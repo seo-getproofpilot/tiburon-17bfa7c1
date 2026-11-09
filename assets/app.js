@@ -17,7 +17,7 @@
     const el = $('#intro');
     if (!el || root.classList.contains('no-intro')) return;
     const short = root.classList.contains('intro-short');
-    const t0 = performance.now(), minT = short ? 750 : 2050, maxT = short ? 1600 : 3400;
+    const t0 = performance.now(), minT = short ? 950 : 2500, maxT = short ? 1700 : 3800;
     root.style.overflow = 'hidden';
     let done = false;
     const finish = () => {
@@ -117,6 +117,28 @@
     hole.style.setProperty('--r', lerp(mobile ? 20 : 15, mobile ? 46 : 44, e).toFixed(2) + '%');
     hole.style.setProperty('--hz', lerp(1.3, 1, e).toFixed(4));
   }
+
+  /* ---------------- brand marks: story draw-in, footer bookend, the fin across the waterline ---------------- */
+  (function brand() {
+    const story = $('.story'), foot = $('.foot__mark'), pass = $('.finpass'), fin = $('.finpass__fin');
+    if ('IntersectionObserver' in window) {
+      const bo = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add(e.target === story ? 'is-drawn' : 'is-in'); bo.unobserve(e.target); } }), { threshold: .3 });
+      story && bo.observe(story); foot && bo.observe(foot);
+    } else { story && story.classList.add('is-drawn'); foot && foot.classList.add('is-in'); }
+    if (!pass || !fin || reduce) return;
+    let raf = 0;
+    const move = () => {
+      raf = 0;
+      const r = pass.getBoundingClientRect(), vh = innerHeight;
+      if (r.bottom < 0 || r.top > vh) return;
+      const p = Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height)));     // 0 as it enters at the bottom, 1 as it leaves the top
+      const e = p < .5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+      fin.style.setProperty('--fx', (-12 + e * 124).toFixed(2));
+      fin.style.setProperty('--fy', (Math.sin(p * Math.PI * 3) * 2).toFixed(2));
+    };
+    addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(move); }, { passive: true });
+    move();
+  })();
 
   /* ---------------- generic reveals ---------------- */
   const revealEls = $$('.story__text>*, .story__facts div, .infuse__head>*, .infuse__foot>*, .ob__text, .ocean__boat figure, .rooms__head>*, .room, .awards__head>*, .foot__buy>*');

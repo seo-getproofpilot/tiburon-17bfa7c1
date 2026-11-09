@@ -553,3 +553,41 @@ html{scroll-snap-type:none}
 .shade--hero,.shade--dive,.gauge,.film-nav{transition:opacity .7s var(--ease)}
 .shade--hero{opacity:var(--heroA,1)}
 .shade--dive{opacity:calc(1 - var(--heroA,1))}
+
+/* v21 intro: just the mark and the name. A waterline draws, the shark mark rises through it nose first (a fin
+   breaking the surface), solid and large; the wordmark follows. Plain ink ground, no gradient. */
+.intro{background:#080b0c}
+.intro__inner{gap:0;transform:translateY(-3vh)}
+.intro__stage{width:clamp(170px,26vh,280px);aspect-ratio:422.8/499.8;overflow:hidden}
+.intro .intro__mark{display:block;width:100%;height:100%}
+.intro .intro__mark path{fill:var(--bone);fill-opacity:1;stroke:none;animation:none}
+.intro__mark{transform:translateY(104%);animation:surface 1.15s cubic-bezier(.2,.75,.25,1) .5s forwards}
+.intro__sea{display:block;width:clamp(260px,34vw,520px);height:1px;background:linear-gradient(90deg,transparent,rgba(250,246,238,.55) 22%,rgba(250,246,238,.55) 78%,transparent);transform:scaleX(0);animation:sea .8s cubic-bezier(.6,0,.2,1) .05s forwards,seaout .7s ease 1.75s forwards}
+.intro .intro__word{width:clamp(230px,24vw,330px);margin-top:30px;opacity:0;transform:translateY(12px);animation:rise .8s cubic-bezier(.2,.75,.25,1) 1.35s forwards}
+@keyframes surface{to{transform:translateY(0)}}
+@keyframes sea{to{transform:scaleX(1)}}
+@keyframes seaout{to{opacity:0}}
+.intro-short .intro__mark{animation-duration:.6s;animation-delay:.1s}
+.intro-short .intro__sea{animation-duration:.4s,.4s;animation-delay:0s,.7s}
+.intro-short .intro__word{animation-duration:.5s;animation-delay:.4s}
+@media (prefers-reduced-motion:reduce){.intro__mark,.intro .intro__word{transform:none;opacity:1}.intro__sea{transform:none}}
+
+/* v21 brand motion: one shark mark, used three times with a reason each */
+.story__mark{position:absolute;left:-4vw;top:50%;width:clamp(380px,40vw,640px);transform:translateY(-50%);pointer-events:none;z-index:0}
+.story__mark path{fill:var(--ink);fill-opacity:0;stroke:var(--ink);stroke-opacity:.09;stroke-width:1.4;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.6s cubic-bezier(.45,0,.2,1),fill-opacity 1.2s ease 2.2s}
+.story.is-drawn .story__mark path{stroke-dashoffset:0;fill-opacity:.035}
+.story__grid{position:relative;z-index:1}
+.finpass{position:relative;height:clamp(110px,13vw,170px);background:var(--abyss);overflow:hidden}
+.finpass__sea{position:absolute;left:0;right:0;top:58%;height:1px;background:linear-gradient(90deg,transparent,rgba(250,246,238,.28) 15%,rgba(250,246,238,.28) 85%,transparent)}
+.finpass__fin{position:absolute;bottom:42%;left:0;width:clamp(56px,6vw,84px);height:clamp(30px,3.2vw,46px);overflow:hidden;transform:translateX(calc(var(--fx,-12) * 1vw)) translateY(calc(var(--fy,0) * 1px));will-change:transform}
+.finpass__fin svg{display:block;width:100%;height:auto}
+.finpass__fin path{fill:var(--bone)}
+.finpass__fin::after{content:"";position:absolute;left:-140%;right:100%;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(250,246,238,.55));}
+.foot__mark{display:flex;flex-direction:column;align-items:center;margin:clamp(40px,6vw,80px) 0 clamp(30px,4vw,50px)}
+.foot__stage{width:clamp(70px,7vw,96px);aspect-ratio:422.8/499.8;overflow:hidden}
+.foot__stage svg{display:block;width:100%;height:100%;transform:translateY(104%);transition:transform 1.2s cubic-bezier(.2,.75,.25,1) .25s}
+.foot__stage path{fill:var(--bone)}
+.foot__sea{width:clamp(180px,22vw,320px);height:1px;background:linear-gradient(90deg,transparent,rgba(250,246,238,.4) 22%,rgba(250,246,238,.4) 78%,transparent);transform:scaleX(0);transition:transform .9s cubic-bezier(.6,0,.2,1)}
+.foot__mark.is-in .foot__stage svg{transform:none}
+.foot__mark.is-in .foot__sea{transform:scaleX(1)}
+@media (prefers-reduced-motion:reduce){.story__mark path{transition:none}.foot__stage svg,.foot__sea{transition:none;transform:none}}
