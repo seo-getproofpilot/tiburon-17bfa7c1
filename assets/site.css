@@ -516,3 +516,7 @@ html{scroll-snap-type:y proximity}
 .dive__moment.is-on,.dive__label.is-on{opacity:1}
 .dive__label{z-index:1}
 @media (max-width:900px){ .dive__moment,.dive__label{top:var(--nav);bottom:auto;height:auto;aspect-ratio:840/1080} }
+
+/* v10: scroll-driven, no snapping */
+html{scroll-snap-type:none}
+.dive__snap{display:none}

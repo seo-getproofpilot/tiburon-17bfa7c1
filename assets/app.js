@@ -41,105 +41,95 @@
   });
   drawer.addEventListener('click', e => { if (e.target.closest('a')) { menu.setAttribute('aria-expanded', 'false'); drawer.hidden = true; } });
 
-  /* ---------------- the dive: five chapters of real video ----------------
-     Scrolling only chooses which chapter you are in (each chapter is CH viewport-heights of scroll, with a
-     light snap). The footage then plays as native 24fps video from the current stop to the next one, so it
-     is equally smooth however fast you scroll. Several chapters ahead plays straight through, a little
-     faster. Going back fades and jumps. At each stop the exact keyframe still fades in (pixel-true labels)
-     and that bottle's card appears. */
+  /* ---------------- the dive: scroll-driven video at a governed speed ---------------- */
   const dive = $('.dive'), vid = $('#diveVid'), still = $('#diveStill'), stageEl = $('.dive__stage');
   const copies = $$('.dc'), depthVal = $('#depthVal'), depthBar = $('#depthBar');
   const heroVid = $('#heroVid'), heroCard = $('.dc--hero');
   const STAGES = ['hero', '0', '1', '2', 'end'], DEPTH = [0, 0, 3, 18, 0];
-  const TIMES = [0, 357 / 60, 834 / 60, 1311 / 60, 1788 / 60];   // chapter stops in the 60fps master             // chapter stops in the master video (seconds)
-  const STILL = ['k4', 'k1', 'k2', 'k3', 'k4'], CH = 1.1;
-  const RATE = 1.4, RATE_FAST = 2.4;
-  let at = 0, target = 0, playing = false, stopAt = 0, fading = false, shownCard = null;
-  // a short living moment at some stops; it starts and ends on the stop frame, labels stay pinned on top
+  let TIMES = [0, 6, 14, 22, 30];                // replaced from the master's real stops below
+  const STILL = ['k4', 'k1', 'k2', 'k3', 'k4'];
+  const VH_PER_SEC = .55, HOLD_VH = 1.4;          // scroll per second of footage; scroll spent paused at a stop
+  const MAX_RATE = 2.2, CATCH = 3.2;              // playback never faster than 2.2x; how eagerly it closes the gap
+  const src = () => (mobile ? vid.dataset.m : vid.dataset.d);
+  vid.src = src(); vid.preload = 'auto'; vid.load();
+  fetch('assets/video/dive.json').then(r => r.json()).then(j => { TIMES = j.stops; layout(); }).catch(() => {});
+  // scroll layout: hold, move, hold, move ... hold (in viewport heights)
+  let SEG = [];
+  function layout() {
+    SEG = []; let u = 0;
+    for (let k = 0; k < 5; k++) {
+      SEG.push({ hold: k, a: u, b: u += HOLD_VH });
+      if (k < 4) SEG.push({ move: k, a: u, b: u += (TIMES[k + 1] - TIMES[k]) * VH_PER_SEC });
+    }
+    dive.style.height = `calc(100vh + ${u.toFixed(3)} * 100vh)`;
+    const anchor = $('#bottles'); if (anchor) anchor.style.top = Math.round(SEG[2].a * innerHeight) + 'px';
+  }
+  layout();
+  function targetTime() {
+    const y = -dive.getBoundingClientRect().top / innerHeight;
+    for (const x of SEG) if (y <= x.b) {
+      if ('hold' in x) return { T: TIMES[x.hold], hold: x.hold };
+      return { T: TIMES[x.move] + (TIMES[x.move + 1] - TIMES[x.move]) * clamp((y - x.a) / (x.b - x.a)), hold: -1 };
+    }
+    return { T: TIMES[4], hold: 4 };
+  }
+  // living moments at some stops; labels pinned on top
   const moment = $('#diveMoment'), label = $('#diveLabel');
   const MOMENTS = { 1: 'pel', 3: 'whale' };
   let momentAt = -1;
   function startMoment(k) {
-    const name = MOMENTS[k]; if (!name || reduce) return;
-    const m = mobile ? '-m' : '';
-    label.src = `assets/img/lab-k${k}${m === '-m' ? '-m' : '-d'}.webp`;
-    const want = `assets/video/m-${name}${m}.mp4`;
+    const name = MOMENTS[k]; if (!name || reduce || momentAt === k) return;
     momentAt = k;
+    label.src = `assets/img/lab-k${k}-${mobile ? 'm' : 'd'}.webp`;
+    const want = `assets/video/m-${name}${mobile ? '-m' : ''}.mp4`;
     if (!moment.src.endsWith(want)) { moment.src = want; moment.load(); }
     const go = () => { if (momentAt !== k) return; moment.currentTime = 0; label.classList.add('is-on'); moment.classList.add('is-on'); moment.play().catch(() => {}); };
-    if (moment.readyState >= 3) setTimeout(go, 500); else moment.addEventListener('canplaythrough', () => setTimeout(go, 300), { once: true });
+    if (moment.readyState >= 3) setTimeout(go, 600); else moment.addEventListener('canplaythrough', () => setTimeout(go, 400), { once: true });
   }
-  function stopMoment() { momentAt = -1; moment.classList.remove('is-on'); label.classList.remove('is-on'); setTimeout(() => { if (momentAt < 0) moment.pause(); }, 350); }
-  // warm the next moment's file once the dive is near
-  setTimeout(() => { const v = document.createElement('link'); v.rel = 'preload'; v.as = 'video'; v.href = `assets/video/m-pel${mobile ? '-m' : ''}.mp4`; document.head.appendChild(v); }, 4000);
-  const src = () => (mobile ? vid.dataset.m : vid.dataset.d);
-  vid.src = src(); vid.load();
-  const stills = STILL.map(n => n);
-  function setStill(k, on) {
-    const url = `assets/seq/${STILL[k]}-${mobile ? 'm' : 'd'}.webp`;
-    if (on) { if (!still.src.endsWith(url)) still.src = url; still.classList.add('is-on'); } else still.classList.remove('is-on');
+  function stopMoment() { if (momentAt < 0) return; momentAt = -1; moment.classList.remove('is-on'); label.classList.remove('is-on'); setTimeout(() => { if (momentAt < 0) moment.pause(); }, 400); }
+  let restAt = -2, shownCard;
+  function rest(k) {
+    if (k === restAt) return; restAt = k;
+    if (k >= 0) { const url = `assets/seq/${STILL[k]}-${mobile ? 'm' : 'd'}.webp`; if (!still.src.endsWith(url)) still.src = url; still.classList.add('is-on'); startMoment(k);
+      if (k === 0 && heroVid && heroVid.src && !reduce) heroVid.play().catch(() => {}); }
+    else { still.classList.remove('is-on'); stopMoment(); if (heroVid && !heroVid.paused) heroVid.pause(); }
   }
-  function showCard(k) {
-    const st = k == null ? null : STAGES[k];
-    if (st === shownCard) return; shownCard = st;
-    copies.forEach(c => c.classList.toggle('is-on', c.dataset.s === st));
-    stageEl.classList.toggle('at-hero', st === 'hero');
-  }
-  function chapterFromScroll() {
-    const r = dive.getBoundingClientRect(), step = innerHeight * CH;
-    return clamp(Math.round(-r.top / step), 0, 4);
-  }
-  function goForward() {
-    if (vid.readyState < 2) return;
-    playing = true; stopAt = TIMES[at + 1];
-    vid.playbackRate = reduce ? 16 : (target - at > 1 ? RATE_FAST : RATE);
-    setStill(at, false); showCard(null); stopMoment();
-    if (heroVid && !heroVid.paused) heroVid.pause();
-    const q = vid.play(); if (q && q.catch) q.catch(() => { playing = false; });
-  }
-  function jumpBack(k) {
-    fading = true; playing = false; vid.pause(); showCard(null); setStill(at, false); stopMoment();
-    vid.classList.add('is-fading');
-    setTimeout(() => {
-      vid.currentTime = TIMES[k]; at = k;
-      const done = () => { vid.classList.remove('is-fading'); fading = false; arrive(); };
-      vid.addEventListener('seeked', done, { once: true });
-      setTimeout(() => { if (fading) done(); }, 700);
-    }, 160);
-  }
-  function arrive() {
-    setStill(at, true); showCard(at); startMoment(at);
-    if (at === 0 && heroVid && heroVid.src && !reduce) heroVid.play().catch(() => {});
-  }
-  vid.addEventListener('loadeddata', () => { if (!playing) { vid.currentTime = TIMES[at]; arrive(); } }, { once: true });
-  arrive();
-  function chapterFrame() {
-    target = chapterFromScroll();
-    if (playing) {
-      if (vid.currentTime >= stopAt - .02) {
-        at++;
-        if (target > at) { stopAt = TIMES[at + 1]; vid.playbackRate = target - at > 1 ? RATE_FAST : RATE; }
-        else { vid.pause(); playing = false; if (Math.abs(vid.currentTime - TIMES[at]) > .05) vid.currentTime = TIMES[at]; arrive(); }
-      } else if (target <= at) { /* scrolled back mid-play: finish into the next stop, then the back-jump runs */ }
-    } else if (!fading) {
-      if (target > at) goForward();
-      else if (target < at) jumpBack(target);
+  rest(0);
+  let lastNow = 0;
+  function chapterFrame(now) {
+    const dt = Math.min(.05, (now - (lastNow || now)) / 1000); lastNow = now;
+    const { T, hold } = targetTime();
+    const t = vid.currentTime || 0, gap = T - t;
+    if (vid.readyState >= 2) {
+      if (reduce) { if (Math.abs(gap) > .01 && !vid.seeking) vid.currentTime = T; }
+      else if (gap > .015) {                                   // forward: native playback, speed from the gap
+        const r = clamp(gap * CATCH, .35, MAX_RATE);
+        if (Math.abs(vid.playbackRate - r) > .05) vid.playbackRate = r;
+        if (vid.paused) vid.play().catch(() => {});
+      } else if (gap < -.015) {                                // backward: step by seeking, same speed cap
+        if (!vid.paused) vid.pause();
+        if (!vid.seeking) vid.currentTime = Math.max(T, t - clamp(-gap * CATCH, .35, MAX_RATE) * Math.max(dt, 1 / 30) * 2);
+      } else if (!vid.paused) { vid.pause(); }
     }
-    // hero layer + depth follow the video clock
-    const t = vid.currentTime || 0;
-    const hA = at === 0 && !playing ? 1 : clamp(1 - (t - TIMES[0]) / 1.2);
+    const t2 = vid.currentTime || 0;
+    rest(hold >= 0 && Math.abs(t2 - TIMES[hold]) < .06 ? hold : -1);
+    // cards: shown while the footage is near a stop (so a continuous scroll still reads them) or you are parked there
+    let near = -1; for (let k = 0; k < 5; k++) if (Math.abs(t2 - TIMES[k]) < (k === 0 ? .5 : .9)) near = k;
+    if (near < 0 && hold >= 0 && Math.abs(t2 - TIMES[hold]) < 1.2) near = hold;
+    const st = near >= 0 ? STAGES[near] : null;
+    if (st !== shownCard) { shownCard = st; copies.forEach(c => c.classList.toggle('is-on', c.dataset.s === st)); }
+    // hero layer fades with the clock; depth follows the clock
+    const hA = clamp(1 - (t2 - TIMES[0]) / 1.4);
     if (stageEl._hA !== hA.toFixed(2)) { stageEl._hA = hA.toFixed(2); stageEl.style.setProperty('--heroA', stageEl._hA); }
     let d = 0;
-    for (let k = 0; k < 4; k++) if (t >= TIMES[k] && t <= TIMES[k + 1]) { const e = ease(clamp((t - TIMES[k]) / (TIMES[k + 1] - TIMES[k]))); d = lerp(DEPTH[k], DEPTH[k + 1], e); }
+    for (let k = 0; k < 4; k++) if (t2 >= TIMES[k] && t2 <= TIMES[k + 1]) { const e = ease(clamp((t2 - TIMES[k]) / (TIMES[k + 1] - TIMES[k]))); d = lerp(DEPTH[k], DEPTH[k + 1], e); }
     depthVal.textContent = d.toFixed(1);
     depthBar.style.setProperty('--d', (d / 18).toFixed(3));
   }
 
   /* hero loop video (desktop); 'The bottles' anchor sits at chapter 1 */
   if (heroVid && innerWidth >= 900 && !reduce) { heroVid.src = heroVid.dataset.src; heroVid.play().catch(() => {}); }
-  const anchor = $('#bottles');
-  const placeAnchor = () => { if (anchor) anchor.style.top = Math.round(innerHeight * CH) + 'px'; };
-  placeAnchor(); addEventListener('resize', placeAnchor);
+  addEventListener('resize', layout);
 
   /* ---------------- pick your pour: reveal once ---------------- */
   const pours = $$('.pour');
@@ -172,7 +162,7 @@
     requestAnimationFrame(frame);
     const sy = scrollY;
     const dr = dive.getBoundingClientRect();
-    if (dr.bottom > 0 && dr.top < vh) chapterFrame();
+    if (dr.bottom > 0 && dr.top < vh) chapterFrame(performance.now());
     if (sy !== lastY) { oceanFrame(); nav.classList.toggle('is-solid', sy > vh * .6 || !drawer.hidden); lastY = sy; }
   }
   requestAnimationFrame(frame);
