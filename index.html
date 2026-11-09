@@ -14,7 +14,7 @@
 <link rel="preload" as="image" href="assets/img/b-dark.webp">
 <link rel="preload" as="image" href="assets/img/b-white.webp">
 <link rel="preload" as="image" href="assets/img/b-fin.webp">
-<link rel="stylesheet" href="assets/site.css?v=1794200226">
+<link rel="stylesheet" href="assets/site.css?v=1794201086">
 <script>
   /* the intro plays fully once per session; a repeat visit gets the short version, ?nointro skips it */
   (function(){var d=document.documentElement,s=location.search;d.classList.add('js');
@@ -60,8 +60,14 @@
 <!-- ============ HERO + THE DIVE (one pinned stage) ============ -->
 <section class="dive" id="top" aria-labelledby="hero-h">
   <span class="dive__anchor" id="bottles"></span>
+  <span class="dive__snap" style="--k:0" aria-hidden="true"></span>
+  <span class="dive__snap" style="--k:1" aria-hidden="true"></span>
+  <span class="dive__snap" style="--k:2" aria-hidden="true"></span>
+  <span class="dive__snap" style="--k:3" aria-hidden="true"></span>
+  <span class="dive__snap" style="--k:4" aria-hidden="true"></span>
   <div class="dive__stage">
-    <canvas class="dive__gl" id="diveSeq" aria-label="Footage: a Tiburon bottle bursts out of the Belize sea, then the camera dives to White Tip in the shallows and FIN in the Blue Hole, and rises to all three on a sandbar"></canvas>
+    <video class="dive__vid" id="diveVid" muted playsinline preload="auto" poster="assets/seq/k4-d.webp" data-d="assets/video/dive.mp4" data-m="assets/video/dive-m.mp4" aria-label="Footage: White Tip and FIN sink into the sandbar, Dark 8 bursts out of the sea, the camera dives to White Tip and a reef shark, follows it down the Blue Hole to FIN, and rises back to all three bottles"></video>
+    <img class="dive__still" id="diveStill" alt="" aria-hidden="true">
 
     <div class="dive__hero" id="diveHero" aria-hidden="true">
       <video class="hero__vid" id="heroVid" muted loop playsinline autoplay preload="auto" poster="assets/img/hero-sandbar.webp" data-src="assets/video/hero.mp4"></video>
@@ -275,6 +281,6 @@
   </div>
 </footer>
 
-<script src="assets/app.js?v=1794200226"></script>
+<script src="assets/app.js?v=1794201086"></script>
 </body>
 </html>
