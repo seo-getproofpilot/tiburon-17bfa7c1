@@ -510,3 +510,9 @@ html{scroll-snap-type:y proximity}
   .gauge{top:calc(var(--nav) + 12px)}
 }
 @media (prefers-reduced-motion:reduce){ html{scroll-snap-type:none} }
+
+/* v9: stop moments */
+.dive__moment,.dive__label{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;opacity:0;pointer-events:none;transition:opacity .4s var(--ease)}
+.dive__moment.is-on,.dive__label.is-on{opacity:1}
+.dive__label{z-index:1}
+@media (max-width:900px){ .dive__moment,.dive__label{top:var(--nav);bottom:auto;height:auto;aspect-ratio:840/1080} }

@@ -55,6 +55,23 @@
   const STILL = ['k4', 'k1', 'k2', 'k3', 'k4'], CH = 1.1;
   const RATE = 1.4, RATE_FAST = 2.4;
   let at = 0, target = 0, playing = false, stopAt = 0, fading = false, shownCard = null;
+  // a short living moment at some stops; it starts and ends on the stop frame, labels stay pinned on top
+  const moment = $('#diveMoment'), label = $('#diveLabel');
+  const MOMENTS = { 1: 'pel', 3: 'whale' };
+  let momentAt = -1;
+  function startMoment(k) {
+    const name = MOMENTS[k]; if (!name || reduce) return;
+    const m = mobile ? '-m' : '';
+    label.src = `assets/img/lab-k${k}${m === '-m' ? '-m' : '-d'}.webp`;
+    const want = `assets/video/m-${name}${m}.mp4`;
+    momentAt = k;
+    if (!moment.src.endsWith(want)) { moment.src = want; moment.load(); }
+    const go = () => { if (momentAt !== k) return; moment.currentTime = 0; label.classList.add('is-on'); moment.classList.add('is-on'); moment.play().catch(() => {}); };
+    if (moment.readyState >= 3) setTimeout(go, 500); else moment.addEventListener('canplaythrough', () => setTimeout(go, 300), { once: true });
+  }
+  function stopMoment() { momentAt = -1; moment.classList.remove('is-on'); label.classList.remove('is-on'); setTimeout(() => { if (momentAt < 0) moment.pause(); }, 350); }
+  // warm the next moment's file once the dive is near
+  setTimeout(() => { const v = document.createElement('link'); v.rel = 'preload'; v.as = 'video'; v.href = `assets/video/m-pel${mobile ? '-m' : ''}.mp4`; document.head.appendChild(v); }, 4000);
   const src = () => (mobile ? vid.dataset.m : vid.dataset.d);
   vid.src = src(); vid.load();
   const stills = STILL.map(n => n);
@@ -76,12 +93,12 @@
     if (vid.readyState < 2) return;
     playing = true; stopAt = TIMES[at + 1];
     vid.playbackRate = reduce ? 16 : (target - at > 1 ? RATE_FAST : RATE);
-    setStill(at, false); showCard(null);
+    setStill(at, false); showCard(null); stopMoment();
     if (heroVid && !heroVid.paused) heroVid.pause();
     const q = vid.play(); if (q && q.catch) q.catch(() => { playing = false; });
   }
   function jumpBack(k) {
-    fading = true; playing = false; vid.pause(); showCard(null); setStill(at, false);
+    fading = true; playing = false; vid.pause(); showCard(null); setStill(at, false); stopMoment();
     vid.classList.add('is-fading');
     setTimeout(() => {
       vid.currentTime = TIMES[k]; at = k;
@@ -91,7 +108,7 @@
     }, 160);
   }
   function arrive() {
-    setStill(at, true); showCard(at);
+    setStill(at, true); showCard(at); startMoment(at);
     if (at === 0 && heroVid && heroVid.src && !reduce) heroVid.play().catch(() => {});
   }
   vid.addEventListener('loadeddata', () => { if (!playing) { vid.currentTime = TIMES[at]; arrive(); } }, { once: true });
