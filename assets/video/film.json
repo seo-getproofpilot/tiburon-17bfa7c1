@@ -6,32 +6,29 @@
   },
   {
    "name": "wave",
-   "start": 9.9333
+   "start": 3.8833
   },
   {
    "name": "dark",
-   "start": 15.85
+   "start": 9.5667
   },
   {
    "name": "sink",
-   "start": 22.7667
-  },
-  {
-   "name": "white",
-   "start": 30.6833
+   "start": 16.25
   },
   {
    "name": "reef",
-   "start": 36.6
+   "start": 25.6167
   },
   {
    "name": "fin",
-   "start": 44.5167
+   "start": 34.9833
   },
   {
    "name": "rise",
-   "start": 52.4333
+   "start": 42.6667
   }
  ],
- "duration": 60.3333
+ "duration": 50.5833,
+ "white_at": 25.6167
 }

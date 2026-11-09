@@ -49,24 +49,24 @@
   const dive = $('.dive'), vid = $('#diveVid'), stageEl = $('.dive__stage');
   const copies = $$('.dc'), depthVal = $('#depthVal'), depthBar = $('#depthBar');
   const navBtns = $$('.film-nav [data-k]'), pauseBtn = $('.film-pause');
-  let SEGS = { hero: 0, wave: 9.93, dark: 15.85, sink: 22.77, white: 30.68, reef: 36.6, fin: 44.52, rise: 52.43 }, DUR = 60.33;
+  let SEGS = { hero: 0, wave: 3.88, dark: 9.57, sink: 16.25, white: 25.62, reef: 25.62, fin: 34.98, rise: 42.67 }, DUR = 50.58;
   vid.loop = true; vid.muted = true; vid.playsInline = true;
   vid.src = mobile ? 'assets/video/film-m.mp4' : 'assets/video/film.mp4';
   vid.poster = mobile ? 'assets/seq/k4-m.webp' : 'assets/img/hero-sandbar.webp';
-  fetch('assets/video/film.json').then(r => r.json()).then(j => { j.segments.forEach(x => { SEGS[x.name] = x.start; }); DUR = j.duration; }).catch(() => {});
+  fetch('assets/video/film.json').then(r => r.json()).then(j => { j.segments.forEach(x => { SEGS[x.name] = x.start; }); SEGS.white = j.white_at || SEGS.reef; DUR = j.duration; }).catch(() => {});
   // card windows on the film clock: [stage, from, to]
   const windows = () => [
-    ['hero', -1, SEGS.wave - .4], ['hero', DUR - .7, DUR + 1],
+    ['hero', -1, SEGS.wave + .5], ['hero', DUR - .9, DUR + 1],
     ['0', SEGS.wave + 3.6, SEGS.sink + .5],
-    ['1', SEGS.white - .9, SEGS.reef + .9],
+    ['1', SEGS.white - 2.6, SEGS.white + 2.8],
     ['2', SEGS.fin - .9, SEGS.rise + .9],
   ];
-  const chapterAt = { 1: () => SEGS.dark - .2, 2: () => SEGS.white - .3, 3: () => SEGS.fin - .3 };
+  const chapterAt = { 1: () => SEGS.dark - .2, 2: () => SEGS.white - 2.4, 3: () => SEGS.fin - .3 };
   const depthAt = t => {
     if (t < SEGS.sink) return 0;
-    if (t < SEGS.white) return 3 * ease(clamp((t - SEGS.sink) / (SEGS.white - SEGS.sink)));
-    if (t < SEGS.reef) return 3;
-    if (t < SEGS.fin) return 3 + 15 * ease(clamp((t - SEGS.reef) / (SEGS.fin - SEGS.reef)));
+    if (t < SEGS.white - 1.5) return 3 * ease(clamp((t - SEGS.sink) / (SEGS.white - 1.5 - SEGS.sink)));
+    if (t < SEGS.white + 1.5) return 3;
+    if (t < SEGS.fin) return 3 + 15 * ease(clamp((t - SEGS.white - 1.5) / (SEGS.fin - SEGS.white - 1.5)));
     if (t < SEGS.rise) return 18;
     return 18 * (1 - ease(clamp((t - SEGS.rise) / (DUR - SEGS.rise))));
   };
