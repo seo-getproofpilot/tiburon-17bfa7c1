@@ -14,7 +14,7 @@
 <link rel="preload" as="image" href="assets/img/b-dark.webp">
 <link rel="preload" as="image" href="assets/img/b-white.webp">
 <link rel="preload" as="image" href="assets/img/b-fin.webp">
-<link rel="stylesheet" href="assets/site.css?v=1794199408">
+<link rel="stylesheet" href="assets/site.css?v=1794200226">
 <script>
   /* the intro plays fully once per session; a repeat visit gets the short version, ?nointro skips it */
   (function(){var d=document.documentElement,s=location.search;d.classList.add('js');
@@ -40,7 +40,7 @@
     <span>Tiburón</span>
   </a>
   <nav class="nav__links" aria-label="Main">
-    <a href="#dive">The bottles</a>
+    <a href="#bottles">The bottles</a>
     <a href="#story">Our story</a>
     <a href="#infusions">Infusions</a>
     <a href="#rooms">Tasting rooms</a>
@@ -50,43 +50,42 @@
   <button class="nav__menu" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><i></i><i></i></button>
 </header>
 <div class="drawer" id="drawer" hidden>
-  <a href="#dive">The bottles</a><a href="#story">Our story</a><a href="#infusions">Infusions</a><a href="#rooms">Tasting rooms</a><a href="#ocean">The ocean</a>
+  <a href="#bottles">The bottles</a><a href="#story">Our story</a><a href="#infusions">Infusions</a><a href="#rooms">Tasting rooms</a><a href="#ocean">The ocean</a>
   <a class="btn btn--buy" href="https://www.tiburonrum.com/buy-now-2-2/">Buy a bottle</a>
 </div>
 
 <main id="main">
 
 
-<!-- ============ HERO ============ -->
-<section class="hero" id="top" aria-labelledby="hero-h">
-  <div class="hero__bg">
-    <video class="hero__vid" id="heroVid" muted loop playsinline autoplay preload="auto" poster="assets/img/hero-sandbar.webp" data-src="assets/video/hero.mp4" aria-hidden="true"></video>
-    <img class="hero__labels" src="assets/img/hero-labels.webp" alt="Tiburon White Tip, Dark 8 Reserve Blend and FIN Tequila Blanco standing on a white sandbar in Belize at golden hour" width="1924" height="1076">
-    <img class="hero__mobile" src="assets/img/hero-sandbar-m.webp" alt="" aria-hidden="true">
-  </div>
-  <div class="hero__shade" aria-hidden="true"></div>
-  <div class="hero__copy">
-    <p class="hero__eyebrow">Tiburón Rum Company, Belize</p>
-    <h1 id="hero-h">Belize's award-winning <em>rum &amp; tequila</em></h1>
-    <p class="hero__sub">Barrel-aged rum and 100% de agave FIN tequila from a family-owned brand on the Belize coast.</p>
-  </div>
-  <div class="hero__cta">
-    <a class="btn btn--primary" href="https://www.tiburonrum.com/buy-now-2-2/">Shop the bottles</a>
-    <a class="btn btn--glass" href="#rooms">Visit a tasting room</a>
-  </div>
-</section>
-
-<!-- ============ THE DIVE ============ -->
-<section class="dive" id="dive" aria-label="Dive through the Tiburon range">
+<!-- ============ HERO + THE DIVE (one pinned stage) ============ -->
+<section class="dive" id="top" aria-labelledby="hero-h">
+  <span class="dive__anchor" id="bottles"></span>
   <div class="dive__stage">
     <canvas class="dive__gl" id="diveSeq" aria-label="Footage: a Tiburon bottle bursts out of the Belize sea, then the camera dives to White Tip in the shallows and FIN in the Blue Hole, and rises to all three on a sandbar"></canvas>
 
-    <div class="dive__copy">
-      <div class="dc dc--intro" data-s="intro">
-        <p class="eyebrow">The range</p>
-        <h2>From the surface to the <em>deep blue.</em></h2>
-        <p class="lede">Three bottles, each with its own stretch of Belize water. Keep scrolling and we'll take you under.</p>
+    <div class="dive__hero" id="diveHero" aria-hidden="true">
+      <video class="hero__vid" id="heroVid" muted loop playsinline autoplay preload="auto" poster="assets/img/hero-sandbar.webp" data-src="assets/video/hero.mp4"></video>
+      <img class="hero__labels" src="assets/img/hero-labels.webp" alt="" width="1924" height="1076">
+    </div>
+    <div class="shade shade--hero" aria-hidden="true"></div>
+    <div class="shade shade--dive" aria-hidden="true"></div>
+
+    <div class="dive__copy dive__copy--hero">
+      <div class="dc dc--hero" data-s="hero">
+        <div class="hero__copy">
+          <p class="hero__eyebrow">Tiburón Rum Company, Belize</p>
+          <h1 id="hero-h">Belize's award-winning <em>rum &amp; tequila</em></h1>
+        </div>
+        <p class="hero__sub">Barrel-aged rum and 100% de agave FIN tequila from a family-owned brand on the Belize coast.</p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="https://www.tiburonrum.com/buy-now-2-2/">Shop the bottles</a>
+          <a class="btn btn--glass" href="#rooms">Visit a tasting room</a>
+        </div>
+        <p class="hero__hint">Scroll to dive in</p>
       </div>
+    </div>
+
+    <div class="dive__copy">
       <article class="dc dc--stop " data-s="0">
         <p class="eyebrow">At the surface</p>
         <h2>Dark 8 Reserve Blend</h2>
@@ -130,7 +129,7 @@
 <!-- ============ OUR STORY ============ -->
 <section class="story" id="story" aria-labelledby="story-h">
   <div class="story__grid">
-    <div class="story__frames" aria-hidden="false">
+    <div class="story__frames" >
       <figure class="frame frame--a"><img src="assets/img/boat-founder.webp" alt="Out on Belize water in a Tiburon Rum shirt" loading="lazy" width="1400" height="1234"><figcaption>Out on the water, Belize</figcaption></figure>
       <figure class="frame frame--b"><img src="assets/img/sp-pour.webp" alt="A Tiburon host pouring a tasting at the San Pedro bar" loading="lazy" width="1100" height="1649"><figcaption>San Pedro tasting room</figcaption></figure>
       <figure class="frame frame--c"><img src="assets/img/palms-duo.webp" alt="Tiburon Dark 8 and White Tip among palm fronds at Victoria House, San Pedro" loading="lazy" width="1800" height="540"><figcaption>Victoria House, San Pedro</figcaption></figure>
@@ -276,6 +275,6 @@
   </div>
 </footer>
 
-<script src="assets/app.js?v=1794199408"></script>
+<script src="assets/app.js?v=1794200226"></script>
 </body>
 </html>

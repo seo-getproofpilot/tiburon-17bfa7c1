@@ -46,20 +46,26 @@
      of the wanted position are cross-blended, so 12fps footage plays back as continuous motion. Frames are
      decoded off the main thread (img.decode) before use, and at each hold the exact keyframe still is
      drawn on top so every label is pixel-true while its card is up. */
-  const dive = $('#dive'), canvas = $('#diveSeq'), ctx = canvas.getContext('2d', { alpha: false });
-  const copies = $$('.dc'), depthVal = $('#depthVal'), depthBar = $('#depthBar');
-  const STAGES = ['intro', '0', '1', '2', 'end'];
+  const dive = $('.dive'), canvas = $('#diveSeq'), ctx = canvas.getContext('2d', { alpha: false });
+  const copies = $$('.dc'), depthVal = $('#depthVal'), depthBar = $('#depthBar'), stageEl = $('.dive__stage');
+  const heroVid = $('#heroVid'), heroCard = $('.dc--hero');
+  const STAGES = ['hero', '0', '1', '2', 'end'];
   const DEPTH = [0, 0, 3, 18, 0];
-  const HOLD = [.11, .16, .16, .16, .14], MOVE = [.07, .08, .07, .05];
+  const HOLD = [.06, .1, .1, .1, .1], MOVE = [.13, .14, .14, .13];
   let SEQ = null, frames = [], stills = [], cur = 0, pS = 0, lastStage, lastDraw = '';
   const dir = () => (mobile ? 'm' : 'd');
   const SEG = (() => { const out = []; let u = 0;
     for (let k = 0; k < 5; k++) { out.push({ hold: k, a: u, b: u += HOLD[k] }); if (k < 4) out.push({ move: k, a: u, b: u += MOVE[k] }); }
     out.forEach(x => { x.a /= u; x.b /= u; }); return out; })();
+  const SPEED = 1.35, HOLD_S = 1.1, JUMP_S = 7;   // 1.35x real time; a jump this far (seconds) snaps
+  let tau = 0, heroDrop = 1;
+  const segDur = x => ('hold' in x) ? HOLD_S : (SEQ ? (SEQ.keys[x.move + 1] - SEQ.keys[x.move]) / (SEQ.fps || 12) / SPEED : 6);
+  function qToTau(q) { let T = 0; for (const x of SEG) { const d = segDur(x); if (q <= x.b) return T + d * clamp((q - x.a) / (x.b - x.a)); T += d; } return T; }
+  function tauToQ(T) { for (const x of SEG) { const d = segDur(x); if (T <= d) return x.a + (x.b - x.a) * clamp(T / d); T -= d; } return 1; }
   function loadSeq() {
     fetch('assets/seq/seq.json').then(r => r.json()).then(j => {
       SEQ = j; frames = new Array(j.n);
-      stills = ['k0', 'k1', 'k2', 'k3', 'k4'].map(n => { const i = new Image(); i.src = `assets/seq/${n}-${dir()}.webp`; i.decode && i.decode().catch(() => {}); return i; });
+      stills = ['k4', 'k1', 'k2', 'k3', 'k4'].map(n => { const i = new Image(); i.src = `assets/seq/${n}-${dir()}.webp`; i.decode && i.decode().catch(() => {}); return i; });
       const order = [], seen = new Set();
       for (let step = 32; step >= 1; step = Math.floor(step / 2)) for (let i = 0; i < j.n; i += step) if (!seen.has(i)) { seen.add(i); order.push(i); }
       let next = 0, live = 0;
@@ -77,7 +83,7 @@
   function cover(img, alpha) {
     const cw = canvas.width, ch = canvas.height, ir = img.naturalWidth / img.naturalHeight, cr = cw / ch;
     let w = cw, h = ch, y;
-    if (mobile && cr < ir) { w = cw * 1.06; h = w / ir; y = Math.min((ch - h) / 2, 52 * Math.min(devicePixelRatio || 1, 1.5)); }
+    if (mobile && cr < ir) { const k = Math.min(devicePixelRatio || 1, 1.5); w = cw * 1.06; h = w / ir; y = Math.min((ch - h) / 2, 52 * k) + (heroDrop || 0) * 210 * k; }
     else { if (cr > ir) h = cw / ir; else w = ch * ir; y = (ch - h) / 2; }
     ctx.globalAlpha = alpha; ctx.drawImage(img, (cw - w) / 2, y, w, h); ctx.globalAlpha = 1; return y + h;
   }
@@ -85,10 +91,13 @@
     const r = canvas.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 1.5);
     const W = Math.round(r.width * dpr), H = Math.round(r.height * dpr);
     if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; lastDraw = ''; }
-    const now = performance.now(), dt = Math.min(64, now - (diveFrame.t || now)) / 16.67; diveFrame.t = now;
-    pS += (p - pS) * (reduce ? 1 : 1 - Math.pow(1 - .11, dt));
-    if (Math.abs(p - pS) < .00005) pS = p;
-    const q = pS;
+    const now = performance.now(), dts = Math.min(.064, (now - (diveFrame.t || now)) / 1000); diveFrame.t = now;
+    const Tp = qToTau(p);
+    if (reduce || !SEQ || Math.abs(Tp - tau) > JUMP_S) tau = Tp;           // first paint, nav jumps, reduced motion
+    else { const diff = Tp - tau, rate = Math.min(1, Math.max(.3, Math.abs(diff) * 2.2));
+      tau += Math.sign(diff) * Math.min(Math.abs(diff), dts * rate); }
+    const q = tauToQ(tau); pS = q;
+    { const h0 = SEG[0], m0 = SEG[1]; const tt = clamp((q - (h0.b - .01)) / ((m0.b - m0.a) * .35 + .01)); heroDrop = 1 - tt * tt * (3 - 2 * tt); if (mobile && Math.abs(heroDrop - (diveFrame.hd || 0)) > .001) lastDraw = ''; diveFrame.hd = heroDrop; }
     const seg = SEG.find(x => q <= x.b) || SEG[SEG.length - 1];
     const t = clamp((q - seg.a) / (seg.b - seg.a));
     let hold = -1, holdA = 0, d = 0;
@@ -123,27 +132,25 @@
       if (c._o !== o.toFixed(3) || c._y !== y.toFixed(1)) {
         c._o = o.toFixed(3); c._y = y.toFixed(1);
         c.style.opacity = c._o;
+        if (c.classList.contains('dc--hero')) continue;
         const centred = !mobile && !c.classList.contains('dc--end');
         c.style.transform = centred ? `translate3d(0,calc(-50% + ${c._y}px),0)` : `translate3d(0,${c._y}px,0)`;
         c.style.pointerEvents = o > .6 ? 'auto' : 'none';
       }
     }
+    { const h0 = SEG[0], m0 = SEG[1]; const tt = clamp((q - (h0.b - .01)) / ((m0.b - m0.a) * .35 + .01)); const hA = 1 - tt * tt * (3 - 2 * tt);
+      if (stageEl._hA !== hA.toFixed(3)) { stageEl._hA = hA.toFixed(3); stageEl.style.setProperty('--heroA', stageEl._hA);
+        heroCard.style.opacity = stageEl._hA; heroCard.style.pointerEvents = hA > .5 ? 'auto' : 'none';
+        if (heroVid && heroVid.src) { if (hA <= 0) heroVid.pause(); else if (heroVid.paused) heroVid.play().catch(() => {}); } } }
     depthVal.textContent = d.toFixed(1);
     depthBar.style.setProperty('--d', (d / 18).toFixed(3));
   }
 
-  /* ---------------- hero: sandbar loop, labels pinned on top ---------------- */
-  const hero = $('.hero'), heroBg = $('.hero__bg'), heroVid = $('#heroVid');
-  if (heroVid && innerWidth >= 900 && !reduce) {
-    heroVid.src = heroVid.dataset.src;
-    const play = () => { const q = heroVid.play(); if (q && q.catch) q.catch(() => {}); };
-    play(); document.addEventListener('visibilitychange', () => { if (!document.hidden) play(); });
-  }
-  function heroFrame() {
-    if (mobile) return;
-    const r = hero.getBoundingClientRect(); if (r.bottom < 0) return;
-    heroBg.style.setProperty('--z', (1 + clamp(-r.top / r.height) * .05).toFixed(4));
-  }
+  /* ---------------- hero video (desktop); 'The bottles' anchor sits at the Dark 8 stop ---------------- */
+  if (heroVid && innerWidth >= 900 && !reduce) { heroVid.src = heroVid.dataset.src; heroVid.play().catch(() => {}); }
+  const anchor = $('#bottles');
+  const placeAnchor = () => { if (anchor) anchor.style.top = Math.round(SEG[2].a * (dive.offsetHeight - innerHeight) + innerHeight * .02) + 'px'; };
+  placeAnchor(); addEventListener('resize', placeAnchor);
 
   /* ---------------- pick your pour: reveal once ---------------- */
   const pours = $$('.pour');
@@ -177,7 +184,8 @@
     const sy = scrollY;
     const dr = dive.getBoundingClientRect();
     if (dr.bottom > -vh * .2 && dr.top < vh * 1.2) diveFrame(clamp(-dr.top / Math.max(1, dr.height - vh)));
-    if (sy !== lastY) { heroFrame(); oceanFrame(); nav.classList.toggle('is-solid', sy > vh * .6 || !drawer.hidden); lastY = sy; }
+    else if (SEQ) tau = qToTau(dr.top > 0 ? 0 : 1);
+    if (sy !== lastY) { oceanFrame(); nav.classList.toggle('is-solid', sy > vh * .6 || !drawer.hidden); lastY = sy; }
   }
   requestAnimationFrame(frame);
   addEventListener('resize', () => { vw = innerWidth; vh = innerHeight; mobile = mq.matches; lastDraw = ''; }, { passive: true });
