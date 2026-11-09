@@ -51,9 +51,9 @@
   const copies = $$('.dc'), depthVal = $('#depthVal'), depthBar = $('#depthBar');
   const heroVid = $('#heroVid'), heroCard = $('.dc--hero');
   const STAGES = ['hero', '0', '1', '2', 'end'], DEPTH = [0, 0, 3, 18, 0];
-  const TIMES = [0, 8, 16, 24, 32];             // chapter stops in the master video (seconds)
+  const TIMES = [0, 357 / 60, 834 / 60, 1311 / 60, 1788 / 60];   // chapter stops in the 60fps master             // chapter stops in the master video (seconds)
   const STILL = ['k4', 'k1', 'k2', 'k3', 'k4'], CH = 1.1;
-  const RATE = 1.2, RATE_FAST = 2;
+  const RATE = 1.4, RATE_FAST = 2.4;
   let at = 0, target = 0, playing = false, stopAt = 0, fading = false, shownCard = null;
   const src = () => (mobile ? vid.dataset.m : vid.dataset.d);
   vid.src = src(); vid.load();
@@ -99,7 +99,7 @@
   function chapterFrame() {
     target = chapterFromScroll();
     if (playing) {
-      if (vid.currentTime >= stopAt - .03) {
+      if (vid.currentTime >= stopAt - .02) {
         at++;
         if (target > at) { stopAt = TIMES[at + 1]; vid.playbackRate = target - at > 1 ? RATE_FAST : RATE; }
         else { vid.pause(); playing = false; if (Math.abs(vid.currentTime - TIMES[at]) > .05) vid.currentTime = TIMES[at]; arrive(); }
