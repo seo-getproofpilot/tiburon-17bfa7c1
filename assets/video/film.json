@@ -17,18 +17,14 @@
    "start": 16.25
   },
   {
-   "name": "reef",
-   "start": 25.6167
-  },
-  {
    "name": "fin",
    "start": 34.9833
   },
   {
    "name": "rise",
-   "start": 42.6667
+   "start": 39.5
   }
  ],
- "duration": 50.5833,
- "white_at": 25.6167
+ "duration": 47.4167,
+ "white_at": 25.2667
 }
