@@ -70,10 +70,9 @@
       pump();
     });
   }
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); loadSeq(); } }, { rootMargin: '150% 0px' });
-    io.observe(dive);
-  } else loadSeq();
+  let seqStarted = false; const startSeq = () => { if (!seqStarted) { seqStarted = true; loadSeq(); } };
+  if (document.readyState === 'complete') setTimeout(startSeq, 300); else addEventListener('load', () => setTimeout(startSeq, 300));
+  addEventListener('scroll', startSeq, { once: true, passive: true });
   const near = (i, dirn) => { for (let d = 0; d < 48; d++) { const k = i + d * dirn; if (frames[k]) return frames[k]; } return null; };
   function cover(img, alpha) {
     const cw = canvas.width, ch = canvas.height, ir = img.naturalWidth / img.naturalHeight, cr = cw / ch;
@@ -86,7 +85,8 @@
     const r = canvas.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 1.5);
     const W = Math.round(r.width * dpr), H = Math.round(r.height * dpr);
     if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; lastDraw = ''; }
-    pS += (p - pS) * (reduce ? 1 : .14);
+    const now = performance.now(), dt = Math.min(64, now - (diveFrame.t || now)) / 16.67; diveFrame.t = now;
+    pS += (p - pS) * (reduce ? 1 : 1 - Math.pow(1 - .11, dt));
     if (Math.abs(p - pS) < .00005) pS = p;
     const q = pS;
     const seg = SEG.find(x => q <= x.b) || SEG[SEG.length - 1];
@@ -113,8 +113,21 @@
         if (A) lastDraw = key;
       }
     }
-    const stage = 'hold' in seg && t > .04 ? STAGES[seg.hold] : null;
-    if (stage !== lastStage) { copies.forEach(c => c.classList.toggle('is-on', c.dataset.s === stage)); lastStage = stage; }
+    // copy rides the scroll: each card fades and drifts with the eased position, so fast scrolling never pops
+    for (const c of copies) {
+      const k = STAGES.indexOf(c.dataset.s), h = SEG.find(x => x.hold === k); if (!h) continue;
+      const len = h.b - h.a, m = len * .32;
+      const sm = (e0, e1, x) => { const tt = clamp((x - e0) / (e1 - e0)); return tt * tt * (3 - 2 * tt); };
+      const inn = k === 0 ? 1 : sm(h.a - m * .4, h.a + m, q), out = k === 4 ? 1 : 1 - sm(h.b - m, h.b + m * .4, q);
+      const o = inn * out, y = (1 - inn) * 46 - (1 - out) * 46;
+      if (c._o !== o.toFixed(3) || c._y !== y.toFixed(1)) {
+        c._o = o.toFixed(3); c._y = y.toFixed(1);
+        c.style.opacity = c._o;
+        const centred = !mobile && !c.classList.contains('dc--end');
+        c.style.transform = centred ? `translate3d(0,calc(-50% + ${c._y}px),0)` : `translate3d(0,${c._y}px,0)`;
+        c.style.pointerEvents = o > .6 ? 'auto' : 'none';
+      }
+    }
     depthVal.textContent = d.toFixed(1);
     depthBar.style.setProperty('--d', (d / 18).toFixed(3));
   }
@@ -163,7 +176,7 @@
     requestAnimationFrame(frame);
     const sy = scrollY;
     const dr = dive.getBoundingClientRect();
-    if (dr.bottom > 0 && dr.top < vh) diveFrame(clamp(-dr.top / Math.max(1, dr.height - vh)));
+    if (dr.bottom > -vh * .2 && dr.top < vh * 1.2) diveFrame(clamp(-dr.top / Math.max(1, dr.height - vh)));
     if (sy !== lastY) { heroFrame(); oceanFrame(); nav.classList.toggle('is-solid', sy > vh * .6 || !drawer.hidden); lastY = sy; }
   }
   requestAnimationFrame(frame);
