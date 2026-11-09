@@ -14,7 +14,7 @@
 <link rel="preload" as="image" href="assets/img/b-dark.webp">
 <link rel="preload" as="image" href="assets/img/b-white.webp">
 <link rel="preload" as="image" href="assets/img/b-fin.webp">
-<link rel="stylesheet" href="assets/site.css?v=1794204137">
+<link rel="stylesheet" href="assets/site.css?v=1794235508">
 <script>
   /* the intro plays fully once per session; a repeat visit gets the short version, ?nointro skips it */
   (function(){var d=document.documentElement,s=location.search;d.classList.add('js');
@@ -60,11 +60,6 @@
 <!-- ============ HERO + THE DIVE (one pinned stage) ============ -->
 <section class="dive" id="top" aria-labelledby="hero-h">
   <span class="dive__anchor" id="bottles"></span>
-  <span class="dive__snap" style="--k:0" aria-hidden="true"></span>
-  <span class="dive__snap" style="--k:1" aria-hidden="true"></span>
-  <span class="dive__snap" style="--k:2" aria-hidden="true"></span>
-  <span class="dive__snap" style="--k:3" aria-hidden="true"></span>
-  <span class="dive__snap" style="--k:4" aria-hidden="true"></span>
   <div class="dive__stage">
     <video class="dive__vid" id="diveVid" muted playsinline preload="auto" poster="assets/seq/k4-d.webp" data-d="assets/video/dive.mp4" data-m="assets/video/dive-m.mp4" aria-label="Footage: White Tip and FIN sink into the sandbar, Dark 8 bursts out of the sea, the camera dives to White Tip and a reef shark, follows it down the Blue Hole to FIN, and rises back to all three bottles"></video>
     <img class="dive__still" id="diveStill" alt="" aria-hidden="true">
@@ -124,6 +119,12 @@
       </div>
     </div>
 
+    <nav class="film-nav" aria-label="Jump to a bottle">
+      <button type="button" data-k="1"><span>Dark 8</span><i></i></button>
+      <button type="button" data-k="2"><span>White Tip</span><i></i></button>
+      <button type="button" data-k="3"><span>FIN</span><i></i></button>
+      <button type="button" class="film-pause" aria-label="Pause the film" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><rect class="pz" x="3" y="2.5" width="3.2" height="11"/><rect class="pz" x="9.8" y="2.5" width="3.2" height="11"/><path class="pl" d="M4 2.5v11l9.5-5.5z"/></svg></button>
+    </nav>
     <div class="gauge" aria-hidden="true">
       <span class="gauge__label">Depth</span>
       <span class="gauge__val"><b id="depthVal">0.0</b> m</span>
@@ -283,6 +284,6 @@
   </div>
 </footer>
 
-<script src="assets/app.js?v=1794204137"></script>
+<script src="assets/app.js?v=1794235508"></script>
 </body>
 </html>

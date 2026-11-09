@@ -41,95 +41,120 @@
   });
   drawer.addEventListener('click', e => { if (e.target.closest('a')) { menu.setAttribute('aria-expanded', 'false'); drawer.hidden = true; } });
 
-  /* ---------------- the dive: scroll-driven video at a governed speed ---------------- */
+  /* ---------------- the dive: a self-playing film on a seamless loop ----------------
+     hero (loop) > wave > Dark 8 (pelicans) > under the sandbar > White Tip (reef shark) > the Blue Hole >
+     FIN (whale shark) > back up to the sandbar, which is the hero frame, so it loops without a seam.
+     Every stop holds while its living moment plays and its card shows. Everything plays natively, so it
+     looks the same every time. It pauses off screen; the chapter buttons jump to a bottle. */
   const dive = $('.dive'), vid = $('#diveVid'), still = $('#diveStill'), stageEl = $('.dive__stage');
   const copies = $$('.dc'), depthVal = $('#depthVal'), depthBar = $('#depthBar');
-  const heroVid = $('#heroVid'), heroCard = $('.dc--hero');
-  const STAGES = ['hero', '0', '1', '2', 'end'], DEPTH = [0, 0, 3, 18, 0];
-  let TIMES = [0, 6, 14, 22, 30];                // replaced from the master's real stops below
-  const STILL = ['k4', 'k1', 'k2', 'k3', 'k4'];
-  const VH_PER_SEC = .55, HOLD_VH = 1.4;          // scroll per second of footage; scroll spent paused at a stop
-  const MAX_RATE = 2.2, CATCH = 3.2;              // playback never faster than 2.2x; how eagerly it closes the gap
-  const src = () => (mobile ? vid.dataset.m : vid.dataset.d);
-  vid.src = src(); vid.preload = 'auto'; vid.load();
-  fetch('assets/video/dive.json').then(r => r.json()).then(j => { TIMES = j.stops; layout(); }).catch(() => {});
-  // scroll layout: hold, move, hold, move ... hold (in viewport heights)
-  let SEG = [];
-  function layout() {
-    SEG = []; let u = 0;
-    for (let k = 0; k < 5; k++) {
-      SEG.push({ hold: k, a: u, b: u += HOLD_VH });
-      if (k < 4) SEG.push({ move: k, a: u, b: u += (TIMES[k + 1] - TIMES[k]) * VH_PER_SEC });
-    }
-    dive.style.height = `calc(100vh + ${u.toFixed(3)} * 100vh)`;
-    const anchor = $('#bottles'); if (anchor) anchor.style.top = Math.round(SEG[2].a * innerHeight) + 'px';
-  }
-  layout();
-  function targetTime() {
-    const y = -dive.getBoundingClientRect().top / innerHeight;
-    for (const x of SEG) if (y <= x.b) {
-      if ('hold' in x) return { T: TIMES[x.hold], hold: x.hold };
-      return { T: TIMES[x.move] + (TIMES[x.move + 1] - TIMES[x.move]) * clamp((y - x.a) / (x.b - x.a)), hold: -1 };
-    }
-    return { T: TIMES[4], hold: 4 };
-  }
-  // living moments at some stops; labels pinned on top
+  const heroVid = $('#heroVid'), heroLabels = $('.dive__hero .hero__labels');
+  const navBtns = $$('.film-nav [data-k]'), pauseBtn = $('.film-pause');
+  const STAGES = ['hero', '0', '1', '2'], DEPTH = [0, 0, 3, 18, 0];
+  let TIMES = [0, 5.95, 13.9, 21.85, 29.8];
+  const STILL = ['k4', 'k1', 'k2', 'k3'];
+  const HOLD = [6.5, 7.2, 6.2, 8.2];              // seconds at each stop (moments are ~6-8s)
+  const MOMENT = { 1: 'pel', 2: 'shark', 3: 'whale' };
+  const RATE = 1.1;                               // the moves play slightly faster than real time
+  const dev = () => (mobile ? 'm' : 'd');
+  vid.src = mobile ? vid.dataset.m : vid.dataset.d; vid.preload = 'auto'; vid.load();
+  if (heroVid) { heroVid.src = mobile ? 'assets/video/hero-m.mp4' : heroVid.dataset.src; heroVid.loop = true; }
+  if (heroLabels) heroLabels.src = mobile ? 'assets/img/lab-k4-m.webp' : 'assets/img/hero-labels.webp';
+  fetch('assets/video/dive.json').then(r => r.json()).then(j => { TIMES = j.stops; }).catch(() => {});
   const moment = $('#diveMoment'), label = $('#diveLabel');
-  const MOMENTS = { 1: 'pel', 3: 'whale' };
-  let momentAt = -1;
-  function startMoment(k) {
-    const name = MOMENTS[k]; if (!name || reduce || momentAt === k) return;
-    momentAt = k;
-    label.src = `assets/img/lab-k${k}-${mobile ? 'm' : 'd'}.webp`;
+  // warm the moment clips in the background
+  setTimeout(() => ['pel', 'shark', 'whale'].forEach(n => { const l = document.createElement('link'); l.rel = 'preload'; l.as = 'video'; l.href = `assets/video/m-${n}${mobile ? '-m' : ''}.mp4`; document.head.appendChild(l); }), 2500);
+
+  // state: phase 'hold' at stop k, or 'move' from k to k+1
+  let phase = 'hold', k = 0, held = 0, running = true, visible = true, userPaused = false, lastNow = 0, firstHero = true;
+  function showCard(i) { const st = i == null ? null : STAGES[i]; copies.forEach(c => c.classList.toggle('is-on', c.dataset.s === st)); }
+  function setStill(i) {
+    if (i == null) { still.classList.remove('is-on'); return; }
+    const url = `assets/seq/${STILL[i]}-${dev()}.webp`; if (!still.src.endsWith(url)) still.src = url; still.classList.add('is-on');
+  }
+  function startMoment(i) {
+    const name = MOMENT[i]; if (!name || reduce) return;
+    label.src = `assets/img/lab-k${i}-${dev()}.webp`;
     const want = `assets/video/m-${name}${mobile ? '-m' : ''}.mp4`;
     if (!moment.src.endsWith(want)) { moment.src = want; moment.load(); }
-    const go = () => { if (momentAt !== k) return; moment.currentTime = 0; label.classList.add('is-on'); moment.classList.add('is-on'); moment.play().catch(() => {}); };
-    if (moment.readyState >= 3) setTimeout(go, 600); else moment.addEventListener('canplaythrough', () => setTimeout(go, 400), { once: true });
+    const go = () => { if (phase !== 'hold' || k !== i) return; moment.currentTime = 0; label.classList.add('is-on'); moment.classList.add('is-on'); if (running) moment.play().catch(() => {}); };
+    if (moment.readyState >= 3) setTimeout(go, 250); else moment.addEventListener('canplaythrough', go, { once: true });
   }
-  function stopMoment() { if (momentAt < 0) return; momentAt = -1; moment.classList.remove('is-on'); label.classList.remove('is-on'); setTimeout(() => { if (momentAt < 0) moment.pause(); }, 400); }
-  let restAt = -2, shownCard;
-  function rest(k) {
-    if (k === restAt) return; restAt = k;
-    if (k >= 0) { const url = `assets/seq/${STILL[k]}-${mobile ? 'm' : 'd'}.webp`; if (!still.src.endsWith(url)) still.src = url; still.classList.add('is-on'); startMoment(k);
-      if (k === 0 && heroVid && heroVid.src && !reduce) heroVid.play().catch(() => {}); }
-    else { still.classList.remove('is-on'); stopMoment(); if (heroVid && !heroVid.paused) heroVid.pause(); }
+  function stopMoment() { moment.classList.remove('is-on'); label.classList.remove('is-on'); setTimeout(() => { if (!moment.classList.contains('is-on')) moment.pause(); }, 400); }
+  function enterHold(i) {
+    phase = 'hold'; k = i; held = 0;
+    vid.pause();
+    setStill(i); showCard(i);
+    stageEl.classList.toggle('at-hero', i === 0);
+    if (i === 0) { if (heroVid && !reduce) { heroVid.currentTime = 0; if (running) heroVid.play().catch(() => {}); } }
+    else startMoment(i);
+    navBtns.forEach(b => b.classList.toggle('is-on', +b.dataset.k === i));
   }
-  rest(0);
-  let lastNow = 0;
+  function enterMove(i) {
+    if (i === 0) firstHero = false;
+    phase = 'move'; k = i;
+    showCard(null); setStill(null); stopMoment();
+    stageEl.classList.remove('at-hero');
+    if (heroVid) setTimeout(() => heroVid.pause(), 900);
+    if (Math.abs(vid.currentTime - TIMES[i]) > .05) vid.currentTime = TIMES[i];
+    vid.playbackRate = RATE;
+    if (running) vid.play().catch(() => {});
+  }
+  function jumpTo(i) {
+    stopMoment(); showCard(null);
+    vid.classList.add('is-fading');
+    setTimeout(() => { vid.currentTime = TIMES[i]; vid.addEventListener('seeked', () => { vid.classList.remove('is-fading'); enterHold(i); }, { once: true }); }, 180);
+  }
+  function setRunning(on) {
+    running = on;
+    if (!on) { vid.pause(); moment.pause(); heroVid && heroVid.pause(); }
+    else if (phase === 'move') vid.play().catch(() => {});
+    else if (k === 0) heroVid && !reduce && heroVid.play().catch(() => {});
+    else if (moment.classList.contains('is-on')) moment.play().catch(() => {});
+  }
+  const sync = () => setRunning(visible && !userPaused && !document.hidden);
+  if ('IntersectionObserver' in window) new IntersectionObserver(es => { visible = es[0].intersectionRatio > .35; sync(); }, { threshold: [0, .35, .6] }).observe(stageEl);
+  document.addEventListener('visibilitychange', sync);
+  navBtns.forEach(b => b.addEventListener('click', () => { userPaused = false; pauseBtn.setAttribute('aria-pressed', 'false'); stageEl.classList.remove('is-paused'); sync(); jumpTo(+b.dataset.k); }));
+  pauseBtn.addEventListener('click', () => {
+    userPaused = !userPaused; pauseBtn.setAttribute('aria-pressed', String(userPaused));
+    pauseBtn.setAttribute('aria-label', userPaused ? 'Play the film' : 'Pause the film'); stageEl.classList.toggle('is-paused', userPaused); sync();
+  });
+  if (reduce) { userPaused = true; stageEl.classList.add('is-paused'); pauseBtn.setAttribute('aria-pressed', 'true'); }
+  enterHold(0);
+
   function chapterFrame(now) {
-    const dt = Math.min(.05, (now - (lastNow || now)) / 1000); lastNow = now;
-    const { T, hold } = targetTime();
-    const t = vid.currentTime || 0, gap = T - t;
-    if (vid.readyState >= 2) {
-      if (reduce) { if (Math.abs(gap) > .01 && !vid.seeking) vid.currentTime = T; }
-      else if (gap > .015) {                                   // forward: native playback, speed from the gap
-        const r = clamp(gap * CATCH, .35, MAX_RATE);
-        if (Math.abs(vid.playbackRate - r) > .05) vid.playbackRate = r;
-        if (vid.paused) vid.play().catch(() => {});
-      } else if (gap < -.015) {                                // backward: step by seeking, same speed cap
-        if (!vid.paused) vid.pause();
-        if (!vid.seeking) vid.currentTime = Math.max(T, t - clamp(-gap * CATCH, .35, MAX_RATE) * Math.max(dt, 1 / 30) * 2);
-      } else if (!vid.paused) { vid.pause(); }
+    const dt = Math.min(.1, (now - (lastNow || now)) / 1000); lastNow = now;
+    if (running && vid.readyState >= 2) {
+      if (phase === 'hold') {
+        if (!(k === 0 && root.classList.contains('intro-pending'))) held += dt;   // the hero waits for the logo intro
+        const dur = k === 0 && firstHero ? 8.5 : (HOLD[k] || 6);
+        if (held >= dur) {
+          if (k < 3) enterMove(k);
+          else enterMove(3);                       // FIN > rise to the sandbar
+        }
+      } else if (vid.currentTime >= TIMES[k + 1] - .02) {
+        if (k + 1 >= 4) { vid.pause(); vid.currentTime = 0; enterHold(0); }   // the sandbar again = the hero
+        else enterHold(k + 1);
+      }
     }
-    const t2 = vid.currentTime || 0;
-    rest(hold >= 0 && Math.abs(t2 - TIMES[hold]) < .06 ? hold : -1);
-    // cards: shown while the footage is near a stop (so a continuous scroll still reads them) or you are parked there
-    let near = -1; for (let k = 0; k < 5; k++) if (Math.abs(t2 - TIMES[k]) < (k === 0 ? .5 : .9)) near = k;
-    if (near < 0 && hold >= 0 && Math.abs(t2 - TIMES[hold]) < 1.2) near = hold;
-    const st = near >= 0 ? STAGES[near] : null;
-    if (st !== shownCard) { shownCard = st; copies.forEach(c => c.classList.toggle('is-on', c.dataset.s === st)); }
-    // hero layer fades with the clock; depth follows the clock
-    const hA = clamp(1 - (t2 - TIMES[0]) / 1.4);
+    // chapter progress, hero fade and depth from the film clock
+    const t = vid.currentTime || 0;
+    navBtns.forEach(b => {
+      const i = +b.dataset.k; let f = 0;
+      if (phase === 'hold' && k === i) f = Math.min(1, held / HOLD[i]);
+      else if (phase === 'move' && k === i - 1) f = 0;
+      b.style.setProperty('--f', f.toFixed(3));
+    });
+    const hA = phase === 'hold' && k === 0 ? 1 : clamp(1 - (t - TIMES[0]) / 1.2);
     if (stageEl._hA !== hA.toFixed(2)) { stageEl._hA = hA.toFixed(2); stageEl.style.setProperty('--heroA', stageEl._hA); }
     let d = 0;
-    for (let k = 0; k < 4; k++) if (t2 >= TIMES[k] && t2 <= TIMES[k + 1]) { const e = ease(clamp((t2 - TIMES[k]) / (TIMES[k + 1] - TIMES[k]))); d = lerp(DEPTH[k], DEPTH[k + 1], e); }
+    for (let i = 0; i < 4; i++) if (t >= TIMES[i] && t <= TIMES[i + 1]) { const e = ease(clamp((t - TIMES[i]) / (TIMES[i + 1] - TIMES[i]))); d = lerp(DEPTH[i], DEPTH[i + 1], e); }
+    if (phase === 'hold') d = DEPTH[k];
     depthVal.textContent = d.toFixed(1);
     depthBar.style.setProperty('--d', (d / 18).toFixed(3));
   }
 
-  /* hero loop video (desktop); 'The bottles' anchor sits at chapter 1 */
-  if (heroVid && innerWidth >= 900 && !reduce) { heroVid.src = heroVid.dataset.src; heroVid.play().catch(() => {}); }
-  addEventListener('resize', layout);
 
   /* ---------------- pick your pour: reveal once ---------------- */
   const pours = $$('.pour');
@@ -162,7 +187,7 @@
     requestAnimationFrame(frame);
     const sy = scrollY;
     const dr = dive.getBoundingClientRect();
-    if (dr.bottom > 0 && dr.top < vh) chapterFrame(performance.now());
+    chapterFrame(performance.now());
     if (sy !== lastY) { oceanFrame(); nav.classList.toggle('is-solid', sy > vh * .6 || !drawer.hidden); lastY = sy; }
   }
   requestAnimationFrame(frame);

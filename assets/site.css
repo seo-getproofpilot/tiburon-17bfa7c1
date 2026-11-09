@@ -520,3 +520,30 @@ html{scroll-snap-type:y proximity}
 /* v10: scroll-driven, no snapping */
 html{scroll-snap-type:none}
 .dive__snap{display:none}
+
+/* ================= v11: the film ================= */
+.dive{height:100vh!important;height:100svh!important}
+.dive__copy--r{display:none}
+.film-nav{position:absolute;z-index:4;left:50%;bottom:28px;transform:translateX(-50%);display:flex;align-items:center;gap:6px;padding:6px;background:rgba(4,18,26,.55);border:1px solid rgba(250,246,238,.14);opacity:calc(1 - var(--heroA,1) * .55)}
+.film-nav button{position:relative;border:0;background:none;color:rgba(250,246,238,.75);font:700 11px/1 var(--f);font-stretch:112%;letter-spacing:.16em;text-transform:uppercase;padding:12px 16px;cursor:pointer;transition:color .2s}
+.film-nav button:hover,.film-nav button.is-on{color:var(--bone)}
+.film-nav [data-k] i{position:absolute;left:16px;right:16px;bottom:6px;height:2px;background:rgba(250,246,238,.18)}
+.film-nav [data-k] i::after{content:"";position:absolute;inset:0;background:var(--amber);transform-origin:left;transform:scaleX(var(--f,0))}
+.film-pause{width:40px;padding:10px!important}
+.film-pause svg{width:14px;height:14px;fill:currentColor;display:block;margin:auto}
+.film-pause .pl{display:none}
+.is-paused .film-pause .pz{display:none}.is-paused .film-pause .pl{display:block}
+.at-hero .dc--hero{pointer-events:auto}
+.dc--hero .hero__hint{display:none}
+.dc--hero .hero__cta{bottom:calc(7vh + 44px)}
+.dc--hero .hero__sub{bottom:calc(7vh + 118px)}
+@media (max-width:900px){
+  .dive__hero{display:block}
+  .dive__hero .hero__vid,.dive__hero .hero__labels{top:var(--nav);bottom:auto;height:auto;aspect-ratio:840/1080}
+  .film-nav{left:var(--gut);right:var(--gut);transform:none;bottom:max(14px,env(safe-area-inset-bottom));justify-content:space-between}
+  .film-nav button{padding:11px 8px;font-size:10px;letter-spacing:.1em}
+  .film-nav [data-k] i{left:8px;right:8px}
+  .dc{bottom:calc(max(14px,env(safe-area-inset-bottom)) + 62px)}
+  .dc--hero .hero__copy{bottom:calc(max(14px,env(safe-area-inset-bottom)) + 140px)}
+  .dc--hero .hero__cta{bottom:calc(max(14px,env(safe-area-inset-bottom)) + 62px)}
+}
