@@ -49,14 +49,14 @@
   const dive = $('.dive'), vid = $('#diveVid'), stageEl = $('.dive__stage');
   const copies = $$('.dc'), depthVal = $('#depthVal'), depthBar = $('#depthBar');
   const navBtns = $$('.film-nav [data-k]'), pauseBtn = $('.film-pause');
-  let SEGS = { hero: 0, wave: 2.68, dark: 6.65, sink: 12.73, white: 21.80, reef: 21.80, fin: 31.87, rise: 38.73 }, DUR = 43.38;
+  let SEGS = { hero: 0, wave: 2.68, dark: 6.65, sink: 12.73, white: 21.80, reef: 21.80, fin: 33.93, rise: 40.80 }, DUR = 51.10;
   vid.loop = true; vid.muted = true; vid.playsInline = true;
   vid.src = mobile ? 'assets/video/film-m.mp4' : 'assets/video/film.mp4';
   vid.poster = mobile ? 'assets/seq/k4-m.webp' : 'assets/img/hero-sandbar.webp';
   fetch('assets/video/film.json').then(r => r.json()).then(j => { j.segments.forEach(x => { SEGS[x.name] = x.start; }); SEGS.white = j.white_at || SEGS.reef; DUR = j.duration; }).catch(() => {});
   // card windows on the film clock: [stage, from, to]
   const windows = () => [
-    ['hero', -1, SEGS.wave + .5], ['hero', DUR - .9, DUR + 1],
+    ['hero', -1, SEGS.wave + .5], ['hero', DUR - 1.9, DUR + 1],
     ['0', SEGS.wave + 3.6, SEGS.sink + .5],
     ['1', SEGS.white - 2.6, SEGS.white + 2.8],
     ['2', SEGS.fin - .9, SEGS.rise + .9],
