@@ -591,3 +591,37 @@ html{scroll-snap-type:none}
 .foot__mark.is-in .foot__stage svg{transform:none}
 .foot__mark.is-in .foot__sea{transform:scaleX(1)}
 @media (prefers-reduced-motion:reduce){.story__mark path{transition:none}.foot__stage svg,.foot__sea{transition:none;transform:none}}
+
+/* v22 type: headlines in Metamorphous, a flared, carved capital cut from the same stone as the TIBURÓN label
+   lettering; Archivo stays for everything you read or tap */
+:root{--fd:"Metamorphous","Archivo",serif}
+h1,h2,.pour__name{font-family:var(--fd)!important;font-weight:400!important;font-stretch:normal!important;letter-spacing:.012em!important;line-height:1.04!important}
+.story h2,.infuse__head h2,.rooms__head h2,.awards__head h2,.foot__buy h2{font-size:clamp(34px,3.8vw,62px)!important}
+.ocean h2{font-family:var(--fd);font-weight:400;letter-spacing:.01em}
+.dc h2{font-size:clamp(30px,3vw,50px)!important}
+.hero h1,.dc--hero h1{font-size:clamp(36px,3.8vw,62px)!important}
+
+/* v22 buy button: the Tiburon mark's own silhouette turned on its side - a pointed nose to the right, the notched
+   double tail of its lower fins to the left - with the mark riding inside; it swims forward on hover */
+.btn--primary,.btn--buy{--nose:20px;--tail:12px;position:relative;background:var(--bone);color:var(--ink);box-shadow:none;
+  padding:0 calc(26px + var(--nose)) 0 calc(22px + var(--tail));
+  clip-path:polygon(0 0,calc(100% - var(--nose)) 0,100% 50%,calc(100% - var(--nose)) 100%,0 100%,var(--tail) 50%);
+  transition:background-color .2s var(--ease),transform .2s var(--ease)}
+.btn--primary::after,.btn--buy::after{display:none}
+.btn--primary::before,.btn--buy::before{content:"";flex:none;width:15px;height:18px;background:currentColor;
+  -webkit-mask:url(img/mark.svg) center/contain no-repeat;mask:url(img/mark.svg) center/contain no-repeat;
+  transform:rotate(90deg);transition:transform .35s cubic-bezier(.2,.75,.25,1)}
+.btn--primary:hover,.btn--buy:hover{background:#fff;color:var(--ink)}
+.btn--primary:hover::before,.btn--buy:hover::before{transform:rotate(90deg) translateY(-5px)}
+.btn--primary:active,.btn--buy:active{transform:translateY(1px)}
+.btn--buy{--nose:15px;--tail:9px;min-height:42px;font-size:11px}
+.btn--buy::before{width:12px;height:14px}
+.pour--white .btn--primary{background:var(--ink);color:var(--bone)}
+.pour--white .btn--primary:hover{background:#000;color:var(--bone)}
+@media (prefers-reduced-motion:reduce){.btn--primary::before,.btn--buy::before{transition:none}}
+@media (max-width:600px){
+  .story h2,.infuse__head h2,.rooms__head h2,.awards__head h2,.foot__buy h2{font-size:clamp(28px,8.2vw,40px)!important}
+  .dc h2{font-size:clamp(26px,7.4vw,36px)!important}
+  .hero h1,.dc--hero h1{font-size:clamp(30px,8.6vw,42px)!important}
+  h1,h2{overflow-wrap:break-word;hyphens:manual}
+}
