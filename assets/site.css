@@ -547,3 +547,9 @@ html{scroll-snap-type:none}
   .dc--hero .hero__copy{bottom:calc(max(14px,env(safe-area-inset-bottom)) + 140px)}
   .dc--hero .hero__cta{bottom:calc(max(14px,env(safe-area-inset-bottom)) + 62px)}
 }
+
+/* v12: one film. The hero, stills, moments and label layers are baked into it now. */
+.dive__hero,.dive__still,.dive__moment,.dive__label{display:none!important}
+.shade--hero,.shade--dive,.gauge,.film-nav{transition:opacity .7s var(--ease)}
+.shade--hero{opacity:var(--heroA,1)}
+.shade--dive{opacity:calc(1 - var(--heroA,1))}

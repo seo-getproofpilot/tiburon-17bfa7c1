@@ -1,0 +1,37 @@
+{
+ "segments": [
+  {
+   "name": "hero",
+   "start": 0.0
+  },
+  {
+   "name": "wave",
+   "start": 9.9333
+  },
+  {
+   "name": "dark",
+   "start": 15.85
+  },
+  {
+   "name": "sink",
+   "start": 22.7667
+  },
+  {
+   "name": "white",
+   "start": 30.6833
+  },
+  {
+   "name": "reef",
+   "start": 36.6
+  },
+  {
+   "name": "fin",
+   "start": 44.5167
+  },
+  {
+   "name": "rise",
+   "start": 52.4333
+  }
+ ],
+ "duration": 60.3333
+}
