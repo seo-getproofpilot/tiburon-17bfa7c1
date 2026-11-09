@@ -49,7 +49,7 @@
   const dive = $('.dive'), vid = $('#diveVid'), stageEl = $('.dive__stage');
   const copies = $$('.dc'), depthVal = $('#depthVal'), depthBar = $('#depthBar');
   const navBtns = $$('.film-nav [data-k]'), pauseBtn = $('.film-pause');
-  let SEGS = { hero: 0, wave: 2.68, dark: 6.65, sink: 12.73, white: 21.80, reef: 21.80, fin: 31.87, rise: 36.98 }, DUR = 41.63;
+  let SEGS = { hero: 0, wave: 2.68, dark: 6.65, sink: 12.73, white: 21.80, reef: 21.80, fin: 31.87, rise: 36.58 }, DUR = 41.23;
   vid.loop = true; vid.muted = true; vid.playsInline = true;
   vid.src = mobile ? 'assets/video/film-m.mp4' : 'assets/video/film.mp4';
   vid.poster = mobile ? 'assets/seq/k4-m.webp' : 'assets/img/hero-sandbar.webp';
