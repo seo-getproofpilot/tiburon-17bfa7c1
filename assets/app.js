@@ -51,9 +51,9 @@
   const navBtns = $$('.film-nav [data-k]'), pauseBtn = $('.film-pause');
   let SEGS = { hero: 0, wave: 2.68, dark: 6.65, sink: 12.73, white: 21.80, reef: 21.80, fin: 33.93, rise: 40.80 }, DUR = 51.10;
   vid.loop = true; vid.muted = true; vid.playsInline = true;
-  vid.src = mobile ? 'assets/video/film-m.mp4?v=1794327234' : 'assets/video/film.mp4?v=1794327234';
+  vid.src = mobile ? 'assets/video/film-m.mp4?v=1794337701' : 'assets/video/film.mp4?v=1794337701';
   vid.poster = mobile ? 'assets/seq/k4-m.webp' : 'assets/img/hero-sandbar.webp';
-  fetch('assets/video/film.json?v=1794327234').then(r => r.json()).then(j => { j.segments.forEach(x => { SEGS[x.name] = x.start; }); SEGS.white = j.white_at || SEGS.reef; DUR = j.duration; }).catch(() => {});
+  fetch('assets/video/film.json?v=1794337701').then(r => r.json()).then(j => { j.segments.forEach(x => { SEGS[x.name] = x.start; }); SEGS.white = j.white_at || SEGS.reef; DUR = j.duration; }).catch(() => {});
   // card windows on the film clock: [stage, from, to]
   const windows = () => [
     ['hero', -1, SEGS.wave + .5], ['hero', DUR - 1.9, DUR + 1],
@@ -111,6 +111,7 @@
   /* ---------------- ocean: the blue hole opens ---------------- */
   const ocPin = $('.ocean__pin'), hole = $('.ocean__hole img');
   function oceanFrame() {
+    if (!ocPin || !hole) return;           // v32: the blue-hole pin was replaced by the reef film (sections.js)
     const r = ocPin.getBoundingClientRect();
     if (r.bottom < -50 || r.top > vh + 50) return;
     const e = ease(clamp(-r.top / Math.max(1, r.height - vh) * 1.2));
@@ -201,10 +202,12 @@
   });
   show(0);
 
-  /* ---------------- awards rail: drag to scroll ---------------- */
+  /* ---------------- awards rail: drag to scroll (v32: replaced by the medal wall; kept if a rail returns) ---------------- */
   const rail = $('#rail');
-  let down = false, sx = 0, sl = 0;
-  rail.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; down = true; sx = e.clientX; sl = rail.scrollLeft; rail.classList.add('is-drag'); });
-  addEventListener('pointerup', () => { down = false; rail.classList.remove('is-drag'); });
-  rail.addEventListener('pointermove', e => { if (down) rail.scrollLeft = sl - (e.clientX - sx); });
+  if (rail) {
+    let down = false, sx = 0, sl = 0;
+    rail.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; down = true; sx = e.clientX; sl = rail.scrollLeft; rail.classList.add('is-drag'); });
+    addEventListener('pointerup', () => { down = false; rail.classList.remove('is-drag'); });
+    rail.addEventListener('pointermove', e => { if (down) rail.scrollLeft = sl - (e.clientX - sx); });
+  }
 })();
