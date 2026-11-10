@@ -1264,3 +1264,38 @@ h1,h2,.pour__name{font-family:var(--fd)!important;font-weight:400!important;font
 }
 @media (prefers-reduced-motion:reduce){.aw__big{animation:none}}
 .pill{font-size:12.5px;padding:5px 11px}.rec__yr li{font-size:18px}.rec__yr>b{font-size:36px}.plinth img{height:360px;top:-170px}.plinth{margin-top:170px;padding-top:210px}
+
+/* ============ v34: reef threats as a field-guide strip; award cards built on the bottle photos ============ */
+.reef__threats{display:none}
+.threats{margin-top:34px;width:min(980px,100%)}
+.threats__label{display:flex;align-items:center;gap:18px;margin:0 0 22px;font:700 12px/1 var(--f);letter-spacing:.28em;text-transform:uppercase;color:var(--amber)}
+.threats__label::before,.threats__label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(240,160,75,0),rgba(240,160,75,.55))}
+.threats__label::after{background:linear-gradient(270deg,rgba(240,160,75,0),rgba(240,160,75,.55))}
+.threats ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr)}
+.threats li{display:grid;justify-items:center;gap:6px;padding:4px 14px}
+.threats li+li{border-left:1px solid rgba(250,246,238,.14)}
+.threats svg{width:46px;height:46px;margin-bottom:8px;fill:none;stroke:#bfe6e3;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.threats b{font:400 clamp(20px,1.6vw,24px)/1.1 var(--fd);color:var(--bone)}
+.threats span{font-size:15px;color:rgba(250,246,238,.7)}
+@media (max-width:900px){.threats ul{grid-template-columns:1fr 1fr;row-gap:22px}.threats li:nth-child(3){border-left:0}.threats svg{width:36px;height:36px}}
+
+.aw__plinths{gap:clamp(18px,2vw,30px)}
+.plinth{margin-top:0;padding:0;border-radius:26px;overflow:hidden;background:#140d08;border:1px solid rgba(230,187,131,.22);box-shadow:0 50px 80px -46px rgba(0,0,0,.9);text-align:left;transition:transform .6s var(--ease),box-shadow .6s var(--ease)}
+.plinth:hover{transform:translateY(-6px);box-shadow:0 60px 90px -44px rgba(0,0,0,.95),0 0 0 1px rgba(230,187,131,.4)}
+.plinth::before{display:none}
+.plinth figure{margin:0;aspect-ratio:4/4.4;overflow:hidden;position:relative}
+.plinth figure img{position:static;width:100%;height:100%;object-fit:cover;transform:none;filter:none;transition:transform 1.2s var(--ease)}
+.plinth:hover figure img{transform:scale(1.04)}
+.plinth figure::after{content:"";position:absolute;inset:auto 0 0;height:45%;background:linear-gradient(180deg,rgba(20,13,8,0),#140d08)}
+.plinth img{top:auto;left:auto;height:auto}
+.plinth__text{position:relative;padding:4px 28px 30px;margin-top:-40px}
+.plinth h3{margin:0 0 10px}
+.plinth--dark h3{font-size:clamp(34px,3vw,44px)}
+.plinth__text p{font-size:17px;line-height:1.5;color:rgba(250,246,238,.82);margin:0}
+.seal{position:absolute;right:20px;top:20px;width:96px;height:96px;border-radius:50%;display:grid;place-content:center;text-align:center;
+  background:radial-gradient(circle at 34% 28%,#fff6d2 0%,#f0cf78 30%,#c4952f 70%,#8a6418 100%);
+  box-shadow:0 0 0 4px rgba(255,240,200,.35),0 0 0 6px #b88a2a,0 18px 30px -10px rgba(0,0,0,.7),inset 0 -6px 12px rgba(0,0,0,.25);transform:rotate(-8deg)}
+.seal::before{content:"";position:absolute;inset:8px;border-radius:50%;border:1.5px dashed rgba(90,60,10,.45)}
+.seal b{font:800 15px/1 var(--f);font-stretch:118%;letter-spacing:.22em;text-transform:uppercase;color:#3a2604;padding-left:.22em}
+.seal span{font:400 26px/1 var(--fd);color:#2a1a02;margin-top:4px}
+@media (max-width:900px){.plinth{margin-top:0}.aw__plinths{gap:22px}}
