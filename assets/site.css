@@ -812,3 +812,46 @@ h1,h2,.pour__name{font-family:var(--fd)!important;font-weight:400!important;font
 }
 .lu--dark::after{background:linear-gradient(180deg,#0b0604 0%,rgba(11,6,4,.75) 8%,rgba(11,6,4,0) 24%),linear-gradient(90deg,rgba(12,6,2,.88) 0%,rgba(12,6,2,.7) 28%,rgba(12,6,2,.18) 52%,rgba(12,6,2,0) 64%),linear-gradient(0deg,rgba(8,4,1,.45),rgba(8,4,1,0) 30%)}
 @media (max-width:900px){.lu--dark .lu__scene::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0b0604 0%,rgba(11,6,4,0) 22%);pointer-events:none}}
+
+/* ============ v31: everything small reads comfortably; Dark 8 in real bronze; FIN notes in the dusk tone ============ */
+.lu__text{max-width:640px}
+.lu--dark .lu__desc,.lu--white .lu__desc,.lu--coffee .lu__desc{font-size:clamp(22px,1.7vw,26px);line-height:1.48;font-weight:600}
+.lu--fin .lu__desc{font-size:clamp(20px,1.45vw,22px);line-height:1.6}
+.lu__notes{font-size:15px;letter-spacing:.14em;gap:10px 26px}
+.lu__specs div,.lu__steep li{grid-template-columns:150px 1fr;padding:15px 0}
+.lu__specs dt,.lu__steep b{font-size:14px;letter-spacing:.16em}
+.lu__specs dd{font-size:21px}
+.lu--dark .lu__specs dd{font-size:21px}
+.lu--white .lu__specs dd{font-size:20px;font-weight:500}
+.lu__steep span{font-size:24px;font-weight:600;line-height:1.35}
+.lu--white .lu__sub,.lu--coffee .lu__sub{font-size:16px;letter-spacing:.24em}
+.lu--white .lu__line{font-size:15px;letter-spacing:.24em}
+.lu--coffee .lu__kicker{font-size:16px;letter-spacing:.24em}
+.lu--dark .lu__title small{font-size:17px;letter-spacing:.28em}
+.lu__serve{font-size:24px!important;font-weight:600}
+.lu__price{font-size:36px}
+.lu .btn{font-size:15px;min-height:62px}
+.lu__link{font-size:15px}
+
+/* Dark 8: polished bronze instead of flat orange, with one slow glint across the big type */
+.lu--dark{--bz-hi:#f6dcae;--bz:#d7a26a;--bz-lo:#9c6431;--bz-text:#e6bb83}
+.lu--dark .lu__script,.lu--dark .lu__title b,.li--dark i{background:linear-gradient(100deg,var(--bz-lo) 0%,var(--bz) 22%,var(--bz-hi) 34%,var(--bz) 46%,#b97c43 70%,var(--bz) 100%);background-size:260% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.lu--dark .lu__title b{filter:drop-shadow(0 2px 14px rgba(215,162,106,.28))}
+@media (prefers-reduced-motion:no-preference){
+  .lu--dark .lu__script,.lu--dark .lu__title b,.li--dark i{animation:bzGlint 7s ease-in-out infinite}
+  @keyframes bzGlint{0%,55%{background-position:100% 0}85%,100%{background-position:0 0}}
+}
+.lu--dark .lu__notes,.lu--dark .lu__serve{color:var(--bz-text)}
+.lu--dark .btn--primary{background:linear-gradient(135deg,#f3d29e 0%,#d7a26a 45%,#a96d36 100%);color:#1c0e03}
+.lu--dark .btn--primary:hover{background:linear-gradient(135deg,#fbe2b6 0%,#e4b37c 45%,#b97c43 100%)}
+
+/* FIN: the notes take the warm line of the horizon, so they stop disappearing into the navy */
+.lu--fin .lu__notes{color:#f4bf8c}
+
+@media (max-width:900px){
+  .lu--dark .lu__desc,.lu--white .lu__desc,.lu--coffee .lu__desc{font-size:22px}
+  .lu__specs div,.lu__steep li{grid-template-columns:118px 1fr}
+  .lu__specs dd{font-size:19px}.lu__steep span{font-size:21px}
+  .lu__notes{font-size:14px}
+}
+.lu__desc,.lu__steep span,.lu__specs dd{text-wrap:pretty}.lu__steep span{font-size:23px}@media (max-width:900px){.lu__steep span{font-size:21px}}
