@@ -625,3 +625,94 @@ h1,h2,.pour__name{font-family:var(--fd)!important;font-weight:400!important;font
   .hero h1,.dc--hero h1{font-size:clamp(30px,8.6vw,42px)!important}
   h1,h2{overflow-wrap:break-word;hyphens:manual}
 }
+
+/* ============ v27: THE BOTTLES - one display per bottle, each set in its own label's type ============ */
+.lineup{position:relative;background:#070504}
+.lineup__head{padding:clamp(88px,12vw,160px) var(--gut) clamp(40px,6vw,72px);max-width:1180px}
+.lineup__head h2{font:800 clamp(30px,4.2vw,58px)/1.02 var(--f);font-stretch:125%;text-transform:uppercase;letter-spacing:-.01em;max-width:18ch}
+.lu{position:relative;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);align-items:center;gap:clamp(24px,5vw,80px);min-height:100vh;min-height:100svh;padding:clamp(64px,8vw,120px) var(--gut);overflow:hidden;isolation:isolate}
+.lu__text{position:relative;z-index:2;max-width:560px}
+.lu__stage{position:relative;height:min(82vh,820px);min-height:520px}
+.lu__bottle{position:absolute;bottom:4%;height:88%;width:auto;filter:drop-shadow(0 30px 40px rgba(0,0,0,.45))}
+.lu__canvas{position:absolute;inset:0;width:100%;height:100%}
+.lu__title{margin:0 0 22px}
+.lu__desc{font-size:clamp(19px,1.5vw,22px);line-height:1.55;margin-bottom:26px}
+.lu__notes{list-style:none;margin:0 0 28px;padding:0;display:flex;flex-wrap:wrap;gap:8px 22px;font:600 12px/1.3 var(--f);letter-spacing:.2em;text-transform:uppercase}
+.lu__specs{margin:0 0 30px;display:grid;gap:0}
+.lu__specs div{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:11px 0;border-top:1px solid currentColor;border-color:color-mix(in srgb,currentColor 18%,transparent)}
+.lu__specs div:last-child{border-bottom:1px solid color-mix(in srgb,currentColor 18%,transparent)}
+.lu__specs dt{font:600 11px/1.6 var(--f);letter-spacing:.22em;text-transform:uppercase;opacity:.62}
+.lu__specs dd{margin:0;font-size:16px}
+.lu__buy{display:flex;align-items:center;flex-wrap:wrap;gap:16px 26px}
+.lu__price{font:800 30px/1 var(--f);font-stretch:112%}
+.lu__link{font:600 12px/1 var(--f);letter-spacing:.2em;text-transform:uppercase;text-underline-offset:6px}
+
+/* Dark 8: black label, copper shark, flared caps, a script line */
+.lu--dark{background:radial-gradient(70% 80% at 72% 55%,#3a1d0b 0%,#170b05 45%,#0b0604 100%);color:#efe3d0}
+.lu--dark .lu__script{font:400 clamp(30px,3vw,42px)/1 "Pinyon Script",cursive;color:#e0974a;margin-bottom:14px}
+.lu--dark .lu__title{font-family:"Marcellus SC",serif;font-weight:400;display:grid;justify-items:start;line-height:.95}
+.lu--dark .lu__title span{font-size:clamp(46px,5.6vw,84px);letter-spacing:.04em}
+.lu--dark .lu__title b{font:400 clamp(60px,7vw,104px)/1 "Marcellus",serif;color:#e0974a;margin:4px 0 0}
+.lu--dark .lu__title small{font:400 15px/1 "Marcellus SC",serif;letter-spacing:.32em;margin-top:6px}
+.lu--dark .lu__desc,.lu--dark .lu__serve{font-family:"Cormorant Garamond",serif;font-weight:500}
+.lu--dark .lu__serve{font-style:italic;font-size:20px;color:#e0974a;margin:-6px 0 28px}
+.lu--dark .lu__notes{color:#e0974a}
+.lu--dark .lu__specs dd{font-family:"Marcellus",serif}
+.lu--dark .lu__bottle{left:6%}
+.lu--dark .btn--primary{background:#e0974a;color:#1a0b00}
+.lu--dark .btn--primary:hover{background:#f2b06a}
+
+/* White Tip: frosted glass, black brushed shark, rough old-style caps; the reef light plays over it */
+.lu--white{grid-template-columns:minmax(0,6fr) minmax(0,5fr);background:linear-gradient(180deg,#dff0ef 0%,#eef3ee 46%,#f1eadc 100%);color:#121c1c}
+.lu--white .lu__line{display:flex;gap:14px;font:400 13px/1 "Marcellus SC",serif;letter-spacing:.3em;margin-bottom:16px;color:#3a4a49}
+.lu--white .lu__title,.lu--coffee .lu__title{font:400 clamp(64px,8.4vw,128px)/.9 "IM Fell DW Pica SC",serif;letter-spacing:-.01em;margin-bottom:10px}
+.lu--white .lu__sub,.lu--coffee .lu__sub{font:700 13px/1.4 "Cormorant Garamond",serif;letter-spacing:.34em;text-transform:uppercase;margin-bottom:26px}
+.lu--white .lu__desc,.lu--coffee .lu__desc{font-family:"Cormorant Garamond",serif;font-weight:500}
+.lu--white .lu__notes{color:#24504f}
+.lu--white .btn--primary{background:#121c1c;color:#f4f1ea}
+.lu--white .btn--primary:hover{background:#000;color:#fff}
+.lu__stage--reef{border-radius:2px;overflow:hidden;background:radial-gradient(120% 70% at 50% 100%,#efe4cf 0%,#e3d8bf 30%,rgba(214,232,228,0) 62%),linear-gradient(180deg,#7fc3c4 0%,#a9d8d4 45%,#d7ebe3 70%)}
+.lu__stage--reef .lu__bottle{left:50%;transform:translateX(-50%);bottom:7%;height:84%;filter:drop-shadow(-26px 18px 22px rgba(40,70,64,.28))}
+.lu__caustic{position:absolute;inset:-20%;pointer-events:none;mix-blend-mode:soft-light;opacity:.9;background-image:url(img/caustic.png),url(img/caustic.png);background-size:420px 420px,620px 620px;animation:luCaustic 18s linear infinite}
+.lu__rays{position:absolute;inset:-10% -20% 30%;pointer-events:none;background:repeating-linear-gradient(100deg,rgba(255,255,255,0) 0 60px,rgba(255,255,255,.22) 80px,rgba(255,255,255,0) 120px);filter:blur(10px);transform-origin:50% 0;animation:luRays 11s ease-in-out infinite alternate;mix-blend-mode:screen}
+@keyframes luCaustic{to{background-position:420px 210px,-620px 310px}}
+@keyframes luRays{from{transform:skewX(-6deg) translateX(-3%)}to{transform:skewX(6deg) translateX(3%)}}
+
+/* Coffee & Cacao: the White Tip type, roasted palette */
+.lu--coffee{background:radial-gradient(80% 90% at 70% 60%,#4a2a17 0%,#2a170d 42%,#140b06 100%);color:#f1e3cf}
+.lu--coffee .lu__kicker{font:400 14px/1 "Marcellus SC",serif;letter-spacing:.3em;color:#d7a774;margin-bottom:16px}
+.lu--coffee .lu__title i{font-style:normal;color:#d7a774}
+.lu__steep{list-style:none;margin:0 0 32px;padding:0;display:grid;gap:0;counter-reset:s}
+.lu__steep li{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:12px 0;border-top:1px solid rgba(241,227,207,.16);opacity:.45;transition:opacity .6s var(--ease)}
+.lu__steep li:last-child{border-bottom:1px solid rgba(241,227,207,.16)}
+.lu__steep li.is-on{opacity:1}
+.lu__steep b{font:600 11px/1.7 var(--f);letter-spacing:.22em;text-transform:uppercase;color:#d7a774}
+.lu__steep span{font:500 18px/1.45 "Cormorant Garamond",serif}
+.lu--coffee .btn--primary{background:#d7a774;color:#1c0f07}
+.lu--coffee .btn--primary:hover{background:#ecc394}
+.lu--coffee .lu__link{color:#f1e3cf}
+.lu__bottle--src{visibility:hidden}
+.lu__day{position:absolute;right:4%;top:6%;display:grid;justify-items:end;color:#d7a774;font:400 14px/1 "Marcellus SC",serif;letter-spacing:.3em}
+.lu__day b{font:400 clamp(70px,8vw,120px)/1 "IM Fell DW Pica SC",serif;letter-spacing:0;color:#f1e3cf}
+
+/* FIN: blue-hour agave, navy glass, wide heavy caps */
+.lu--fin{background:#06172a;color:#eaf1f8}
+.lu__agave{position:absolute;inset:0;z-index:-1;overflow:hidden}
+.lu__agave::before{content:"";position:absolute;inset:-4%;background:url(img/agave.webp) center 70%/cover;filter:saturate(.55) brightness(.55) contrast(1.1);animation:luKen 30s ease-in-out infinite alternate}
+.lu__agave::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,14,28,.94) 0%,rgba(5,20,40,.78) 40%,rgba(6,26,52,.35) 75%,rgba(6,23,42,.55) 100%),linear-gradient(180deg,rgba(14,46,92,.6),rgba(3,12,24,.2) 50%,rgba(3,10,20,.85));mix-blend-mode:normal}
+@keyframes luKen{from{transform:scale(1.04) translateX(0)}to{transform:scale(1.12) translateX(-2%)}}
+.lu--fin .lu__line{font:300 15px/1 var(--f);font-stretch:125%;letter-spacing:.6em;text-transform:uppercase;margin-bottom:6px;color:#b9cde2}
+.lu--fin .lu__title{font:900 clamp(96px,13vw,200px)/.82 var(--f);font-stretch:125%;letter-spacing:.02em;margin-bottom:12px}
+.lu--fin .lu__sub{font:400 clamp(18px,1.6vw,24px)/1 "Marcellus SC",serif;letter-spacing:.14em;margin-bottom:28px;color:#cfe0f0}
+.lu--fin .lu__desc{font-weight:300}
+.lu--fin .lu__notes{color:#9ec4e6}
+.lu--fin .btn--primary{background:#eaf1f8;color:#06172a}
+.lu--fin .lu__stage .lu__bottle{left:50%;transform:translateX(-50%)}
+
+@media (max-width:900px){
+  .lu,.lu--white{grid-template-columns:1fr;min-height:0}
+  .lu__stage{height:72vh;min-height:440px;order:-1}
+  .lu--white .lu__stage{order:-1}
+  .lu__specs div,.lu__steep li{grid-template-columns:100px 1fr}
+}
+@media (prefers-reduced-motion:reduce){.lu__caustic,.lu__rays,.lu__agave::before{animation:none}}

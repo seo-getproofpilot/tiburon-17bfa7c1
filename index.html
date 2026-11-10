@@ -10,11 +10,11 @@
 <link rel="icon" href="assets/img/mark.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,100,400&family=Metamorphous&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,100,400&family=Metamorphous&family=Marcellus&family=Marcellus+SC&family=Pinyon+Script&family=IM+Fell+DW+Pica+SC&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/img/b-dark.webp">
 <link rel="preload" as="image" href="assets/img/b-white.webp">
 <link rel="preload" as="image" href="assets/img/b-fin.webp">
-<link rel="stylesheet" href="assets/site.css?v=1794286115">
+<link rel="stylesheet" href="assets/site.css?v=1794290540">
 <script>
   /* the intro plays fully once per session; a repeat visit gets the short version, ?nointro skips it */
   (function(){var d=document.documentElement,s=location.search;d.classList.add('js');
@@ -134,6 +134,98 @@
 </section>
 
 <!-- ============ THE BOTTLES ============ -->
+<section class="lineup" id="lineup" aria-labelledby="lu-h">
+  <header class="lineup__head">
+    <p class="eyebrow">The bottles</p>
+    <h2 id="lu-h">Three bottles and the house infusion. Each one dressed its own way.</h2>
+  </header>
+
+  <!-- Dark 8 -->
+  <article class="lu lu--dark" id="dark8" aria-labelledby="lu-dark-h">
+    <div class="lu__text">
+      <p class="lu__script">Product of Belize</p>
+      <h3 id="lu-dark-h" class="lu__title"><span>Tiburón Rum</span><b>8</b><small>Reserve Blend</small></h3>
+      <p class="lu__desc">Molasses rum aged eight years in bourbon oak, then re-casked for a second maturation in the Belize heat. The copper shark curls around the label with its jaws open, and a shark tooth hangs at the neck.</p>
+      <ul class="lu__notes" aria-label="Tasting notes"><li>Toasted oak</li><li>Vanilla</li><li>Caramel</li><li>Dark chocolate</li><li>Honey</li></ul>
+      <dl class="lu__specs">
+        <div><dt>Strength</dt><dd>40% ABV, 80 proof</dd></div>
+        <div><dt>Bottle</dt><dd>750 ml</dd></div>
+        <div><dt>Medal</dt><dd>Gold, San Francisco World Spirits 2019</dd></div>
+      </dl>
+      <p class="lu__serve">Pour it neat, over one big sphere of ice.</p>
+      <div class="lu__buy"><span class="lu__price">$37.99</span><a class="btn btn--primary" href="https://www.tiburonrum.com/buy-now-2-2/">Buy Dark 8</a></div>
+    </div>
+    <div class="lu__stage lu__stage--pour" data-anim="pour">
+      <img class="lu__bottle" src="assets/img/b-dark.webp" alt="Tiburón Rum 8, Reserve Blend, with the copper shark label" width="490" height="1800" loading="lazy">
+      <canvas class="lu__canvas" aria-hidden="true"></canvas>
+    </div>
+  </article>
+
+  <!-- White Tip -->
+  <article class="lu lu--white" id="whitetip" aria-labelledby="lu-white-h">
+    <div class="lu__stage lu__stage--reef" data-anim="reef">
+      <span class="lu__rays" aria-hidden="true"></span>
+      <img class="lu__bottle" src="assets/img/b-white.webp" alt="Tiburón White Tip overproof white rum, frosted bottle with a black shark" width="496" height="1800" loading="lazy">
+      <span class="lu__caustic" aria-hidden="true"></span>
+    </div>
+    <div class="lu__text">
+      <p class="lu__line"><span>Tiburón Rum</span><span>Company</span><span>Belize</span></p>
+      <h3 id="lu-white-h" class="lu__title">White Tip</h3>
+      <p class="lu__sub">Premium crafted overproof white rum</p>
+      <p class="lu__desc">Ninety-two proof and as clear as the shallows. It is made for cocktails and for the infusions we steep at the tasting rooms, and it still finishes smooth on its own. The black shark on the frosted bottle is the only dark thing about it.</p>
+      <ul class="lu__notes" aria-label="Tasting notes"><li>Sweet coconut</li><li>Vanilla</li><li>Butterscotch</li><li>Marshmallow</li><li>A peppery kick</li></ul>
+      <dl class="lu__specs">
+        <div><dt>Strength</dt><dd>46% ABV, 92 proof</dd></div>
+        <div><dt>Bottle</dt><dd>750 ml</dd></div>
+        <div><dt>Rated</dt><dd>92.5, The Tasting Panel</dd></div>
+      </dl>
+      <div class="lu__buy"><span class="lu__price">$27.99</span><a class="btn btn--primary" href="https://www.tiburonrum.com/buy-now-2-2/">Buy White Tip</a></div>
+    </div>
+  </article>
+
+  <!-- Coffee & Cacao -->
+  <article class="lu lu--coffee" id="coffee" aria-labelledby="lu-coffee-h">
+    <div class="lu__text">
+      <p class="lu__kicker">The tasting-room favourite</p>
+      <h3 id="lu-coffee-h" class="lu__title">Coffee <i>&amp;</i> Cacao</h3>
+      <p class="lu__sub">A White Tip infusion</p>
+      <p class="lu__desc">The pour people ask for by name. White Tip steeps with whole cacao beans for three days, takes a spoon of vanilla or caramel coffee for one more, and finishes with our honey syrup. It wears the same White Tip shark, with a much darker rum behind it.</p>
+      <ol class="lu__steep" aria-label="How it is made">
+        <li data-step="0"><b>Days 1 to 3</b><span>Ten cacao beans in half a bottle of White Tip</span></li>
+        <li data-step="1"><b>Day 4</b><span>A teaspoon of vanilla or caramel coffee</span></li>
+        <li data-step="2"><b>Day 5</b><span>Strain, then sweeten with the house syrup</span></li>
+      </ol>
+      <div class="lu__buy"><a class="btn btn--primary" href="#rooms">Taste it in San Pedro</a><a class="lu__link" href="#infusions">Make it at home</a></div>
+    </div>
+    <div class="lu__stage lu__stage--steep" data-anim="steep">
+      <canvas class="lu__canvas" aria-hidden="true"></canvas>
+      <img class="lu__bottle lu__bottle--src" src="assets/img/b-white.webp" alt="White Tip turning dark as it steeps with coffee and cacao" width="496" height="1800" loading="lazy">
+      <p class="lu__day" aria-hidden="true"><span>Day</span><b>1</b></p>
+    </div>
+  </article>
+
+  <!-- FIN -->
+  <article class="lu lu--fin" id="fin" aria-labelledby="lu-fin-h">
+    <span class="lu__agave" aria-hidden="true"></span>
+    <div class="lu__text">
+      <p class="lu__line"><span>Tiburon&#8217;s</span></p>
+      <h3 id="lu-fin-h" class="lu__title">FIN</h3>
+      <p class="lu__sub">Tequila Blanco</p>
+      <p class="lu__desc">One hundred percent de agave, grown in the volcanic soil of Jalisco, harvested by hand and distilled in small batches. The bottle runs from navy to clear, with a dorsal fin pressed up through the glass.</p>
+      <ul class="lu__notes" aria-label="Tasting notes"><li>Pepper</li><li>Citrus</li><li>Agave</li><li>A slightly sweet finish</li></ul>
+      <dl class="lu__specs">
+        <div><dt>Agave</dt><dd>100% de agave, Jalisco</dd></div>
+        <div><dt>Bottle</dt><dd>700 ml, 40% ABV</dd></div>
+        <div><dt>Medal</dt><dd>Gold, Asia World Spirits 2025</dd></div>
+      </dl>
+      <div class="lu__buy"><span class="lu__price">$54.90</span><a class="btn btn--primary" href="https://www.tiburonrum.com/buy-now-2-2/">Buy FIN</a></div>
+    </div>
+    <div class="lu__stage lu__stage--fill" data-anim="fill">
+      <canvas class="lu__canvas" aria-hidden="true"></canvas>
+      <img class="lu__bottle lu__bottle--src" src="assets/img/b-fin.webp" alt="Tiburon's FIN Tequila Blanco filling with tequila" width="464" height="1500" loading="lazy">
+    </div>
+  </article>
+</section>
 
 <!-- ============ OUR STORY ============ -->
 <section class="story" id="story" aria-labelledby="story-h">
@@ -293,6 +385,7 @@
   </div>
 </footer>
 
-<script src="assets/app.js?v=1794286115"></script>
+<script src="assets/app.js?v=1794290540"></script>
+<script src="assets/lineup.js?v=1794290540" defer></script>
 </body>
 </html>
