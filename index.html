@@ -14,7 +14,7 @@
 <link rel="preload" as="image" href="assets/img/b-dark.webp">
 <link rel="preload" as="image" href="assets/img/b-white.webp">
 <link rel="preload" as="image" href="assets/img/b-fin.webp">
-<link rel="stylesheet" href="assets/site.css?v=1794334325">
+<link rel="stylesheet" href="assets/site.css?v=1794334882">
 <script>
   /* the intro plays fully once per session; a repeat visit gets the short version, ?nointro skips it */
   (function(){var d=document.documentElement,s=location.search;d.classList.add('js');
@@ -136,8 +136,16 @@
 <!-- ============ THE BOTTLES ============ -->
 <section class="lineup" id="lineup" aria-labelledby="lu-h">
   <header class="lineup__head">
-    <p class="eyebrow">The bottles</p>
-    <h2 id="lu-h">Three bottles and the house infusion. Each one dressed its own way.</h2>
+    <div class="lineup__intro">
+      <p class="eyebrow">The bottles</p>
+      <h2 id="lu-h">Three bottles and the house infusion. Each one dressed its own way.</h2>
+    </div>
+    <ol class="lineup__index" aria-label="The bottles">
+      <li><a href="#dark8" class="li--dark"><span class="li__n">01</span><b>Tibur&oacute;n <i>8</i></b><em>Aged rum, reserve blend</em></a></li>
+      <li><a href="#whitetip" class="li--white"><span class="li__n">02</span><b>White Tip</b><em>Overproof white rum, 92 proof</em></a></li>
+      <li><a href="#coffee" class="li--coffee"><span class="li__n">03</span><b>Coffee <i>&amp;</i> Cacao</b><em>The tasting-room infusion</em></a></li>
+      <li><a href="#fin" class="li--fin"><span class="li__n">04</span><b>FIN</b><em>Tequila blanco, 100% agave</em></a></li>
+    </ol>
   </header>
 
   <!-- Dark 8 -->
@@ -370,7 +378,7 @@
   </div>
 </footer>
 
-<script src="assets/app.js?v=1794334325"></script>
+<script src="assets/app.js?v=1794334882"></script>
 <script>
 /* v29: the bottle scenes come alive. Each loop loads only when its section is near the screen, plays while visible,
    and fades in over the still once it is actually playing. Reduced motion or Save-Data: the still stays. */

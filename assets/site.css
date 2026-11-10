@@ -753,3 +753,62 @@ h1,h2,.pour__name{font-family:var(--fd)!important;font-weight:400!important;font
 .lu--dark .lu__loop{object-position:52% 50%}.lu--white .lu__loop{object-position:25% 50%}.lu--coffee .lu__loop{object-position:52% 50%}.lu--fin .lu__loop{object-position:71% 50%}
 @supports (animation-timeline:view()){@media (prefers-reduced-motion:no-preference){.lu__loop{animation:luSettle linear both;animation-timeline:view();animation-range:entry 0% cover 50%}}}
 @media (max-width:900px){.lu__loop{object-position:50% 50%!important}}
+
+/* ============ v30: the bottles intro as a chapter opener, and the bottle copy made easier to read ============ */
+.lineup__head{max-width:none;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(32px,6vw,96px);align-items:end;
+  padding:clamp(96px,11vw,160px) var(--gut) clamp(64px,7vw,104px);
+  background:radial-gradient(60% 90% at 85% 100%,rgba(120,60,20,.28),rgba(0,0,0,0) 70%),linear-gradient(180deg,#071a24 0%,#0a0d10 38%,#0b0604 100%)}
+.lineup__head h2{font-size:clamp(34px,3.6vw,56px)!important;max-width:15ch;margin:0;color:var(--bone)}
+.lineup__index{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(24px,3vw,48px)}
+.lineup__index li{border-top:1px solid rgba(250,246,238,.16)}
+.lineup__index a{display:grid;grid-template-columns:42px 1fr;grid-template-rows:auto auto;column-gap:10px;padding:22px 0 24px;color:var(--bone);text-decoration:none;transition:color .2s var(--ease)}
+.li__n{grid-row:1/3;font:600 12px/2.6 var(--f);letter-spacing:.2em;color:rgba(250,246,238,.55)}
+.lineup__index b{font-weight:400;font-size:clamp(28px,2.4vw,38px);line-height:1.05;transition:transform .3s var(--ease);display:inline-block;justify-self:start}
+.lineup__index em{font:500 14px/1.4 var(--f);font-style:normal;letter-spacing:.04em;color:rgba(250,246,238,.72);margin-top:8px}
+.lineup__index a:hover b,.lineup__index a:focus-visible b{transform:translateX(6px)}
+.li--dark b{font-family:"Marcellus SC",serif;letter-spacing:.03em}.li--dark i{font:400 1.15em/1 "Marcellus",serif;font-style:normal;color:#e0974a}
+.li--white b{font-family:"IM Fell DW Pica SC",serif;color:#dff0ef}
+.li--coffee b{font-family:"IM Fell DW Pica SC",serif;color:#f1e3cf}.li--coffee i{font-style:normal;color:#d7a774}
+.li--fin b{font:900 clamp(30px,2.6vw,42px)/1 var(--f);font-stretch:125%;letter-spacing:.04em;color:#cfe0f0}
+.lineup__index a:hover em{color:var(--bone)}
+
+/* copy: bigger, calmer, more contrast */
+.lu__text{max-width:600px;text-shadow:none}
+.lu__desc{font-size:clamp(19px,1.35vw,21px);line-height:1.6}
+.lu--dark .lu__desc,.lu--white .lu__desc,.lu--coffee .lu__desc{font-size:clamp(21px,1.55vw,24px);line-height:1.5;font-weight:500}
+.lu__notes{font:700 13.5px/1.4 var(--f);letter-spacing:.16em;gap:10px 24px;margin-bottom:32px}
+.lu__specs div,.lu__steep li{grid-template-columns:130px 1fr;padding:14px 0;align-items:baseline}
+.lu__specs dt,.lu__steep b{font:700 12.5px/1.5 var(--f);letter-spacing:.18em;opacity:1}
+.lu__specs dd{font-size:18px}
+.lu--dark .lu__specs dd{font-size:19px}
+.lu__steep span{font-size:21px;line-height:1.4}
+.lu__serve{font-size:22px!important}
+.lu__buy{gap:18px 28px;margin-top:6px}
+.lu__price{font-size:34px}
+.lu .btn{min-height:60px;padding:0 34px;font-size:14px;letter-spacing:.16em}
+.lu__link{font-size:13.5px;letter-spacing:.18em;text-decoration-thickness:1.5px}
+/* per bottle */
+.lu--dark .lu__specs dt{color:rgba(239,227,208,.72)}
+.lu--dark .lu__specs div,.lu--dark .lu__specs div:last-child{border-color:rgba(239,227,208,.2)}
+.lu--white::after{background:linear-gradient(270deg,rgba(238,247,245,.96) 0%,rgba(238,247,245,.93) 36%,rgba(238,247,245,.7) 47%,rgba(238,247,245,0) 62%)}
+.lu--white{color:#0d1716}
+.lu--white .lu__notes{color:#164240}
+.lu--white .lu__line{color:#2a3b3a}
+.lu--white .lu__specs dt{color:#3a4c4b}
+.lu--white .lu__specs div,.lu--white .lu__specs div:last-child{border-color:rgba(13,23,22,.2)}
+.lu--coffee .lu__steep b,.lu--coffee .lu__kicker{color:#e3b480}
+.lu--coffee .lu__steep li,.lu--coffee .lu__steep li:last-child{border-color:rgba(241,227,207,.22)}
+.lu--fin .lu__desc{font-weight:400;color:#e4edf6}
+.lu--fin .lu__specs dt{color:rgba(207,224,240,.75)}
+.lu--fin .lu__specs div,.lu--fin .lu__specs div:last-child{border-color:rgba(207,224,240,.2)}
+.lu--fin .lu__notes{color:#a9cdee}
+@media (max-width:900px){
+  .lineup__head{grid-template-columns:1fr;align-items:start;padding-bottom:48px}
+  .lineup__index{grid-template-columns:1fr}
+  .lineup__index a{padding:18px 0 20px}
+  .lu--dark .lu__desc,.lu--white .lu__desc,.lu--coffee .lu__desc{font-size:21px}
+  .lu__specs div,.lu__steep li{grid-template-columns:110px 1fr}
+  .lu--white{background:#eef6f4}
+}
+.lu--dark::after{background:linear-gradient(180deg,#0b0604 0%,rgba(11,6,4,.75) 8%,rgba(11,6,4,0) 24%),linear-gradient(90deg,rgba(12,6,2,.88) 0%,rgba(12,6,2,.7) 28%,rgba(12,6,2,.18) 52%,rgba(12,6,2,0) 64%),linear-gradient(0deg,rgba(8,4,1,.45),rgba(8,4,1,0) 30%)}
+@media (max-width:900px){.lu--dark .lu__scene::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0b0604 0%,rgba(11,6,4,0) 22%);pointer-events:none}}
