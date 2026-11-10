@@ -1341,3 +1341,52 @@ h1,h2,.pour__name{font-family:var(--fd)!important;font-weight:400!important;font
 .tk:hover,.tk:focus-visible{transform:translateY(-3px) scale(1.12);outline:none;z-index:3}
 .tk[data-tip]:hover::after,.tk[data-tip]:focus-visible::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%);white-space:nowrap;padding:7px 11px;border-radius:8px;background:#fffaf1;color:#1a0b00;font:700 12px/1 var(--f);letter-spacing:.06em;box-shadow:0 10px 20px -8px rgba(0,0,0,.6);pointer-events:none}
 @media (max-width:900px){.rec__head{grid-template-columns:1fr}.rec tbody th{min-width:200px;padding-left:16px}.rec table{min-width:760px}}
+
+/* ============ v36: the ticket, finished like a printed pass ============ */
+.ticket{max-width:1120px}
+.ticket__main,.ticket__stub{-webkit-mask:none;mask:none}
+.ticket__main{position:relative;border-radius:22px 0 0 22px;border-right:0;overflow:hidden;
+  background:radial-gradient(120% 90% at 0% 0%,#fffdf7 0%,#fbf3e4 60%,#f6ead4 100%);
+  -webkit-mask:radial-gradient(circle 16px at 100% 0,#0000 98%,#000) top/100% 51% no-repeat,radial-gradient(circle 16px at 100% 100%,#0000 98%,#000) bottom/100% 51% no-repeat;
+  mask:radial-gradient(circle 16px at 100% 0,#0000 98%,#000) top/100% 51% no-repeat,radial-gradient(circle 16px at 100% 100%,#0000 98%,#000) bottom/100% 51% no-repeat}
+.ticket__main::before{content:"";position:absolute;inset:14px;border:1px solid rgba(151,81,15,.28);border-radius:12px;pointer-events:none;box-shadow:inset 0 0 0 4px rgba(255,253,247,.0),inset 0 0 0 5px rgba(151,81,15,.12)}
+.ticket__main::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;background:repeating-linear-gradient(135deg,rgba(151,81,15,.035) 0 2px,transparent 2px 9px)}
+.ticket__main>*{position:relative;z-index:1}
+.ticket__wm{position:absolute!important;z-index:0!important;right:-40px;top:-30px;width:300px;fill:rgba(151,81,15,.06);pointer-events:none}
+.ticket__top{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.ticket__pass{margin:0;padding:6px 12px;border-radius:999px;border:1px solid rgba(151,81,15,.35);font:700 11px/1 var(--f);letter-spacing:.24em;text-transform:uppercase;color:var(--amber-ink)}
+.ticket h3{font-size:clamp(40px,3.6vw,56px)}
+.ticket legend,.ticket label{font-size:12.5px;color:#4d5b59}
+.ticket__where span{border-radius:14px;padding:15px 18px 15px 48px;position:relative;background:rgba(255,255,255,.75)}
+.ticket__where span::before{content:"";position:absolute;left:18px;top:18px;width:18px;height:18px;border-radius:50%;border:2px solid rgba(20,32,31,.3);background:#fff;transition:border-color .2s,box-shadow .2s}
+.ticket__where input:checked+span{background:#fff8ec;border-color:var(--amber);box-shadow:0 10px 24px -14px rgba(151,81,15,.5)}
+.ticket__where input:checked+span::before{border-color:var(--amber);box-shadow:inset 0 0 0 4px #fff,inset 0 0 0 10px var(--amber)}
+.ticket label input{background:rgba(255,255,255,.85);border-radius:12px}
+.ticket__step button{background:rgba(255,255,255,.85)}
+.ticket__step button:first-child{border-radius:12px 0 0 12px}.ticket__step button:last-child{border-radius:0 12px 12px 0}
+.ticket .btn--primary{background:var(--ink);color:var(--bone);min-height:60px;padding:0 34px;font-size:14px}
+.ticket .btn--primary:hover{background:#000}
+.ticket__note{font-size:14px}
+.ticket__stub{position:relative;border-radius:0 22px 22px 0;padding:40px 30px 40px 44px;gap:6px;
+  background:radial-gradient(120% 80% at 50% 0%,#fbd79f 0%,#f2b56c 55%,#e39a4f 100%);
+  -webkit-mask:radial-gradient(circle 16px at 0 0,#0000 98%,#000) top/100% 51% no-repeat,radial-gradient(circle 16px at 0 100%,#0000 98%,#000) bottom/100% 51% no-repeat;
+  mask:radial-gradient(circle 16px at 0 0,#0000 98%,#000) top/100% 51% no-repeat,radial-gradient(circle 16px at 0 100%,#0000 98%,#000) bottom/100% 51% no-repeat}
+.ticket__stub::before{content:"";position:absolute;left:0;top:22px;bottom:22px;border-left:2px dashed rgba(74,36,8,.4)}
+.ticket__stub::after{content:"";position:absolute;inset:14px 14px 14px 22px;border:1px solid rgba(74,36,8,.25);border-radius:12px;pointer-events:none}
+.ticket__side{position:absolute;left:14px;top:50%;transform:translate(-50%,-50%) rotate(-90deg);transform-origin:center;margin-left:14px;white-space:nowrap;font:700 10px/1 var(--f);letter-spacing:.34em;text-transform:uppercase;color:rgba(74,36,8,.6)}
+.ticket__n b{font-size:120px;text-shadow:0 2px 0 rgba(255,255,255,.35)}
+.ticket__total b{font-size:32px}
+.ticket__code{display:block;width:150px;height:34px;margin-top:16px;border-radius:3px;opacity:.75;
+  background:repeating-linear-gradient(90deg,#1a0b00 0 2px,transparent 2px 4px,#1a0b00 4px 5px,transparent 5px 8px,#1a0b00 8px 11px,transparent 11px 13px,#1a0b00 13px 14px,transparent 14px 17px)}
+.ticket__mark{right:-24px;bottom:-24px;width:130px;fill:rgba(26,11,0,.07)}
+@media (max-width:900px){
+  .ticket__main{border-radius:22px 22px 0 0;-webkit-mask:radial-gradient(circle 16px at 0 100%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 16px at 100% 100%,#0000 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 16px at 0 100%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 16px at 100% 100%,#0000 98%,#000) right/51% 100% no-repeat}
+  .ticket__stub{border-radius:0 0 22px 22px;padding:34px 26px;-webkit-mask:radial-gradient(circle 16px at 0 0,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 16px at 100% 0,#0000 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 16px at 0 0,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 16px at 100% 0,#0000 98%,#000) right/51% 100% no-repeat}
+  .ticket__stub::before{left:22px;right:22px;top:0;bottom:auto;border-left:0;border-top:2px dashed rgba(74,36,8,.4)}
+  .ticket__stub::after{inset:22px 14px 14px}
+  .ticket__side{display:none}
+  .ticket__n b{font-size:72px}
+  .ticket__wm{width:200px}
+}
+.ticket__where input:checked+span::before{border-color:var(--amber-ink);background:radial-gradient(circle,var(--amber-ink) 0 4.5px,#fff 5px);box-shadow:0 0 0 3px rgba(240,160,75,.25)}
+@media (max-width:900px){.ticket .btn--primary{font-size:13px;letter-spacing:.1em;padding:0 26px;width:100%;justify-content:center}}
