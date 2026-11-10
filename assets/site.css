@@ -716,3 +716,34 @@ h1,h2,.pour__name{font-family:var(--fd)!important;font-weight:400!important;font
   .lu__specs div,.lu__steep li{grid-template-columns:100px 1fr}
 }
 @media (prefers-reduced-motion:reduce){.lu__caustic,.lu__rays,.lu__agave::before{animation:none}}
+
+/* ============ v29: each bottle in its own photographed scene, full bleed; the type sits on the calm side ============ */
+.lu{min-height:100vh;min-height:100svh;background:#0b0604}
+.lu__scene{position:absolute;inset:0;z-index:-2;overflow:hidden}
+.lu__scene img{width:100%;height:100%;object-fit:cover;display:block}
+.lu::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none}
+.lu--dark::after{background:linear-gradient(90deg,rgba(12,6,2,.88) 0%,rgba(12,6,2,.7) 28%,rgba(12,6,2,.18) 52%,rgba(12,6,2,0) 64%),linear-gradient(0deg,rgba(8,4,1,.45),rgba(8,4,1,0) 30%)}
+.lu--white{background:#cfe9ea}
+.lu--white .lu__text{grid-column:2}
+.lu--white::after{background:linear-gradient(270deg,rgba(236,246,244,.92) 0%,rgba(236,246,244,.8) 30%,rgba(236,246,244,.25) 50%,rgba(236,246,244,0) 60%)}
+.lu--coffee::after{background:linear-gradient(90deg,rgba(14,8,4,.9) 0%,rgba(14,8,4,.72) 28%,rgba(14,8,4,.2) 50%,rgba(14,8,4,0) 62%)}
+.lu--fin{background:#06172a}
+.lu--fin::after{background:linear-gradient(90deg,rgba(4,13,26,.9) 0%,rgba(4,13,26,.7) 30%,rgba(4,13,26,.15) 52%,rgba(4,13,26,0) 64%)}
+.lu__steep li{opacity:1}
+.lu__text{text-shadow:0 1px 18px rgba(0,0,0,.25)}
+.lu--white .lu__text{text-shadow:0 1px 16px rgba(240,248,246,.6)}
+/* the one move: the shot settles as you scroll to it (scroll-driven, no JS; static where unsupported) */
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    .lu__scene img{animation:luSettle linear both;animation-timeline:view();animation-range:entry 0% cover 50%}
+    @keyframes luSettle{from{transform:scale(1.09)}to{transform:scale(1)}}
+  }
+}
+@media (max-width:900px){
+  .lu,.lu--white{grid-template-columns:1fr;min-height:0;padding-top:0}
+  .lu__scene{position:relative;inset:auto;z-index:0;display:block;margin:0 calc(-1 * var(--gut)) 36px;aspect-ratio:4/5;order:-1}
+  .lu--white .lu__text{grid-column:1}
+  .lu::after{display:none}
+  .lu--white{background:#e6f1ef}
+  .lu__text{text-shadow:none}
+}

@@ -14,7 +14,7 @@
 <link rel="preload" as="image" href="assets/img/b-dark.webp">
 <link rel="preload" as="image" href="assets/img/b-white.webp">
 <link rel="preload" as="image" href="assets/img/b-fin.webp">
-<link rel="stylesheet" href="assets/site.css?v=1794327281">
+<link rel="stylesheet" href="assets/site.css?v=1794333027">
 <script>
   /* the intro plays fully once per session; a repeat visit gets the short version, ?nointro skips it */
   (function(){var d=document.documentElement,s=location.search;d.classList.add('js');
@@ -155,19 +155,12 @@
       <p class="lu__serve">Pour it neat, over one big sphere of ice.</p>
       <div class="lu__buy"><span class="lu__price">$37.99</span><a class="btn btn--primary" href="https://www.tiburonrum.com/buy-now-2-2/">Buy Dark 8</a></div>
     </div>
-    <div class="lu__stage lu__stage--pour" data-anim="pour">
-      <img class="lu__bottle" src="assets/img/b-dark.webp" alt="Tiburón Rum 8, Reserve Blend, with the copper shark label" width="490" height="1800" loading="lazy">
-      <canvas class="lu__canvas" aria-hidden="true"></canvas>
-    </div>
+    <picture class="lu__scene"><source media="(max-width:900px)" srcset="assets/img/lu-dark-m.webp"><img src="assets/img/lu-dark.webp" alt="Tiburón Rum 8 Reserve Blend on a beach-bar counter at sunset, beside a rocks glass with one sphere of ice" width="2400" height="1340" loading="lazy" style="object-position:52% 50%"></picture>
   </article>
 
   <!-- White Tip -->
   <article class="lu lu--white" id="whitetip" aria-labelledby="lu-white-h">
-    <div class="lu__stage lu__stage--reef" data-anim="reef">
-      <span class="lu__rays" aria-hidden="true"></span>
-      <img class="lu__bottle" src="assets/img/b-white.webp" alt="Tiburón White Tip overproof white rum, frosted bottle with a black shark" width="496" height="1800" loading="lazy">
-      <span class="lu__caustic" aria-hidden="true"></span>
-    </div>
+    <picture class="lu__scene"><source media="(max-width:900px)" srcset="assets/img/lu-white-m.webp"><img src="assets/img/lu-white.webp" alt="White Tip standing in white sand on the Belize reef, a queen triggerfish and sea fans behind it" width="2400" height="1340" loading="lazy" style="object-position:25% 50%"></picture>
     <div class="lu__text">
       <p class="lu__line"><span>Tiburón Rum</span><span>Company</span><span>Belize</span></p>
       <h3 id="lu-white-h" class="lu__title">White Tip</h3>
@@ -197,16 +190,11 @@
       </ol>
       <div class="lu__buy"><a class="btn btn--primary" href="#rooms">Taste it in San Pedro</a><a class="lu__link" href="#infusions">Make it at home</a></div>
     </div>
-    <div class="lu__stage lu__stage--steep" data-anim="steep">
-      <canvas class="lu__canvas" aria-hidden="true"></canvas>
-      <img class="lu__bottle lu__bottle--src" src="assets/img/b-white.webp" alt="White Tip turning dark as it steeps with coffee and cacao" width="496" height="1800" loading="lazy">
-      <p class="lu__day" aria-hidden="true"><span>Day</span><b>1</b></p>
-    </div>
+    <picture class="lu__scene"><source media="(max-width:900px)" srcset="assets/img/lu-coffee-m.webp"><img src="assets/img/lu-coffee.webp" alt="A White Tip bottle dark with the coffee and cacao infusion, on a wooden table with a split cacao pod, cacao beans, coffee beans and vanilla" width="2400" height="1340" loading="lazy" style="object-position:52% 50%"></picture>
   </article>
 
   <!-- FIN -->
   <article class="lu lu--fin" id="fin" aria-labelledby="lu-fin-h">
-    <span class="lu__agave" aria-hidden="true"></span>
     <div class="lu__text">
       <p class="lu__line"><span>Tiburon&#8217;s</span></p>
       <h3 id="lu-fin-h" class="lu__title">FIN</h3>
@@ -220,10 +208,7 @@
       </dl>
       <div class="lu__buy"><span class="lu__price">$54.90</span><a class="btn btn--primary" href="https://www.tiburonrum.com/buy-now-2-2/">Buy FIN</a></div>
     </div>
-    <div class="lu__stage lu__stage--fill" data-anim="fill">
-      <canvas class="lu__canvas" aria-hidden="true"></canvas>
-      <img class="lu__bottle lu__bottle--src" src="assets/img/b-fin.webp" alt="Tiburon's FIN Tequila Blanco filling with tequila" width="464" height="1500" loading="lazy">
-    </div>
+    <picture class="lu__scene"><source media="(max-width:900px)" srcset="assets/img/lu-fin-m.webp"><img src="assets/img/lu-fin.webp" alt="FIN Tequila Blanco on volcanic rock at the edge of a blue agave field at dusk, with a lime and a clay caballito" width="2400" height="1340" loading="lazy" style="object-position:71% 50%"></picture>
   </article>
 </section>
 
@@ -385,7 +370,6 @@
   </div>
 </footer>
 
-<script src="assets/app.js?v=1794327281"></script>
-<script src="assets/lineup.js?v=1794327281" defer></script>
+<script src="assets/app.js?v=1794333027"></script>
 </body>
 </html>
