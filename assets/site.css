@@ -1299,3 +1299,45 @@ h1,h2,.pour__name{font-family:var(--fd)!important;font-weight:400!important;font
 .seal b{font:800 15px/1 var(--f);font-stretch:118%;letter-spacing:.22em;text-transform:uppercase;color:#3a2604;padding-left:.22em}
 .seal span{font:400 26px/1 var(--fd);color:#2a1a02;margin-top:4px}
 @media (max-width:900px){.plinth{margin-top:0}.aw__plinths{gap:22px}}
+
+/* ============ v35: award cards on Tiburon's own medal photos; the record as a competition x year grid ============ */
+.plinth figure{aspect-ratio:3/2}
+.plinth figure::after{height:38%}
+.plinth__text{margin-top:-26px;padding:6px 28px 30px}
+.rec__head{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:16px 60px;align-items:end;margin-bottom:28px}
+.rec__head h3{margin:0}
+.rec__head p{margin:0;font-size:18px;line-height:1.55;color:rgba(250,246,238,.8)}
+.rec__legend{display:flex;flex-wrap:wrap;gap:10px 22px;margin:0 0 18px;font:700 12px/1 var(--f);letter-spacing:.14em;text-transform:uppercase;color:rgba(250,246,238,.72)}
+.rec__legend>span{display:flex;align-items:center;gap:10px}
+.rec__legend .tk{width:26px;height:26px}.rec__legend .tk i{font-size:11px}
+.rec{columns:auto;overflow-x:auto;border-radius:20px;border:1px solid rgba(230,187,131,.2);background:linear-gradient(180deg,rgba(250,246,238,.04),rgba(250,246,238,.015));scrollbar-width:thin;scrollbar-color:#b88a2a transparent}
+.rec table{width:100%;min-width:900px;border-collapse:collapse}
+.rec thead th{font:400 26px/1 var(--fd);color:#e6bb83;padding:22px 8px 16px;text-align:center;border-bottom:1px solid rgba(230,187,131,.25)}
+.rec thead th:first-child{text-align:left}
+.rec .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.rec tbody th{text-align:left;padding:14px 18px 14px 26px;min-width:290px;position:sticky;left:0;background:#120b07;z-index:1}
+.rec tbody th b{display:block;font:600 17px/1.3 var(--f);color:var(--bone)}
+.rec tbody th span{display:block;font-size:14px;color:rgba(250,246,238,.55);margin-top:2px}
+.rec tbody th em{display:inline-block;margin-top:8px;padding:4px 10px;border-radius:999px;font:800 11px/1.2 var(--f);font-style:normal;letter-spacing:.14em;text-transform:uppercase;color:#1a0b00;background:linear-gradient(90deg,#cf8a52,#d4dbe0 50%,#e8c063)}
+.rec td{text-align:center;padding:12px 6px;border-left:1px solid rgba(230,187,131,.08);white-space:nowrap}
+.rec tbody tr{border-top:1px solid rgba(230,187,131,.1);transition:background-color .2s}
+.rec tbody tr:hover{background:rgba(230,187,131,.06)}
+.rec tbody tr:hover th{background:#1a110a}
+.rec tr.is-star{background:linear-gradient(90deg,rgba(230,187,131,.12),rgba(230,187,131,.04))}
+.rec tr.is-star th{background:#1c120a}
+.tk{display:inline-grid;place-items:center;width:38px;height:38px;margin:2px;border-radius:50%;position:relative;cursor:default;vertical-align:middle;
+  background:radial-gradient(circle at 34% 28%,var(--m1) 0%,var(--m2) 34%,var(--m3) 70%,var(--m4) 100%);
+  box-shadow:0 0 0 1.5px var(--m3),0 6px 12px -4px rgba(0,0,0,.6),inset 0 -4px 7px rgba(0,0,0,.22);transition:transform .25s var(--ease)}
+.tk::before{content:"";position:absolute;inset:4px;border-radius:50%;border:1px solid rgba(255,255,255,.45);box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.tk i{font:800 13px/1 var(--f);font-style:normal;font-stretch:112%;color:var(--ink2);letter-spacing:.02em;position:relative}
+.tk--g{--m1:#fff6d2;--m2:#f0cf78;--m3:#c4952f;--m4:#8a6418;--ink2:#3a2604}
+.tk--dg{--m1:#fff6d2;--m2:#f0cf78;--m3:#c4952f;--m4:#8a6418;--ink2:#3a2604;box-shadow:0 0 0 1.5px #c4952f,0 0 0 4px #120b07,0 0 0 5.5px #e8c063,0 6px 12px -4px rgba(0,0,0,.6)}
+.tk--dg i{font-size:11px}
+.tk--s{--m1:#ffffff;--m2:#e2e8ec;--m3:#a2aeb5;--m4:#66727a;--ink2:#2b3439}
+.tk--b{--m1:#fbe0c4;--m2:#d99a62;--m3:#a5622f;--m4:#653817;--ink2:#2e1606}
+.tk--p{--m1:#ffffff;--m2:#eef4f6;--m3:#bfd0d7;--m4:#86a0aa;--ink2:#22343b}
+.tk--bc{--m1:#e3f8f6;--m2:#8fd8d3;--m3:#3a9c96;--m4:#145652;--ink2:#06302d}
+.tk--bc i{font-size:15px}
+.tk:hover,.tk:focus-visible{transform:translateY(-3px) scale(1.12);outline:none;z-index:3}
+.tk[data-tip]:hover::after,.tk[data-tip]:focus-visible::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%);white-space:nowrap;padding:7px 11px;border-radius:8px;background:#fffaf1;color:#1a0b00;font:700 12px/1 var(--f);letter-spacing:.06em;box-shadow:0 10px 20px -8px rgba(0,0,0,.6);pointer-events:none}
+@media (max-width:900px){.rec__head{grid-template-columns:1fr}.rec tbody th{min-width:200px;padding-left:16px}.rec table{min-width:760px}}
