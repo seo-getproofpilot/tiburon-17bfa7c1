@@ -21,16 +21,20 @@
     tabs.forEach((x) => { const on = x === t; x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1; const p = $('#' + x.getAttribute('aria-controls')); p.hidden = !on; p.classList.toggle('is-on', on); });
     $('.process').dataset.k = t.dataset.k; if (focus) t.focus();
   };
+  $$('[data-tab]').forEach((a) => a.addEventListener('click', () => { const t = tabs.find((x) => x.dataset.k === a.dataset.tab); if (t) pick(t); }));
   tabs.forEach((t, i) => {
     t.addEventListener('click', () => pick(t));
     t.addEventListener('keydown', (e) => { const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (d) { e.preventDefault(); pick(tabs[(i + d + tabs.length) % tabs.length], true); } });
   });
-  if ($('.process')) $('.process').dataset.k = 'dark';
 
-  /* ---------- booking: an email to the team with the details filled in (no backend) ---------- */
-  const book = $('#book');
+  /* ---------- booking: a ticket; the stub keeps count; submitting opens an email to the team (no backend) ---------- */
+  const book = $('#bookForm');
   if (book) {
-    const d = book.querySelector('[name=date]'); const t = new Date(); d.min = t.toISOString().slice(0, 10);
+    const d = book.querySelector('[name=date]'); d.min = new Date().toISOString().slice(0, 10);
+    const g = book.querySelector('[name=guests]');
+    const stub = () => { const n = Math.max(1, Math.min(20, parseInt(g.value, 10) || 1)); $('#tkN').textContent = n; $('#tkTotal').textContent = '$' + n * 25; $('#tkRoom').textContent = book.querySelector('[name=room]:checked').value; };
+    $$('.ticket__step button', book).forEach((b) => b.addEventListener('click', () => { g.value = Math.max(1, Math.min(20, (parseInt(g.value, 10) || 1) + +b.dataset.d)); stub(); }));
+    book.addEventListener('input', stub); book.addEventListener('change', stub); stub();
     book.addEventListener('submit', (e) => {
       e.preventDefault();
       if (!book.checkValidity()) { book.reportValidity(); return; }
@@ -38,12 +42,12 @@
       const when = new Date(f.get('date') + 'T12:00').toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
       const body = `Hi Tiburon team,\n\nI'd like to book a rum tasting.\n\nRoom: ${room}\nDate: ${when}\nGuests: ${f.get('guests')}\nName: ${f.get('name')}\nEmail: ${f.get('email')}\n\nThank you!`;
       location.href = 'mailto:basil@sharkbaitco.com?subject=' + encodeURIComponent(`Tasting request, ${room}, ${when}`) + '&body=' + encodeURIComponent(body);
-      book.querySelector('.book__note').textContent = 'Your email app should open with the request ready to send.';
+      book.querySelector('.ticket__note').textContent = 'Your email app should open with the request ready to send.';
     });
   }
 
   /* ---------- reef: scroll flies the camera down from the air, through the surface, onto the reef ---------- */
-  const reef = $('.reef'), pin = $('.reef__pin'), vid = $('.reef__vid'), caps = $$('.rc'), depth = $('.reef__depth');
+  const reef = $('.reef'), pin = $('.reef__pin'), vid = $('.reef__vid'), caps = $$('.rc'), depth = $('.reef__depth'), endP = $('.reef__end'), stage = $('.reef__stage');
   if (reef && pin && vid) {
     let target = 0, shown = 0, dur = 10, ready = false, raf = 0, loaded = false;
     const load = () => {
@@ -62,13 +66,16 @@
         c.style.opacity = o.toFixed(3); c.style.transform = `translateY(${((1 - o) * 18).toFixed(1)}px)`;
         c.classList.toggle('is-on', o > .5);
       });
-      if (depth) depth.style.setProperty('--d', p.toFixed(4));
+      if (depth) depth.style.setProperty('--d', Math.min(1, p / .86).toFixed(4));
+      const e = ss((p - .86) / .08);                         // the film is done: everything left fades up in the middle
+      if (stage) stage.style.setProperty('--end', e.toFixed(3));
+      if (endP) endP.classList.toggle('is-on', e > .5);
     };
     const tick = () => {
       raf = 0;
-      shown += (target - shown) * (RM ? 1 : .16);
+      shown += (target - shown) * (RM ? 1 : .085);
       if (Math.abs(target - shown) < .0005) shown = target;
-      if (ready && !vid.seeking) { const t = Math.min(dur - .05, shown * dur); if (Math.abs(vid.currentTime - t) > .02) vid.currentTime = t; }
+      if (ready && !vid.seeking) { const t = Math.min(dur - .05, Math.min(1, shown / .86) * dur); if (Math.abs(vid.currentTime - t) > .015) vid.currentTime = t; }
       paint(shown);
       if (shown !== target) raf = requestAnimationFrame(tick);
     };
@@ -76,14 +83,14 @@
     addEventListener('scroll', onScroll, { passive: true }); addEventListener('resize', onScroll); onScroll(); paint(0);
   }
 
-  /* ---------- medal wall: one disc per medal, by year ---------- */
-  const wall = $('#medalWall');
-  if (wall) {
+  /* ---------- awards: the full record, year by year ---------- */
+  const rec = $('#awRecord');
+  if (rec) {
     const M = [
       [2025, 'gold', 'Gold', 'Asia World Spirits Competition, FIN Tequila Blanco'],
       [2022, 'gold', 'Gold', 'San Francisco World Spirits Competition, White Tip'],
       [2021, 'gold', 'Gold', 'San Francisco World Spirits Competition'],
-      [2019, 'gold', 'Gold', 'San Francisco World Spirits Competition'],
+      [2019, 'gold', 'Gold', 'San Francisco World Spirits Competition, Dark 8'],
       [2017, 'best', 'Best in Class', 'Miami Rum Festival, Rum XP'], [2017, 'silver', 'Silver', 'San Francisco World Spirits Competition'],
       [2016, 'best', 'Best in Class', 'WSWA Show'], [2016, 'double', 'Double Gold', 'WSA Show'], [2016, 'gold', 'Gold', 'Miami Rum Festival'], [2016, 'gold', 'Gold', 'Bar Biz Magazine Spirit Competition'],
       [2015, 'double', 'Double Gold, Best in Class', 'WSWA Competition'], [2015, 'gold', 'Gold', 'The Fifty Best, aged rum'], [2015, 'gold', 'Gold', 'SIP Awards'], [2015, 'gold', 'Gold, packaging', 'SIP Awards'],
@@ -92,19 +99,14 @@
       [2014, 'silver', 'Silver', 'SIP Awards'], [2014, 'silver', 'Silver', 'San Diego International'], [2014, 'silver', 'Silver', 'IWSC, London'], [2014, 'silver', 'Silver', 'New York World Wine & Spirits'],
       [2014, 'bronze', 'Bronze', 'San Francisco World Spirits Competition'],
     ];
-    const years = [...new Set(M.map((m) => m[0]))].sort((a, b) => a - b);
-    const read = $('#mwRead'); $('#awCount').textContent = M.length;
-    wall.innerHTML = years.map((y) => `<div class="mw__yr" role="listitem"><div class="mw__stack">${M.filter((m) => m[0] === y).map((m) =>
-      `<button type="button" class="md md--${m[1]}" data-t="${m[2]}" data-c="${m[3]}" aria-label="${y}: ${m[2]}, ${m[3]}"><i></i></button>`).join('')}</div><b>${y}</b></div>`).join('');
-    const show = (b) => { $$('.md.is-sel', wall).forEach((x) => x.classList.remove('is-sel')); b.classList.add('is-sel'); read.innerHTML = `<b>${b.closest('.mw__yr').querySelector('b').textContent} &middot; ${b.dataset.t}</b>${b.dataset.c}`; read.classList.add('is-on'); };
-    $$('.md', wall).forEach((b) => { b.addEventListener('mouseenter', () => show(b)); b.addEventListener('focus', () => show(b)); b.addEventListener('click', () => show(b)); });
-    show($('.md', wall));
-    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { wall.classList.add('is-in'); io.disconnect(); } }), { threshold: .25 });
-    io.observe(wall);
+    const years = [...new Set(M.map((m) => m[0]))].sort((a, b) => b - a);
+    const c = $('#awCount'); if (c) c.textContent = M.length;
+    rec.innerHTML = years.map((y) => `<div class="rec__yr"><b>${y}</b><ul>${M.filter((m) => m[0] === y).map((m) =>
+      `<li><span class="pill pill--${m[1]}">${m[2]}</span>${m[3]}</li>`).join('')}</ul></div>`).join('');
   }
 
   /* ---------- small reveals for the new blocks ---------- */
-  const rv = $$('.story__head>*, .process__head>*, .process__tabs, .rooms__wall figure, .visit__steps li, .book, .reef__why .rw__text>*, .rw__pics figure, .vessel__pics figure, .vessel__text>*');
+  const rv = $$('.story__head>*, .process__head>*, .process__tabs, .rx__text>*, .rx__pics figure, .visit2__head, .strip li, .ticket, .aw__photo, .aw__intro>*, .plinth, .rec__yr');
   rv.forEach((el, i) => { el.classList.add('rv'); el.style.transitionDelay = (i % 4) * 70 + 'ms'; });
   const ro = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); ro.unobserve(e.target); } }), { rootMargin: '0px 0px -6% 0px', threshold: .08 });
   rv.forEach((el) => ro.observe(el));

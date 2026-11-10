@@ -175,6 +175,7 @@
     { n: 'Limoncello', img: 'inf-pineapple', i: ['3/4 bottle Tiburon White Tip', '5 lemons', '2 cups water', '1 cup white sugar'] }
   ];
   REC[9].img = 'inf-cucumber';
+  if ($('#infList')) {   // v33: the infusions section was folded into How it's made; kept in case it returns
   const list = $('#infList'), recImg = $('#recImg'), recName = $('#recName'), recIng = $('#recIng'), recNote = $('#recNote'), fig = $('.recipe__img');
   REC.forEach((r, k) => {
     const li = document.createElement('li');
@@ -201,6 +202,7 @@
     const n = (cur + (/Down|Right/.test(e.key) ? 1 : -1) + REC.length) % REC.length; show(n); $('#inf-' + n).focus();
   });
   show(0);
+  }
 
   /* ---------------- awards rail: drag to scroll (v32: replaced by the medal wall; kept if a rail returns) ---------------- */
   const rail = $('#rail');
