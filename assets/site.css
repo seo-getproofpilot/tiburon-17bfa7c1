@@ -1390,3 +1390,101 @@ h1,h2,.pour__name{font-family:var(--fd)!important;font-weight:400!important;font
 }
 .ticket__where input:checked+span::before{border-color:var(--amber-ink);background:radial-gradient(circle,var(--amber-ink) 0 4.5px,#fff 5px);box-shadow:0 0 0 3px rgba(240,160,75,.25)}
 @media (max-width:900px){.ticket .btn--primary{font-size:13px;letter-spacing:.1em;padding:0 26px;width:100%;justify-content:center}}
+
+/* ============ v37: How it's made as an illustrated flow ============ */
+.pp{display:block;padding-top:clamp(34px,4vw,56px)}
+.pp__head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:30px 50px;align-items:end;margin-bottom:clamp(10px,2vw,24px)}
+.pp__title{margin-bottom:14px}
+.pp__intro{margin:0;font:600 clamp(20px,1.6vw,24px)/1.45 var(--fB);color:rgba(250,246,238,.86);max-width:30em}
+.pp--fin .pp__intro{font-weight:400;font-size:20px}
+.pp__arch{margin:0;width:clamp(150px,13vw,200px);aspect-ratio:3/4;border-radius:999px 999px 20px 20px;overflow:hidden;position:relative;
+  box-shadow:0 0 0 2px var(--acc),0 0 0 9px rgba(0,0,0,.35),0 0 0 10px color-mix(in srgb,var(--acc) 35%,transparent),0 40px 60px -30px rgba(0,0,0,.8)}
+.pp__arch img{width:100%;height:100%;object-fit:cover;display:block}
+.flow{position:relative;--row:150px;--medal:108px;margin-top:6px}
+.flow__steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:0 18px;position:relative;z-index:1}
+.st{display:grid;grid-template-rows:var(--row) var(--medal) var(--row);justify-items:center;text-align:center;padding:0;border:0}
+.st::before{display:none}
+.st__medal{grid-row:2;position:relative;width:var(--medal);height:var(--medal);border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 34% 28%,#3a2c20 0%,#1a120c 55%,#0b0705 100%);
+  box-shadow:0 0 0 2px var(--acc),inset 0 0 0 7px rgba(0,0,0,.35),inset 0 0 0 8px color-mix(in srgb,var(--acc) 45%,transparent),0 22px 34px -14px rgba(0,0,0,.85),0 0 40px -10px color-mix(in srgb,var(--acc) 60%,transparent)}
+.st__medal svg{width:52px;height:52px;fill:none;stroke:var(--acc);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.st__medal em{position:absolute;top:-8px;right:-10px;min-width:34px;padding:6px 8px;border-radius:999px;background:var(--acc);color:#140b05;font:800 12px/1 var(--f);font-style:normal;font-stretch:112%;letter-spacing:.06em;box-shadow:0 6px 12px -6px rgba(0,0,0,.7)}
+.st__txt{max-width:15em}
+.st--down .st__txt{grid-row:3;align-self:start;padding-top:20px}
+.st--up .st__txt{grid-row:1;align-self:end;padding-bottom:20px}
+.st__txt b{display:block;font:400 clamp(21px,1.7vw,27px)/1.1 var(--fT);color:var(--bone);margin-bottom:8px}
+.st__txt span{display:block;font:600 clamp(16px,1.2vw,19px)/1.45 var(--fB);color:rgba(250,246,238,.82)}
+.pp--fin .st__txt b{font:800 clamp(15px,1.2vw,18px)/1.2 var(--f);font-stretch:118%;letter-spacing:.06em;text-transform:uppercase}
+.pp--fin .st__txt span{font-weight:400;font-size:16px}
+.pp--dark .st__txt b{letter-spacing:.02em}
+.flow__line{position:absolute;left:0;width:100%;top:calc(var(--row) + var(--medal) / 2 - 100px);height:200px;pointer-events:none;z-index:0;overflow:visible}
+.flow__line path{fill:none;vector-effect:non-scaling-stroke;stroke-linecap:round}
+.fl-base{stroke:rgba(250,246,238,.12);stroke-width:2}
+.fl-pour{stroke:var(--acc);stroke-width:3;stroke-dasharray:1;stroke-dashoffset:1;filter:drop-shadow(0 0 6px color-mix(in srgb,var(--acc) 60%,transparent))}
+.fl-run{stroke:rgba(255,250,240,.85);stroke-width:2.5;stroke-dasharray:.4 6;opacity:0}
+.st{opacity:0}
+.process.is-seen .pp.is-on .fl-pour{animation:flPour 1.9s cubic-bezier(.4,0,.2,1) .15s forwards}
+.process.is-seen .pp.is-on .fl-run{animation:flRun 6s linear 2s infinite,flShow .6s ease 2s forwards}
+.process.is-seen .pp.is-on .st{animation:stIn .7s var(--ease) both;animation-delay:calc(.25s + var(--i) * .3s)}
+@keyframes flPour{to{stroke-dashoffset:0}}
+@keyframes flRun{to{stroke-dashoffset:-100}}
+@keyframes flShow{to{opacity:.7}}
+@keyframes stIn{from{opacity:0;transform:translateY(16px) scale(.92)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.st{opacity:1}.fl-pour{stroke-dashoffset:0}.process .pp .st,.process .pp .fl-pour,.process .pp .fl-run{animation:none!important}}
+@media (max-width:900px){
+  .pp__head{grid-template-columns:minmax(0,1fr) 110px;align-items:center}
+  .pp__arch{width:110px}
+  .flow{--medal:76px;margin-top:22px}
+  .flow__line{display:none}
+  .flow::before{content:"";position:absolute;left:38px;top:30px;bottom:30px;width:2px;background:linear-gradient(var(--acc),color-mix(in srgb,var(--acc) 15%,transparent))}
+  .flow__steps{grid-template-columns:1fr;gap:18px}
+  .st{grid-template-rows:auto;grid-template-columns:var(--medal) 1fr;justify-items:start;text-align:left;align-items:center}
+  .st__medal{grid-row:1;grid-column:1}
+  .st--down .st__txt,.st--up .st__txt{grid-row:1;grid-column:2;padding:0 0 0 18px;align-self:center}
+  .st__medal svg{width:38px;height:38px}
+  .st__medal em{top:-6px;right:-8px;min-width:28px;padding:5px 6px;font-size:11px}
+}
+.flow__line path{vector-effect:none}
+.fl-base{stroke-width:1.6}.fl-pour{stroke-width:2.6}.fl-run{stroke-width:2}
+.st__medal svg{width:58px;height:58px;stroke-width:1.6}
+.process{padding-bottom:clamp(70px,8vw,120px)}
+
+/* ============ v38: custom award badges in place of the medal-pile photo ============ */
+.badges{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,1.4vw,22px);align-items:center}
+.badge{aspect-ratio:1;display:grid;place-items:center;transition:transform .5s var(--ease)}
+.badge:nth-child(odd of .badge){transform:translateY(10px)}
+.badge:hover{transform:translateY(-6px) scale(1.04)}
+.bdg{width:100%;height:auto;overflow:visible}
+.bdg text{font-family:var(--f)}
+.bt-big{font:900 30px/1 var(--f);font-stretch:125%;fill:#f4dca0;letter-spacing:.04em}
+.bt-sm{font:800 9.5px/1 var(--f);fill:#f2d9a6;letter-spacing:.08em}
+.bt-ban{font:400 13px/1 "Marcellus SC",serif;fill:#f4dca0;letter-spacing:.12em}
+.bt-ban--dark{fill:#1c1206;font:800 11px/1 var(--f);letter-spacing:.14em}
+.bt-foot{font:400 20px/1 var(--fd);fill:#e9c98a}
+.bt-foot--sm{font:800 9px/1 var(--f);letter-spacing:.14em;fill:#d9b878}
+.bt-arc{font:800 10.5px/1 var(--f);letter-spacing:.2em}
+.bt-arc--light{fill:#fff3cf}
+.bt-arc--dark{fill:#1c1206}
+.bt-arc--wax{fill:#5a3605;font-size:9px}
+.bt-huge{font:400 44px/1 var(--fd);fill:#2a1a03}
+.bt-huge--wax{fill:#5a3605;font-size:40px}
+.bt-mid{font:900 14px/1 var(--f);font-stretch:118%;letter-spacing:.2em;fill:#2a1a03}
+.bt-mid--gold{fill:#f4dca0;font-size:15px}
+.bt-num{font:400 34px/1 var(--fd);fill:#f4dca0}
+.bt-tiny{font:800 8.5px/1 var(--f);letter-spacing:.16em}
+.bt-tiny--gold{fill:#e9c98a}
+.bt-cap{font:900 12px/1 var(--f);font-stretch:118%;letter-spacing:.16em;fill:#f4dca0}
+.bt-word{font:900 19px/1 var(--f);font-stretch:118%;letter-spacing:.1em}
+.bt-year{font:400 20px/1 var(--fd);fill:#f4dca0}
+.badges .badge{opacity:0;transform:translateY(18px) scale(.9);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:calc(var(--i) * 90ms)}
+.badges.is-in .badge{opacity:1;transform:none}
+.badges.is-in .badge:nth-child(even){transform:translateY(12px)}
+.badges.is-in .badge:hover{transform:translateY(-6px) scale(1.05)}
+@media (prefers-reduced-motion:reduce){.badges .badge{opacity:1;transform:none;transition:none}}
+@media (max-width:900px){.badges{grid-template-columns:repeat(2,1fr);max-width:440px}}
+.aw__top{grid-template-columns:minmax(0,6fr) minmax(0,5fr)}
+.badges{grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,30px)}
+.badges.is-in .badge:nth-child(even){transform:translateY(16px)}
+.bdg .bt-cap{font-size:11px}
+@media (max-width:900px){.badges{grid-template-columns:repeat(3,1fr);max-width:none;gap:10px}}
+@media (max-width:900px){.aw__top{grid-template-columns:1fr}.badges{grid-template-columns:repeat(3,1fr)}}

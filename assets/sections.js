@@ -121,3 +121,17 @@
   const ro = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); ro.unobserve(e.target); } }), { rootMargin: '0px 0px -6% 0px', threshold: .08 });
   rv.forEach((el) => ro.observe(el));
 })();
+/* v37: How it's made flow plays when the section comes into view (and replays on every tab switch) */
+(function () {
+  var p = document.querySelector('.process'); if (!p) return;
+  if (!('IntersectionObserver' in window)) { p.classList.add('is-seen'); return; }
+  var o = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { p.classList.add('is-seen'); o.disconnect(); } }); }, { threshold: .25 });
+  o.observe(p);
+})();
+/* v38: the badge wall arrives once */
+(function () {
+  var b = document.querySelector('.badges'); if (!b) return;
+  if (!('IntersectionObserver' in window)) { b.classList.add('is-in'); return; }
+  var o = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { b.classList.add('is-in'); o.disconnect(); } }); }, { threshold: .2 });
+  o.observe(b);
+})();

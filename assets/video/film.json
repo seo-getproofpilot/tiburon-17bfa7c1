@@ -10,21 +10,22 @@
   },
   {
    "name": "dark",
-   "start": 6.65
+   "start": 6.6086
   },
   {
    "name": "sink",
-   "start": 12.7333
+   "start": 9.1333
   },
   {
    "name": "fin",
-   "start": 33.9333
+   "start": 30.3333
   },
   {
    "name": "rise",
-   "start": 40.8
+   "start": 37.2
   }
  ],
- "duration": 55.95,
- "white_at": 21.8
+ "duration": 52.35,
+ "white_at": 18.2,
+ "dark_retimed": true
 }
