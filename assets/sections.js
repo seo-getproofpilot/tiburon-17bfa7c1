@@ -2,7 +2,7 @@
 (function () {
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const mobile = matchMedia('(max-width:900px)').matches;
+  const mobile = matchMedia('(max-width:900px),(orientation:portrait) and (max-width:1180px)').matches;
   const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
   const ss = (u) => { u = clamp(u); return u * u * (3 - 2 * u); };
 

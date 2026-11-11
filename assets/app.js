@@ -7,7 +7,7 @@
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   const span = (p, a, b) => clamp((p - a) / (b - a));
   const root = document.documentElement;
-  const mq = window.matchMedia('(max-width:900px)');
+  const mq = window.matchMedia('(max-width:900px),(orientation:portrait) and (max-width:1180px)');
   let mobile = mq.matches;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let vw = innerWidth, vh = innerHeight;
