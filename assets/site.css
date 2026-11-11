@@ -1528,3 +1528,7 @@ h1,h2,.pour__name{font-family:var(--fd)!important;font-weight:400!important;font
 .process__tabs{grid-template-columns:repeat(3,1fr)}
 @media (max-width:900px){.process__tabs{grid-template-columns:repeat(3,1fr)}.process__tabs button:nth-child(3){border-left:1px solid rgba(250,246,238,.12)}.process__tabs button:nth-child(n+3){border-top:0}}
 .lineup__index .li--dark i{background:none!important;-webkit-text-fill-color:#e0b27a!important;color:#e0b27a!important;animation:none!important}
+/* v42 QC: the two-year bubble stays on one line; bubble labels readable on phones */
+.tl__when b{white-space:nowrap}
+.tl__when b.is-long{font-size:20px;letter-spacing:0}
+@media (max-width:900px){.tl::before,.tl::after{left:31px}.tl__ch{grid-template-columns:62px 1fr}.tl__when{width:62px;height:62px}.tl__when b{font-size:16px}.tl__when b.is-long{font-size:12px}.tl__when span{font-size:9px;letter-spacing:.06em}}
