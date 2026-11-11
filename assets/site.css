@@ -1523,3 +1523,8 @@ h1,h2,.pour__name{font-family:var(--fd)!important;font-weight:400!important;font
 .aw__intro h2{font-size:clamp(40px,4.2vw,68px)!important}
 @media (max-width:900px){.aw__intro{grid-template-columns:1fr}}
 .md2 span{font-size:14.5px}.md2 em{font-size:12px}
+/* v41: no coffee infusion (owner's request): three bottles in the index and three process tabs */
+.lineup__index{grid-template-columns:1fr}
+.process__tabs{grid-template-columns:repeat(3,1fr)}
+@media (max-width:900px){.process__tabs{grid-template-columns:repeat(3,1fr)}.process__tabs button:nth-child(3){border-left:1px solid rgba(250,246,238,.12)}.process__tabs button:nth-child(n+3){border-top:0}}
+.lineup__index .li--dark i{background:none!important;-webkit-text-fill-color:#e0b27a!important;color:#e0b27a!important;animation:none!important}
