@@ -130,7 +130,7 @@
 })();
 /* v38: the badge wall arrives once */
 (function () {
-  var b = document.querySelector('.badges'); if (!b) return;
+  var b = document.querySelector('.badges') || document.querySelector('.medals'); if (!b) return;
   if (!('IntersectionObserver' in window)) { b.classList.add('is-in'); return; }
   var o = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { b.classList.add('is-in'); o.disconnect(); } }); }, { threshold: .2 });
   o.observe(b);
