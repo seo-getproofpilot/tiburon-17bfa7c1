@@ -43,7 +43,20 @@
   }));
 
   /* ---------- background loops: load near the viewport, play only while visible ---------- */
-  $$('video[data-d]').forEach((v) => {
+  /* ---------- a film that plays once and holds on its last frame (FIN hero) ---------- */
+  $$('video[data-once]').forEach((v) => {
+    const m = mobile.matches;
+    v.poster = m ? v.dataset.pm : v.dataset.pd;
+    if (RM) { v.poster = (m ? v.dataset.pm : v.dataset.pd).replace('-0m.', '-m.').replace('-0.', '.'); return; }
+    v.src = m ? v.dataset.m : v.dataset.d;
+    let played = false;
+    const go = () => { if (played || root.classList.contains('needs-age')) return; played = true; v.play().catch(() => { played = false; }); };
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) setTimeout(go, 500); }), { threshold: .4 });
+    io.observe(v);
+    if (gate) gate.addEventListener('click', (e) => { if (e.target.closest('[data-age=yes]')) setTimeout(go, 600); });
+  });
+
+  $$('video[data-d]:not([data-once])').forEach((v) => {
     if (RM) return;
     const src = () => (mobile.matches ? v.dataset.m : v.dataset.d);
     const io = new IntersectionObserver((es) => es.forEach((e) => {
