@@ -1651,3 +1651,8 @@ h1,h2,.pour__name{font-family:var(--fd)!important;font-weight:400!important;font
   .stz__item:not(.stz__item--big){aspect-ratio:16/11}
 }
 .story__head .story__more{justify-self:start}
+/* v52: legal links in the footer */
+.foot__legal{display:flex;gap:18px;flex-wrap:wrap}
+.foot__legal a{color:rgba(250,246,238,.7);text-decoration:none;border-bottom:1px solid rgba(250,246,238,.3)}
+.foot__legal a:hover{color:var(--bone)}
+.foot__legal{flex:none;white-space:nowrap}.foot__base p:last-child{white-space:nowrap}
