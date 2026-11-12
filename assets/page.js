@@ -54,6 +54,38 @@
     });
   }
 
+  /* ---------- shipping checker (Where to Buy): the ten states on their Buy Now page are the only ones excluded ---------- */
+  const sel = $('#stateSel');
+  if (sel) {
+    const ALL = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];
+    const NO = ['Alabama','Alaska','Hawaii','Idaho','Massachusetts','Michigan','Mississippi','Montana','Oklahoma','Utah'];
+    ALL.forEach((s) => { const o = document.createElement('option'); o.value = o.textContent = s; sel.appendChild(o); });
+    const out = $('#stateOut');
+    sel.addEventListener('change', () => {
+      const s = sel.value; out.className = 'ship__out';
+      if (!s) { out.textContent = ''; return; }
+      if (NO.includes(s)) { out.classList.add('is-no'); out.textContent = `Sorry, our partners can't ship to ${s} right now.`; }
+      else { out.classList.add('is-yes'); out.innerHTML = `Good news: ${s} is on our partners' shipping list. <a href="https://www.tiburonrum.com/buy-now-2-2/">Shop the bottles</a>`; }
+    });
+  }
+
+  /* ---------- wholesale + contact forms: honeypot and a minimum fill time keep bots out; submit opens an email (no backend yet) ---------- */
+  $$('form[data-kind]').forEach((f) => {
+    const t0 = Date.now();
+    f.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const note = f.querySelector('.wform__note');
+      if (f.website && f.website.value) return;                 // a bot filled the hidden field
+      if (Date.now() - t0 < 2500) { note.textContent = 'One moment, then try again.'; return; }
+      if (!f.checkValidity()) { f.reportValidity(); return; }
+      const d = new FormData(f); d.delete('website');
+      const lines = [...d.entries()].map(([k, v]) => `${k[0].toUpperCase() + k.slice(1)}: ${v}`).join('\n');
+      const subj = `${f.dataset.kind}${d.get('business') ? ', ' + d.get('business') : ''}`;
+      location.href = 'mailto:basil@sharkbaitco.com?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(`Hi Tiburon team,\n\n${lines}\n`);
+      note.textContent = 'Your email app should open with the message ready to send.';
+    });
+  });
+
   /* ---------- recipe filters (White Tip infusions) ---------- */
   const chips = $$('[data-filter]'), cards = $$('[data-tags]');
   chips.forEach((c) => c.addEventListener('click', () => {
