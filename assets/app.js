@@ -26,11 +26,26 @@
       try { sessionStorage.setItem('tb_intro', '1'); } catch (e) {}
       setTimeout(() => el.classList.add('is-gone'), 1150);
     };
-    const ready = () => setTimeout(finish, Math.max(0, minT - (performance.now() - t0)));
+    /* legal-age gate: asked once, inside the intro, then remembered on this device */
+    let ok = false; try { ok = localStorage.getItem('tb_age') === '1'; } catch (e) {}
+    const gate = $('#gate');
+    const ask = () => {
+      if (done) return;
+      el.removeAttribute('aria-hidden'); gate.hidden = false;
+      requestAnimationFrame(() => { el.classList.add('is-gate'); gate.querySelector('[data-age=yes]').focus({ preventScroll: true }); });
+      gate.addEventListener('click', (e) => {
+        const b = e.target.closest('[data-age]'); if (!b) return;
+        if (b.dataset.age === 'yes') { try { localStorage.setItem('tb_age', '1'); } catch (e2) {} el.setAttribute('aria-hidden', 'true'); finish(); return; }
+        gate.querySelector('.gate__q').textContent = 'Then we\u2019ll see you when you are.';
+        gate.querySelector('.gate__btns').innerHTML = '<a class="btn btn--glass" href="https://oceana.org/">Meet the reef we protect</a>';
+        gate.querySelector('.gate__note').textContent = 'This site is for adults of legal drinking age.';
+      });
+    };
+    const ready = () => setTimeout(ok || !gate ? finish : ask, Math.max(0, minT - (performance.now() - t0)));
     // wait for the three bottles and fonts, never longer than maxT
     const imgs = ['b-dark', 'b-white', 'b-fin'].map(n => new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = `assets/img/${n}.webp`; }));
     Promise.all([...imgs, document.fonts ? document.fonts.ready : Promise.resolve()]).then(ready);
-    setTimeout(finish, maxT);
+    setTimeout(() => { if (ok || !gate) finish(); else if (!el.classList.contains('is-gate')) ask(); }, maxT);
   })();
 
   /* ---------------- nav ---------------- */
@@ -159,7 +174,7 @@
     if (sy !== lastY) { oceanFrame(); nav.classList.toggle('is-solid', sy > vh * .6 || !drawer.hidden); lastY = sy; }
   }
   requestAnimationFrame(frame);
-  addEventListener('resize', () => { vw = innerWidth; vh = innerHeight; const m = mq.matches; if (m !== mobile) { mobile = m; const t = vid.currentTime; vid.src = src(); vid.addEventListener('loadeddata', () => { vid.currentTime = t; }, { once: true }); } }, { passive: true });
+  addEventListener('resize', () => { vw = innerWidth; vh = innerHeight; const m = mq.matches; if (m !== mobile) { mobile = m; const t = vid.currentTime; vid.src = (mobile ? 'assets/video/film-m.mp4?v=1794368365' : 'assets/video/film.mp4?v=1794368365') + ((vid.getAttribute('src') || '').match(/\?.*$/) || [''])[0]; vid.addEventListener('loadeddata', () => { vid.currentTime = t; }, { once: true }); } }, { passive: true });
 
   /* ---------------- infusions ---------------- */
   const REC = [

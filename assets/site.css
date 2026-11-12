@@ -1612,3 +1612,13 @@ h1,h2,.pour__name{font-family:var(--fd)!important;font-weight:400!important;font
   .threats span{font-size:13px}
   .reef__end blockquote{margin:14px 0}
 }
+
+/* v44: legal-age gate, asked inside the intro under the wordmark */
+.intro__inner{position:relative}
+.gate{position:absolute;top:calc(100% + 30px);left:50%;width:min(460px,88vw);transform:translate(-50%,10px);text-align:center;opacity:0;transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.intro.is-gate .gate{opacity:1;transform:translate(-50%,0)}
+.gate__q{margin:0 0 20px;font:500 clamp(17px,2.2vw,20px)/1.4 var(--f);color:var(--bone)}
+.gate__btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.gate__btns .btn{min-width:150px;justify-content:center}
+.gate__note{margin:16px 0 0;font:400 13px/1.4 var(--f);color:rgba(240,232,216,.62)}
+@media (prefers-reduced-motion:reduce){.gate{transition:none}}
