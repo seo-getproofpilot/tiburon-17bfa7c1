@@ -34,6 +34,26 @@
     rv.forEach((el, i) => { el.style.transitionDelay = (i % 3) * 80 + 'ms'; io.observe(el); });
   } else rv.forEach((el) => el.classList.add('is-in'));
 
+  /* ---------- tasting request ticket (Tasting Rooms): the stub keeps count; submit opens an email (no backend yet) ---------- */
+  const book = $('#bookForm');
+  if (book) {
+    const d = book.querySelector('[name=date]'); d.min = new Date().toISOString().slice(0, 10);
+    const g = book.querySelector('[name=guests]');
+    const stub = () => { const n = Math.max(1, Math.min(20, parseInt(g.value, 10) || 1)); $('#tkN').textContent = n; $('#tkTotal').textContent = '$' + n * 25; $('#tkRoom').textContent = book.querySelector('[name=room]:checked').value; };
+    $$('.ticket__step button', book).forEach((b) => b.addEventListener('click', () => { g.value = Math.max(1, Math.min(20, (parseInt(g.value, 10) || 1) + +b.dataset.d)); stub(); }));
+    book.addEventListener('input', stub); book.addEventListener('change', stub); stub();
+    $$('[data-room]').forEach((a) => a.addEventListener('click', () => { const r = book.querySelector(`[name=room][value="${a.dataset.room}"]`); if (r) { r.checked = true; stub(); } }));
+    book.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!book.checkValidity()) { book.reportValidity(); return; }
+      const f = new FormData(book), room = f.get('room');
+      const when = new Date(f.get('date') + 'T12:00').toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+      const body = `Hi Tiburon team,\n\nI'd like to book a rum tasting.\n\nRoom: ${room}\nDate: ${when}\nGuests: ${f.get('guests')}\nName: ${f.get('name')}\nEmail: ${f.get('email')}\n\nThank you!`;
+      location.href = 'mailto:basil@sharkbaitco.com?subject=' + encodeURIComponent(`Tasting request, ${room}, ${when}`) + '&body=' + encodeURIComponent(body);
+      book.querySelector('.ticket__note').textContent = 'Your email app should open with the request ready to send.';
+    });
+  }
+
   /* ---------- recipe filters (White Tip infusions) ---------- */
   const chips = $$('[data-filter]'), cards = $$('[data-tags]');
   chips.forEach((c) => c.addEventListener('click', () => {
