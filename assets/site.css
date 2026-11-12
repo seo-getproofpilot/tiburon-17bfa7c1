@@ -1622,3 +1622,6 @@ h1,h2,.pour__name{font-family:var(--fd)!important;font-weight:400!important;font
 .gate__btns .btn{min-width:150px;justify-content:center}
 .gate__note{margin:16px 0 0;font:400 13px/1.4 var(--f);color:rgba(240,232,216,.62)}
 @media (prefers-reduced-motion:reduce){.gate{transition:none}}
+/* v45: lineup cards link to their bottle pages */
+.lu__more{font:700 12px/1 var(--f);font-stretch:112%;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;padding-bottom:5px;border-bottom:1.5px solid currentColor;opacity:.85;transition:opacity .2s}
+.lu__more:hover{opacity:1}

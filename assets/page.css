@@ -1,0 +1,177 @@
+/* Inner pages. Loaded after site.css; site.css owns tokens, nav, buttons, footer.
+   Each bottle page is dressed in its own label type, the way the homepage dresses each bottle. */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.inner .nav{background:linear-gradient(180deg,rgba(10,5,2,.55),rgba(10,5,2,0))}
+.inner .nav.is-solid{background:rgba(4,18,26,.92)}
+
+/* ---------- legal-age gate (inner pages) ---------- */
+.agegate{display:none;position:fixed;inset:0;z-index:200;background:radial-gradient(120% 90% at 50% 40%,#0a2a34 0%,var(--abyss) 70%);place-items:center;padding:24px}
+.needs-age .agegate{display:grid}
+.needs-age body{overflow:hidden}
+.agegate__in{display:flex;flex-direction:column;align-items:center;text-align:center;width:min(460px,100%)}
+.agegate__mark{width:clamp(80px,9vw,112px);fill:var(--bone);margin-bottom:22px}
+.agegate__word{width:clamp(200px,24vw,290px);fill:var(--bone);margin-bottom:30px}
+.agegate .gate__q{margin:0 0 20px;font:500 clamp(17px,2.2vw,20px)/1.4 var(--f);color:var(--bone)}
+.agegate .gate__btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.agegate .gate__btns .btn{min-width:150px;justify-content:center}
+.agegate .gate__note{margin:16px 0 0;font:400 13px/1.4 var(--f);color:rgba(240,232,216,.62)}
+
+/* ---------- shared bits ---------- */
+.crumbs ol{list-style:none;margin:0 0 26px;padding:0;display:flex;gap:10px;font:600 11px/1 var(--f);font-stretch:112%;letter-spacing:.2em;text-transform:uppercase}
+.crumbs li+li::before{content:"/";margin-right:10px;opacity:.45}
+.crumbs a{text-decoration:none;opacity:.7}.crumbs a:hover{opacity:1}
+.crumbs [aria-current]{opacity:1}
+.btn--ink{background:var(--mahogany)!important;color:#f6e7d2!important}
+.btn--ink:hover{background:#3a1d0b!important}
+
+/* =================== DARK 8 =================== */
+.pg--dark{--d8:#e0974a;--d8-deep:#8a4a14;--wood:#1b0f07;--cream:#f4ece0;background:var(--wood)}
+.pg--dark h1,.pg--dark main h2{font-family:"Marcellus SC","Marcellus",serif!important;letter-spacing:.03em!important;line-height:1.02!important}
+.d8-script{font:400 clamp(28px,2.6vw,38px)/1 "Pinyon Script",cursive;color:var(--d8);margin:0 0 10px}
+.d8-h2{font-size:clamp(34px,4.2vw,60px)!important;margin-bottom:22px!important;max-width:15em}
+.d8-link{display:inline-block;margin-top:8px;font:700 12px/1 var(--f);font-stretch:112%;letter-spacing:.16em;text-transform:uppercase;color:var(--d8-deep);text-decoration:none;padding-bottom:6px;border-bottom:1.5px solid currentColor}
+.d8-link:hover{color:var(--wood)}
+
+/* hero: their studio shot bleeds left, the label type sits on the wood to the right */
+.d8h{position:relative;min-height:min(100svh,980px);display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);background:radial-gradient(80% 90% at 85% 40%,#3a1d0b 0%,#1b0f07 55%,#0b0604 100%);color:#f2e6d4;overflow:hidden}
+.d8h__pic{position:relative;margin:0}
+.d8h__pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:28% 50%}
+.d8h__pic::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(27,15,7,0) 55%,#1b0f07 99%),linear-gradient(0deg,rgba(11,6,4,.45),rgba(11,6,4,0) 30%)}
+.d8h__copy{position:relative;z-index:1;align-self:center;padding:calc(var(--nav) + 48px) var(--gut) 64px clamp(24px,3vw,56px);max-width:640px}
+.d8h__h1{display:grid;gap:18px;margin-bottom:26px}
+.d8h__name{display:grid;grid-template-columns:auto auto;justify-content:start;align-items:end;column-gap:.18em;font-size:clamp(58px,7vw,108px);line-height:.9}
+.d8h__name b{font:400 1.25em/.8 "Marcellus",serif;color:var(--d8)}
+.d8h__name small{grid-column:1/-1;font:400 clamp(14px,1.2vw,17px)/1 "Marcellus SC",serif;letter-spacing:.34em;margin-top:14px;color:#e8d5b8}
+.d8h__kw{font:500 italic clamp(22px,2vw,28px)/1.25 "Cormorant Garamond",serif;letter-spacing:0;color:var(--d8);max-width:18em}
+.d8h__lede{font:500 clamp(19px,1.5vw,21px)/1.55 "Cormorant Garamond",serif;color:#eadbc4;max-width:31em}
+.d8h__specs{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:0;margin:34px 0 34px;border-top:1px solid rgba(224,151,74,.35);border-bottom:1px solid rgba(224,151,74,.35)}
+.d8h__specs div{padding:16px 26px 16px 0;margin-right:26px;border-right:1px solid rgba(224,151,74,.22)}
+.d8h__specs div:last-child{border-right:0;margin-right:0}
+.d8h__specs dt{font:600 10.5px/1 var(--f);font-stretch:112%;letter-spacing:.22em;text-transform:uppercase;color:rgba(242,230,212,.6);margin-bottom:10px}
+.d8h__specs dd{margin:0;font:400 clamp(22px,1.9vw,28px)/1 "Marcellus",serif;color:#f6e7d2}
+.d8h__cta{display:flex;gap:14px;flex-wrap:wrap}
+.pg--dark .btn--primary{background:var(--d8);color:#1a0b00}
+.pg--dark .btn--primary:hover{background:#f0b06a}
+.d8h__fine{margin-top:18px;font-size:13.5px;color:rgba(242,230,212,.58)}
+
+/* tasting notes: the bottle stands on the cream like a label on a shelf */
+.d8n{background:var(--cream);color:var(--ink);display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(30px,5vw,90px);padding:clamp(90px,10vw,150px) var(--gut);align-items:start;position:relative;overflow:hidden}
+.d8n::before{content:"";position:absolute;left:-8%;top:8%;width:52%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(224,151,74,.28),rgba(224,151,74,0) 68%)}
+.d8n__bottle{position:sticky;top:calc(var(--nav) + 30px);display:flex;justify-content:center}
+.d8n__bottle img{height:min(74vh,720px);width:auto;filter:drop-shadow(0 40px 40px rgba(60,30,8,.35))}
+.d8n__intro{font:500 clamp(20px,1.6vw,23px)/1.55 "Cormorant Garamond",serif;color:#3a2a1c;max-width:32em;margin-bottom:clamp(40px,5vw,70px)}
+.note{display:grid;grid-template-columns:clamp(110px,11vw,170px) 1fr;gap:24px;padding:30px 0;border-top:1px solid rgba(27,15,7,.16)}
+.note:last-child{border-bottom:1px solid rgba(27,15,7,.16)}
+.note h3{font:400 clamp(24px,2.2vw,32px)/1 "Marcellus SC",serif;color:var(--d8-deep);letter-spacing:.06em;padding-top:4px}
+.note p{font:500 clamp(20px,1.65vw,24px)/1.5 "Cormorant Garamond",serif;color:#24180e}
+
+/* matured twice: dark wood, numbered steps beside their barrel wall */
+.d8m{background:radial-gradient(70% 90% at 20% 30%,#2c170a,#120a05 70%);color:#efe2cd;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(36px,6vw,110px);padding:clamp(90px,10vw,150px) var(--gut);align-items:center}
+.d8m .eyebrow{color:var(--d8)}
+.d8m__intro{font:500 clamp(19px,1.5vw,22px)/1.55 "Cormorant Garamond",serif;color:#e2d0b4;max-width:30em;margin-bottom:36px}
+.d8m__steps{list-style:none;margin:0;padding:0;counter-reset:st}
+.d8m__steps li{counter-increment:st;display:grid;grid-template-columns:64px 1fr;column-gap:18px;padding:18px 0;border-top:1px solid rgba(224,151,74,.18)}
+.d8m__steps li::before{content:counter(st,decimal-leading-zero);grid-row:span 2;font:400 30px/1 "Marcellus",serif;color:var(--d8)}
+.d8m__steps b{font:400 21px/1.2 "Marcellus SC",serif;letter-spacing:.04em;color:#f6e7d2;margin-bottom:4px}
+.d8m__steps span{font-size:16px;line-height:1.55;color:rgba(239,226,205,.78)}
+.d8m__pic{margin:0;position:relative}
+.d8m__pic img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:62% 50%;border-radius:3px;box-shadow:0 50px 80px -40px rgba(0,0,0,.8)}
+.d8m__pic figcaption{position:absolute;left:16px;bottom:16px;padding:7px 11px;background:rgba(244,236,224,.92);color:var(--wood);font:700 11px/1 var(--f);letter-spacing:.16em;text-transform:uppercase}
+
+/* awards */
+.d8a{background:var(--cream);color:var(--ink);display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(36px,5vw,90px);padding:clamp(90px,10vw,150px) var(--gut);align-items:center}
+.d8a__pic{margin:0}
+.d8a__pic img{width:100%;border-radius:3px;box-shadow:0 40px 70px -40px rgba(40,20,4,.6)}
+.d8a__copy>p:not(.eyebrow){font:500 clamp(19px,1.5vw,22px)/1.55 "Cormorant Garamond",serif;color:#33251a;max-width:30em;margin-bottom:22px}
+.d8a__road{list-style:none;margin:8px 0 28px;padding:0;display:grid;grid-template-columns:repeat(3,1fr);position:relative;max-width:440px}
+.d8a__road::before{content:"";position:absolute;left:8px;right:8px;top:8px;height:2px;background:linear-gradient(90deg,#a9714a,#b8b8b8 50%,#d9a441)}
+.d8a__road li{position:relative;padding-top:28px}
+.d8a__road li::before{content:"";position:absolute;left:0;top:0;width:18px;height:18px;border-radius:50%;background:#a9714a;box-shadow:0 0 0 4px var(--cream)}
+.d8a__road li:nth-child(2)::before{background:#b8b8b8}
+.d8a__road li.is-gold::before{background:#d9a441;width:22px;height:22px;top:-2px}
+.d8a__road b{display:block;font:400 26px/1 "Marcellus",serif;color:var(--wood)}
+.d8a__road span{font:600 11px/1.3 var(--f);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.d8a__road .is-gold span{color:var(--d8-deep)}
+
+/* how to drink it: a bar menu card over the beach-bar loop */
+.d8s{position:relative;min-height:min(110svh,1000px);display:grid;align-items:center;justify-items:end;padding:clamp(90px,10vw,140px) var(--gut);overflow:hidden;color:#f2e6d4}
+.d8s__vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:30% 50%}
+.d8s__shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,6,4,0) 20%,rgba(11,6,4,.55) 60%,rgba(11,6,4,.7))}
+.d8s__card{position:relative;width:min(560px,100%);padding:clamp(34px,4vw,54px);background:rgba(20,11,5,.93);border:1px solid rgba(224,151,74,.4);outline:1px solid rgba(224,151,74,.18);outline-offset:-10px}
+.menu{margin:12px 0 0}
+.menu div{padding:20px 0;border-top:1px dashed rgba(224,151,74,.35)}
+.menu dt{font:400 22px/1.2 "Marcellus SC",serif;letter-spacing:.05em;color:var(--d8);margin-bottom:6px}
+.menu dd{margin:0;font:500 19px/1.5 "Cormorant Garamond",serif;color:#eadbc4}
+.d8s__fine{margin-top:14px;font-size:13px;color:rgba(242,230,212,.55)}
+
+/* taste it in Belize */
+.d8t{background:var(--cream);color:var(--ink);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(36px,5vw,90px);padding:clamp(90px,10vw,150px) var(--gut);align-items:center}
+.d8t__pic{margin:0}
+.d8t__pic img{width:100%;border-radius:3px;box-shadow:0 40px 70px -40px rgba(40,20,4,.55)}
+.d8t__copy>p:not(.eyebrow){font:500 clamp(19px,1.5vw,22px)/1.55 "Cormorant Garamond",serif;color:#33251a;max-width:30em}
+.rooms2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:30px 0 34px}
+.rooms2 div{padding-top:16px;border-top:2px solid var(--d8)}
+.rooms2 dt{font:400 19px/1.25 "Marcellus SC",serif;letter-spacing:.04em;color:var(--wood);margin-bottom:8px}
+.rooms2 dd{margin:0;font-size:15px;line-height:1.5;color:var(--ink-soft)}
+
+/* the rest of the family */
+.fam{background:var(--cream);color:var(--ink);display:grid;grid-template-columns:auto 1fr 1fr;gap:clamp(20px,4vw,60px);align-items:center;padding:clamp(40px,5vw,70px) var(--gut) clamp(90px,10vw,140px);border-top:1px solid rgba(27,15,7,.1);margin:0 var(--gut);padding-left:0;padding-right:0}
+.fam__h{font-family:"Marcellus SC",serif!important;font-size:clamp(24px,2.2vw,32px)!important;max-width:7em;color:var(--wood)}
+.fam__item{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:22px;text-decoration:none;padding:18px 22px;border-radius:4px;transition:background-color .25s var(--ease)}
+.fam__item:hover{background:rgba(224,151,74,.12)}
+.fam__item img{height:150px;width:auto;filter:drop-shadow(0 16px 16px rgba(40,20,4,.25))}
+.fam__item b{display:block;font:400 26px/1 "Marcellus SC",serif;color:var(--wood)}
+.fam__item--fin b{font:800 26px/1 var(--f);font-stretch:125%;letter-spacing:.06em}
+.fam__item em{display:block;font:500 italic 18px/1.3 "Cormorant Garamond",serif;color:var(--ink-soft);margin:6px 0 12px}
+.fam__item i{font:700 11px/1 var(--f);font-style:normal;letter-spacing:.16em;text-transform:uppercase;color:var(--d8-deep);border-bottom:1.5px solid currentColor;padding-bottom:4px}
+.pg--dark .fam{background:none}
+.pg--dark .fam,.pg--dark .d8t{position:relative}
+.pg--dark main{background:var(--cream)}
+.pg--dark main>.d8h,.pg--dark main>.d8m,.pg--dark main>.d8s{background-color:#120a05}
+
+/* ---------- tablet + phone ---------- */
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){
+  .d8h{grid-template-columns:1fr;min-height:0}
+  .d8h__pic{height:min(62svh,620px)}
+  .d8h__pic img{object-position:50% 40%}
+  .d8h__pic::after{background:linear-gradient(0deg,#1b0f07 2%,rgba(27,15,7,0) 40%)}
+  .d8h__copy{padding:0 var(--gut) 64px;margin-top:-28px;max-width:720px}
+  .d8n{grid-template-columns:1fr}
+  .d8n__bottle{position:relative;top:0;order:2;margin-top:10px}
+  .d8n__bottle img{height:min(56svh,520px)}
+  .d8m,.d8a,.d8t{grid-template-columns:1fr}
+  .d8m__pic{max-width:620px}
+  .d8a__copy,.d8t__copy,.d8m__copy,.d8n__body{max-width:720px}
+  .d8s{justify-items:center;align-items:end;min-height:0;padding-top:46svh}
+  .d8s__vid{height:60svh;bottom:auto}
+  .d8s__shade{background:linear-gradient(180deg,rgba(11,6,4,0) 20%,#120a05 60svh)}
+  .fam{grid-template-columns:1fr 1fr}
+  .fam__h{grid-column:1/-1;max-width:none}
+}
+@media (max-width:600px){
+  .d8h__pic{height:56svh}
+  .d8h__name{font-size:clamp(54px,16vw,72px)}
+  .d8h__specs{grid-template-columns:repeat(2,1fr);width:100%}
+  .d8h__specs div{margin-right:0;padding:14px 0 14px 0;border-right:0}
+  .d8h__specs div:nth-child(odd){border-right:1px solid rgba(224,151,74,.22);padding-right:16px}
+  .d8h__specs div:nth-child(even){padding-left:18px}
+  .d8h__specs div:nth-child(-n+2){border-bottom:1px solid rgba(224,151,74,.22)}
+  .d8h__cta .btn{flex:1 1 100%;justify-content:center}
+  .note{grid-template-columns:1fr;gap:8px;padding:24px 0}
+  .d8m__steps li{grid-template-columns:46px 1fr}
+  .d8m__steps li::before{font-size:24px}
+  .rooms2{grid-template-columns:1fr}
+  .fam{grid-template-columns:1fr}
+  .fam__item{padding:14px 0}
+  .fam__item img{height:120px}
+}
+@media (prefers-reduced-motion:reduce){.d8s__vid{display:none}.d8s{background:#120a05 url(img/lu-dark.webp) 30% 50%/cover}}
+/* tablet band: keep the bottle beside its notes and the steps beside the barrels */
+@media (min-width:601px) and (max-width:900px),(min-width:601px) and (orientation:portrait) and (max-width:1180px){
+  .d8n{grid-template-columns:minmax(0,.62fr) minmax(0,1.38fr);gap:32px}
+  .d8n__bottle{order:0;position:sticky;top:calc(var(--nav) + 30px);margin-top:0}
+  .d8n__bottle img{height:min(60svh,560px)}
+  .d8m{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:36px}
+  .d8m__pic img{aspect-ratio:3/4}
+  .d8t{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:36px}
+}
