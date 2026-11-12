@@ -175,3 +175,133 @@
   .d8m__pic img{aspect-ratio:3/4}
   .d8t{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:36px}
 }
+
+/* =================== WHITE TIP =================== */
+/* dressed in its label: IM Fell capitals, Marcellus SC spaced lines, near-black ink on shallow-water aqua and sand */
+.pg--white{--wt-ink:#121c1c;--wt-teal:#24504f;--wt-aqua:#dff0ef;--wt-sand:#f1eadc;--wt-deep:#0c2a2c;background:var(--wt-deep)}
+.pg--white main{background:var(--wt-sand)}
+.pg--white h1,.pg--white main h2{font-family:"IM Fell DW Pica SC",serif!important;letter-spacing:-.005em!important;line-height:1!important}
+.pg--white .nav{background:rgba(12,42,44,.94)}
+.wt-line{display:flex;flex-wrap:wrap;gap:14px;font:400 13px/1 "Marcellus SC",serif;letter-spacing:.3em;color:#3a4a49;margin:0 0 16px}
+.wt-h2{font-size:clamp(36px,4.4vw,64px)!important;margin-bottom:22px!important;max-width:14em}
+.wt-eyebrow{color:var(--wt-teal)!important}
+.wt-link{display:inline-block;margin-top:10px;font:700 12px/1 var(--f);font-stretch:112%;letter-spacing:.16em;text-transform:uppercase;color:var(--wt-teal);text-decoration:none;padding-bottom:6px;border-bottom:1.5px solid currentColor}
+.wt-link:hover{color:var(--wt-ink)}
+.pg--white main .btn--primary{background:var(--wt-ink);color:#f4f1ea}
+.pg--white main .btn--primary:hover{background:#000;color:#fff}
+.btn--line{background:transparent;color:var(--wt-ink);box-shadow:inset 0 0 0 1.5px rgba(18,28,28,.55)}
+.btn--line::after{display:none}
+.btn--line:hover{background:var(--wt-ink);color:#f4f1ea}
+
+/* hero: copy on the shallows, their studio shot bleeds right */
+.wth{position:relative;min-height:min(100svh,980px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);background:linear-gradient(160deg,#e6f4f2 0%,#d6ecea 45%,#efe7d6 100%);color:var(--wt-ink);overflow:hidden}
+.wth .crumbs{color:var(--wt-ink)}
+.wth__copy{position:relative;z-index:1;align-self:center;padding:calc(var(--nav) + 48px) clamp(24px,3vw,56px) 64px var(--gut);max-width:660px;justify-self:end}
+.wth__h1{display:grid;gap:14px;margin-bottom:24px}
+.wth__name{font-size:clamp(70px,8.6vw,136px);line-height:.88}
+.wth__kw{font:700 clamp(13px,1.05vw,15px)/1.5 "Cormorant Garamond",serif;letter-spacing:.3em;text-transform:uppercase;color:var(--wt-teal);max-width:26em}
+.wth__lede{font:500 clamp(19px,1.5vw,22px)/1.55 "Cormorant Garamond",serif;color:#24302f;max-width:31em}
+.wth__specs{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;margin:32px 0;border-top:1px solid rgba(18,28,28,.22);border-bottom:1px solid rgba(18,28,28,.22)}
+.wth__specs div{padding:16px 26px 16px 0;margin-right:26px;border-right:1px solid rgba(18,28,28,.14)}
+.wth__specs div:last-child{border-right:0;margin-right:0}
+.wth__specs dt{font:600 10.5px/1 var(--f);font-stretch:112%;letter-spacing:.22em;text-transform:uppercase;color:rgba(18,28,28,.55);margin-bottom:10px}
+.wth__specs dd{margin:0;font:400 clamp(24px,2vw,30px)/1 "IM Fell DW Pica SC",serif}
+.wth__cta{display:flex;gap:14px;flex-wrap:wrap}
+.wth__fine{margin-top:18px;font-size:13.5px;color:rgba(18,28,28,.6)}
+.wth__pic{position:relative;margin:0}
+.wth__pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:28% 50%}
+.wth__pic::after{content:"";position:absolute;inset:0;background:linear-gradient(270deg,rgba(214,236,234,0) 70%,#dcefed 100%)}
+
+/* tasting notes */
+.wtn{background:var(--wt-sand);color:var(--wt-ink);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(30px,5vw,90px);padding:clamp(90px,10vw,150px) var(--gut);align-items:start;position:relative;overflow:hidden}
+.wtn::after{content:"";position:absolute;right:-6%;top:10%;width:50%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(120,196,196,.35),rgba(120,196,196,0) 68%)}
+.wtn__bottle{position:sticky;top:calc(var(--nav) + 30px);display:flex;justify-content:center;z-index:1}
+.wtn__bottle img{height:min(74vh,720px);width:auto;filter:drop-shadow(0 40px 40px rgba(18,40,40,.28))}
+.wtn__intro{font:500 clamp(20px,1.6vw,23px)/1.55 "Cormorant Garamond",serif;color:#2b3635;max-width:32em;margin-bottom:clamp(40px,5vw,70px)}
+.note--wt{border-color:rgba(18,28,28,.16)}
+.note--wt:last-child{border-bottom-color:rgba(18,28,28,.16)}
+.note--wt h3{font-family:"IM Fell DW Pica SC",serif;color:var(--wt-teal);letter-spacing:0}
+.note--wt p{color:#172322}
+
+/* infusions: deep water, cream recipe cards */
+.wti{background:radial-gradient(90% 70% at 20% 0%,#164043 0%,var(--wt-deep) 60%,#081c1e 100%);color:#e9f1ee;padding:clamp(90px,10vw,150px) var(--gut)}
+.wti .eyebrow{color:#9fd6d2}
+.wti__lead{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(36px,5vw,90px);align-items:center;max-width:1360px;margin:0 auto clamp(60px,7vw,100px)}
+.wti__pic{margin:0;position:relative}
+.wti__pic img{width:100%;aspect-ratio:5/4;object-fit:cover;object-position:60% 50%;border-radius:3px;box-shadow:0 50px 80px -40px rgba(0,0,0,.8)}
+.wti__pic figcaption{position:absolute;left:16px;bottom:16px;padding:7px 11px;background:rgba(241,234,220,.94);color:var(--wt-ink);font:700 11px/1 var(--f);letter-spacing:.16em;text-transform:uppercase}
+.wti__intro>p:not(.eyebrow){font:500 clamp(19px,1.5vw,22px)/1.55 "Cormorant Garamond",serif;color:#d4e3df;max-width:30em;margin-bottom:28px}
+.wti__how{list-style:none;margin:0;padding:0;counter-reset:hw}
+.wti__how li{counter-increment:hw;display:grid;grid-template-columns:52px 1fr;column-gap:14px;padding:14px 0;border-top:1px solid rgba(159,214,210,.2)}
+.wti__how li::before{content:counter(hw);grid-row:span 2;font:400 34px/1 "IM Fell DW Pica SC",serif;color:#9fd6d2}
+.wti__how b{font:400 20px/1.2 "Marcellus SC",serif;letter-spacing:.04em;color:#f4f1ea}
+.wti__how span{font-size:15.5px;line-height:1.5;color:rgba(233,241,238,.75)}
+.wti__filters{display:flex;flex-wrap:wrap;gap:10px;max-width:1360px;margin:0 auto 28px}
+.chip{font:600 12px/1 var(--f);font-stretch:112%;letter-spacing:.14em;text-transform:uppercase;padding:13px 18px;border:0;border-radius:999px;background:rgba(233,241,238,.08);color:#e9f1ee;box-shadow:inset 0 0 0 1px rgba(159,214,210,.35);cursor:pointer;transition:background-color .2s,color .2s}
+.chip:hover{background:rgba(233,241,238,.16)}
+.chip.is-on{background:#f1eadc;color:var(--wt-ink);box-shadow:none}
+.recipes{list-style:none;margin:0 auto;padding:0;max-width:1360px;columns:3 300px;column-gap:22px}
+.rc2{break-inside:avoid;margin:0 0 22px;padding:28px 28px 24px;background:#f4eee2;color:var(--wt-ink);border-radius:2px;box-shadow:0 20px 40px -24px rgba(0,0,0,.6);background-image:repeating-linear-gradient(180deg,transparent 0 33px,rgba(36,80,79,.09) 33px 34px);background-position:0 70px}
+.rc2[hidden]{display:none}
+.rc2 h3{font:400 clamp(26px,2.1vw,30px)/1.05 "IM Fell DW Pica SC",serif;margin:0 0 18px;padding-bottom:14px;border-bottom:1.5px solid var(--wt-ink)}
+.rc2 ul{list-style:none;margin:0;padding:0}
+.rc2 ul li{font:500 19px/34px "Cormorant Garamond",serif;color:#1c2828}
+.rc2 ul b{font-weight:700;color:var(--wt-teal)}
+.syrup{max-width:1360px;margin:20px auto 0;display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:clamp(20px,4vw,60px);padding:clamp(28px,3vw,44px) 0 0;border-top:1px solid rgba(159,214,210,.25)}
+.syrup h3{font:400 clamp(26px,2.4vw,36px)/1.05 "IM Fell DW Pica SC",serif;color:#f4f1ea}
+.syrup p{font:500 clamp(18px,1.4vw,20px)/1.6 "Cormorant Garamond",serif;color:#d4e3df}
+.wti__fine{max-width:1360px;margin:24px auto 0;font-size:13px;color:rgba(233,241,238,.5)}
+
+/* awards */
+.wta{background:linear-gradient(180deg,#e3f2f0,#eef0e6);color:var(--wt-ink);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:clamp(36px,5vw,90px);padding:clamp(90px,10vw,150px) var(--gut);align-items:center}
+.wta__copy>p:not(.eyebrow){font:500 clamp(19px,1.5vw,22px)/1.55 "Cormorant Garamond",serif;color:#24302f;max-width:30em;margin-bottom:24px}
+.wta__marks{display:grid;grid-template-columns:auto 1fr;gap:0;margin:0 0 26px;max-width:460px}
+.wta__marks div{display:contents}
+.wta__marks dt{font:400 40px/1 "IM Fell DW Pica SC",serif;color:var(--wt-ink);padding:14px 22px 14px 0;border-top:1px solid rgba(18,28,28,.16)}
+.wta__marks dd{margin:0;align-self:stretch;display:flex;align-items:center;font:600 12px/1.4 var(--f);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);border-top:1px solid rgba(18,28,28,.16)}
+.wta__pic{margin:0}
+.wta__pic img{width:100%;border-radius:3px;box-shadow:0 40px 70px -40px rgba(10,30,30,.6)}
+
+/* taste it */
+.wtt{background:var(--wt-sand);color:var(--wt-ink);display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(36px,5vw,90px);padding:clamp(90px,10vw,150px) var(--gut);align-items:center}
+.wtt__pic{margin:0;max-width:520px}
+.wtt__pic img{width:100%;border-radius:3px;box-shadow:0 40px 70px -40px rgba(10,30,30,.55)}
+.wtt__copy>p:not(.eyebrow){font:500 clamp(19px,1.5vw,22px)/1.55 "Cormorant Garamond",serif;color:#24302f;max-width:30em}
+.rooms2--wt div{border-top-color:var(--wt-teal)}
+.rooms2--wt dt{font-family:"Marcellus SC",serif;color:var(--wt-ink)}
+
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){
+  .wth{grid-template-columns:1fr;min-height:0}
+  .wth__pic{order:-1;height:min(62svh,620px)}
+  .wth__pic img{object-position:50% 40%}
+  .wth__pic::after{background:linear-gradient(0deg,#dcefed 2%,rgba(220,239,237,0) 38%)}
+  .wth__copy{padding:0 var(--gut) 64px;margin-top:-28px;max-width:720px;justify-self:start}
+  .wtn{grid-template-columns:1fr}
+  .wtn__bottle{position:relative;top:0;margin-top:10px}
+  .wtn__bottle img{height:min(56svh,520px)}
+  .wti__lead,.wta,.wtt{grid-template-columns:1fr}
+  .wti__intro,.wta__copy,.wtt__copy,.wtn__body{max-width:720px}
+  .wta__pic{order:-1}
+  .syrup{grid-template-columns:1fr}
+}
+@media (min-width:601px) and (max-width:900px),(min-width:601px) and (orientation:portrait) and (max-width:1180px){
+  .wtn{grid-template-columns:minmax(0,1.38fr) minmax(0,.62fr);gap:32px}
+  .wtn__bottle{position:sticky;top:calc(var(--nav) + 30px);margin-top:0}
+  .wtn__bottle img{height:min(60svh,560px)}
+  .wtt{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:36px}
+  .recipes{columns:2}
+}
+@media (max-width:600px){
+  .wth__pic{height:56svh}
+  .wth__name{font-size:clamp(64px,19vw,88px)}
+  .wth__specs{grid-template-columns:repeat(2,1fr);width:100%}
+  .wth__specs div{margin-right:0;padding:14px 0;border-right:0}
+  .wth__specs div:nth-child(odd){border-right:1px solid rgba(18,28,28,.14);padding-right:16px}
+  .wth__specs div:nth-child(even){padding-left:18px}
+  .wth__specs div:nth-child(-n+2){border-bottom:1px solid rgba(18,28,28,.14)}
+  .wth__cta .btn{flex:1 1 100%;justify-content:center}
+  .wti__how li{grid-template-columns:40px 1fr}
+  .recipes{columns:1}
+  .rc2{padding:24px 22px 20px}
+  .wta__marks dt{font-size:32px}
+}

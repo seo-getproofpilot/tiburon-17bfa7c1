@@ -34,6 +34,14 @@
     rv.forEach((el, i) => { el.style.transitionDelay = (i % 3) * 80 + 'ms'; io.observe(el); });
   } else rv.forEach((el) => el.classList.add('is-in'));
 
+  /* ---------- recipe filters (White Tip infusions) ---------- */
+  const chips = $$('[data-filter]'), cards = $$('[data-tags]');
+  chips.forEach((c) => c.addEventListener('click', () => {
+    const f = c.dataset.filter;
+    chips.forEach((x) => { const on = x === c; x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', on); });
+    cards.forEach((k) => { k.hidden = f !== 'all' && !k.dataset.tags.split(' ').includes(f); });
+  }));
+
   /* ---------- background loops: load near the viewport, play only while visible ---------- */
   $$('video[data-d]').forEach((v) => {
     if (RM) return;
