@@ -1,0 +1,119 @@
+/* v54 type (Chris, 2026-11-14): one family for the whole site, the Archivo of the TIBURÓN nav wordmark.
+   Only the bottle NAMES keep their own label lettering: Dark 8 in Marcellus, White Tip in IM Fell, FIN in its logo.
+   Loaded last on every page. The :not(#_) adds id weight so these beat the older per-section !important rules. */
+
+/* 1. everything: Archivo */
+*:not(#_){font-family:"Archivo",system-ui,sans-serif!important}
+
+/* 2. headlines: the wordmark's extended, heavy Archivo, set in sentence case so long lines still fit */
+h1:not(#_),h2:not(#_){font-weight:800!important;font-stretch:115%!important;letter-spacing:-.012em!important;line-height:1.02!important;font-style:normal!important}
+h1:not(#_) em,h2:not(#_) em{font-style:normal!important;color:var(--amber)}
+h3:not(#_){font-weight:700!important;font-stretch:108%!important;letter-spacing:-.005em!important;font-style:normal!important}
+
+/* 3. what used to be the serif reading text: descriptions, ledes, notes, menus, steps */
+.lu__desc:not(#_),.lu__serve:not(#_),.dc__desc:not(#_),.pp__intro:not(#_),.st__txt span:not(#_),
+.d8h__lede:not(#_),.d8n__intro:not(#_),.note p:not(#_),.d8m__intro:not(#_),.d8a__copy>p:not(.eyebrow):not(#_),.menu dd:not(#_),.d8t__copy>p:not(.eyebrow):not(#_),
+.wth__lede:not(#_),.wtn__intro:not(#_),.wti__intro>p:not(.eyebrow):not(#_),.rc2 ul li:not(#_),.syrup p:not(#_),.wta__copy>p:not(.eyebrow):not(#_),.wtt__copy>p:not(.eyebrow):not(#_),
+.osh__lede:not(#_),.trh__lede:not(#_),.wbh__lede:not(#_),.shelf__type:not(#_),.stz__cap span:not(#_),.hero__sub:not(#_){
+  font-weight:400!important;font-style:normal!important;font-stretch:100%!important;font-size:clamp(16px,1.12vw,18px)!important;line-height:1.65!important;letter-spacing:0!important}
+.note p:not(#_),.menu dd:not(#_){font-size:clamp(16px,1.1vw,17.5px)!important}
+.rc2 ul li:not(#_){font-size:16.5px!important;line-height:34px!important}
+.d8h__kw:not(#_),.wth__kw:not(#_),.fnh__kw:not(#_){font-weight:600!important;font-style:normal!important;font-stretch:112%!important;font-size:clamp(13px,1vw,15px)!important;letter-spacing:.18em!important;text-transform:uppercase!important;line-height:1.5!important}
+
+/* quotes stay a step larger, in Archivo */
+.ch__quote p:not(#_),.press p:not(#_),.osr__quote p:not(#_),.story__quote p:not(#_),.reef__end blockquote p:not(#_){font-weight:500!important;font-style:italic!important;font-stretch:100%!important;letter-spacing:-.005em!important;line-height:1.4!important}
+.press p:not(#_){font-size:clamp(20px,1.8vw,26px)!important}
+
+/* the script flourishes become the wordmark's spaced caps */
+.d8-script:not(#_),.lu__script:not(#_),.fn-line:not(#_),.wt-line:not(#_),.lu__line:not(#_),.pp__kicker:not(#_),.ticket__brand:not(#_){
+  font-weight:700!important;font-style:normal!important;font-stretch:125%!important;font-size:12px!important;letter-spacing:.32em!important;text-transform:uppercase!important;line-height:1.4!important}
+
+/* labels inside the bottle pages that used the bottle fonts */
+.note h3:not(#_),.menu dt:not(#_),.d8m__steps b:not(#_),.wti__how b:not(#_),.fna__steps b:not(#_),.rooms2 dt:not(#_),.dist dt:not(#_){font-weight:700!important;font-stretch:112%!important;letter-spacing:.06em!important;text-transform:uppercase!important;font-size:14px!important;font-style:normal!important}
+.d8h__specs dd:not(#_),.wth__specs dd:not(#_),.lu__specs dd:not(#_){font-weight:700!important;font-stretch:112%!important;letter-spacing:0!important}
+
+/* 4. bottle NAMES keep their label lettering */
+.lu--dark .lu__title:not(#_),.lu--dark .lu__title span:not(#_),.lu--dark .lu__title small:not(#_),.li--dark b:not(#_),.process__tabs #pt-dark b:not(#_),
+.pp--dark .pp__title:not(#_),.plinth--dark h3:not(#_),.d8h__name:not(#_),.d8h__name small:not(#_),.shelf__item--dark .shelf__name:not(#_),.nf__d8:not(#_),
+.dc--stop[data-s="0"] h2:not(#_){font-family:"Marcellus SC","Marcellus",serif!important;font-weight:400!important;font-stretch:normal!important;letter-spacing:.03em!important}
+.lu--dark .lu__title b:not(#_),.li--dark i:not(#_),.process__tabs #pt-dark i:not(#_),.pp--dark .pp__title b:not(#_),.d8h__name b:not(#_){font-family:"Marcellus",serif!important;font-weight:400!important;font-stretch:normal!important}
+.lu--white .lu__title:not(#_),.li--white b:not(#_),.process__tabs #pt-white b:not(#_),.pp--white .pp__title:not(#_),.plinth--white h3:not(#_),.wth__name:not(#_),
+.shelf__item--white .shelf__name:not(#_),.nf__wt:not(#_),.dc--stop[data-s="1"] h2:not(#_){font-family:"IM Fell DW Pica SC",serif!important;font-weight:400!important;font-stretch:normal!important;letter-spacing:0!important}
+.d8h__specs dd:not(#_),.wth__specs dd:not(#_),.fnh__specs dd:not(#_){white-space:nowrap!important}
+
+/* FIN's own logo (the shark fin cut into the N) wherever FIN is a name; masked so it takes the text colour */
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.finmark{display:inline-block;vertical-align:baseline;height:.74em;aspect-ratio:222/76;background:currentColor;
+  -webkit-mask:url(img/fin-logo.svg) no-repeat left center/contain;mask:url(img/fin-logo.svg) no-repeat left center/contain}
+.dc--fin h2 .finmark{height:.9em;margin-right:.18em}
+.dc__sub:not(#_){font-weight:600!important;font-stretch:112%!important;font-size:.42em!important;letter-spacing:.18em!important;text-transform:uppercase;vertical-align:.35em}
+.lu--fin .lu__title .finmark{height:.78em}
+.pp--fin .pp__title .finmark{height:.76em}
+.fnh__name .finmark{height:.8em}
+.ticket__where:not(#_){grid-template-columns:repeat(2,minmax(0,1fr))!important}@media (max-width:600px){.ticket__where:not(#_){grid-template-columns:1fr!important}}
+
+/* ============ shop: offer bar, nav cart, cart drawer (v54) ============ */
+:root{--offer:34px;--nav:110px}
+.offer{position:fixed;top:0;left:0;right:0;z-index:51;height:var(--offer);display:grid;place-items:center;background:var(--amber);color:#1a0b00;padding:0 var(--gut);overflow:hidden}
+.offer p{margin:0;font-size:12.5px;line-height:1.2;letter-spacing:.04em;text-align:center;white-space:nowrap}
+.offer b{font-weight:800;font-stretch:112%;letter-spacing:.08em;text-transform:uppercase}
+.offer a{margin-left:10px;font-weight:700;color:inherit;text-decoration:underline;text-underline-offset:3px}
+.nav:not(#_){top:var(--offer)!important;height:76px!important}
+.drawer:not(#_){inset:var(--nav) 0 0!important}
+@media (max-width:600px){.offer span{display:none}.offer p{font-size:11.5px}}
+.cartbtn{position:relative;width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:var(--bone);cursor:pointer;display:grid;place-items:center;box-shadow:inset 0 0 0 1.5px rgba(250,246,238,.45);flex:none}
+.cartbtn:hover{background:rgba(250,246,238,.1)}
+.cartbtn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round}
+.cartbtn__n{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--amber);color:#1a0b00;font:800 11px/20px "Archivo",sans-serif;text-align:center}
+.cartbtn__n[hidden]{display:none}
+.drawer .cartbtn{display:none}
+@media (max-width:1240px){.nav .btn--buy{display:none}.nav .cartbtn{margin-left:auto}}
+.cart-open{overflow:hidden}
+.cartd{position:fixed;inset:0;z-index:150}
+.cartd[hidden]{display:none}
+.cartd__shade{position:absolute;inset:0;background:rgba(2,8,12,.55);opacity:0;transition:opacity .3s var(--ease)}
+.cartd__panel{position:absolute;top:0;right:0;bottom:0;width:min(440px,100%);background:#fffaf1;color:var(--ink);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s var(--ease);box-shadow:-30px 0 60px -30px rgba(0,0,0,.5)}
+.cartd.is-open .cartd__shade{opacity:1}.cartd.is-open .cartd__panel{transform:none}
+.cartd__head{display:flex;align-items:center;justify-content:space-between;padding:22px 24px;border-bottom:1px solid rgba(20,32,31,.1)}
+.cartd__head h2:not(#_){font-size:22px!important}
+.cartd__x{width:40px;height:40px;border:0;background:none;font-size:30px;line-height:1;cursor:pointer;color:var(--ink)}
+.cartd__ship{padding:16px 24px;background:#f6ecd9}
+.cartd__shipT{margin:0 0 10px;font-size:14.5px}
+.cartd__bar{display:block;height:6px;border-radius:3px;background:rgba(151,81,15,.18);overflow:hidden}
+.cartd__bar i{display:block;height:100%;width:0;background:var(--amber-ink);transition:width .4s var(--ease)}
+.cartd__list{list-style:none;margin:0;padding:8px 24px;flex:1;overflow:auto}
+.cartd__item{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid rgba(20,32,31,.08)}
+.cartd__item img{height:76px;width:auto;justify-self:center}
+.cartd__item b{display:block;font-size:15px}
+.cartd__item span{font-size:14px;color:var(--ink-soft)}
+.cartd__qty{display:flex;align-items:center;border:1.5px solid rgba(20,32,31,.18);border-radius:999px}
+.cartd__qty button{width:34px;height:34px;border:0;background:none;font-size:18px;cursor:pointer;color:var(--ink)}
+.cartd__qty output{min-width:22px;text-align:center;font-weight:700}
+.cartd__empty{padding:30px 0;color:var(--ink-soft)}
+.cartd__add{display:flex;flex-wrap:wrap;gap:8px;padding:0 24px 16px}
+.cartd__more{border:1.5px dashed rgba(151,81,15,.45);background:none;border-radius:999px;padding:9px 14px;font:600 13px/1 "Archivo",sans-serif;color:var(--amber-ink);cursor:pointer}
+.cartd__more span{opacity:.7;margin-left:4px}
+.cartd__more:hover{background:rgba(240,160,75,.12)}
+.cartd__foot{padding:18px 24px 24px;border-top:1px solid rgba(20,32,31,.1);display:grid;gap:12px}
+.cartd__sub{display:flex;justify-content:space-between;margin:0;font-size:16px}
+.cartd__sub b{font-size:20px}
+.cartd__go{justify-content:center;width:100%}
+.cartd__go:disabled{opacity:.45;cursor:not-allowed}
+.cartd__fine{margin:0;font-size:12.5px;line-height:1.5;color:#5a6866}
+
+/* v54 bottle-page system */
+.bph__lede:not(#_),.bpn__intro:not(#_),.bpa__intro:not(#_),.bpw__copy>p:not(.eyebrow):not(#_),.bpb__copy>p:not(.eyebrow):not(#_),.bpst__head p:not(.eyebrow):not(#_){
+  font-weight:400!important;font-style:normal!important;font-stretch:100%!important;font-size:clamp(16px,1.12vw,18px)!important;line-height:1.65!important;letter-spacing:0!important}
+.bph__kw:not(#_){font-weight:600!important;font-style:normal!important;font-stretch:112%!important;font-size:clamp(13px,1vw,15px)!important;letter-spacing:.18em!important;text-transform:uppercase!important;line-height:1.5!important}
+.bp-line:not(#_){font-weight:700!important;font-stretch:125%!important;font-size:12px!important;letter-spacing:.32em!important;text-transform:uppercase!important}
+.bpa__steps b:not(#_){font-weight:700!important;font-stretch:112%!important;letter-spacing:.06em!important;text-transform:uppercase!important;font-size:14px!important}
+.pg--dark .bph__name:not(#_),.pg--dark .bph__name small:not(#_){font-family:"Marcellus SC","Marcellus",serif!important;font-weight:400!important;font-stretch:normal!important;letter-spacing:.03em!important}
+.pg--dark .bph__name b:not(#_){font-family:"Marcellus",serif!important;font-weight:400!important;font-stretch:normal!important}
+.pg--white .bph__name:not(#_){font-family:"IM Fell DW Pica SC",serif!important;font-weight:400!important;font-stretch:normal!important;letter-spacing:0!important}
+.pg--fin .bph__name .finmark{height:.8em}
+.ofs{display:none}
+@media (max-width:600px){.ofl{display:none}.ofs{display:inline}.offer b{letter-spacing:.04em}.offer a{margin-left:8px}}
+.foot__dist{display:inline-block;padding:9px 14px;border-radius:4px;background:var(--amber);color:#1a0b00!important;font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none}
+.ds__card p{font-size:16px;line-height:1.6;color:var(--ink-soft);margin:0}
+.ds__card .btn{justify-self:start}
+.cartd__go:not(#_){background:var(--ink)!important;color:#fffaf1!important}

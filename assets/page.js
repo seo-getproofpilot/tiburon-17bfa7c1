@@ -65,7 +65,7 @@
       const s = sel.value; out.className = 'ship__out';
       if (!s) { out.textContent = ''; return; }
       if (NO.includes(s)) { out.classList.add('is-no'); out.textContent = `Sorry, our partners can't ship to ${s} right now.`; }
-      else { out.classList.add('is-yes'); out.innerHTML = `Good news: ${s} is on our partners' shipping list. <a href="https://www.tiburonrum.com/buy-now-2-2/">Shop the bottles</a>`; }
+      else { out.classList.add('is-yes'); out.innerHTML = `Good news: ${s} is on our partners' shipping list. <a href="#top" onclick="window.scrollTo({top:0,behavior:\x27smooth\x27})">Shop the bottles</a>`; }
     });
   }
 
