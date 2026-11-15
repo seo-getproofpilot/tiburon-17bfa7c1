@@ -125,3 +125,12 @@ h3:not(#_){font-weight:700!important;font-stretch:108%!important;letter-spacing:
 .foot__nav{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
 .reef__more,.aw__more{color:var(--amber);font-weight:700;text-decoration:none;border-bottom:1px solid currentColor;white-space:nowrap}
 .aw__more{color:#e6bb83}
+
+/* v55: bottle names that were still in Archivo */
+.nm--dark:not(#_),.bottles3 a[href*="dark-8"] b:not(#_),.pours li:nth-child(1) b:not(#_),.film-nav [data-k="1"] span:not(#_){font-family:"Marcellus SC","Marcellus",serif!important;font-weight:400!important;font-stretch:normal!important;letter-spacing:.03em!important}
+.nm--white:not(#_),.bottles3 a[href*="white-tip"] b:not(#_),.pours li:nth-child(2) b:not(#_),.film-nav [data-k="2"] span:not(#_){font-family:"IM Fell DW Pica SC",serif!important;font-weight:400!important;font-stretch:normal!important;letter-spacing:0!important}
+.cartd__more .finmark{height:.72em;margin-right:.08em}
+.cartd__item b{font-size:19px;line-height:1.1}.cartd__item .finmark{height:.8em}
+.cartd__kind{display:block;font-style:normal;font-size:13px;color:var(--ink-soft);margin:3px 0 4px}
+.lineup__index a{grid-template-columns:1fr!important}
+.lineup__index b{white-space:nowrap}

@@ -4,9 +4,9 @@
 (function () {
   var SHOP = 'https://shop.bigthirst.com', TOKEN = '69c683813165f7171fb5daa955056bb4', API = SHOP + '/api/2024-10/graphql.json';
   var P = {
-    dark:  { name: 'Dark 8 Year Reserve Blend', short: 'Dark 8', price: 37.99, v: '43685670322412', img: 'b-dark.webp', url: SHOP + '/products/tiburon-rum-8' },
-    white: { name: 'White Tip Overproof Rum', short: 'White Tip', price: 27.99, v: '43685670813932', img: 'b-white.webp', url: SHOP + '/products/white-tip' },
-    fin:   { name: 'FIN Tequila Blanco', short: 'FIN', price: 54.99, v: '47080982937836', img: 'b-fin.webp', url: SHOP + '/products/tiburons-fin-tequila' }
+    dark:  { name: 'Dark 8 Year Reserve Blend', short: 'Dark 8', rest: '8 Year Reserve Blend rum', price: 37.99, v: '43685670322412', img: 'b-dark.webp', url: SHOP + '/products/tiburon-rum-8' },
+    white: { name: 'White Tip Overproof Rum', short: 'White Tip', rest: 'Overproof white rum', price: 27.99, v: '43685670813932', img: 'b-white.webp', url: SHOP + '/products/white-tip' },
+    fin:   { name: 'FIN Tequila Blanco', short: 'FIN', rest: 'Tequila blanco', price: 54.99, v: '47080982937836', img: 'b-fin.webp', url: SHOP + '/products/tiburons-fin-tequila' }
   };
   var FREE = 3, KEY = 'tb_cart';
   var root = (document.querySelector('script[src*="cart.js"]').getAttribute('src') || '').replace(/assets\/cart\.js.*$/, '');
@@ -14,6 +14,8 @@
   var save = function () { try { localStorage.setItem(KEY, JSON.stringify(cart)); } catch (e) {} };
   var count = function () { return Object.keys(cart).reduce(function (n, k) { return n + (cart[k] || 0); }, 0); };
   var money = function (n) { return '$' + n.toFixed(2); };
+  /* the bottle name in its own label lettering; FIN is its logo */
+  var nm = function (k) { return k === 'fin' ? '<span class="finmark" aria-hidden="true"></span><span class="sr">FIN</span>' : '<span class="nm nm--' + k + '">' + P[k].short + '</span>'; };
 
   /* drawer markup */
   var d = document.createElement('div');
@@ -34,7 +36,7 @@
     var n = count(), total = 0;
     list.innerHTML = Object.keys(P).filter(function (k) { return cart[k]; }).map(function (k) {
       var p = P[k], q = cart[k]; total += p.price * q;
-      return '<li class="cartd__item"><img src="' + root + 'assets/img/' + p.img + '" alt=""><div><b>' + p.name + '</b><span>' + money(p.price) + '</span></div>' +
+      return '<li class="cartd__item"><img src="' + root + 'assets/img/' + p.img + '" alt=""><div><b>' + nm(k) + '</b><em class="cartd__kind">' + p.rest + '</em><span>' + money(p.price) + '</span></div>' +
         '<span class="cartd__qty"><button type="button" data-q="' + k + '" data-d="-1" aria-label="One fewer ' + p.short + '">&minus;</button><output>' + q + '</output>' +
         '<button type="button" data-q="' + k + '" data-d="1" aria-label="One more ' + p.short + '">+</button></span></li>';
     }).join('') || '<li class="cartd__empty">Your cart is empty. Pick a bottle to start.</li>';
@@ -44,7 +46,7 @@
       left ? 'Add <b>' + left + ' more bottle' + (left > 1 ? 's' : '') + '</b> for free shipping.' : '<b>You&rsquo;ve unlocked free shipping.</b>';
     bar.style.width = Math.min(1, n / FREE) * 100 + '%';
     addRow.innerHTML = Object.keys(P).filter(function (k) { return !cart[k]; }).map(function (k) {
-      return '<button type="button" class="cartd__more" data-add="' + k + '">+ Add ' + P[k].short + ' <span>' + money(P[k].price) + '</span></button>';
+      return '<button type="button" class="cartd__more" data-add="' + k + '">+ Add ' + nm(k) + ' <span>' + money(P[k].price) + '</span></button>';
     }).join('');
     go.disabled = n === 0;
     document.querySelectorAll('.cartbtn__n').forEach(function (el) { el.textContent = n; el.hidden = n === 0; });
