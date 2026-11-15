@@ -20,23 +20,35 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,100,400&family=Metamorphous&family=Marcellus+SC&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="../assets/img/tr-hero.webp">
-<link rel="stylesheet" href="../assets/site.css?v=1794718893">
-<link rel="stylesheet" href="../assets/page.css?v=1794718893">
-<link rel="stylesheet" href="../assets/type.css?v=1794718893">
+<link rel="stylesheet" href="../assets/site.css?v=1794720048">
+<link rel="stylesheet" href="../assets/page.css?v=1794720048">
+<link rel="stylesheet" href="../assets/type.css?v=1794720048">
 <script>
   (function(){var d=document.documentElement;d.classList.add('js','inner');try{if(localStorage.getItem('tb_age')!=='1'&&!/nointro/.test(location.search))d.classList.add('needs-age');}catch(e){}})();
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
  {"@type":["BarOrPub","LocalBusiness"],"@id":"https://www.tiburonrum.com/tasting-rooms/#san-pedro","name":"Tiburon Rum Tasting Room, San Pedro","parentOrganization":{"@id":"https://www.tiburonrum.com/#org"},
-  "url":"https://www.tiburonrum.com/tasting-rooms/#san-pedro","image":"https://www.tiburonrum.com/assets/img/e-front.webp","telephone":"+1-847-309-7700","email":"basil@sharkbaitco.com",
+  "url":"https://www.tiburonrum.com/tasting-rooms/#san-pedro","image":"https://www.tiburonrum.com/assets/img/sp-front.webp","telephone":"+1-847-309-7700","email":"basil@sharkbaitco.com",
   "address":{"@type":"PostalAddress","streetAddress":"Barrier Reef Drive, next to Belize Bank","addressLocality":"San Pedro","addressRegion":"Ambergris Caye","addressCountry":"BZ"},
   "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"10:00","closes":"19:00"}],
   "priceRange":"$25 BZD per tasting"},
  {"@type":["BarOrPub","LocalBusiness"],"@id":"https://www.tiburonrum.com/tasting-rooms/#placencia","name":"Tiburon Rum Tasting Room, Placencia Village","parentOrganization":{"@id":"https://www.tiburonrum.com/#org"},
-  "url":"https://www.tiburonrum.com/tasting-rooms/#placencia","image":"https://www.tiburonrum.com/assets/img/os-store.webp","telephone":"+1-847-309-7700","email":"basil@sharkbaitco.com",
+  "url":"https://www.tiburonrum.com/tasting-rooms/#placencia","image":"https://www.tiburonrum.com/assets/img/pl-front.webp","telephone":"+1-847-309-7700","email":"basil@sharkbaitco.com",
   "address":{"@type":"PostalAddress","streetAddress":"Main Street","addressLocality":"Placencia Village","addressRegion":"Stann Creek","addressCountry":"BZ"},
   "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"10:00","closes":"18:00"}],
+  "priceRange":"$25 BZD per tasting"},
+ {"@type":["BarOrPub","LocalBusiness"],"@id":"https://www.tiburonrum.com/tasting-rooms/#caye-caulker","name":"Tiburon Rum Tasting Room, Caye Caulker","parentOrganization":{"@id":"https://www.tiburonrum.com/#org"},
+  "url":"https://www.tiburonrum.com/tasting-rooms/#caye-caulker","image":"https://www.tiburonrum.com/assets/img/tr-cc-front.webp","email":"basil@sharkbaitco.com",
+  "address":{"@type":"PostalAddress","streetAddress":"Corner of Avenida Hicaceno and Chapoose Street","addressLocality":"Caye Caulker","addressRegion":"Belize District","addressCountry":"BZ"},
+  "geo":{"@type":"GeoCoordinates","latitude":17.7449007,"longitude":-88.0235914},
+  "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Thursday","Friday","Saturday","Sunday"],"opens":"09:00","closes":"18:00"}],
+  "priceRange":"$25 BZD per tasting"},
+ {"@type":["BarOrPub","LocalBusiness"],"@id":"https://www.tiburonrum.com/tasting-rooms/#san-ignacio","name":"The Shark Shack, Tiburon Rum Tasting Room, San Ignacio","parentOrganization":{"@id":"https://www.tiburonrum.com/#org"},
+  "url":"https://www.tiburonrum.com/tasting-rooms/#san-ignacio","image":"https://www.tiburonrum.com/assets/img/tr-si-front.webp","email":"basil@sharkbaitco.com",
+  "address":{"@type":"PostalAddress","streetAddress":"Savannah Street","addressLocality":"San Ignacio","addressRegion":"Cayo District","addressCountry":"BZ"},
+  "geo":{"@type":"GeoCoordinates","latitude":17.1588152,"longitude":-89.0697736},
+  "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Wednesday","Thursday","Friday","Saturday"],"opens":"09:00","closes":"18:00"}],
   "priceRange":"$25 BZD per tasting"},
  {"@type":"BreadcrumbList","itemListElement":[
   {"@type":"ListItem","position":1,"name":"Home","item":"https://www.tiburonrum.com/"},
@@ -93,69 +105,98 @@
     <ul class="trh__facts" aria-label="The tasting at a glance">
       <li><b>4</b><span>pours</span></li><li><b>$25</b><span>BZD a person</span></li><li><b>1</b><span>glass to keep</span></li><li><b>4</b><span>rooms in Belize</span></li>
     </ul>
-    <div class="trh__cta"><a class="btn btn--primary" href="#book">Book a tasting</a><a class="btn btn--glass" href="#san-pedro">Find a room</a></div>
+    <div class="trh__cta"><a class="btn btn--primary" href="#book">Book a tasting</a><a class="btn btn--glass" href="#rooms">Find a room</a></div>
   </div>
 </section>
 
+<!-- ============ ROOM PICKER ============ -->
+<nav class="rpick" id="rooms" aria-label="Our four tasting rooms">
+  <p class="eyebrow">Pick your room</p>
+  <ul>
+    <li><a href="#san-pedro"><img src="../assets/img/sp-front.webp" alt="" loading="lazy"><b>San Pedro</b><span>Ambergris Caye</span><em>Open daily, 10am to 7pm</em></a></li>
+    <li><a href="#placencia"><img src="../assets/img/pl-front.webp" alt="" loading="lazy"><b>Placencia Village</b><span>Stann Creek</span><em>Open daily, 10am to 6pm</em></a></li>
+    <li><a href="#caye-caulker"><img src="../assets/img/tr-cc-front.webp" alt="" loading="lazy"><b>Caye Caulker</b><span>Avenida Hicaceno</span><em>Thursday to Sunday, 9am to 6pm</em></a></li>
+    <li><a href="#san-ignacio"><img src="../assets/img/tr-si-front.webp" alt="" loading="lazy"><b>San Ignacio</b><span>The Shark Shack, Cayo</span><em>Wednesday to Saturday, 9am to 6pm</em></a></li>
+  </ul>
+</nav>
+
 <!-- ============ SAN PEDRO ============ -->
-<section class="room2" id="san-pedro" aria-labelledby="sp-h">
+<section class="room2" id="san-pedro" aria-labelledby="san-pedro-h">
   <div class="room2__pics">
-    <figure class="room2__a rv"><img src="../assets/img/e-front.webp" alt="The Tiburon Rum tasting room on Barrier Reef Drive, with Tiburon banners either side of the doors" width="1280" height="960" loading="lazy"></figure>
-    <figure class="room2__b rv"><img src="../assets/img/e-bar2.webp" alt="The San Pedro tasting bar with bottles and fresh flowers under the Tiburon logo" width="1280" height="960" loading="lazy"></figure>
-    <figure class="room2__c rv"><img src="../assets/img/e-merch.webp" alt="Tiburon shirts and caps on the San Pedro tasting room wall" width="1280" height="960" loading="lazy"></figure>
+    <figure class="room2__a rv"><img src="../assets/img/sp-front.webp" alt="The San Pedro tasting room on Barrier Reef Drive, with Tiburon banners either side of the doors" loading="lazy"></figure>
+    <figure class="room2__b rv"><img src="../assets/img/sp-bar.webp" alt="The San Pedro tasting bar with its carved shark counter under the Tiburon logo" loading="lazy"></figure>
+    <figure class="room2__c rv"><img src="../assets/img/sp-pour.webp" alt="A Tiburon host pouring for guests at the San Pedro bar" loading="lazy"></figure>
   </div>
   <div class="room2__info">
     <p class="eyebrow eyebrow--dark">Ambergris Caye</p>
-    <h2 id="sp-h">San Pedro tasting room</h2>
+    <h2 id="san-pedro-h">San Pedro tasting room</h2>
     <p>Downtown on Barrier Reef Drive, next to Belize Bank. Bottles of the house infusions are on the shelves to take home, and if you have a special request, ask the team.</p>
     <dl class="room2__facts">
       <div><dt>Where</dt><dd>Barrier Reef Drive, next to Belize Bank, San Pedro</dd></div>
       <div><dt>Open</dt><dd>Every day, 10am to 7pm</dd></div>
     </dl>
-    <div class="room2__map"><iframe title="Map of the Tiburon Rum tasting room in San Pedro" src="https://www.google.com/maps?q=Tiburon+Rum+Tasting+Room,+Barrier+Reef+Drive,+San+Pedro,+Belize&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+    <div class="room2__map"><iframe title="Map of the Tiburon tasting room in San Pedro" src="https://www.google.com/maps?q=Tiburon+Rum+Tasting+Room,+Barrier+Reef+Drive,+San+Pedro,+Belize&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
     <div class="room2__cta"><a class="btn btn--primary btn--ink" href="#book" data-room="San Pedro">Book in San Pedro</a><a class="tr-link" href="https://www.google.com/maps/search/?api=1&amp;query=Tiburon+Rum+Tasting+Room+San+Pedro+Belize" rel="noopener">Get directions</a></div>
   </div>
 </section>
 
 <!-- ============ PLACENCIA ============ -->
-<section class="room2 room2--flip" id="placencia" aria-labelledby="pl-h">
+<section class="room2 room2--flip" id="placencia" aria-labelledby="placencia-h">
   <div class="room2__pics">
-    <figure class="room2__a rv"><img src="../assets/img/os-store.webp" alt="The white Tiburon Rum Company Belize building in Placencia Village, with a Now Open chalkboard at the door" width="960" height="1280" loading="lazy"></figure>
-    <figure class="room2__b rv"><img src="../assets/img/e-carved.webp" alt="A carved wooden shark on the Placencia tasting room counter" width="960" height="1280" loading="lazy"></figure>
-    <figure class="room2__c rv"><img src="../assets/img/tr-pl-group.webp" alt="A group of friends raising their tasting glasses in the Placencia tasting room" width="640" height="480" loading="lazy"></figure>
+    <figure class="room2__a rv"><img src="../assets/img/pl-front.webp" alt="The white Tiburon Rum Company Belize building on Main Street in Placencia Village" loading="lazy"></figure>
+    <figure class="room2__b rv"><img src="../assets/img/pl-shelf.webp" alt="Dark 8, White Tip and FIN lined up on the Placencia tasting bar" loading="lazy"></figure>
+    <figure class="room2__c rv"><img src="../assets/img/tr-pl-group.webp" alt="A group of friends raising their tasting glasses in the Placencia tasting room" loading="lazy"></figure>
   </div>
   <div class="room2__info">
     <p class="eyebrow eyebrow--dark">Stann Creek</p>
-    <h2 id="pl-h">Placencia Village tasting room</h2>
+    <h2 id="placencia-h">Placencia Village tasting room</h2>
     <p>On Main Street in Placencia Village, on the southern coast. Come for a tasting, pick up a mixology tip from the team, or pop in for a T-shirt and a bottle to go.</p>
     <dl class="room2__facts">
       <div><dt>Where</dt><dd>Main Street, Placencia Village</dd></div>
       <div><dt>Open</dt><dd>Every day, 10am to 6pm</dd></div>
     </dl>
-    <div class="room2__map"><iframe title="Map of the Tiburon Rum tasting room in Placencia Village" src="https://www.google.com/maps?q=Tiburon+Rum+Tasting+Room,+Main+Street,+Placencia,+Belize&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
-    <div class="room2__cta"><a class="btn btn--primary btn--ink" href="#book" data-room="Placencia Village">Book in Placencia</a><a class="tr-link" href="https://www.google.com/maps/search/?api=1&amp;query=Tiburon+Rum+Tasting+Room+Placencia+Belize" rel="noopener">Get directions</a></div>
+    <div class="room2__map"><iframe title="Map of the Tiburon tasting room in Placencia Village" src="https://www.google.com/maps?q=Tiburon+Rum+Placencia+Tasting+Room,+Placencia,+Belize&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+    <div class="room2__cta"><a class="btn btn--primary btn--ink" href="#book" data-room="Placencia Village">Book in Placencia</a><a class="tr-link" href="https://www.google.com/maps/search/?api=1&amp;query=Tiburon+Rum+Placencia+Tasting+Room" rel="noopener">Get directions</a></div>
   </div>
 </section>
 
-<!-- ============ THE NEWER ROOMS ============ -->
-<section class="room3" id="newer" aria-labelledby="new-h">
-  <div class="room3__head">
-    <p class="eyebrow eyebrow--dark">The newest rooms</p>
-    <h2 id="new-h">Two more rooms: Caye Caulker and Cayo</h2>
+<!-- ============ CAYE CAULKER ============ -->
+<section class="room2" id="caye-caulker" aria-labelledby="caye-caulker-h">
+  <div class="room2__pics">
+    <figure class="room2__a rv"><img src="../assets/img/tr-cc-front.webp" alt="The Tiburon Rum Belize tasting room sign outside the Caye Caulker room" loading="lazy"></figure>
+    <figure class="room2__b rv"><img src="../assets/img/tr-cc-guests.webp" alt="Guests tasting at a table in the Caye Caulker tasting room" loading="lazy"></figure>
+    <figure class="room2__c rv"><img src="../assets/img/tr-cc-shop.webp" alt="Tiburon shirts hanging in the Caye Caulker tasting room" loading="lazy"></figure>
   </div>
-  <div class="room3__grid">
-    <article class="room3__item" id="caye-caulker">
-      <h3>Caye Caulker</h3>
-      <p>The island just south of Ambergris Caye.</p>
-      <dl class="room2__facts"><div><dt>Where</dt><dd>Caye Caulker village</dd></div><div><dt>Open</dt><dd>Ask the team for today&rsquo;s hours</dd></div></dl>
-      <a class="btn btn--primary btn--ink" href="#book" data-room="Caye Caulker">Book on Caye Caulker</a>
-    </article>
-    <article class="room3__item" id="san-ignacio">
-      <h3>San Ignacio, Cayo</h3>
-      <p>Inland in the Cayo District, at the Cayo Welcome Center in San Ignacio.</p>
-      <dl class="room2__facts"><div><dt>Where</dt><dd>Cayo Welcome Center, San Ignacio</dd></div><div><dt>Open</dt><dd>Ask the team for today&rsquo;s hours</dd></div></dl>
-      <a class="btn btn--primary btn--ink" href="#book" data-room="San Ignacio">Book in San Ignacio</a>
-    </article>
+  <div class="room2__info">
+    <p class="eyebrow eyebrow--dark">Caye Caulker</p>
+    <h2 id="caye-caulker-h">Caye Caulker tasting room</h2>
+    <p>On Avenida Hicaceno at Chapoose Street, a short walk from the water taxi. Taste the range and the house infusions, then take home a bottle or a Tiburon tank top.</p>
+    <dl class="room2__facts">
+      <div><dt>Where</dt><dd>Corner of Avenida Hicaceno and Chapoose Street, Caye Caulker</dd></div>
+      <div><dt>Open</dt><dd>Thursday to Sunday, 9am to 6pm</dd></div>
+    </dl>
+    <div class="room2__map"><iframe title="Map of the Tiburon tasting room in Caye Caulker" src="https://www.google.com/maps?q=17.7449007,-88.0235914&amp;z=17&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+    <div class="room2__cta"><a class="btn btn--primary btn--ink" href="#book" data-room="Caye Caulker">Book on Caye Caulker</a><a class="tr-link" href="https://www.google.com/maps/search/?api=1&amp;query=Tiburon+Rum+Caye+Caulker+Tasting+Room" rel="noopener">Get directions</a></div>
+  </div>
+</section>
+
+<!-- ============ SAN IGNACIO ============ -->
+<section class="room2 room2--flip" id="san-ignacio" aria-labelledby="san-ignacio-h">
+  <div class="room2__pics">
+    <figure class="room2__a rv"><img src="../assets/img/tr-si-front.webp" alt="The Shark Shack, the Tiburon tasting room in San Ignacio, with the Tiburon Rum Company Belize sign on its wall" loading="lazy"></figure>
+    <figure class="room2__b rv"><img src="../assets/img/tr-si-shop.webp" alt="Tiburon shirts and caps inside the Shark Shack" loading="lazy"></figure>
+    <figure class="room2__c rv"><img src="../assets/img/tr-si-pour.webp" alt="A White Tip cocktail being poured at the Shark Shack bar" loading="lazy"></figure>
+  </div>
+  <div class="room2__info">
+    <p class="eyebrow eyebrow--dark">Cayo District</p>
+    <h2 id="san-ignacio-h">The Shark Shack, San Ignacio</h2>
+    <p>Our only tasting room away from the coast, on Savannah Street in San Ignacio. Stop in before or after a day at the Maya sites and caves of Cayo.</p>
+    <dl class="room2__facts">
+      <div><dt>Where</dt><dd>Savannah Street, San Ignacio</dd></div>
+      <div><dt>Open</dt><dd>Wednesday to Saturday, 9am to 6pm</dd></div>
+    </dl>
+    <div class="room2__map"><iframe title="Map of the Tiburon tasting room in San Ignacio" src="https://www.google.com/maps?q=17.1588152,-89.0697736&amp;z=17&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+    <div class="room2__cta"><a class="btn btn--primary btn--ink" href="#book" data-room="San Ignacio">Book in San Ignacio</a><a class="tr-link" href="https://www.google.com/maps/search/?api=1&amp;query=Tiburon+Rum+Cayo+Tasting+Room+San+Ignacio" rel="noopener">Get directions</a></div>
   </div>
 </section>
 
@@ -191,8 +232,8 @@
         <fieldset class="ticket__where"><legend>Which room?</legend>
           <label><input type="radio" name="room" value="San Pedro" checked><span><b>San Pedro</b>Barrier Reef Drive, next to Belize Bank<em>Daily 10am to 7pm</em></span></label>
           <label><input type="radio" name="room" value="Placencia Village"><span><b>Placencia Village</b>Main Street, Placencia<em>Daily 10am to 6pm</em></span></label>
-          <label><input type="radio" name="room" value="Caye Caulker"><span><b>Caye Caulker</b>Caye Caulker village<em>Hours on request</em></span></label>
-          <label><input type="radio" name="room" value="San Ignacio"><span><b>San Ignacio</b>Cayo Welcome Center<em>Hours on request</em></span></label>
+          <label><input type="radio" name="room" value="Caye Caulker"><span><b>Caye Caulker</b>Avenida Hicaceno<em>Thu to Sun, 9am to 6pm</em></span></label>
+          <label><input type="radio" name="room" value="San Ignacio"><span><b>San Ignacio</b>The Shark Shack<em>Wed to Sat, 9am to 6pm</em></span></label>
         </fieldset>
         <div class="ticket__row">
           <label>Date<input type="date" name="date" required></label>
@@ -250,10 +291,10 @@
     <p>&copy; 2026 Tiburon Rum Company</p>
   </div>
 </footer>
-<script src="../assets/analytics.js?v=1794718893" defer></script>
-<script src="../assets/cart.js?v=1794718893" defer></script>
+<script src="../assets/analytics.js?v=1794720048" defer></script>
+<script src="../assets/cart.js?v=1794720048" defer></script>
 
 
-<script src="../assets/page.js?v=1794718893" defer></script>
+<script src="../assets/page.js?v=1794720048" defer></script>
 </body>
 </html>

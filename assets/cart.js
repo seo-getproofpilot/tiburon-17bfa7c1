@@ -58,12 +58,19 @@
   function add(k, q) {
     (k === 'all' ? Object.keys(P) : [k]).forEach(function (x) { if (P[x]) cart[x] = Math.min(24, (cart[x] || 0) + (q || 1)); });
     save(); render(); open();
-    if (window.gtag) gtag('event', 'add_to_cart', { bottle: k });
+    if (window.gtag) gtag('event', 'add_to_cart', { bottle: k, quantity: q || 1 });
   }
 
   document.addEventListener('click', function (e) {
     var a = e.target.closest('[data-add]');
-    if (a) { e.preventDefault(); add(a.getAttribute('data-add')); return; }
+    if (a) { e.preventDefault(); add(a.getAttribute('data-add'), +(a.getAttribute('data-q') || 1)); return; }
+    var st = e.target.closest('.qty [data-step]');
+    if (st) {
+      var box = st.closest('.qty'), out = box.querySelector('output'), n = Math.max(1, Math.min(24, (+out.textContent || 1) + (+st.getAttribute('data-step'))));
+      out.textContent = n; var item = box.closest('.shop__item'), btn = item && item.querySelector('[data-add]');
+      if (btn) { btn.setAttribute('data-q', n); btn.textContent = n > 1 ? 'Add ' + n + ' to cart' : 'Add to cart'; }
+      return;
+    }
     if (e.target.closest('[data-cart]')) { e.preventDefault(); open(); return; }
     if (e.target.closest('#cartd [data-close]')) { close(); return; }
     var q = e.target.closest('#cartd [data-q]');
