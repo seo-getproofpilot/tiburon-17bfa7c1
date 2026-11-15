@@ -75,6 +75,7 @@
   go.addEventListener('click', function () {
     var lines = Object.keys(cart).filter(function (k) { return cart[k] && P[k]; }).map(function (k) { return { merchandiseId: 'gid://shopify/ProductVariant/' + P[k].v, quantity: cart[k] }; });
     if (!lines.length) return;
+    if (window.gtag) gtag('event', 'begin_checkout', { bottles: count(), value: lines.reduce(function (t, l) { var k = Object.keys(P).filter(function (x) { return 'gid://shopify/ProductVariant/' + P[x].v === l.merchandiseId; })[0]; return t + P[k].price * l.quantity; }, 0), currency: 'USD' });
     go.disabled = true; go.textContent = 'Opening secure checkout';
     var permalink = SHOP + '/cart/' + Object.keys(cart).filter(function (k) { return cart[k]; }).map(function (k) { return P[k].v + ':' + cart[k]; }).join(',');
     fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': TOKEN },
