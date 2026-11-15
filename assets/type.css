@@ -117,3 +117,11 @@ h3:not(#_){font-weight:700!important;font-stretch:108%!important;letter-spacing:
 .ds__card p{font-size:16px;line-height:1.6;color:var(--ink-soft);margin:0}
 .ds__card .btn{justify-self:start}
 .cartd__go:not(#_){background:var(--ink)!important;color:#fffaf1!important}
+
+/* v54: footer gets an Explore column; homepage links to the Awards and Conservation pages */
+.foot__cols{grid-template-columns:repeat(4,1fr)}
+@media (max-width:1100px){.foot__cols{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.foot__cols{grid-template-columns:1fr}}
+.foot__nav{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.reef__more,.aw__more{color:var(--amber);font-weight:700;text-decoration:none;border-bottom:1px solid currentColor;white-space:nowrap}
+.aw__more{color:#e6bb83}

@@ -4,7 +4,7 @@
 (function () {
   var SHOP = 'https://shop.bigthirst.com', TOKEN = '69c683813165f7171fb5daa955056bb4', API = SHOP + '/api/2024-10/graphql.json';
   var P = {
-    dark:  { name: 'Dark 8 Reserve Blend', short: 'Dark 8', price: 37.99, v: '43685670322412', img: 'b-dark.webp', url: SHOP + '/products/tiburon-rum-8' },
+    dark:  { name: 'Dark 8 Year Reserve Blend', short: 'Dark 8', price: 37.99, v: '43685670322412', img: 'b-dark.webp', url: SHOP + '/products/tiburon-rum-8' },
     white: { name: 'White Tip Overproof Rum', short: 'White Tip', price: 27.99, v: '43685670813932', img: 'b-white.webp', url: SHOP + '/products/white-tip' },
     fin:   { name: 'FIN Tequila Blanco', short: 'FIN', price: 54.99, v: '47080982937836', img: 'b-fin.webp', url: SHOP + '/products/tiburons-fin-tequila' }
   };
