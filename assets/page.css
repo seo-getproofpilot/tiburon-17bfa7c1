@@ -638,3 +638,7 @@
 .osr__more{color:var(--amber);font-weight:700;text-decoration:none;border-bottom:1px solid currentColor;white-space:nowrap}
 .cvx__list .todo b{font:700 11px/1.3 var(--f);letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px}
 .cvr .threats li{text-align:center}
+
+/* v55 */
+.press--one{grid-template-columns:1fr!important;justify-items:center;text-align:center}
+.press--one blockquote{max-width:900px}
