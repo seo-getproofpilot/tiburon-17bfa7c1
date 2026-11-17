@@ -337,3 +337,54 @@ h3:not(#_){font-weight:700!important;font-stretch:108%!important;letter-spacing:
   .offer a:not(#_){position:absolute;inset:0;margin:0;font-size:0;color:transparent}
   .offer b:not(#_){font-size:15px}
 }
+
+/* ===== v63 phones + tablets: readable labels, thumb-sized targets ===== */
+@media (max-width:1180px){
+  .crumbs a:not(#_),.crumbs li:not(#_),.hero__eyebrow:not(#_),.film-nav button span:not(#_),.process__tabs button span:not(#_),.sr:not(#_),
+  .gauge__label:not(#_),.stz__cap i:not(#_),.ticket__pass:not(#_),.trh__facts span:not(#_),li>a>em:not(#_),li>a>span:not(#_),
+  dl dt:not(.menu dt):not(.rooms2 dt):not(.dist dt):not(#_),.shop__notes li:not(#_),.wb-link:not(#_),.m b:not(#_),.todo b:not(#_),
+  main figcaption:not(#_),main cite:not(#_),.foot h3:not(#_),.wnode span:not(#_){font-size:12px!important}
+  main label:not(#_){font-size:12.5px!important}
+}
+@media (pointer:coarse),(max-width:1180px){
+  .foot__nav a:not(#_){display:inline-flex;align-items:center;min-height:40px}
+  .foot__legal a:not(#_){display:inline-flex;align-items:center;min-height:40px}
+  .plinth__more:not(#_){display:inline-flex;align-items:center;min-height:40px}
+  .film-pause:not(#_){min-height:40px;min-width:44px}
+  .crumbs a:not(#_){display:inline-flex;align-items:center;min-height:32px}
+}
+@media (max-width:1180px){
+  .foot__nav:not(#_){display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:20px;row-gap:0!important}
+}
+@media (max-width:1180px){.legal__date:not(#_),.shelf__spec:not(#_),.ticket__side:not(#_){font-size:12px!important}}
+@media (max-width:1366px) and (pointer:coarse){.ticket__side:not(#_){font-size:12px!important}}
+
+/* ===== v63 footer: a lit back-bar shelf, each bottle shoppable ===== */
+.foot__buy:not(#_){grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)!important;align-items:end;gap:clamp(30px,5vw,80px)}
+.foot__kick{display:inline-block;margin:0 0 18px!important;padding:7px 12px;border-radius:3px;background:rgba(232,211,166,.14);color:#e8d3a6!important;font-size:13px!important;font-weight:700;font-stretch:112%;letter-spacing:.14em;text-transform:uppercase}
+.foot__ctas{display:flex;flex-wrap:wrap;gap:12px}
+.foot__shelf{position:relative;display:grid;grid-template-columns:repeat(3,1fr);align-items:end;padding:clamp(40px,6vh,70px) clamp(10px,2vw,30px) 0;isolation:isolate}
+.foot__shelf::before{content:"";position:absolute;left:4%;right:4%;top:0;bottom:calc(clamp(40px,6vh,64px) + 48px);z-index:-1;border-radius:50% 50% 0 0/22% 22% 0 0;
+  background:radial-gradient(60% 70% at 50% 100%,rgba(232,170,90,.28),rgba(232,170,90,.08) 55%,transparent 75%),radial-gradient(40% 55% at 20% 100%,rgba(240,151,74,.16),transparent 70%),radial-gradient(40% 55% at 80% 100%,rgba(120,170,230,.16),transparent 70%)}
+.fb{display:grid;justify-items:center;gap:4px;text-decoration:none;color:var(--bone);position:relative;z-index:1}
+.fb__pic{display:block;height:clamp(190px,min(19vw,32vh),290px);transition:transform .45s var(--ease)}
+.fb__pic img{height:100%;width:auto;display:block;filter:drop-shadow(0 18px 22px rgba(0,0,0,.55))}
+.fb--dark .fb__pic{height:calc(clamp(190px,min(19vw,32vh),290px) * .98)}
+.fb--fin .fb__pic{height:calc(clamp(190px,min(19vw,32vh),290px) * .9)}
+.fb:hover .fb__pic,.fb:focus-visible .fb__pic{transform:translateY(-8px)}
+.fb__nm{margin-top:clamp(40px,6vh,64px);font-size:clamp(17px,1.4vw,21px)!important;line-height:1.1;color:var(--bone)}
+.fb__nm .finmark{height:.95em}
+.fb__px{font-size:14px!important;font-weight:700;font-stretch:110%;letter-spacing:.06em;color:#e8d3a6}
+.fb__bar{position:absolute;left:0;right:0;bottom:calc(clamp(40px,6vh,64px) + 40px);height:8px;z-index:0;border-radius:2px;
+  background:linear-gradient(180deg,#4a2f1c,#2a190e);box-shadow:0 1px 0 rgba(255,220,170,.25) inset,0 14px 24px rgba(0,0,0,.45)}
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){
+  .foot__buy:not(#_){grid-template-columns:1fr!important}
+  .foot__shelf{padding-top:34px}
+  .fb__pic{height:clamp(150px,40vw,220px)}
+  .fb--dark .fb__pic{height:calc(clamp(150px,40vw,220px) * .98)}
+  .fb--fin .fb__pic{height:calc(clamp(150px,40vw,220px) * .9)}
+  .fb__nm{margin-top:42px}
+  .fb__bar{bottom:calc(42px + 40px)}
+  .foot__shelf::before{bottom:calc(42px + 48px)}
+}
+.sr-only{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}

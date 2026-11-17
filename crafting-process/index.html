@@ -19,10 +19,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,100,400&family=Marcellus+SC&family=IM+Fell+DW+Pica+SC&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=1794951365">
-<link rel="stylesheet" href="../assets/page.css?v=1794951365">
-<link rel="stylesheet" href="../assets/type.css?v=1794951365">
-<link rel="stylesheet" href="../assets/stories.css?v=1794951365">
+<link rel="stylesheet" href="../assets/site.css?v=1794953773">
+<link rel="stylesheet" href="../assets/page.css?v=1794953773">
+<link rel="stylesheet" href="../assets/type.css?v=1794953773">
+<link rel="stylesheet" href="../assets/stories.css?v=1794953773">
 <script>
   (function(){var d=document.documentElement;d.classList.add('js','inner');try{if(localStorage.getItem('tb_age')!=='1'&&!/nointro/.test(location.search))d.classList.add('needs-age');}catch(e){}})();
 </script>
@@ -119,8 +119,8 @@
 
     <article class="step">
       <div class="step__art step__bottles">
-        <img src="../assets/img/b-dark.webp" alt="Tiburon Dark 8 Year Reserve Blend bottle" width="600" height="1800" loading="lazy">
-        <img src="../assets/img/b-white.webp" alt="Tiburon White Tip overproof white rum bottle" width="600" height="1800" loading="lazy">
+        <img src="../assets/img/b-dark-f.webp" alt="Tiburon Dark 8 Year Reserve Blend bottle" width="174" height="640" loading="lazy">
+        <img src="../assets/img/b-white-f.webp" alt="Tiburon White Tip overproof white rum bottle" width="176" height="640" loading="lazy">
       </div>
       <div class="step__copy"><span class="step__n">07</span><h3>Bottled two ways</h3><p><a href="../dark-8-reserve-rum/">Dark 8</a> is bottled at 80 proof, with a shark-tooth charm at the neck. <a href="../white-tip-rum/">White Tip</a> is bottled clear at 92 proof, strong enough to carry a cocktail or a jar of fruit.</p></div>
     </article>
@@ -143,12 +143,28 @@
     </article>
 
     <article class="step">
-      <div class="step__art step__bottles"><img src="../assets/img/b-fin.webp" alt="Tiburón's FIN Tequila Blanco bottle" width="600" height="1800" loading="lazy"></div>
+      <div class="step__art step__bottles"><img src="../assets/img/b-fin-f.webp" alt="Tiburón's FIN Tequila Blanco bottle" width="198" height="640" loading="lazy"></div>
       <div class="step__copy"><span class="step__n">11</span><h3>Small batches, reef-colored glass</h3><p>FIN is distilled in small batches and bottled in Jalisco, after about three years of work on the recipe. The bottle fades from navy to clear, with a dorsal fin pressed up through the glass. <a href="../fin-tequila-blanco/">Meet FIN</a>.</p></div>
     </article>
 
     <div class="proc__end">
-      <img class="plate" src="../assets/img/il/x-anchor.webp" alt="" width="538" height="720" loading="lazy">
+      <div class="anchor" aria-hidden="true">
+        <img src="../assets/img/il/x-anchor.webp" alt="" width="478" height="640" loading="lazy">
+        <svg class="anchor__tie" viewBox="0 0 478 640">
+          <g class="tie__wraps">
+            <path class="tie__w" pathLength="1" d="M318 58 C 300 64, 293 90, 301 107 C 309 121, 323 114, 319 97"/>
+            <path class="tie__w" pathLength="1" d="M327 60 C 311 69, 307 95, 315 111 C 323 124, 338 117, 334 99"/>
+            <path class="tie__w" pathLength="1" d="M336 64 C 324 74, 323 99, 331 114 C 339 127, 354 119, 350 101"/>
+            <path class="tie__w tie__tail" pathLength="1" d="M347 104 C 361 117, 363 141, 353 160 C 347 172, 353 186, 361 194"/>
+          </g>
+          <g class="tie__twist">
+            <path class="tie__t" d="M318 58 C 300 64, 293 90, 301 107 C 309 121, 323 114, 319 97"/>
+            <path class="tie__t" d="M327 60 C 311 69, 307 95, 315 111 C 323 124, 338 117, 334 99"/>
+            <path class="tie__t" d="M336 64 C 324 74, 323 99, 331 114 C 339 127, 354 119, 350 101"/>
+            <path class="tie__t tie__tail" d="M347 104 C 361 117, 363 141, 353 160 C 347 172, 353 186, 361 194"/>
+          </g>
+        </svg>
+      </div>
       <h2>And then, the reef</h2>
       <p>Every bottle of Tiburon sold in Belize gives $1 BZ to Oceana Belize, to protect the reef we dive on.</p>
       <div class="proc__cta"><a class="btn btn--primary" href="../ecosystem/">See the full circle</a><a class="btn btn--line" href="../tasting-rooms/#book">Book a tasting</a></div>
@@ -162,13 +178,20 @@
 <!-- ============ FOOTER / BUY ============ -->
 <footer class="foot" id="buy">
   <div class="foot__buy">
-    <div>
+    <div class="foot__pitch">
+      <p class="foot__kick">Free shipping on 3 or more bottles</p>
       <h2>Ship Tiburon to your door.</h2>
       <p>We ship to most U.S. states and D.C. through a network of retail partners. You&rsquo;ll see any shipping limits for your address at checkout.</p>
-      <a class="btn btn--primary" href="../where-to-buy/">Shop the bottles</a>
+      <div class="foot__ctas">
+        <a class="btn btn--primary" href="../where-to-buy/" data-add="all" data-track="buy-all-footer">Add all three, $120.97</a>
+        <a class="btn btn--glass" href="../where-to-buy/">Shop the bottles</a>
+      </div>
     </div>
-    <div class="foot__lineup" aria-hidden="true">
-      <img src="../assets/img/b-dark.webp" alt="" loading="lazy" width="490" height="1800"><img src="../assets/img/b-white.webp" alt="" loading="lazy" width="496" height="1800"><img src="../assets/img/b-fin.webp" alt="" loading="lazy" width="464" height="1500">
+    <div class="foot__shelf">
+      <a class="fb fb--dark" href="../dark-8-reserve-rum/"><span class="fb__pic"><img src="../assets/img/b-dark-f.webp" alt="" loading="lazy" width="174" height="640"></span><b class="fb__nm nm--dark">Dark 8</b><span class="fb__px">$37.99</span></a>
+      <a class="fb fb--white" href="../white-tip-rum/"><span class="fb__pic"><img src="../assets/img/b-white-f.webp" alt="" loading="lazy" width="177" height="640"></span><b class="fb__nm nm--white">White Tip</b><span class="fb__px">$27.99</span></a>
+      <a class="fb fb--fin" href="../fin-tequila-blanco/"><span class="fb__pic"><img src="../assets/img/b-fin-f.webp" alt="" loading="lazy" width="198" height="640"></span><b class="fb__nm"><span class="finmark" aria-hidden="true"></span><span class="sr-only">FIN</span></b><span class="fb__px">$54.99</span></a>
+      <span class="fb__bar" aria-hidden="true"></span>
     </div>
   </div>
   <div class="foot__cols">
@@ -188,11 +211,11 @@
     <p>&copy; 2026 Tiburon Rum Company</p>
   </div>
 </footer>
-<script src="../assets/analytics.js?v=1794951365" defer></script>
-<script src="../assets/cart.js?v=1794951365" defer></script>
+<script src="../assets/analytics.js?v=1794953773" defer></script>
+<script src="../assets/cart.js?v=1794953773" defer></script>
 
 
-<script src="../assets/page.js?v=1794951365" defer></script>
-<script src="../assets/stories.js?v=1794951365" defer></script>
+<script src="../assets/page.js?v=1794953773" defer></script>
+<script src="../assets/stories.js?v=1794953773" defer></script>
 </body>
 </html>

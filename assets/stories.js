@@ -8,18 +8,28 @@
     els.forEach((e) => io.observe(e));
   };
 
-  /* ---- rope: its drawn length follows how far you have read ---- */
-  const proc = $('.proc'), rope = $('.proc__rope i');
+  /* ---- rope: its drawn length follows how far you have read, and it ends on the anchor ring ---- */
+  const proc = $('.proc'), ropeBox = $('.proc__rope'), rope = $('.proc__rope i'), anchor = $('.anchor img'), end = $('.proc__end');
   if (proc && rope) {
-    let ticking = false;
+    let ticking = false, len = 0;
+    const measure = () => {   // rope runs from the top of the steps to the top of the anchor's ring (about 15% down the drawing)
+      const top = proc.getBoundingClientRect().top + scrollY;
+      if (anchor) { const r = anchor.getBoundingClientRect(); len = r.top + scrollY + r.height * .155 - top; }
+      else len = proc.offsetHeight - 120;
+      ropeBox.style.setProperty('--len', Math.max(0, len) + 'px');
+    };
     const set = () => {
       ticking = false;
-      const r = proc.getBoundingClientRect(), vh = innerHeight;
-      const p = Math.min(1, Math.max(0, (vh * .62 - r.top) / r.height));
+      const r = proc.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, (innerHeight * .62 - r.top) / (len || 1)));
       rope.style.setProperty('--p', RM ? 1 : p.toFixed(4));
+      if (end) end.classList.toggle('is-tied', RM || p >= .995);
     };
     addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(set); } }, { passive: true });
-    addEventListener('resize', set); set();
+    addEventListener('resize', () => { measure(); set(); });
+    if (anchor && !anchor.complete) anchor.addEventListener('load', () => { measure(); set(); });
+    addEventListener('load', () => { measure(); set(); });
+    measure(); set();
     seen($$('.step'));
   }
 

@@ -58,7 +58,22 @@
 .step__mark path{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.4s var(--ease)}
 .step.is-in .step__mark path{stroke-dashoffset:0}
 .proc__end{position:relative;z-index:1;display:grid;justify-items:center;text-align:center;gap:10px;padding-top:10px}
-.proc__end img{width:min(220px,46vw)}
+/* the rope ends on the anchor: it stops at the ring (67.2% across, 14% down the drawing) and ties on */
+.anchor{--aw:min(320px,72vw);position:relative;width:var(--aw);translate:calc(var(--aw) * -0.172) 0;transform-origin:67.2% 14%}
+.anchor img{display:block;width:100%;height:auto;filter:drop-shadow(0 10px 18px rgba(20,32,31,.1))}
+.anchor__tie{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.tie__w{fill:none;stroke:#c29a63;stroke-width:12;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;filter:drop-shadow(0 0 0 #5c4022) drop-shadow(0 1.6px 0 #5c4022)}
+/* rope twist: short dark diagonal strokes laid over each wrap once it has drawn */
+.tie__t{fill:none;stroke:#6e4f2b;stroke-width:12;stroke-dasharray:1.6 4.2;stroke-opacity:.55;opacity:0;transition:opacity .4s}
+.tie__t.tie__tail,.tie__tail{stroke-width:9}
+.proc__end.is-tied .tie__t{opacity:1;transition-delay:1.6s}
+.proc__end.is-tied .tie__w{stroke-dashoffset:0;transition:stroke-dashoffset .5s cubic-bezier(.5,0,.2,1)}
+.proc__end.is-tied .tie__w:nth-child(2){transition-delay:.35s}
+.proc__end.is-tied .tie__w:nth-child(3){transition-delay:.7s}
+.proc__end.is-tied .tie__w:nth-child(4){transition-delay:1.05s;transition-duration:.6s}
+.proc__end.is-tied .anchor{animation:anchorSet 1.6s cubic-bezier(.3,0,.2,1) 1.2s both}
+@keyframes anchorSet{0%{rotate:0deg}30%{rotate:-4deg}60%{rotate:2.2deg}82%{rotate:-.8deg}100%{rotate:0deg}}
+.proc__rope{bottom:auto;height:var(--len,0px)}
 .proc__end p{max-width:30em}
 .proc__cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:8px}
 .sty .btn--primary{background:var(--ink-2);color:var(--bone)}
@@ -107,7 +122,7 @@
 .sp p{font-size:15.5px!important;margin:0}
 
 /* protection timeline on a wave line */
-.tl{padding:var(--sy) 0;overflow:hidden}
+
 .tl__rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);gap:0;overflow-x:auto;scroll-snap-type:x mandatory;padding:46px 2px 10px;position:relative;scrollbar-width:thin}
 .tl__item{scroll-snap-align:start;position:relative;padding:28px 26px 0 0;border-top:2px solid rgba(159,211,207,.45)}
 .tl__item::before{content:"";position:absolute;left:0;top:-8px;width:14px;height:14px;border-radius:50%;background:#9fd3cf;box-shadow:0 0 0 5px #0d2a2e}
@@ -115,7 +130,7 @@
 .tl__item p{font-size:15px!important;margin:0}
 .tl__item--us::before{background:#e8d3a6}
 .tl__item--us b{color:#e8d3a6}
-.tl__src{margin-top:24px;font-size:13px!important;opacity:.7}
+
 
 /* ---------- carbon: life of a bottle ---------- */
 .life{padding:clamp(20px,4vh,50px) 0 var(--sy)}
@@ -180,7 +195,7 @@
 .ck__how{font-size:15px!important;color:var(--ink-soft)!important;margin:0!important}
 /* the pour glass fills band by band when the card scrolls in */
 .ck__glass rect.band{transform-box:fill-box;transform-origin:bottom;transform:scaleY(0);transition:transform .7s var(--ease)}
-.ck.is-in .ck__glass rect.band{transform:scaleY(1)}
+.ck details[open] .ck__glass rect.band{transform:scaleY(1)}
 .cks__more{margin-top:clamp(20px,4vh,40px);display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .cks .btn--primary{background:var(--c3);color:var(--c1)}
 .cks .btn--line{background:transparent;color:var(--c3);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--c3) 60%,transparent)}
@@ -194,14 +209,6 @@
 @media (max-width:900px),(orientation:portrait) and (max-width:1180px){
   .sth__grid,.eco__grid{grid-template-columns:1fr}
   .sth__art{justify-self:center;width:min(76%,420px)}
-  .proc__rope{left:calc((100% - min(1240px,100% - 2*var(--gut)))/2 + 28px);width:24px;margin-left:-12px}
-  .proc__rope i{background-size:24px auto}
-  .step,.step:nth-of-type(even){grid-template-columns:1fr;gap:14px;padding-left:64px}
-  .step__art,.step:nth-of-type(even) .step__art{grid-column:1;grid-row:1;justify-self:start;width:min(86%,340px)}
-  .step__copy,.step:nth-of-type(even) .step__copy{grid-column:1;grid-row:2;justify-self:start;text-align:left}
-  .step::after{left:28px;top:40px}
-  .proc__part{margin-left:56px;text-align:left}
-  .step__bottles img{height:240px}
   .guide__grid{grid-template-columns:repeat(2,1fr)}
   .sp,.sp--wide{grid-column:span 1}
   .sp--wide{grid-column:span 2}
@@ -210,6 +217,22 @@
   .know__grid{grid-template-columns:1fr}
   .cks__head{grid-template-columns:1fr}
   .cks__bottle{height:220px}
+}
+@media (max-width:760px){
+  .proc__rope{left:calc((100% - min(1240px,100% - 2*var(--gut)))/2 + 28px);width:24px;margin-left:-12px}
+  .proc__rope i{background-size:24px auto}
+  .step,.step:nth-of-type(even){grid-template-columns:1fr;gap:14px;padding-left:64px}
+  .step__art,.step:nth-of-type(even) .step__art{grid-column:1;grid-row:1;justify-self:start;width:min(86%,340px)}
+  .step__copy,.step:nth-of-type(even) .step__copy{grid-column:1;grid-row:2;justify-self:start;text-align:left}
+  .step::after{left:28px;top:40px}
+  .proc__part{margin-left:56px;text-align:left}
+  .step__bottles img{height:240px}
+}
+/* tablets keep the two-column rope, a little tighter */
+@media (min-width:761px) and (max-width:1180px){
+  .step{gap:clamp(40px,7vw,80px)}
+  .step__art{width:min(100%,340px)}
+  .step__bottles img{height:300px}
 }
 @media (max-width:600px){
   .guide__grid{grid-template-columns:1fr}
@@ -229,3 +252,73 @@
 .pg--story .nav{background:var(--abyss)}
 .cks .ck p{color:var(--ink-soft);opacity:1}
 .cks .ck .ck__how{color:var(--ink-soft)!important}
+@media (max-width:760px){
+  .proc__end{justify-items:start;text-align:left}
+  .anchor{--aw:min(210px,56vw);translate:none;transform-origin:32.8% 14%;margin-left:calc(28px - var(--aw) * .328)}
+  .anchor>img,.anchor>svg{scale:-1 1}
+  .proc__end h2,.proc__end p,.proc__cta{padding-left:64px}
+  .proc__cta{justify-content:flex-start}
+}
+@media (prefers-reduced-motion:reduce){.tie__w{stroke-dashoffset:0}.proc__end.is-tied .anchor{animation:none}}
+/* outline buttons sit on a solid fill, never see-through over the pattern */
+.sty .btn--line{background:#fbf7ef;box-shadow:inset 0 0 0 1.5px rgba(34,48,46,.7),0 2px 10px rgba(20,32,31,.06)}
+.sty--deep .btn--line,.cks .btn--line{background:var(--c1,#0d2a2e)}
+
+/* ---------- reef timeline: years as buoys on a hand-drawn tide line (no rails, no borders) ---------- */
+
+.tide{--wave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='64' viewBox='0 0 24 64'%3E%3Cpath d='M12 0 C 20 10, 20 22, 12 32 S 4 54, 12 64' fill='none' stroke='%239fd3cf' stroke-width='2' stroke-linecap='round' stroke-opacity='.55'/%3E%3C/svg%3E");
+  position:relative;list-style:none;margin:clamp(28px,5vh,56px) 0 0;padding:0}
+.tide::before{content:"";position:absolute;left:50%;top:6px;bottom:6px;width:24px;margin-left:-12px;background:var(--wave) center top/24px 64px repeat-y}
+.tide__i{position:relative;display:grid;grid-template-columns:1fr 84px 1fr;align-items:start;min-height:64px}
+.tide__i+.tide__i{margin-top:calc(-1 * clamp(18px,3vh,36px))}
+.tide__c{grid-column:1;text-align:right;max-width:24em;justify-self:end;padding:2px 0 clamp(14px,2.4vh,26px)}
+.tide__i:nth-child(even) .tide__c{grid-column:3;text-align:left;justify-self:start}
+.tide__dot{position:absolute;left:50%;top:14px;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:#0d2a2e;box-shadow:inset 0 0 0 3px #9fd3cf,0 0 0 6px #0d2a2e}
+.tide__i--us .tide__dot{width:30px;height:34px;margin-left:-15px;top:8px;border-radius:0;box-shadow:none;background:#e8d3a6;-webkit-mask:url(img/mark.svg) center/contain no-repeat;mask:url(img/mark.svg) center/contain no-repeat}
+.tide__y{display:block;font-size:clamp(30px,min(3vw,5vh),46px);font-weight:800;font-stretch:118%;line-height:1;color:var(--bone);letter-spacing:-.01em}
+.tide__i--us .tide__y{color:#e8d3a6}
+.tide__tag{display:inline-block;margin:8px 0 2px;padding:3px 8px;border-radius:3px;background:rgba(232,211,166,.14);color:#e8d3a6;font-size:12px;font-weight:700;font-stretch:110%;letter-spacing:.14em;text-transform:uppercase}
+.tide__c p{margin:8px 0 0!important;font-size:clamp(15px,1.05vw,17px)!important;line-height:1.55;color:rgba(250,246,238,.78)!important}
+.tide__i.rv{opacity:0;transform:translateY(14px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.tide__i.rv.is-in{opacity:1;transform:none}
+@media (max-width:760px){
+  .tide::before{left:12px}
+  .tide__i{grid-template-columns:48px 1fr}
+  .tide__i+.tide__i{margin-top:0}
+  .tide__c,.tide__i:nth-child(even) .tide__c{grid-column:2;text-align:left;justify-self:start}
+  .tide__dot{left:12px}
+}
+@media (prefers-reduced-motion:reduce){.tide__i.rv{opacity:1;transform:none;transition:none}}
+
+/* the timeline is water: full bleed, wavy top and bottom edges instead of a box */
+.reeftl{position:relative;width:100%;max-width:none;margin:0;padding:calc(var(--sy) + 30px) 0 calc(var(--sy) + 30px);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='720' height='40' viewBox='0 0 720 40' preserveAspectRatio='none'%3E%3Cpath d='M0 22 C 90 6, 180 6, 270 20 S 450 36, 540 20 S 660 8, 720 22 V40 H0Z'/%3E%3C/svg%3E") top/720px 40px repeat-x,linear-gradient(#000,#000) center/100% calc(100% - 78px) no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='720' height='40' viewBox='0 0 720 40' preserveAspectRatio='none'%3E%3Cpath d='M0 0 H720 V18 C 630 32, 540 34, 450 20 S 270 4, 180 18 S 60 34, 0 18Z'/%3E%3C/svg%3E") bottom/720px 40px repeat-x;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='720' height='40' viewBox='0 0 720 40' preserveAspectRatio='none'%3E%3Cpath d='M0 22 C 90 6, 180 6, 270 20 S 450 36, 540 20 S 660 8, 720 22 V40 H0Z'/%3E%3C/svg%3E") top/720px 40px repeat-x,linear-gradient(#000,#000) center/100% calc(100% - 78px) no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='720' height='40' viewBox='0 0 720 40' preserveAspectRatio='none'%3E%3Cpath d='M0 0 H720 V18 C 630 32, 540 34, 450 20 S 270 4, 180 18 S 60 34, 0 18Z'/%3E%3C/svg%3E") bottom/720px 40px repeat-x}
+.reeftl::after{content:"";position:absolute;inset:0;z-index:0;background:url(img/il/reef-pattern.webp) 0 0/620px auto repeat;opacity:.06;filter:invert(1);pointer-events:none}
+.reeftl>*{position:relative;z-index:1}
+.reeftl__src{margin-top:clamp(20px,4vh,36px);font-size:13px!important;opacity:.6;text-align:center}
+
+/* painted photos: no box, no radius, the watercolor edge fades into the sand */
+.wpanel figure.painted{margin:10px 0 0 -2%}
+.wpanel figure.painted img{aspect-ratio:auto;object-fit:contain;border-radius:0;width:104%;max-width:none;height:auto;filter:drop-shadow(0 8px 14px rgba(20,32,31,.06))}
+.wpanel figure.painted figcaption{margin:-4px 0 0 2%}
+
+/* ---------- cocktails v2: real photography, cards in each bottle's own colors ---------- */
+.cks{--card:#1d110a;--card-ink:#f3e4cf;--card-soft:rgba(243,228,207,.72);--line:rgba(243,228,207,.14)}
+.cks--white{--card:#ffffff;--card-ink:#14201f;--card-soft:#4a5755;--line:rgba(20,32,31,.1)}
+.cks--fin{--card:#0b2238;--card-ink:#eaf1f8;--card-soft:rgba(234,241,248,.72);--line:rgba(234,241,248,.14)}
+.ck:not(#_){background:var(--card);color:var(--card-ink);border-radius:4px;box-shadow:0 18px 40px rgba(0,0,0,.28)}
+.ck:hover{transform:translateY(-4px);box-shadow:0 26px 50px rgba(0,0,0,.36)}
+.ck__ph{margin:0;aspect-ratio:4/4.4;overflow:hidden;background:#000}
+.ck__ph img{width:100%;height:100%;object-fit:cover;object-position:center 62%;display:block;transition:transform 1.2s var(--ease)}
+.ck:hover .ck__ph img{transform:scale(1.04)}
+.ck .ck__body{padding:20px 22px 22px}
+.ck .ck__credit{color:var(--c2)}
+.ck h3:not(#_){color:var(--card-ink)}
+.cks .ck p.ck__line,.cks .ck .ck__how{color:var(--card-soft)!important}
+.ck summary{color:var(--card-ink)}
+.ck__build{display:grid;grid-template-columns:56px 1fr;gap:16px;align-items:center;margin:6px 0 12px}
+.ck__build .ck__glass{width:56px;height:auto}
+.ck__build .ck__glass>path:first-of-type{stroke:var(--card-ink)}
+.ck__build ul{margin:0}
+.ck li{color:var(--card-ink);border-top-color:var(--line)}

@@ -34,8 +34,8 @@
 <link rel="preload" as="image" href="assets/img/b-dark.webp">
 <link rel="preload" as="image" href="assets/img/b-white.webp">
 <link rel="preload" as="image" href="assets/img/b-fin.webp">
-<link rel="stylesheet" href="assets/site.css?v=1794951365">
-<link rel="stylesheet" href="assets/type.css?v=1794951365">
+<link rel="stylesheet" href="assets/site.css?v=1794953773">
+<link rel="stylesheet" href="assets/type.css?v=1794953773">
 <script>
   /* the intro plays fully once per session; a repeat visit gets the short version, ?nointro skips it */
   (function(){var d=document.documentElement,s=location.search;d.classList.add('js');
@@ -190,12 +190,12 @@
       <p class="lu__serve">Pour it neat, over one big sphere of ice.</p>
       <div class="lu__buy"><span class="lu__price">$37.99</span><a class="btn btn--primary" href="https://shop.bigthirst.com/products/tiburon-rum-8" data-add="dark">Buy Dark 8</a><a class="lu__more" href="dark-8-reserve-rum/">Tasting notes &amp; awards</a></div>
     </div>
-    <div class="lu__scene"><picture><source media="(max-width:900px),(orientation:portrait) and (max-width:1180px)" srcset="assets/img/lu-dark-m.webp?v=1794951365"><img src="assets/img/lu-dark.webp?v=1794951365" alt="Tiburón Rum 8 Year Reserve Blend on a beach-bar counter at sunset, beside a rocks glass with one sphere of ice" width="2400" height="1340" loading="lazy" style="object-position:52% 50%"></picture><video class="lu__loop" muted loop playsinline preload="none" aria-hidden="true" data-d="assets/video/lu-dark.mp4?v=1794951365" data-m="assets/video/lu-dark-m.mp4?v=1794951365"></video></div>
+    <div class="lu__scene"><picture><source media="(max-width:900px),(orientation:portrait) and (max-width:1180px)" srcset="assets/img/lu-dark-m.webp?v=1794953773"><img src="assets/img/lu-dark.webp?v=1794953773" alt="Tiburón Rum 8 Year Reserve Blend on a beach-bar counter at sunset, beside a rocks glass with one sphere of ice" width="2400" height="1340" loading="lazy" style="object-position:52% 50%"></picture><video class="lu__loop" muted loop playsinline preload="none" aria-hidden="true" data-d="assets/video/lu-dark.mp4?v=1794953773" data-m="assets/video/lu-dark-m.mp4?v=1794953773"></video></div>
   </article>
 
   <!-- White Tip -->
   <article class="lu lu--white" id="whitetip" aria-labelledby="lu-white-h">
-    <div class="lu__scene"><picture><source media="(max-width:900px),(orientation:portrait) and (max-width:1180px)" srcset="assets/img/lu-white-m.webp?v=1794951365"><img src="assets/img/lu-white.webp?v=1794951365" alt="A bottle of White Tip, clear glass with its white label, standing in white sand on the Belize reef, a queen triggerfish and sea fans behind it" width="2400" height="1340" loading="lazy" style="object-position:25% 50%"></picture></div>
+    <div class="lu__scene"><picture><source media="(max-width:900px),(orientation:portrait) and (max-width:1180px)" srcset="assets/img/lu-white-m.webp?v=1794953773"><img src="assets/img/lu-white.webp?v=1794953773" alt="A bottle of White Tip, clear glass with its white label, standing in white sand on the Belize reef, a queen triggerfish and sea fans behind it" width="2400" height="1340" loading="lazy" style="object-position:25% 50%"></picture></div>
     <div class="lu__text">
       <p class="lu__line"><span>Tiburón Rum</span><span>Company</span><span>Belize</span></p>
       <h3 id="lu-white-h" class="lu__title">White Tip</h3>
@@ -226,7 +226,7 @@
       </dl>
       <div class="lu__buy"><span class="lu__price">$54.99</span><a class="btn btn--primary" href="https://shop.bigthirst.com/products/tiburons-fin-tequila" data-add="fin">Buy FIN</a><a class="lu__more" href="fin-tequila-blanco/">Agave story &amp; notes</a></div>
     </div>
-    <div class="lu__scene"><picture><source media="(max-width:900px),(orientation:portrait) and (max-width:1180px)" srcset="assets/img/lu-fin-m.webp?v=1794951365"><img src="assets/img/lu-fin.webp?v=1794951365" alt="FIN Tequila Blanco on volcanic rock at the edge of a blue agave field at dusk, with a lime and a clay caballito" width="2400" height="1340" loading="lazy" style="object-position:71% 50%"></picture><video class="lu__loop" muted loop playsinline preload="none" aria-hidden="true" data-d="assets/video/lu-fin.mp4?v=1794951365" data-m="assets/video/lu-fin-m.mp4?v=1794951365"></video></div>
+    <div class="lu__scene"><picture><source media="(max-width:900px),(orientation:portrait) and (max-width:1180px)" srcset="assets/img/lu-fin-m.webp?v=1794953773"><img src="assets/img/lu-fin.webp?v=1794953773" alt="FIN Tequila Blanco on volcanic rock at the edge of a blue agave field at dusk, with a lime and a clay caballito" width="2400" height="1340" loading="lazy" style="object-position:71% 50%"></picture><video class="lu__loop" muted loop playsinline preload="none" aria-hidden="true" data-d="assets/video/lu-fin.mp4?v=1794953773" data-m="assets/video/lu-fin-m.mp4?v=1794953773"></video></div>
   </article>
 </section>
 
@@ -439,13 +439,20 @@
 <!-- ============ FOOTER / BUY ============ -->
 <footer class="foot" id="buy">
   <div class="foot__buy">
-    <div>
+    <div class="foot__pitch">
+      <p class="foot__kick">Free shipping on 3 or more bottles</p>
       <h2>Ship Tiburon to your door.</h2>
       <p>We ship to most U.S. states and D.C. through a network of retail partners. You&rsquo;ll see any shipping limits for your address at checkout.</p>
-      <a class="btn btn--primary" href="where-to-buy/">Shop the bottles</a>
+      <div class="foot__ctas">
+        <a class="btn btn--primary" href="where-to-buy/" data-add="all" data-track="buy-all-footer">Add all three, $120.97</a>
+        <a class="btn btn--glass" href="where-to-buy/">Shop the bottles</a>
+      </div>
     </div>
-    <div class="foot__lineup" aria-hidden="true">
-      <img src="assets/img/b-dark.webp" alt="" loading="lazy" width="490" height="1800"><img src="assets/img/b-white.webp" alt="" loading="lazy" width="496" height="1800"><img src="assets/img/b-fin.webp" alt="" loading="lazy" width="464" height="1500">
+    <div class="foot__shelf">
+      <a class="fb fb--dark" href="dark-8-reserve-rum/"><span class="fb__pic"><img src="assets/img/b-dark-f.webp" alt="" loading="lazy" width="174" height="640"></span><b class="fb__nm nm--dark">Dark 8</b><span class="fb__px">$37.99</span></a>
+      <a class="fb fb--white" href="white-tip-rum/"><span class="fb__pic"><img src="assets/img/b-white-f.webp" alt="" loading="lazy" width="177" height="640"></span><b class="fb__nm nm--white">White Tip</b><span class="fb__px">$27.99</span></a>
+      <a class="fb fb--fin" href="fin-tequila-blanco/"><span class="fb__pic"><img src="assets/img/b-fin-f.webp" alt="" loading="lazy" width="198" height="640"></span><b class="fb__nm"><span class="finmark" aria-hidden="true"></span><span class="sr-only">FIN</span></b><span class="fb__px">$54.99</span></a>
+      <span class="fb__bar" aria-hidden="true"></span>
     </div>
   </div>
   <div class="foot__cols">
@@ -465,12 +472,12 @@
     <p>&copy; 2026 Tiburon Rum Company</p>
   </div>
 </footer>
-<script src="assets/analytics.js?v=1794951365" defer></script>
-<script src="assets/cart.js?v=1794951365" defer></script>
+<script src="assets/analytics.js?v=1794953773" defer></script>
+<script src="assets/cart.js?v=1794953773" defer></script>
 
 
-<script src="assets/app.js?v=1794951365"></script>
-<script src="assets/sections.js?v=1794951365" defer></script>
+<script src="assets/app.js?v=1794953773"></script>
+<script src="assets/sections.js?v=1794953773" defer></script>
 <script>
 /* v29: the bottle scenes come alive. Each loop loads only when its section is near the screen, plays while visible,
    and fades in over the still once it is actually playing. Reduced motion or Save-Data: the still stays. */
