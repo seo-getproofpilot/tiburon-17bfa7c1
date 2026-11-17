@@ -321,3 +321,19 @@ h3:not(#_){font-weight:700!important;font-stretch:108%!important;letter-spacing:
 .trio p b{color:var(--ink)}
 .trio .btn--primary{background:var(--ink)!important;color:var(--bone)!important}
 .trio__bottles img{filter:drop-shadow(0 10px 10px rgba(0,0,0,.25))!important}
+/* v62: bigger free-shipping bar */
+:root{--offer:48px;--nav:124px}
+.offer p:not(#_){font-size:16px;letter-spacing:.03em}
+.offer b:not(#_){font-size:17px;letter-spacing:.07em}
+.offer a:not(#_){font-size:15px;margin-left:14px}
+@media (max-width:600px){
+  :root{--offer:44px;--nav:120px}
+  .offer p:not(#_){font-size:14px}
+  .offer b:not(#_){font-size:14.5px;letter-spacing:.04em}
+  .offer a:not(#_){font-size:13.5px;margin-left:10px}
+}
+@media (max-width:440px){
+  .offer{position:fixed}
+  .offer a:not(#_){position:absolute;inset:0;margin:0;font-size:0;color:transparent}
+  .offer b:not(#_){font-size:15px}
+}
