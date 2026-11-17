@@ -27,7 +27,7 @@
     '<div class="cartd__add"></div>' +
     '<footer class="cartd__foot"><p class="cartd__sub"><span>Subtotal</span><b></b></p>' +
     '<button type="button" class="btn btn--primary cartd__go" data-track="checkout">Check out securely</button>' +
-    '<p class="cartd__fine">Checkout, age verification and delivery are handled by our licensed retail partner. Shipping to up to 41 states and D.C.; your address is checked at checkout.</p></footer></aside>';
+    '<p class="cartd__fine">Checkout, age verification and delivery are handled by our licensed retail partner. Ships to most U.S. states and D.C.; your address is checked at checkout.</p></footer></aside>';
   document.body.appendChild(d);
   var list = d.querySelector('.cartd__list'), shipT = d.querySelector('.cartd__shipT'), bar = d.querySelector('.cartd__bar i'),
       sub = d.querySelector('.cartd__sub b'), go = d.querySelector('.cartd__go'), addRow = d.querySelector('.cartd__add');

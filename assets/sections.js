@@ -32,7 +32,7 @@
   if (book) {
     const d = book.querySelector('[name=date]'); d.min = new Date().toISOString().slice(0, 10);
     const g = book.querySelector('[name=guests]');
-    const stub = () => { const n = Math.max(1, Math.min(20, parseInt(g.value, 10) || 1)); $('#tkN').textContent = n; $('#tkTotal').textContent = '$' + n * 25; $('#tkRoom').textContent = book.querySelector('[name=room]:checked').value; };
+    const stub = () => { const n = Math.max(1, Math.min(20, parseInt(g.value, 10) || 1)); $('#tkN').textContent = n; $('#tkTotal').textContent = '$' + n * 30; $('#tkRoom').textContent = book.querySelector('[name=room]:checked').value; };
     $$('.ticket__step button', book).forEach((b) => b.addEventListener('click', () => { g.value = Math.max(1, Math.min(20, (parseInt(g.value, 10) || 1) + +b.dataset.d)); stub(); }));
     book.addEventListener('input', stub); book.addEventListener('change', stub); stub();
     book.addEventListener('submit', (e) => {

@@ -303,3 +303,21 @@ h3:not(#_){font-weight:700!important;font-stretch:108%!important;letter-spacing:
   .bph__fine{margin-top:10px!important}
   .bpa__steps span{font-size:14.5px!important}
 }
+/* v61: shop and Our Story bottle tiles use Tiburon's real product photos, framed so the whole bottle shows */
+.shop__pic{aspect-ratio:auto!important;height:min(46vh,30vw,480px)}
+@media (max-width:1100px){.shop__pic{height:auto;aspect-ratio:4/3!important}}
+.shop__pic img{object-position:50% 50%!important}
+.shop__item--dark .shop__pic img{object-position:28% 50%!important}
+.shop__item--white .shop__pic img{object-position:22% 50%!important}
+.osb__t img{aspect-ratio:1/1!important;height:auto}
+.osb__t--dark img{object-position:24% 50%!important}
+.osb__t--white img{object-position:18% 50%!important}
+@media (min-width:901px){.osb__t img{aspect-ratio:auto!important;height:min(64vh,33vw,620px)}}
+@media (max-width:900px){.osb__t img{aspect-ratio:4/3!important}}
+/* v61: "Take all three home" callout: solid, high-contrast card */
+.trio{background:var(--bone)!important;color:var(--ink)!important;box-shadow:0 40px 70px -40px rgba(0,0,0,.8);border-radius:4px}
+.trio h2:not(#_){color:var(--ink)!important}
+.trio p{color:var(--ink-soft)!important;font-size:16px!important}
+.trio p b{color:var(--ink)}
+.trio .btn--primary{background:var(--ink)!important;color:var(--bone)!important}
+.trio__bottles img{filter:drop-shadow(0 10px 10px rgba(0,0,0,.25))!important}
