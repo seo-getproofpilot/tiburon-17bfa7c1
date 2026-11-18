@@ -895,3 +895,40 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 .foot:not(#_){position:relative;z-index:4;margin-top:-90px;background:linear-gradient(180deg,transparent 0,transparent 130px,var(--abyss) 130px)}
 .foot__buy::before{-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1440 140%22 preserveAspectRatio=%22none%22%3E%3Cfilter id=%22b%22 x=%22-5%25%22 y=%22-50%25%22 width=%22110%25%22 height=%22200%25%22%3E%3CfeGaussianBlur stdDeviation=%225%22/%3E%3C/filter%3E%3Cg transform=%22translate%280,140%29 scale%281,-1%29%22%3E%3Cpath filter=%22url%28%23b%29%22 d=%22M-40 -40 H1480 V66 C1300 46 1160 104 960 98 C760 92 620 50 420 62 C260 72 120 108 -40 88 Z%22 fill=%22%23000%22/%3E%3C/g%3E%3C/svg%3E") top/100% 130px no-repeat,linear-gradient(#000,#000) bottom/100% calc(100% - 128px) no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1440 140%22 preserveAspectRatio=%22none%22%3E%3Cfilter id=%22b%22 x=%22-5%25%22 y=%22-50%25%22 width=%22110%25%22 height=%22200%25%22%3E%3CfeGaussianBlur stdDeviation=%225%22/%3E%3C/filter%3E%3Cg transform=%22translate%280,140%29 scale%281,-1%29%22%3E%3Cpath filter=%22url%28%23b%29%22 d=%22M-40 -40 H1480 V66 C1300 46 1160 104 960 98 C760 92 620 50 420 62 C260 72 120 108 -40 88 Z%22 fill=%22%23000%22/%3E%3C/g%3E%3C/svg%3E") top/100% 130px no-repeat,linear-gradient(#000,#000) bottom/100% calc(100% - 128px) no-repeat}
 .pg--os .foot:not(#_){margin-top:0;background:var(--abyss)}
+
+/* ===== v71 homepage process picker plays itself: a thin gold timer fills under the bottle on show ===== */
+.process__tabs [role=tab]{position:relative}
+.pt__prog{position:absolute;left:50%;bottom:6px;width:56px;height:2px;translate:-50% 0;border-radius:2px;background:rgba(230,187,131,.18);opacity:0;transition:opacity .3s}
+.pt__prog i{display:block;height:100%;width:0;border-radius:inherit;background:#e6bb83}
+.process.is-auto [aria-selected=true] .pt__prog{opacity:1}
+.process.is-tick [aria-selected=true] .pt__prog i{animation:ptTick 6s linear forwards}
+@keyframes ptTick{to{width:100%}}
+
+/* ===== v71 homepage rooms: the heading runs the full width above the words and photos, so it never stacks word by word ===== */
+.rx__head{grid-column:1/-1;margin-bottom:clamp(-10px,-1vh,0px)}
+.rx__head .eyebrow:not(#_){margin:0 0 14px}
+.rx__head h2:not(#_){font-size:clamp(40px,5.2vw,86px)!important;margin:0;max-width:none;text-wrap:balance;line-height:1}
+@media (min-width:1101px){.rx__head h2:not(#_){white-space:nowrap}}
+.rx__facts:not(#_){flex-wrap:nowrap;gap:10px}
+.rx__facts li:not(#_){padding:11px 15px;white-space:nowrap}
+@media (max-width:560px){.rx__facts:not(#_){flex-wrap:wrap}}
+.rx__head h2:not(#_){font-size:clamp(38px,4.3vw,74px)!important}
+@media (min-width:901px){.rx__text:not(#_){align-self:start;padding-top:clamp(20px,4vh,50px)}}
+@media (max-width:1280px){.rx__facts:not(#_){flex-wrap:wrap}}
+
+/* ===== v71 homepage: buying sits under the award bottles; the footer drops its second set of bottles here ===== */
+.pg--home .foot__buy{display:none!important}
+.aw2__ship{max-width:860px;margin:clamp(50px,8vh,90px) auto 0;text-align:center;display:grid;justify-items:center;gap:14px}
+.aw2__kick{margin:0;display:inline-flex;align-items:center;gap:10px;font:800 13px/1.3 var(--f);font-stretch:118%;letter-spacing:.18em;text-transform:uppercase;color:#e6bb83}
+.aw2__kick::before{content:"";width:9px;height:9px;rotate:45deg;background:#e6bb83}
+.aw2__shiph:not(#_){margin:0;font:800 clamp(38px,4.6vw,72px)/.98 var(--f)!important;font-stretch:125%!important;letter-spacing:-.02em;text-transform:uppercase;color:var(--bone);text-wrap:balance}
+.aw2__shipp{margin:4px 0 0;max-width:36em;font-size:clamp(16px,1.2vw,19px);line-height:1.6;color:rgba(250,246,238,.8)}
+.aw2__ctas{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:14px}
+.aw2__all:not(#_){background:#f6efe2!important;color:#14201f!important;font-size:15px;padding-inline:34px}
+.aw2__shop:not(#_){background:#e6bb83!important;color:#1a1208!important}
+.pg--home .foot:not(#_){margin-top:0;background:var(--abyss);padding-top:clamp(110px,14vh,170px)!important}
+.pg--home .aw2.wv:not(#_){z-index:5;padding-bottom:calc(var(--sy, 90px) + var(--wh) * .6)}
+.pg--home .foot:not(#_){padding-top:clamp(60px,8vh,100px)!important}
+/* the timer fills the bottle's own underline instead of drawing a second line */
+.pt__prog:not(#_){bottom:0;width:44px;height:3px;background:none;z-index:1}
+.process.is-auto [aria-selected=true]::after{opacity:.28}

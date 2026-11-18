@@ -22,9 +22,30 @@
     $('.process').dataset.k = t.dataset.k; if (focus) t.focus();
   };
   $$('[data-tab]').forEach((a) => a.addEventListener('click', () => { const t = tabs.find((x) => x.dataset.k === a.dataset.tab); if (t) pick(t); }));
+  /* v71: the picker plays itself, about 6 seconds a bottle (Tiburon 8, White Tip, FIN), while it is on screen.
+     Hovering or focusing pauses it; choosing a bottle hands control to the visitor; reduced motion leaves it still. */
+  const proc = $('.process');
+  let auto = !!(proc && tabs.length > 1) && !matchMedia('(prefers-reduced-motion: reduce)').matches, held = false, seen = false, timer;
+  tabs.forEach((t) => { if (!t.querySelector('.pt__prog')) t.insertAdjacentHTML('beforeend', '<span class="pt__prog" aria-hidden="true"><i></i></span>'); });
+  const arm = () => {
+    clearTimeout(timer); if (!proc) return;
+    proc.classList.remove('is-tick'); void proc.offsetWidth;
+    if (!auto || held || !seen) return;
+    proc.classList.add('is-tick');
+    timer = setTimeout(() => { const i = tabs.findIndex((x) => x.getAttribute('aria-selected') === 'true'); pick(tabs[(i + 1) % tabs.length]); arm(); }, 6000);
+  };
+  if (auto) {
+    proc.classList.add('is-auto');
+    new IntersectionObserver((es) => { seen = es[0].isIntersecting; arm(); }, { rootMargin: '-35% 0px -35% 0px' }).observe(proc);
+    proc.addEventListener('pointerenter', () => { held = true; arm(); });
+    proc.addEventListener('pointerleave', () => { held = false; arm(); });
+    proc.addEventListener('focusin', () => { held = true; arm(); });
+    proc.addEventListener('focusout', (e) => { if (!proc.contains(e.relatedTarget)) { held = false; arm(); } });
+  }
+  const stopAuto = () => { if (!auto) return; auto = false; clearTimeout(timer); proc.classList.remove('is-auto', 'is-tick'); };
   tabs.forEach((t, i) => {
-    t.addEventListener('click', () => pick(t));
-    t.addEventListener('keydown', (e) => { const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (d) { e.preventDefault(); pick(tabs[(i + d + tabs.length) % tabs.length], true); } });
+    t.addEventListener('click', () => { stopAuto(); pick(t); });
+    t.addEventListener('keydown', (e) => { const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (d) { e.preventDefault(); stopAuto(); pick(tabs[(i + d + tabs.length) % tabs.length], true); } });
   });
 
   /* ---------- booking: a ticket; the stub keeps count; submitting opens an email to the team (no backend) ---------- */
