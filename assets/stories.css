@@ -517,3 +517,130 @@
 .ostl .ch__quote cite{display:block;margin-top:12px;font:800 12px/1 var(--f);font-stretch:118%;letter-spacing:.16em;text-transform:uppercase;font-style:normal;color:#8a6234}
 @media (prefers-reduced-motion:reduce){.ch__ring{animation:none}}
 @media (max-width:900px){.ostl>section:not(#_){padding-top:calc(var(--sy, 72px) + 40px)}.ch__hole{width:min(84%,420px)}}
+
+/* ===== v67 Our Story timeline: a depth line (shallow to deep as the years go by) with big years, not the rope ===== */
+.ostl .ostl__line:not(#_){width:4px;margin-left:-2px}
+.ostl .ostl__line::before{inset:0;background:linear-gradient(rgba(29,107,102,.25),rgba(29,107,102,.25)) center/2px 100% no-repeat,
+  repeating-linear-gradient(180deg,rgba(29,107,102,.45) 0 2px,transparent 2px 48px) center/14px 100% no-repeat}
+.ostl .ostl__line i:not(#_){background:linear-gradient(180deg,#7fd1cb 0%,#2a9a93 35%,#1d6b66 65%,#0c3550 100%);border-radius:2px;box-shadow:0 0 12px rgba(42,154,147,.5)}
+.ostl .ostl__tag:not(#_){left:calc(var(--lx) + 30px);translate:0 0;top:clamp(34px,5vh,60px);min-width:0;padding:0;border-radius:0;background:none;box-shadow:none;transform:none;
+  font:800 clamp(44px,5vw,84px)/1 var(--f);font-stretch:125%;letter-spacing:-.02em;text-transform:none;color:rgba(160,116,67,.28);transition:color .6s ease}
+.ostl .ostl__tag::before{content:"";position:absolute;left:-30px;top:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:#f4ecdd;box-shadow:inset 0 0 0 3px #2a9a93;transition:background .45s,transform .45s cubic-bezier(.3,1.6,.5,1)}
+.ostl .ostl__tag::after{content:"";position:absolute;left:-19px;top:50%;width:14px;height:2px;background:#2a9a93}
+.ostl .ostl__tag.is-on{color:#b07a3e}
+.ostl .ostl__tag.is-on::before{background:#2a9a93;transform:scale(1.15)}
+.osm .ostl__tag.is-on,.osf .ostl__tag.is-on{color:#e6bb83}
+.osm .ostl__tag::before{background:#071a26}
+@media (min-width:901px){.ostl>section:not(#_){padding-top:calc(var(--sy, 100px) + clamp(70px,8vw,120px))}}
+@media (max-width:900px){
+  .ostl .ostl__tag:not(#_){left:calc(var(--lx) + 22px);top:26px;font-size:40px}
+  .ostl .ostl__tag::before{left:-22px;width:18px;height:18px;margin:-9px 0 0 -9px}
+  .ostl .ostl__tag::after{display:none}
+  .ostl>section:not(#_){padding-top:calc(var(--sy, 72px) + 60px)}
+}
+/* medals: each on its own lit pedestal, floating; hover spins it */
+.osm2 figure:not(#_){position:relative;display:grid;justify-items:center;text-align:center;padding-bottom:10px;perspective:800px}
+.osm2 figure img:not(#_){width:min(70%,190px);height:auto;filter:drop-shadow(0 26px 24px rgba(0,0,0,.55));animation:medFloat 5s ease-in-out infinite;transition:transform 1.1s cubic-bezier(.3,.9,.3,1)}
+.osm2 figure:nth-child(2) img{animation-delay:-1.6s}.osm2 figure:nth-child(3) img{animation-delay:-3.2s}
+.osm2 figure:hover img{transform:rotateY(360deg)}
+.osm2 figure::before{content:"";position:absolute;left:50%;top:-30px;width:70%;height:80%;translate:-50% 0;z-index:-1;background:radial-gradient(50% 60% at 50% 0%,rgba(255,226,170,.22),transparent 70%);pointer-events:none}
+.osm2 figure figcaption:not(#_){margin-top:26px;position:relative;padding-top:22px}
+.osm2 figure figcaption::before{content:"";position:absolute;left:50%;top:-14px;width:150px;height:24px;translate:-50% 0;border-radius:50%;background:radial-gradient(closest-side,rgba(230,187,131,.55),rgba(230,187,131,0));animation:pedPulse 5s ease-in-out infinite}
+.osm2 figure figcaption b:not(#_){display:block;font:800 clamp(18px,1.5vw,22px)/1.1 var(--f);font-stretch:120%;letter-spacing:.02em;color:#f2d29b;margin-bottom:6px}
+@keyframes medFloat{0%,100%{translate:0 0}50%{translate:0 -12px}}
+@keyframes pedPulse{0%,100%{opacity:.6;transform:scaleX(.85)}50%{opacity:1;transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){.osm2 figure img,.osm2 figure figcaption::before{animation:none}}
+/* the bottles at the foot of Our Story: whole bottles, nothing cut */
+@media (min-width:901px){.osb .osb__t img:not(#_){aspect-ratio:1/1!important;height:auto!important}.osb .osb__t--fin img:not(#_){object-position:50% 40%!important}}
+/* ===== v67 tasting room cards: clean, lit and arched, like the bottle shelf ===== */
+.rpick:not(#_){background:radial-gradient(70% 60% at 50% 100%,rgba(232,170,90,.12),transparent 70%),#06141f;text-align:center}
+.rpick .eyebrow:not(#_){margin-bottom:clamp(30px,5vh,50px);color:#e6bb83}
+.rpick ul:not(#_){max-width:1360px;margin:0 auto;gap:clamp(18px,2.4vw,40px)}
+.rpick a:not(#_){justify-items:center;position:relative;padding-bottom:6px}
+.rpick img:not(#_){aspect-ratio:4/5!important;border-radius:999px 999px 20px 20px;margin-bottom:22px;box-shadow:0 30px 50px -26px rgba(0,0,0,.8),0 0 0 1px rgba(230,187,131,.25)}
+.rpick a::after{content:"";position:absolute;left:12%;right:12%;top:calc(100% - 120px);height:40px;z-index:-1;border-radius:50%;background:radial-gradient(closest-side,rgba(232,170,90,.35),transparent);opacity:0;transition:opacity .4s}
+.rpick a:hover::after,.rpick a:focus-visible::after{opacity:1}
+.rpick a:hover img,.rpick a:focus-visible img{transform:translateY(-8px)}
+.rpick b:not(#_){font:800 clamp(20px,1.7vw,26px)/1.1 var(--f);font-stretch:118%;color:var(--bone)}
+.rpick span:not(#_){margin-top:6px;font-size:15px}
+.rpick em:not(#_){display:inline-block;margin-top:12px;padding:7px 12px;border-radius:999px;background:rgba(230,187,131,.14);color:#e6bb83;font:800 12px/1.2 var(--f);font-style:normal;font-stretch:115%;letter-spacing:.12em;text-transform:uppercase}
+@media (max-width:900px){.rpick ul:not(#_){grid-template-columns:repeat(2,minmax(0,1fr))}.rpick em:not(#_){font-size:12px;letter-spacing:.08em}}
+
+/* ===== v67 How it's made: the falling rope is cut from the same drawing as the knot; the anchor stays still; knots appear only once the rope passes ===== */
+.proc__rope:not(#_){width:calc(var(--aw) * .0946);margin-left:calc(var(--aw) * -.0473)}
+.proc__rope i:not(#_){background:url(img/il/rope2.webp) center top/100% auto repeat-y;filter:none}
+.proc__end.is-tied .anchor:not(#_),.proc__end .anchor:not(#_){animation:none!important;rotate:none}
+.step::after{opacity:0!important;transform:scale(.3)!important;transition:opacity .35s ease,transform .5s cubic-bezier(.3,1.6,.5,1)!important}
+.step.is-roped::after{opacity:1!important;transform:scale(1)!important;background:radial-gradient(circle at 38% 35%,#d9b88a,#a07443 70%)!important;box-shadow:0 0 0 4px #f4ecdd,0 2px 6px rgba(0,0,0,.18)!important}
+.sty::before{background:url(img/il/shark-pattern-sm.webp) 0 0/300px auto repeat!important;opacity:.06!important}
+.pp2__rope::before{background-image:url(img/il/rope2.webp)!important;filter:none!important;width:16px!important;left:6px!important}
+
+.ostl .ostl__tag.is-on:not(#_){color:#b07a3e}
+.osm .ostl__tag.is-on:not(#_),.osf .ostl__tag.is-on:not(#_){color:#e6bb83}
+.osm2 figure::before{top:-60px!important;height:110%!important;background:radial-gradient(closest-side,rgba(255,226,170,.2),transparent)!important}
+
+.osr .ostl__tag.is-on:not(#_){color:#e6bb83}
+.osr .ostl__tag::before{background:#0a2433}
+.osr__pic img:not(#_),.osf figure img:not(#_){border-radius:18px!important;border:7px solid #fffaf1;box-shadow:0 40px 70px -36px rgba(0,0,0,.6)}
+.osr__pic:not(#_){rotate:-1.4deg}
+.osf figure:nth-child(odd){rotate:-1.6deg}.osf figure:nth-child(even){rotate:1.8deg}
+
+/* ===== v67 cocktails: a clean lit bottle trio in the hero instead of boxed chips; second buttons share the arrow shape in their own colour ===== */
+@media (min-width:901px){
+  .ckh .sty__in:not(#_){display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);column-gap:clamp(30px,5vw,80px);align-items:end}
+  .ckh .sty__in>*:not(.ckh__pick){grid-column:1}
+  .ckh .ckh__pick:not(#_){grid-column:2;grid-row:1/span 5;align-self:end;justify-self:center;margin:0}
+}
+.ckh__pick:not(#_){position:relative;display:flex;gap:clamp(16px,3vw,48px);align-items:flex-end;padding-bottom:18px;flex-wrap:nowrap}
+.ckh__pick::before{content:"";position:absolute;left:-10%;right:-10%;bottom:6px;height:60%;z-index:-1;background:radial-gradient(60% 70% at 50% 100%,rgba(232,190,120,.22),transparent 72%);pointer-events:none}
+.ckh__pick::after{content:"";position:absolute;left:-6%;right:-6%;bottom:52px;height:6px;border-radius:2px;background:linear-gradient(180deg,#5a3a22,#2a190e);box-shadow:0 10px 18px rgba(0,0,0,.45);z-index:-1}
+.ckh__pick a:not(#_){flex:0 0 auto;display:grid;justify-items:center;gap:4px;padding:0;background:none;box-shadow:none;border-radius:0;text-align:center}
+.ckh__pick a:hover:not(#_){background:none;box-shadow:none}
+.ckh__pick img:not(#_){height:clamp(150px,min(24vh,16vw),250px);width:auto;margin-bottom:62px;filter:drop-shadow(0 18px 20px rgba(0,0,0,.55));transition:transform .45s cubic-bezier(.3,1.4,.5,1)}
+.ckh__pick a:hover img{transform:translateY(-8px)}
+.ckh__pick a>span{display:grid;gap:4px;margin-top:-50px}
+.ckh__pick b:not(#_){font-size:clamp(16px,1.3vw,19px)}
+.ckh__pick small:not(#_){font:800 12px/1 var(--f);font-stretch:115%;letter-spacing:.12em;text-transform:uppercase;color:#e6bb83;opacity:1}
+@media (max-width:900px){.ckh__pick a:not(#_){flex:1 1 0}.ckh__pick img:not(#_){height:120px}}
+.cks .btn--alt:not(#_){background:#f6efe2!important;color:#14201f!important;box-shadow:none!important}
+.cks .btn--alt:not(#_):hover{background:#fff!important}
+.cks--white .btn--alt:not(#_){background:#e8d3a6!important;color:#1a1208!important}
+.cks--fin .ck summary:not(#_){background:#dcecfb;color:#06182b;box-shadow:0 8px 22px -8px rgba(156,196,238,.7)}
+/* footer: the free-shipping line is words with a mark, not a highlighted box; Shop the bottles takes the arrow shape */
+.foot__kick:not(#_){display:flex;align-items:center;gap:10px;padding:0!important;background:none!important;color:#e8d3a6!important;font-size:14px!important}
+.foot__kick::before{content:"";width:10px;height:10px;rotate:45deg;background:#e8d3a6;flex:none}
+.foot__shop:not(#_){background:#e8d3a6!important;color:#1a1208!important}
+.ckh__pick img:not(#_){margin-bottom:0}
+.ckh__pick a>span:not(#_){margin-top:18px}
+.ckh__pick::after{bottom:62px!important}
+.ckh__pick::before{background:radial-gradient(closest-side,rgba(232,190,120,.2),transparent)!important;bottom:40px!important;height:80%!important}
+
+/* ===== v67 Tasting Rooms: the pass sits on the hero photo; facts as numbers, not pills; the steps as big alternating cards ===== */
+.trh.trb--bar:not(#_){display:grid;align-content:end;min-height:auto;padding-bottom:clamp(30px,5vh,60px)}
+.trh .trh__pass:not(#_){position:relative;z-index:2;margin:clamp(24px,4vh,44px) 0 0;padding:0;background:none;overflow:visible}
+.trh .trh__pass .ticket:not(#_){filter:drop-shadow(0 30px 50px rgba(0,0,0,.55))}
+.trh__facts:not(#_){display:flex;flex-wrap:wrap;gap:12px clamp(18px,3vw,44px);margin:clamp(18px,3vh,28px) 0;padding:0;list-style:none}
+.trh__facts li:not(#_){display:grid;gap:4px;padding:0 0 0 18px;border:0!important;border-radius:0!important;background:none!important;position:relative}
+.trh__facts li::before{content:"";position:absolute;left:0;top:.55em;width:8px;height:8px;rotate:45deg;background:#e6bb83}
+.trh__facts b:not(#_){font:800 clamp(30px,2.8vw,44px)/1 var(--f)!important;font-stretch:122%!important;color:#f2d29b;letter-spacing:-.01em}
+.trh__facts span:not(#_){font:800 12px/1.2 var(--f);font-stretch:115%;letter-spacing:.16em;text-transform:uppercase;color:rgba(250,246,238,.82)}
+.ts2__list{display:grid;gap:clamp(50px,9vh,110px);margin-top:clamp(20px,4vh,50px)}
+.ts2{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(30px,6vw,100px);align-items:center}
+.ts2:nth-child(even) .ts2__art{order:2}
+.ts2__art{margin:0;position:relative}
+.ts2__art img{display:block;width:100%;height:auto}
+.ts2__art--photo img{aspect-ratio:4/3;object-fit:cover;border-radius:22px;border:9px solid #fffaf1;box-shadow:0 44px 70px -40px rgba(70,38,8,.6);rotate:calc(var(--i) * 1deg - 1.5deg)}
+.ts2__art--draw img{max-width:620px;margin:0 auto;filter:drop-shadow(0 18px 24px rgba(70,38,8,.12))}
+.ts2__copy{position:relative}
+.ts2__n{display:block;font:800 clamp(80px,9vw,150px)/.8 var(--f);font-stretch:125%;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:2px #c9a774;margin-bottom:14px}
+.ts2__copy h3:not(#_){font:800 clamp(30px,3vw,48px)/1.05 var(--f)!important;font-stretch:122%!important;letter-spacing:-.01em;margin:0 0 16px;color:var(--ink)}
+.ts2__copy p{font-size:clamp(18px,1.4vw,21px);line-height:1.6;color:#3a4846;max-width:30em;margin:0}
+@supports (animation-timeline:view()){.ts2__art{animation:prA linear both;animation-timeline:view();animation-range:entry 0% cover 40%}.ts2__copy{animation:prA linear both;animation-timeline:view();animation-range:entry 8% cover 45%}}
+@keyframes prA{from{opacity:0;translate:0 60px}to{opacity:1;translate:0 0}}
+@media (max-width:900px){
+  .ts2{grid-template-columns:1fr;gap:20px}
+  .ts2:nth-child(even) .ts2__art{order:0}
+  .ts2__art--draw img{max-width:380px}
+  .ts2__n{font-size:64px;margin-bottom:8px}
+}
+@media (max-width:900px){.trh__facts:not(#_){display:grid;grid-template-columns:1fr 1fr;gap:18px 16px}.trh__facts span:not(#_){letter-spacing:.1em}}

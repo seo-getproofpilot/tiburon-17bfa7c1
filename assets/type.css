@@ -663,3 +663,195 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 .reef__end blockquote p:not(#_),
 .rw__text blockquote p:not(#_),
 .story .story__quote p:not(#_){font-family:var(--f)!important;font-weight:700!important;font-stretch:112%!important;font-style:normal!important;letter-spacing:-.005em}
+/* v67 footer: free-shipping line as words with a mark, Shop the bottles in the arrow shape */
+.foot__kick:not(#_){display:flex;align-items:center;gap:10px;padding:0!important;background:none!important;color:#e8d3a6!important;font-size:14px!important}
+.foot__kick::before{content:"";width:10px;height:10px;rotate:45deg;background:#e8d3a6;flex:none}
+.foot__shop:not(#_){background:#e8d3a6!important;color:#1a1208!important}
+
+/* ===== v67 homepage How it's made: the plant each bottle starts from grows down the steps; whole-bottle shots; bottle cards for tabs ===== */
+.pp2__grow::before{display:none!important}
+.pp2__grow{--g:2.2s;--lx:14px}
+.pp2__grow::after{content:"";position:absolute;top:-6px;bottom:-14px;left:calc(var(--lx) - 70px);width:140px;pointer-events:none;
+  background:var(--stalk) center top/auto 100% no-repeat;clip-path:inset(0 0 100% 0);filter:drop-shadow(0 6px 10px rgba(0,0,0,.45))}
+.pp2__grow--cane{--stalk:url(img/il/st-cane.webp);--leaf:#8fae4a;--leaf2:#d8c06a}
+.pp2__grow--pale{--stalk:url(img/il/st-pale.webp);--leaf:#c9ddd6;--leaf2:#f1efe4}
+.pp2__grow--agave{--stalk:url(img/il/st-agave.webp);--leaf:#6f9fa0;--leaf2:#a9cbc6}
+.process.is-seen .pp.is-on .pp2__grow::after{animation:grow var(--g) cubic-bezier(.45,0,.3,1) .1s both}
+@keyframes grow{to{clip-path:inset(0 0 0 0)}}
+.pp2__grow li{opacity:0;translate:-14px 0}
+.pp2__grow li::before{all:unset;content:"";position:absolute;left:var(--lx);top:9px;width:30px;height:11px;border-radius:0 100% 0 100%;
+  background:linear-gradient(90deg,var(--leaf),var(--leaf2));transform-origin:0 50%;transform:scale(0) rotate(-14deg);box-shadow:0 2px 4px rgba(0,0,0,.35)}
+.process.is-seen .pp.is-on .pp2__grow li{animation:stepIn .55s ease both;animation-delay:calc(.25s + (var(--i) + .6) * var(--g) / var(--n))}
+.process.is-seen .pp.is-on .pp2__grow li::before{animation:leafOut .6s cubic-bezier(.3,1.5,.5,1) both;animation-delay:calc(.15s + (var(--i) + .6) * var(--g) / var(--n))}
+@keyframes stepIn{to{opacity:1;translate:0 0}}
+@keyframes leafOut{to{transform:scale(1) rotate(-14deg)}}
+@media (prefers-reduced-motion:reduce){.pp2__grow::after{clip-path:none!important;animation:none!important}.pp2__grow li{opacity:1;translate:none;animation:none!important}.pp2__grow li::before{transform:scale(1) rotate(-14deg);animation:none!important}}
+/* the bottle, whole, in a framed portrait */
+.pp2__stage:not(#_){aspect-ratio:3/5;width:min(100%,calc(min(78vh,720px) * .6))}
+.pp2__stage::after{inset:-14px!important;-webkit-mask:none!important;mask:none!important;background:none!important;opacity:1!important;border-radius:34px;box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--acc) 70%,transparent)}
+.pp2__stage>img:not(#_){-webkit-mask:none!important;mask:none!important;border-radius:26px;object-fit:cover;object-position:50% 50%;box-shadow:0 50px 90px -40px rgba(0,0,0,.85),0 0 60px -10px var(--glow)}
+.pp2__line{position:absolute;left:-46px;top:50%;translate:0 -50%;writing-mode:vertical-rl;rotate:180deg;font:800 12px/1 var(--f);font-stretch:118%;letter-spacing:.34em;text-transform:uppercase;color:var(--acc);white-space:nowrap}
+.pp2__seal:not(#_){right:-40px;bottom:7%}
+/* tabs: three bottle cards */
+.process__tabs:not(#_){border:0!important;gap:clamp(10px,1.4vw,18px);background:none}
+.process__tabs button:not(#_){display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:16px;align-items:center;text-align:left;
+  padding:14px 20px 14px 14px;border-radius:20px;border:0!important;background:rgba(250,246,238,.04);box-shadow:inset 0 0 0 1px rgba(250,246,238,.1);transition:background .4s,box-shadow .4s,transform .4s cubic-bezier(.3,1.4,.5,1)}
+.process__tabs button::after{display:none!important}
+.process__tabs .pt__b{grid-row:1/3;height:76px;width:auto;filter:drop-shadow(0 8px 10px rgba(0,0,0,.5));transition:transform .45s cubic-bezier(.3,1.5,.5,1)}
+.process__tabs button b:not(#_){align-self:end}
+.process__tabs button span:not(.finmark):not(.sr){align-self:start}
+.process__tabs button:hover{background:rgba(250,246,238,.08)}
+.process__tabs [aria-selected=true]:not(#_){background:radial-gradient(120% 140% at 0% 100%,color-mix(in srgb,var(--acc) 30%,transparent),transparent 70%),rgba(250,246,238,.07);box-shadow:inset 0 0 0 1.5px var(--acc),0 18px 40px -20px rgba(0,0,0,.7);transform:translateY(-3px)}
+.process__tabs [aria-selected=true] .pt__b{transform:translateY(-6px) scale(1.06)}
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){
+  .process__tabs button:not(#_){grid-template-columns:1fr;grid-template-rows:auto auto auto;justify-items:center;text-align:center;padding:12px 8px}
+  .process__tabs .pt__b{grid-row:auto;height:58px;margin-bottom:6px}
+  .pp2__line{display:none}
+}
+.pp2__grow li:not(#_){padding-left:58px}
+.pp2__seal:not(#_){right:-62px;bottom:2%}
+
+/* ===== v67 award photos: plain, classy portraits (no arch, no frame) ===== */
+.aw2__card figure:not(#_){-webkit-mask:none!important;mask:none!important;border-radius:18px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 40px 70px -36px rgba(0,0,0,.85)}
+.aw2__card figure img{transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+
+/* ===== v67 footer: the bottles stand on a San Pedro beach bar at sunset ===== */
+.foot__buy:not(#_){position:relative;isolation:isolate;border-bottom:0;padding-top:clamp(60px,9vh,110px);padding-bottom:clamp(50px,7vh,90px)}
+.foot__buy::before{content:"";position:absolute;top:0;bottom:0;left:calc(50% - 50vw);width:100vw;z-index:-1;
+  background:linear-gradient(90deg,rgba(5,12,18,.94) 0%,rgba(5,12,18,.78) 34%,rgba(5,12,18,.15) 62%,rgba(5,12,18,.05) 100%),linear-gradient(0deg,rgba(5,12,18,.95) 0%,rgba(5,12,18,0) 22%),url(img/foot-bar.webp) 60% 100%/cover no-repeat}
+.foot{padding-top:0!important}
+.foot__shelf::before,.fb__bar{display:none!important}
+.foot__shelf:not(#_){align-self:end;padding-top:0}
+.fb__pic:not(#_){height:clamp(290px,min(29vw,50vh),460px);-webkit-box-reflect:below 0 linear-gradient(transparent 82%,rgba(255,255,255,.16))}
+.fb--dark .fb__pic:not(#_){height:calc(clamp(290px,min(29vw,50vh),460px) * .98)}
+.fb--fin .fb__pic:not(#_){height:calc(clamp(290px,min(29vw,50vh),460px) * .9)}
+.fb__pic img:not(#_){filter:drop-shadow(0 0 22px rgba(255,190,110,.18)) drop-shadow(0 26px 22px rgba(0,0,0,.55)) brightness(1.06)}
+.fb__nm:not(#_){margin-top:clamp(26px,4vh,46px)}
+.fb::before{bottom:calc(clamp(26px,4vh,46px) + 30px)!important;background:radial-gradient(closest-side,rgba(255,200,130,.6),rgba(255,200,130,0))!important}
+@supports (animation-timeline:view()){.fb{animation:fbRise linear both;animation-timeline:view();animation-range:entry 0% cover 35%}.fb--white{animation-range:entry 6% cover 40%}.fb--fin{animation-range:entry 12% cover 45%}}
+@keyframes fbRise{from{opacity:0;translate:0 60px}to{opacity:1;translate:0 0}}
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){
+  .foot__buy::before{background:linear-gradient(180deg,rgba(5,12,18,.95) 0%,rgba(5,12,18,.75) 45%,rgba(5,12,18,.2) 75%,rgba(5,12,18,.9) 100%),url(img/foot-bar-m.webp) 62% 100%/cover no-repeat}
+  .fb__pic:not(#_){height:clamp(180px,46vw,280px)}
+  .fb--dark .fb__pic:not(#_){height:calc(clamp(180px,46vw,280px) * .98)}
+  .fb--fin .fb__pic:not(#_){height:calc(clamp(180px,46vw,280px) * .9)}
+}
+
+/* ===== v67 homepage: a tasting in four coasters above the pass ===== */
+.tsteps{position:relative;z-index:1;max-width:1180px;margin:0 auto clamp(40px,6vh,70px);text-align:center;color:var(--bone)}
+.tsteps__head .eyebrow{color:#e6bb83;margin-bottom:8px}
+.tsteps__head h3:not(#_){font:800 clamp(28px,3vw,46px)/1.05 var(--f)!important;font-stretch:122%!important;letter-spacing:-.01em;margin:0 0 clamp(26px,4vh,44px);color:var(--bone)}
+.tsteps__row{list-style:none;margin:0;padding:0;position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2vw,30px)}
+.tsteps__route{position:absolute;left:0;right:0;top:calc(clamp(110px,11vw,150px) / 2 - 30px);width:100%;height:60px;z-index:0;overflow:visible}
+.tsteps__route path{fill:none;stroke:#e6bb83;stroke-width:2;stroke-dasharray:.012 .012;opacity:.55}
+.tsteps__row li{position:relative;z-index:1;display:grid;justify-items:center;gap:6px}
+.tco{position:relative;display:grid;place-items:center;width:clamp(110px,11vw,150px);aspect-ratio:1;border-radius:50%;margin-bottom:10px;
+  background:radial-gradient(circle at 50% 45%,#fbf3e2 0 58%,#efe1c4 59% 62%,#f7ecd6 63% 100%);box-shadow:0 0 0 4px #c9a774,0 0 0 6px rgba(0,0,0,.25),0 22px 34px -14px rgba(0,0,0,.8);rotate:calc((var(--i) - 1.5) * 4deg)}
+.tco img{width:74%;height:74%;object-fit:contain}
+.tsteps__row li:nth-child(3) .tco img{width:64%;height:64%;object-fit:cover;border-radius:50%}
+.tco i{position:absolute;top:-6px;right:-4px;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#e0974a;color:#1a0b00;font:800 16px/1 var(--f);font-style:normal;box-shadow:0 6px 12px rgba(0,0,0,.4)}
+.tsteps__row b{font:800 clamp(16px,1.35vw,20px)/1.15 var(--f);font-stretch:118%;color:var(--bone)}
+.tco__t{font-size:15px;line-height:1.45;color:rgba(250,246,238,.78);max-width:16em}
+.tsteps__cta{margin-top:clamp(26px,4vh,40px)}
+.tsteps__btn:not(#_){background:#f6efe2;color:#14201f}
+@supports (animation-timeline:view()){
+  .tsteps__row li{animation:coIn linear both;animation-timeline:view();animation-range:entry calc(var(--i) * 8%) cover calc(30% + var(--i) * 6%)}
+  .tsteps__route path{stroke-dashoffset:1;animation:routeDraw linear both;animation-timeline:view();animation-range:entry 0% cover 45%}
+}
+@keyframes coIn{from{opacity:0;translate:0 -40px;scale:.85}to{opacity:1;translate:0 0;scale:1}}
+@keyframes routeDraw{from{stroke-dashoffset:1;opacity:0}to{stroke-dashoffset:0;opacity:.55}}
+@media (max-width:900px){
+  .tsteps__row{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:28px}
+  .tsteps__route{display:none}
+}
+
+/* ===== v67 homepage tasting: one section. Story, four coasters and a slim pass on the same sand ===== */
+.rooms .tix:not(#_){margin:clamp(10px,2vh,24px) 0 0;padding:0;background:none;overflow:visible}
+.rooms .tix__bg{display:none}
+.rooms .tsteps:not(#_){color:var(--ink)}
+.rooms .tsteps__head .eyebrow{color:#8a6234}
+.rooms .tsteps__head h3:not(#_){color:var(--ink)}
+.rooms .tsteps__row b{color:var(--ink)}
+.rooms .tco__t{color:#4a5755}
+.rooms .tsteps__route path{stroke:#a07443}
+.rooms .tco{box-shadow:0 0 0 4px #c9a774,0 22px 30px -16px rgba(60,36,12,.55)}
+.rooms .tsteps__btn:not(#_){background:#1c2b2a;color:#f6efe2}
+.rooms .visit2{display:none}
+@media (min-width:1001px){
+  .rooms .tix .ticket:not(#_){max-width:1360px;grid-template-columns:minmax(0,1fr) 190px}
+  .rooms .tix .ticket__main:not(#_){grid-template-columns:repeat(4,minmax(0,1fr)) auto;align-items:end;gap:14px 14px;padding:22px 26px 20px}
+  .rooms .tix .ticket__row{display:contents}
+  .rooms .tix .ticket__top{grid-column:1/4;order:0;display:flex;gap:18px;align-items:baseline}
+  .rooms .tix .ticket h3:not(#_){grid-column:4/-1;order:0;justify-self:end;font-size:22px!important;margin:0}
+  .rooms .tix .ticket__main>.ticket__row>label,.rooms .tix .ticket__main>label{order:1}
+  .rooms .tix .ticket .btn:not(#_){order:2;margin:0;align-self:end;white-space:nowrap}
+  .rooms .tix .ticket__where{order:3;grid-column:1/-1;display:flex!important;flex-wrap:wrap;gap:8px;align-items:center}
+  .rooms .tix .ticket__where legend{float:left;margin:0 10px 0 0;padding:10px 0}
+  .rooms .tix .ticket__where span{display:flex;gap:8px;align-items:baseline;padding:9px 14px;border-radius:999px;font-size:13px}
+  .rooms .tix .ticket__where span b{font-size:15px}
+  .rooms .tix .ticket__where span em{font-size:12px}
+  .rooms .tix .ticket__note{order:4;grid-column:1/-1;font-size:13px}
+  .rooms .tix .ticket label input:not(#_){padding:10px 12px;font-size:16px;margin-top:6px}
+  .rooms .tix .ticket__step button{width:40px}
+  .rooms .tix .ticket__wm{display:none}
+  .rooms .tix .ticket__stub:not(#_){padding:18px 14px;gap:2px}
+  .rooms .tix .ticket__n b:not(#_){font-size:64px}
+  .rooms .tix .ticket__room:not(#_){font-size:15px;margin:2px 0 6px}
+  .rooms .tix .ticket__total b:not(#_){font-size:22px}
+  .rooms .tix .ticket__keep:not(#_){font-size:12px;margin-top:6px}
+  .rooms .tix .ticket__side{display:none}
+}
+@media (max-width:1000px){
+  .rooms .tix .ticket__main:not(#_){display:flex;flex-direction:column;gap:14px;padding:22px 20px}
+  .rooms .tix .ticket h3:not(#_){font-size:30px!important;order:0}
+  .rooms .tix .ticket__top{order:0}
+  .rooms .tix .ticket__row{order:1}
+  .rooms .tix .ticket .btn:not(#_){order:2;align-self:stretch;justify-content:center}
+  .rooms .tix .ticket__where{order:3;grid-template-columns:1fr 1fr!important;gap:8px}
+  .rooms .tix .ticket__where span:not(#_){font-size:12px;line-height:1.3;padding:10px 10px 10px 36px;gap:2px;border-radius:12px}
+  .rooms .tix .ticket__where span b{font-size:15px}
+  .rooms .tix .ticket__where span em{font-size:12px}
+  .rooms .tix .ticket__note{order:4}
+  .rooms .tix .ticket__wm{display:none}
+}
+@media (min-width:1001px){.rooms .tix .ticket__where span:not(#_){padding-left:38px}}@media (min-width:1001px){.rooms .tix .ticket__where span:not(#_){padding-left:38px}}
+.rooms:not(#_){padding-bottom:clamp(60px,9vh,110px)}
+
+/* ===== v67 homepage story: a logbook of three prints along a sea route, each with a year and a real paragraph ===== */
+.story:not(#_){isolation:isolate}
+.story::after{content:"";position:absolute;inset:0;z-index:-1;background:url(img/il/shark-pattern-sm.webp) 0 0/320px auto repeat;opacity:.04;pointer-events:none}
+.logb{list-style:none;margin:clamp(30px,5vh,60px) auto 0;padding:0;max-width:1360px;position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,4vw,64px);align-items:start}
+.logb__route{position:absolute;left:0;right:0;top:clamp(120px,13vw,190px);width:100%;height:80px;z-index:0;overflow:visible}
+.logb__route path{fill:none;stroke:#a07443;stroke-width:2;stroke-dasharray:.01 .012;opacity:.6}
+.logb__i{position:relative;z-index:1}
+.logb__i:nth-child(3){margin-top:clamp(50px,7vw,110px)}
+.logb__i:nth-child(4){margin-top:clamp(10px,2vw,30px)}
+.logb__pic{display:block;border-radius:18px;overflow:hidden;border:8px solid #fffaf1;box-shadow:0 40px 60px -34px rgba(70,38,8,.6),0 2px 8px rgba(70,38,8,.08);rotate:calc((var(--i) - 1) * 2.4deg + .6deg);transition:rotate .6s cubic-bezier(.3,1.5,.5,1),transform .6s cubic-bezier(.3,1.5,.5,1)}
+.logb__i:nth-child(3) .logb__pic{rotate:1.6deg}
+.logb__pic img{display:block;width:100%;aspect-ratio:4/3.4;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.logb__pic:hover{rotate:0deg;transform:translateY(-6px)}
+.logb__pic:hover img{transform:scale(1.04)}
+.logb__yr{display:block;margin:22px 0 6px;font:800 clamp(34px,3.4vw,54px)/1 var(--f);font-stretch:125%;letter-spacing:-.02em;color:#b07a3e}
+.logb__i h3:not(#_){margin:0 0 10px;font:800 clamp(20px,1.6vw,24px)/1.15 var(--f)!important;font-stretch:118%!important;color:var(--ink)}
+.logb__i p{margin:0 0 14px;font-size:clamp(16px,1.15vw,17.5px);line-height:1.6;color:#4a5755;max-width:30em}
+.logb__go{font:800 12.5px/1 var(--f);font-stretch:118%;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:2px solid #b07a3e;padding-bottom:5px}
+.story .story__quote:not(#_){max-width:900px;margin:clamp(50px,8vh,90px) auto 0;text-align:center}
+.story .story__quote p:not(#_){font-size:clamp(30px,3.4vw,52px)!important;line-height:1.1;color:var(--ink)}
+.story .story__quote cite{display:block;margin-top:14px;font:800 12.5px/1 var(--f);font-stretch:118%;letter-spacing:.16em;text-transform:uppercase;font-style:normal;color:#8a6234}
+@supports (animation-timeline:view()){.logb__i{animation:prA linear both;animation-timeline:view();animation-range:entry calc(var(--i) * 6%) cover calc(35% + var(--i) * 5%)}}
+@keyframes prA{from{opacity:0;translate:0 60px}to{opacity:1;translate:0 0}}
+@media (max-width:900px){.logb{grid-template-columns:1fr;gap:44px;max-width:520px}.logb__i:nth-child(n){margin-top:0}.logb__route{display:none}}
+/* pass chips: the radio sits in its own gutter */
+.ticket__where label{position:relative}
+.rooms .tix .ticket__where input:not(#_),.trb--bar .ticket__where input:not(#_){position:absolute;left:14px;top:50%;translate:0 -50%;margin:0}
+@media (min-width:1001px){.rooms .tix .ticket__where span:not(#_){padding-left:40px}}
+@media (min-width:1001px){.rooms .tix .ticket__where span:not(#_),.trb--bar .ticket__where span:not(#_){padding-left:44px}}
+/* v67 Dark 8 scene sits above the tide line so the foot of the label is never covered */
+@media (min-width:901px) and (not ((orientation:portrait) and (max-width:1180px))){
+  .lineup .lu--dark .lu__scene:not(#_){bottom:calc(var(--wh) * .75);background:#0b0604}
+  .lineup .lu--white .lu__scene:not(#_){bottom:calc(var(--wh) * .55)}
+}
+@media (min-width:901px) and (not ((orientation:portrait) and (max-width:1180px))){
+  .lineup .lu--dark .lu__scene::after{content:"";position:absolute;left:0;right:0;bottom:0;height:120px;z-index:3;pointer-events:none;background:linear-gradient(180deg,rgba(11,6,4,0),#0b0604)}
+  .lineup .lu--white .lu__scene::after{content:"";position:absolute;left:0;right:0;bottom:0;height:100px;z-index:3;pointer-events:none;background:linear-gradient(180deg,rgba(241,234,220,0),#eef0ea)}
+}

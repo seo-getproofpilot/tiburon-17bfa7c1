@@ -20,10 +20,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,100,400&family=Metamorphous&family=Marcellus+SC&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="../assets/img/tr-hero.webp">
-<link rel="stylesheet" href="../assets/site.css?v=1794975389">
-<link rel="stylesheet" href="../assets/page.css?v=1794975389">
-<link rel="stylesheet" href="../assets/type.css?v=1794975389">
-<link rel="stylesheet" href="../assets/stories.css?v=1794975389">
+<link rel="stylesheet" href="../assets/site.css?v=1794979212">
+<link rel="stylesheet" href="../assets/page.css?v=1794979212">
+<link rel="stylesheet" href="../assets/type.css?v=1794979212">
+<link rel="stylesheet" href="../assets/stories.css?v=1794979212">
 <script>
   (function(){var d=document.documentElement;d.classList.add('js','inner');try{if(localStorage.getItem('tb_age')!=='1'&&!/nointro/.test(location.search))d.classList.add('needs-age');}catch(e){}})();
 </script>
@@ -96,7 +96,7 @@
 <main id="main">
 
 <!-- ============ HERO ============ -->
-<section class="trh" aria-labelledby="tr-h">
+<section class="trh trb--bar" aria-labelledby="tr-h">
   <img class="trh__img" src="../assets/img/tr-hero.webp" alt="A tasting group raising their glasses at the long table in front of the Tiburon logo" width="1280" height="960" fetchpriority="high">
   <span class="trh__shade" aria-hidden="true"></span>
   <div class="trh__copy">
@@ -105,17 +105,12 @@
     <h1 id="tr-h">Rum tasting in Belize, at four Tiburon tasting rooms</h1>
     <p class="trh__lede">Pull up a stool where Tiburon is poured every day. The team walks you through the range, tells you how it&rsquo;s made, and sends you home with the glass.</p>
     <ul class="trh__facts" aria-label="The tasting at a glance">
-      <li><b>4</b><span>pours</span></li><li><b>$30</b><span>BZD a person</span></li><li><b>1</b><span>glass to keep</span></li><li><b>4</b><span>rooms in Belize</span></li>
+      <li><b>4</b><span>flavors to taste</span></li><li><b>$30</b><span>BZD a person</span></li><li><b>1</b><span>glass to keep</span></li><li><b>4</b><span>locations in Belize</span></li>
     </ul>
-    <div class="trh__cta"><a class="btn btn--primary" href="#book">Book a tasting</a><a class="btn btn--glass" href="#rooms">Find a room</a></div>
+    <div class="trh__cta"><a class="btn btn--primary" href="#book">Book a tasting</a><a class="btn btn--glass" href="#san-pedro">See the rooms</a></div>
   </div>
-</section>
-
-<!-- ============ BOOK ============ -->
-<section class="trb trb--bar" aria-labelledby="book-h">
   <h2 id="book-h" class="sr">Book a tasting</h2>
-  <div class="tix" id="book">
-    <div class="tix__bg" aria-hidden="true"><img src="../assets/img/e-bar.webp" alt="" loading="lazy"></div>
+  <div class="tix trh__pass" id="book">
     <form class="ticket" id="bookForm" novalidate>
       <div class="ticket__main">
         <div class="ticket__top"><p class="ticket__brand">Tibur&oacute;n Rum Company, Belize</p><p class="ticket__pass">Tasting pass</p></div>
@@ -152,54 +147,37 @@
   </div>
 </section>
 
-<!-- ============ HOW A TASTING GOES: the same rope as How it's made ============ -->
-<section class="sty trsteps" id="tasting" aria-labelledby="tw-h">
+
+
+<!-- ============ HOW A TASTING GOES ============ -->
+<section class="sty trsteps ts2s" id="tasting" aria-labelledby="tw-h">
   <div class="sty__in trsteps__head">
     <p class="eyebrow">How a tasting goes</p>
     <h2 id="tw-h">Four pours, the story, and a glass to keep</h2>
     <p>From the door to the glass you take home, here is what happens at the bar.</p>
   </div>
-  <div class="proc" aria-label="The tasting, step by step">
-    <div class="proc__rope" aria-hidden="true"><i></i></div>
-    <div class="sty__in">
-      <article class="step">
-        <div class="step__art"><img class="plate" src="../assets/img/il/t-ticket.webp" alt="Drawing of a tasting ticket and a fountain pen on a wooden bar top" width="720" height="548" loading="lazy"></div>
-        <div class="step__copy"><span class="step__n">01</span><h3>Book your seat</h3><p>Pick a room, a day and how many of you are coming on the tasting pass above. A tasting is $30 BZD a person.</p></div>
-      </article>
-      <article class="step">
-        <div class="step__art"><figure class="painted"><img src="../assets/img/il/pt-room.webp" alt="Painting of a group of guests at the Tiburon tasting room bar" width="900" height="604" loading="lazy"></figure></div>
-        <div class="step__copy"><span class="step__n">02</span><h3>Pull up a stool</h3><p>Step in out of the sun. The team greets you at the bar and walks you through the molasses, the barrels and the second maturation as you taste.</p></div>
-      </article>
-      <article class="step">
-        <div class="step__art"><img class="plate" src="../assets/img/il/t-pours.webp" alt="Drawing of four tasting glasses on a wooden paddle: aged rum, white rum, a fruit infusion and tequila with lime" width="720" height="580" loading="lazy"></div>
-        <div class="step__copy"><span class="step__n">03</span><h3>Four pours</h3>
-          <ul class="trpours">
-            <li><img src="../assets/img/b-dark-s.webp" alt="" width="82" height="300" loading="lazy"><span><b class="nm--dark">Dark 8</b>The 8 Year Reserve Blend, rested twice in bourbon barrels</span></li>
-            <li><img src="../assets/img/b-white-s.webp" alt="" width="83" height="300" loading="lazy"><span><b class="nm--white">White Tip</b>The overproof white rum, at 92 proof</span></li>
-            <li><img src="../assets/img/tr-inf.webp" alt="" width="360" height="360" loading="lazy" class="is-jar"><span><b>A fruit infusion</b>White Tip steeped with fruit, like mango or strawberry</span></li>
-            <li><img src="../assets/img/b-fin-s.webp" alt="" width="93" height="300" loading="lazy"><span><b><span class="finmark" aria-hidden="true"></span><span class="sr">FIN</span></b>The tequila blanco, 100% de agave</span></li>
-          </ul>
-        </div>
-      </article>
-      <article class="step">
-        <div class="step__art"><img class="plate" src="../assets/img/il/t-glass.webp" alt="Drawing of a tasting glass with a little rum left in it, on sand beside a conch shell" width="720" height="580" loading="lazy"></div>
-        <div class="step__copy"><span class="step__n">04</span><h3>Keep the glass</h3><p>The tasting glass goes home with you. Bottles, infusions, shirts and caps are on the shelves if you want more of Belize in your bag.</p></div>
-      </article>
-    </div>
+  <div class="sty__in ts2__list">
+    <article class="ts2" style="--i:0">
+      <figure class="ts2__art ts2__art--draw"><img src="../assets/img/il/t-ticket.webp" alt="Drawing of a tasting ticket and a fountain pen on a wooden bar top" width="720" height="548" loading="lazy"></figure>
+      <div class="ts2__copy"><span class="ts2__n">01</span><h3>Book your seat</h3><p>Pick a room, a day and how many of you are coming on the pass at the top of this page. A tasting is $30 BZD a person.</p></div>
+    </article>
+    <article class="ts2" style="--i:1">
+      <figure class="ts2__art ts2__art--photo"><img src="../assets/img/tr-si-front.webp" alt="The Shark Shack in San Ignacio, with the Tiburon Rum Company Belize sign painted on its wall" width="1400" height="1050" loading="lazy"></figure>
+      <div class="ts2__copy"><span class="ts2__n">02</span><h3>Pull up a stool</h3><p>Step in out of the sun at one of our four tasting rooms. The team greets you at the bar and walks you through the molasses, the barrels and the second maturation.</p></div>
+    </article>
+    <article class="ts2" style="--i:2">
+      <figure class="ts2__art ts2__art--photo"><img src="../assets/img/pl-shelf.webp" alt="Dark 8, White Tip and FIN lined up on the Placencia tasting bar with tasting glasses" width="1280" height="960" loading="lazy"></figure>
+      <div class="ts2__copy"><span class="ts2__n">03</span><h3>Four pours</h3><p>Dark 8, the 8 Year Reserve Blend. White Tip at 92 proof. A White Tip fruit infusion, like mango or strawberry. And FIN, our tequila blanco.</p></div>
+    </article>
+    <article class="ts2" style="--i:3">
+      <figure class="ts2__art ts2__art--draw"><img src="../assets/img/il/t-glass.webp" alt="Drawing of a tasting glass with a little rum left in it, on sand beside a conch shell" width="720" height="580" loading="lazy"></figure>
+      <div class="ts2__copy"><span class="ts2__n">04</span><h3>Keep the glass</h3><p>Your tasting glass goes home with you. Bottles, infusions, shirts and caps are on the shelves if you want more of Belize in your bag.</p></div>
+    </article>
   </div>
   <div class="sty__in trsteps__cta"><a class="btn btn--primary btn--ink" href="#book">Book a tasting</a></div>
 </section>
 
-<!-- ============ ROOM PICKER ============ -->
-<nav class="rpick" id="rooms" aria-label="Our four tasting rooms">
-  <p class="eyebrow">Pick your room</p>
-  <ul>
-    <li><a href="#san-pedro"><img src="../assets/img/sp-front.webp" alt="" loading="lazy"><b>San Pedro</b><span>Ambergris Caye</span><em>Open daily, 10am to 7pm</em></a></li>
-    <li><a href="#placencia"><img src="../assets/img/pl-front.webp" alt="" loading="lazy"><b>Placencia Village</b><span>Stann Creek</span><em>Open daily, 10am to 6pm</em></a></li>
-    <li><a href="#caye-caulker"><img src="../assets/img/tr-cc-front.webp" alt="" loading="lazy"><b>Caye Caulker</b><span>Avenida Hicaceno</span><em>Thursday to Sunday, 9am to 6pm</em></a></li>
-    <li><a href="#san-ignacio"><img src="../assets/img/tr-si-front.webp" alt="" loading="lazy"><b>San Ignacio</b><span>The Shark Shack, Cayo</span><em>Wednesday to Saturday, 9am to 6pm</em></a></li>
-  </ul>
-</nav>
+
 
 <!-- ============ SAN PEDRO ============ -->
 <section class="room2" id="san-pedro" aria-labelledby="san-pedro-h">
@@ -297,7 +275,7 @@
       <p>We ship to most U.S. states and D.C. through a network of retail partners. You&rsquo;ll see any shipping limits for your address at checkout.</p>
       <div class="foot__ctas">
         <a class="btn btn--primary foot__all" href="../where-to-buy/" data-add="all" data-track="buy-all-footer">Add all three, $120.97</a>
-        <a class="btn foot__shop" href="../where-to-buy/">Shop the bottles</a>
+        <a class="btn btn--primary foot__shop" href="../where-to-buy/">Shop the bottles</a>
       </div>
     </div>
     <div class="foot__shelf">
@@ -324,11 +302,11 @@
     <p>&copy; 2026 Tiburon Rum Company</p>
   </div>
 </footer>
-<script src="../assets/analytics.js?v=1794975389" defer></script>
-<script src="../assets/cart.js?v=1794975389" defer></script>
+<script src="../assets/analytics.js?v=1794979212" defer></script>
+<script src="../assets/cart.js?v=1794979212" defer></script>
 
 
-<script src="../assets/page.js?v=1794975389" defer></script>
-<script src="../assets/stories.js?v=1794975389" defer></script>
+<script src="../assets/page.js?v=1794979212" defer></script>
+<script src="../assets/stories.js?v=1794979212" defer></script>
 </body>
 </html>
