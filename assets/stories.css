@@ -966,3 +966,27 @@
 @media (min-width:901px){.ckh2__film:not(#_){max-height:none}}
 .cks.wv + .cks--white:not(#_),.cks.wv + .cks--fin:not(#_){padding-top:calc(clamp(90px,14vh,160px) + var(--wh) + 40px)}
 .cks.wv + .cks--white:not(#_),.cks.wv + .cks--fin:not(#_){padding-top:calc(clamp(90px,14vh,160px) + clamp(60px,8vw,120px) + 40px)}
+
+/* ===== v73 cocktails: no hard line where the veil starts; Make this buttons that read on every sea ===== */
+.cks--white>.sty__in::before,.cks--fin>.sty__in::before{inset:-30% -50vw -10%!important;-webkit-mask:linear-gradient(180deg,transparent 0%,#000 26%,#000 100%);mask:linear-gradient(180deg,transparent 0%,#000 26%,#000 100%)}
+.cks--dark .ck summary:not(#_){background:#e0974a!important;color:#1a0b00!important;box-shadow:0 10px 22px -10px rgba(224,151,74,.7)!important;border:0!important}
+.cks--white .ck summary:not(#_){background:#14201f!important;color:#f6efe2!important;box-shadow:0 10px 22px -10px rgba(20,32,31,.6)!important;border:0!important}
+.cks--fin .ck summary:not(#_){background:#e6bb83!important;color:#1a1208!important;box-shadow:0 10px 22px -10px rgba(230,187,131,.6)!important;border:0!important}
+.cks .ck summary:not(#_) *{color:inherit!important}
+/* Dark 8: the sunset dock moves too; the veil sits over the footage */
+.cks--dark::before{z-index:-3!important}
+.cks--dark>.sty__in{position:relative}
+.cks--dark>.sty__in::before{content:"";position:absolute;inset:-30% -50vw -10%;z-index:-1;pointer-events:none;
+  background:linear-gradient(90deg,rgba(18,9,4,.8) 0%,rgba(18,9,4,.42) 45%,rgba(18,9,4,.18) 100%);
+  -webkit-mask:linear-gradient(180deg,transparent 0%,#000 26%,#000 100%);mask:linear-gradient(180deg,transparent 0%,#000 26%,#000 100%)}
+.cks--dark:not(#_){--bgimg:url(img/ck-bg-dark.webp)!important}
+@media (max-width:900px){.cks--dark:not(#_){background-color:#120904;--bgimg:url(img/ck-bg-dark-m.webp)!important}
+  .cks--dark::before{background-size:cover!important;background-position:50% 30%!important}
+  .cks--dark>.sty__in::before{background:linear-gradient(180deg,rgba(18,9,4,0) 0%,rgba(18,9,4,.5) 40%,rgba(18,9,4,.75) 100%)!important}}
+/* the sea footage stays pinned to the screen while you scroll a tall section, like the old fixed backgrounds */
+.cks__bg{position:absolute;inset:0;z-index:-2;pointer-events:none}
+.cks__bg .cks__vid:not(#_){position:sticky;top:0;inset:auto;display:block;width:100%;height:100vh;height:100svh;z-index:auto}
+@media (max-width:900px){
+  .cks__bg{inset:0 0 auto 0;height:min(170vw,960px);-webkit-mask:linear-gradient(#000 62%,transparent);mask:linear-gradient(#000 62%,transparent)}
+  .cks__bg .cks__vid:not(#_){position:static;height:100%!important;-webkit-mask:none;mask:none}
+}
