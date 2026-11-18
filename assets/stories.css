@@ -992,3 +992,16 @@
 }
 /* v73: overflow:hidden made each section its own scroll box, so the pinned sea stopped following; clip keeps the edges without breaking sticky */
 .cks:not(#_){overflow:clip}
+
+/* ===== v74 cocktails: the moving sea is the ONLY background in each bottle section ===== */
+/* no still photo layer at all */
+.cks--dark::before,.cks--white::before,.cks--fin::before{content:none!important;display:none!important;background:none!important}
+.cks--dark:not(#_){background:#120904!important}.cks--white:not(#_){background:#bfe3e6!important}.cks--fin:not(#_){background:#06182b!important}
+/* the footage is fixed to the screen and clipped to its own section, so it fills the section top to bottom as you scroll */
+.cks__bg:not(#_){position:absolute;inset:0!important;height:auto!important;z-index:-2;-webkit-clip-path:inset(0);clip-path:inset(0);-webkit-mask:none!important;mask:none!important}
+.cks__bg .cks__vid:not(#_){position:fixed!important;top:0!important;left:0!important;right:auto;bottom:auto;width:100vw!important;height:100vh!important;object-fit:cover;opacity:1!important;-webkit-mask:none!important;mask:none!important}
+@media (max-width:900px){
+  .cks--white .cks__bg .cks__vid:not(#_){object-position:72% 50%}
+  .cks--dark .cks__bg .cks__vid:not(#_){object-position:62% 50%}
+}
+@media (max-width:900px){.cks--white>.sty__in::before{background:linear-gradient(180deg,rgba(236,247,246,0) 0%,rgba(236,247,246,.42) 22%,rgba(236,247,246,.5) 100%)!important}}
