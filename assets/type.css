@@ -944,3 +944,14 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 .foot__scene:not(#_){border-radius:0;box-shadow:none;
   -webkit-mask:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%),linear-gradient(180deg,transparent 0,#000 16%,#000 82%,transparent 100%);-webkit-mask-composite:source-in;
   mask:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%),linear-gradient(180deg,transparent 0,#000 16%,#000 82%,transparent 100%);mask-composite:intersect}
+
+/* ===== v76 dive sound: a small pill, bottom left of the hero, muted until tapped ===== */
+.dive__sound{position:absolute;left:clamp(16px,2.4vw,36px);bottom:clamp(16px,3vh,32px);z-index:30;display:inline-flex;align-items:center;gap:10px;padding:10px 16px 10px 12px;border:1px solid rgba(250,246,238,.35);border-radius:999px;background:rgba(4,18,26,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--bone);font:800 12px/1 var(--f);font-stretch:118%;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background .25s,border-color .25s}
+.dive__sound:hover,.dive__sound:focus-visible{background:rgba(4,18,26,.8);border-color:#e6bb83}
+.dive__sound svg{width:20px;height:20px;flex:none}
+.dive__sound .ds__on{display:none}.dive__sound.is-on .ds__on{display:block}.dive__sound.is-on .ds__off{display:none}
+.dive__sound:not(.is-on)::after{content:"";position:absolute;inset:-4px;border-radius:999px;border:1px solid rgba(230,187,131,.6);animation:dsPulse 2.4s ease-out infinite;pointer-events:none}
+@keyframes dsPulse{0%{opacity:.9;scale:1}100%{opacity:0;scale:1.18}}
+@media (prefers-reduced-motion:reduce){.dive__sound::after{animation:none!important}}
+@media (max-width:900px){.dive__sound{bottom:auto;top:calc(var(--nav) + 12px);padding:8px 13px 8px 10px;font-size:11px}}
+@media (max-width:900px){.dive__sound:not(#_){top:auto;bottom:calc(env(safe-area-inset-bottom) + 96px)}}
