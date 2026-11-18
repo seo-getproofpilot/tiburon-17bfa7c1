@@ -1005,3 +1005,51 @@
   .cks--dark .cks__bg .cks__vid:not(#_){object-position:62% 50%}
 }
 @media (max-width:900px){.cks--white>.sty__in::before{background:linear-gradient(180deg,rgba(236,247,246,0) 0%,rgba(236,247,246,.42) 22%,rgba(236,247,246,.5) 100%)!important}}
+
+/* ===== v75 custom frames (the homepage "how each bottle is made" frame, carried over): double gold line, spinning seal, side label ===== */
+.fx-seal{position:absolute;z-index:4;width:clamp(92px,8vw,124px);aspect-ratio:1;border-radius:50%;background:#14201f;display:grid;place-items:center;
+  box-shadow:0 16px 34px -12px rgba(0,0,0,.55),0 0 0 1px rgba(201,167,116,.5);pointer-events:none}
+.fx-seal svg{position:absolute;inset:0;width:100%;height:100%;animation:sealSpin 36s linear infinite}
+.fx-seal text{font:700 15.5px/1 var(--f);font-stretch:118%;letter-spacing:.06em;fill:#e6bb83}
+.fx-seal img{width:30%;height:auto;filter:brightness(0) invert(1);opacity:.92}
+@keyframes sealSpin{to{rotate:360deg}}
+@media (prefers-reduced-motion:reduce){.fx-seal svg{animation:none}}
+
+/* How it's made: Part one / Part two as framed plaques */
+.proc__part.fx-plaque:not(#_){border:1.5px solid rgba(185,138,78,.7);border-radius:16px;background:#f7f0e2;padding:26px clamp(80px,9vw,110px) 24px;overflow:visible;box-shadow:0 22px 40px -28px rgba(70,38,8,.45)}
+.fx-plaque::after{content:"";position:absolute;inset:-10px;border-radius:24px;box-shadow:inset 0 0 0 1.5px rgba(185,138,78,.45);pointer-events:none}
+.fx-plaque::before{content:"";position:absolute;left:50%;top:-10px;width:44px;height:20px;translate:-50% -50%;background:url(img/mark.svg) center/contain no-repeat;opacity:.85}
+.fx-plaque .fx-seal{right:clamp(-62px,-4.4vw,-46px);top:50%;translate:0 -50%}
+@media (max-width:900px){
+  .proc__part.fx-plaque:not(#_){padding:22px 70px 20px 22px}
+  .fx-plaque .fx-seal{width:84px;right:-22px;top:-26px;translate:none}
+  .fx-plaque::before{left:28px;translate:0 -50%}
+}
+
+/* Tasting rooms: photos framed with a second gold line, the main photo carries a seal and its area */
+.room2 .fx-frame:not(#_),.ts2 .fx-frame:not(#_){border:0!important;background:none!important;overflow:visible!important;box-shadow:none!important}
+.fx-frame img:not(#_){display:block;width:100%;height:100%;object-fit:cover;border:0!important;border-radius:20px!important;box-shadow:0 34px 60px -30px rgba(40,22,6,.55)}
+.fx-frame::after{content:"";position:absolute;inset:-10px;border-radius:28px;box-shadow:inset 0 0 0 1.5px rgba(185,138,78,.75);pointer-events:none;z-index:1}
+.ts2 .fx-frame{position:relative}
+.ts2__art--photo.fx-frame img:not(#_){aspect-ratio:4/3;height:auto}
+.fx-line{position:absolute;left:-40px;top:50%;translate:0 -50%;writing-mode:vertical-rl;rotate:180deg;font:800 12px/1 var(--f);font-stretch:118%;letter-spacing:.32em;text-transform:uppercase;color:#a4783f;white-space:nowrap;z-index:2}
+.fx-frame--main .fx-seal{left:-34px;bottom:6%}
+.room2--flip .fx-frame--main .fx-line{left:auto;right:-40px;rotate:0deg}
+.room2--flip .fx-frame--main .fx-seal{left:auto;right:-34px}
+/* the map: same double line, rounded, with a little tag */
+.room2 .fx-map:not(#_){overflow:visible!important;border-radius:20px;rotate:0deg;box-shadow:0 0 0 6px #f7f0e2,0 0 0 7.5px rgba(185,138,78,.75),0 30px 50px -28px rgba(20,32,31,.45)!important}
+.fx-map iframe{display:block;width:100%;height:100%;border:0;border-radius:20px}
+.fx-tag{position:absolute;left:18px;top:-15px;z-index:3;padding:7px 14px;border-radius:999px;background:#14201f;color:#e6bb83;font:800 11px/1 var(--f);font-stretch:118%;letter-spacing:.18em;text-transform:uppercase;box-shadow:0 8px 18px -8px rgba(0,0,0,.5)}
+@media (max-width:900px){
+  .fx-line{display:none}
+  .fx-frame--main .fx-seal,.room2--flip .fx-frame--main .fx-seal{width:84px;left:auto;right:-12px;bottom:-18px}
+  .fx-frame::after{inset:-7px;border-radius:25px}
+}
+.fx-frame .fx-seal img:not(#_){width:30%!important;height:auto!important;border-radius:0!important;box-shadow:none!important;object-fit:contain}
+.proc__part.fx-plaque:not(#_){max-width:720px;padding-left:clamp(40px,6vw,96px);padding-right:clamp(40px,6vw,96px)}
+.fx-plaque h2{text-wrap:balance}
+.room2 .fx-frame img:not(#_){aspect-ratio:auto!important;height:100%!important;min-height:0}
+@media (max-width:900px){.room2 .fx-frame:not(#_){position:relative;align-self:stretch}.room2 .fx-frame img:not(#_){position:absolute;inset:0}.room2 .fx-frame--main:not(#_){min-height:220px}}
+@media (max-width:900px){.room2 .room2__a.fx-frame:not(#_){aspect-ratio:auto!important;width:auto;min-width:0}}
+.fx-frame .fx-seal img:not(#_){position:relative!important;inset:auto!important}
+.fx-tag:not(#_){font-size:12px}
