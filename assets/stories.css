@@ -990,3 +990,5 @@
   .cks__bg{inset:0 0 auto 0;height:min(170vw,960px);-webkit-mask:linear-gradient(#000 62%,transparent);mask:linear-gradient(#000 62%,transparent)}
   .cks__bg .cks__vid:not(#_){position:static;height:100%!important;-webkit-mask:none;mask:none}
 }
+/* v73: overflow:hidden made each section its own scroll box, so the pinned sea stopped following; clip keeps the edges without breaking sticky */
+.cks:not(#_){overflow:clip}
