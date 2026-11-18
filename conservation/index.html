@@ -19,9 +19,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,100,400&family=Metamorphous&family=Marcellus+SC&family=IM+Fell+DW+Pica+SC&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=1794979212">
-<link rel="stylesheet" href="../assets/page.css?v=1794979212">
-<link rel="stylesheet" href="../assets/type.css?v=1794979212">
+<link rel="stylesheet" href="../assets/site.css?v=1794981845">
+<link rel="stylesheet" href="../assets/page.css?v=1794981845">
+<link rel="stylesheet" href="../assets/type.css?v=1794981845">
+<link rel="stylesheet" href="../assets/stories.css?v=1794981845">
 <script>
   (function(){var d=document.documentElement;d.classList.add('js','inner');try{if(localStorage.getItem('tb_age')!=='1'&&!/nointro/.test(location.search))d.classList.add('needs-age');}catch(e){}})();
 </script>
@@ -71,9 +72,11 @@
 <main id="main">
 
 <!-- ============ HERO ============ -->
-<section class="cvh cvh--photo" aria-labelledby="cv-h">
+<section class="cvh cvh--photo cvh2 wv" aria-labelledby="cv-h">
   <picture class="cvh__bg"><source media="(max-width:900px)" srcset="../assets/img/reef-poster-m.webp"><img src="../assets/img/reef-poster.webp" alt="" width="1600" height="900" fetchpriority="high"></picture>
+  <video class="cvh2__vid" muted playsinline loop preload="none" aria-hidden="true" data-d="../assets/video/reef.mp4" data-m="../assets/video/reef-m.mp4"></video>
   <span class="cvh__shade" aria-hidden="true"></span>
+  <div class="cvh2__stamp" aria-hidden="true"><b>$1</b><span>BZ from every bottle sold in Belize</span></div>
   <div class="cvh__text">
     <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../">Home</a></li><li aria-current="page">Conservation</li></ol></nav>
     <p class="eyebrow">Conservation</p>
@@ -84,7 +87,7 @@
 </section>
 
 <!-- ============ OCEANA ============ -->
-<section class="cvo" id="oceana" aria-labelledby="cvo-h">
+<section class="cvo cvo2 wv" id="oceana" aria-labelledby="cvo-h">
   <figure class="cvo__pic rv"><img src="../assets/img/e-oceana.webp" alt="The Oceana sign in the Tiburon tasting room: helping save the reef, one drink at a time" width="1000" height="1333" loading="lazy"><figcaption>The Oceana sign in our San Pedro tasting room</figcaption></figure>
   <div class="cvo__text">
     <p class="eyebrow eyebrow--dark">Oceana Belize</p>
@@ -100,7 +103,7 @@
 </section>
 
 <!-- ============ CG-28 ============ -->
-<section class="vessel" id="vessel" aria-labelledby="vessel-h">
+<section class="vessel vessel2 wv wv--b" id="vessel" aria-labelledby="vessel-h">
   <div class="vessel__hull" aria-hidden="true"><span>CG</span><b>28</b></div>
   <div class="vessel__grid">
     <div class="vessel__pics">
@@ -123,9 +126,9 @@
 </section>
 
 <!-- ============ THE REEF ============ -->
-<section class="cvr" aria-labelledby="cvr-h">
+<section class="cvr cvr2 wv" aria-labelledby="cvr-h">
   <div class="cvr__grid">
-    <figure class="cvr__pic rv"><img src="../assets/img/e-bluehole.webp" alt="The Great Blue Hole seen from the air, a deep blue circle in the turquoise Belize Barrier Reef" width="1000" height="1000" loading="lazy"><figcaption>The Great Blue Hole, Belize Barrier Reef</figcaption></figure>
+    <figure class="cvr__pic ch__hole rv"><img src="../assets/img/e-bluehole.webp" alt="The Great Blue Hole seen from the air, a deep blue circle in the turquoise Belize Barrier Reef" width="1000" height="1000" loading="lazy"><svg class="ch__ring" viewBox="0 0 200 200" aria-hidden="true"><path id="cv-ring" fill="none" d="M100 100 m-88 0 a88 88 0 1 1 176 0 a88 88 0 1 1 -176 0"/><text><textPath href="#cv-ring" textLength="548">THE GREAT BLUE HOLE · BELIZE BARRIER REEF · UNESCO WORLD HERITAGE · </textPath></text></svg></figure>
     <div class="cvr__text">
       <p class="eyebrow">What it protects</p>
       <h2 id="cvr-h">The Belize Barrier Reef</h2>
@@ -149,7 +152,7 @@
 </section>
 
 <!-- ============ HOW TO HELP ============ -->
-<section class="cvx" aria-labelledby="cvx-h">
+<section class="cvx cvx2" aria-labelledby="cvx-h">
   <div class="cvx__head">
     <p class="eyebrow eyebrow--dark">Join in</p>
     <h2 id="cvx-h">How you can help</h2>
@@ -199,10 +202,15 @@
     <p>&copy; 2026 Tiburon Rum Company</p>
   </div>
 </footer>
-<script src="../assets/analytics.js?v=1794979212" defer></script>
-<script src="../assets/cart.js?v=1794979212" defer></script>
+<script src="../assets/analytics.js?v=1794981845" defer></script>
+<script src="../assets/cart.js?v=1794981845" defer></script>
 
 
-<script src="../assets/page.js?v=1794979212" defer></script>
+<script src="../assets/page.js?v=1794981845" defer></script>
+<script>
+(function(){var v=document.querySelector('.cvh2__vid');if(!v||matchMedia('(prefers-reduced-motion: reduce)').matches||(navigator.connection&&navigator.connection.saveData))return;
+  v.src=matchMedia('(max-width:900px)').matches?v.dataset.m:v.dataset.d;v.playbackRate=.6;
+  v.addEventListener('playing',function(){v.classList.add('is-on')},{once:true});var p=v.play();if(p&&p.catch)p.catch(function(){});})();
+</script>
 </body>
 </html>

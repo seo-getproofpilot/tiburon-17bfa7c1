@@ -19,10 +19,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,100,400&family=Marcellus+SC&family=IM+Fell+DW+Pica+SC&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=1794979212">
-<link rel="stylesheet" href="../assets/page.css?v=1794979212">
-<link rel="stylesheet" href="../assets/type.css?v=1794979212">
-<link rel="stylesheet" href="../assets/stories.css?v=1794979212">
+<link rel="stylesheet" href="../assets/site.css?v=1794981845">
+<link rel="stylesheet" href="../assets/page.css?v=1794981845">
+<link rel="stylesheet" href="../assets/type.css?v=1794981845">
+<link rel="stylesheet" href="../assets/stories.css?v=1794981845">
 <script>
   (function(){var d=document.documentElement;d.classList.add('js','inner');try{if(localStorage.getItem('tb_age')!=='1'&&!/nointro/.test(location.search))d.classList.add('needs-age');}catch(e){}})();
 </script>
@@ -73,17 +73,15 @@
 
 <main id="main">
 
-<section class="ckh" aria-labelledby="ck-h">
-  <div class="sty__in">
+<section class="ckh2" aria-labelledby="ck-h">
+  <div class="ckh2__film">
+    <img class="ckh2__poster" src="../assets/img/ckh-poster.webp" alt="Dark 8, White Tip and FIN on a beach bar at sunset in San Pedro, with an old fashioned, a rum and cola and a margarita set down in front of them" width="1600" height="900" fetchpriority="high">
+    <video class="ckh2__vid" muted playsinline preload="auto" poster="../assets/img/ckh-poster.webp" aria-hidden="true" data-d="../assets/video/ckh.mp4" data-m="../assets/video/ckh-m.mp4" data-end="../assets/img/ckh-end.webp"></video>
+  </div>
+  <div class="ckh2__copy">
     <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../">Home</a></li><li aria-current="page">Cocktails</li></ol></nav>
-    <p class="eyebrow">Cocktails</p>
-    <h1 id="ck-h">What to mix it with</h1>
-    <p>Recipes for each bottle, with exact measures. Open a card for the full build, and watch the glass to see how much of each goes in.</p>
-    <nav class="ckh__pick" aria-label="Jump to a bottle">
-      <a href="#dark"><img src="../assets/img/b-dark-s.webp" alt="" width="82" height="300"><span><b class="nm--dark">Dark 8</b><small>3 recipes</small></span></a>
-      <a href="#white"><img src="../assets/img/b-white-s.webp" alt="" width="82" height="300"><span><b class="nm--white">White Tip</b><small>4 recipes</small></span></a>
-      <a href="#fin"><img src="../assets/img/b-fin-s.webp" alt="" width="93" height="300"><span><b><span class="finmark" aria-hidden="true"></span><span class="sr-only">FIN</span></b><small>3 recipes</small></span></a>
-    </nav>
+    <h1 id="ck-h"><span class="ckh2__kw">Tiburon cocktails</span><span class="ckh2__big">What to mix it with</span></h1>
+    <p>A drink for every bottle, with exact measures. Pick one and follow the glass.</p>
   </div>
 </section>
 
@@ -344,11 +342,20 @@
     <p>&copy; 2026 Tiburon Rum Company</p>
   </div>
 </footer>
-<script src="../assets/analytics.js?v=1794979212" defer></script>
-<script src="../assets/cart.js?v=1794979212" defer></script>
+<script src="../assets/analytics.js?v=1794981845" defer></script>
+<script src="../assets/cart.js?v=1794981845" defer></script>
 
 
-<script src="../assets/page.js?v=1794979212" defer></script>
-<script src="../assets/stories.js?v=1794979212" defer></script>
+<script src="../assets/page.js?v=1794981845" defer></script>
+<script src="../assets/stories.js?v=1794981845" defer></script>
+<script>
+/* the hero film plays once when it can, then rests on the finished bar; reduced motion or Save-Data shows the finished bar */
+(function(){var v=document.querySelector('.ckh2__vid');if(!v)return;
+  var still=matchMedia('(prefers-reduced-motion: reduce)').matches||(navigator.connection&&navigator.connection.saveData);
+  if(still){document.querySelector('.ckh2__poster').src=v.dataset.end;return;}
+  v.src=matchMedia('(max-width:900px)').matches?v.dataset.m:v.dataset.d;
+  v.addEventListener('playing',function(){v.classList.add('is-on')},{once:true});
+  var p=v.play();if(p&&p.catch)p.catch(function(){document.querySelector('.ckh2__poster').src=v.dataset.end;});})();
+</script>
 </body>
 </html>

@@ -644,3 +644,190 @@
   .ts2__n{font-size:64px;margin-bottom:8px}
 }
 @media (max-width:900px){.trh__facts:not(#_){display:grid;grid-template-columns:1fr 1fr;gap:18px 16px}.trh__facts span:not(#_){letter-spacing:.1em}}
+
+/* v68 no swimming shark; dive gear leans on the anchor */
+.swim{display:none!important}
+.anchor .anchor__gear{position:absolute;right:-50%;bottom:3%;width:58%;height:auto;z-index:2;filter:drop-shadow(0 10px 14px rgba(20,32,31,.14))}
+@media (max-width:760px){.anchor>img.anchor__gear{scale:1;right:auto;left:calc(100% - 10%);width:52%}}
+
+/* ===== v68 cocktails: see the sea behind White Tip and FIN, with light moving through the water; three clearly different buttons ===== */
+.cks--white{--bgimg:linear-gradient(90deg,rgba(236,247,246,.62) 0%,rgba(236,247,246,.2) 45%,rgba(236,247,246,.08) 100%),linear-gradient(180deg,rgba(236,247,246,0),rgba(236,247,246,.25)),url(img/ck-bg-white.webp)!important}
+.cks--fin{--bgimg:linear-gradient(90deg,rgba(3,12,26,.6) 0%,rgba(3,12,26,.22) 50%,rgba(3,12,26,.12) 100%),linear-gradient(180deg,rgba(3,12,26,0),rgba(3,12,26,.35)),url(img/ck-bg-fin.webp)!important}
+.cks--white::after,.cks--fin::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;mix-blend-mode:soft-light;opacity:.55;
+  background-image:url(img/caustic.png),url(img/caustic.png);background-size:520px 520px,760px 760px;animation:ckCaustic 16s linear infinite}
+.cks--fin::after{opacity:.35;mix-blend-mode:screen;filter:brightness(.6)}
+@media (min-width:901px) and (hover:hover){.cks--white::after,.cks--fin::after{background-attachment:fixed,fixed}}
+@keyframes ckCaustic{to{background-position:520px 260px,-760px 380px}}
+@media (prefers-reduced-motion:reduce){.cks--white::after,.cks--fin::after{animation:none}}
+/* words on the lighter reef stay readable */
+.cks--white .ck__body:not(#_){background:linear-gradient(180deg,rgba(240,250,249,.0),rgba(240,250,249,.0))}
+.cks--white .ck h3,.cks--white .ck p.ck__line,.cks--white .cks__head p,.cks--white .cks__nm{text-shadow:0 1px 14px rgba(240,250,249,.95),0 0 2px rgba(240,250,249,.9)}
+.cks--fin .ck h3,.cks--fin .ck p.ck__line,.cks--fin .cks__head p{text-shadow:0 1px 14px rgba(3,12,26,.9)}
+/* buttons: Buy in the bottle's strong colour, About in bone, Make this in its own colour */
+.cks--dark .cks__more .btn--primary:not(.btn--alt):not(#_){background:#e0974a!important;color:#1a0b00!important}
+.cks--white .cks__more .btn--primary:not(.btn--alt):not(#_){background:#1f6f73!important;color:#fffaf1!important}
+.cks--fin .cks__more .btn--primary:not(.btn--alt):not(#_){background:#e6bb83!important;color:#1a1208!important}
+.cks .cks__more .btn--alt:not(#_){background:#f6efe2!important;color:#14201f!important}
+.cks--white .cks__more .btn--alt:not(#_){background:#14201f!important;color:#f6efe2!important}
+.cks--fin .ck summary:not(#_){background:#3d7dc4!important;color:#ffffff!important;box-shadow:0 8px 22px -8px rgba(61,125,196,.8)!important}
+.cks--dark .ck summary:not(#_){background:#3a2414!important;color:#f3e4cf!important;box-shadow:inset 0 0 0 1.5px #e0974a!important}
+
+/* ===== v68 Our Story rebuilt ===== */
+/* hero: the reef from the air, three prints from the story */
+.osh2{position:relative;isolation:isolate;overflow:hidden;min-height:min(100svh,920px);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(30px,5vw,80px);align-items:center;
+  padding:calc(var(--nav) + 50px) var(--gut) clamp(60px,9vh,110px);color:var(--bone);background:#04121a}
+.osh2::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(4,18,26,.95) 0%,rgba(4,18,26,.78) 40%,rgba(4,18,26,.35) 75%,rgba(4,18,26,.55) 100%),linear-gradient(0deg,rgba(4,18,26,.9),rgba(4,18,26,0) 35%),url(img/r-air.webp) 60% 50%/cover no-repeat}
+.osh2::after{content:"";position:absolute;inset:0;z-index:-1;background:url(img/il/shark-pattern-sm.webp) 0 0/320px auto repeat;opacity:.06;filter:invert(1);pointer-events:none}
+.osh2 h1:not(#_){margin:0 0 20px;max-width:14ch}
+.osh2__big{display:block;font:800 clamp(42px,5vw,80px)/1 var(--f);font-stretch:125%;letter-spacing:-.02em}
+.osh2__lede{font-size:clamp(18px,1.4vw,21px);line-height:1.55;max-width:30em;color:rgba(250,246,238,.85);margin:0}
+.osh2__prints{position:relative;height:min(68vh,620px)}
+.op{position:absolute;margin:0;padding:10px 10px 44px;background:#fffaf1;border-radius:10px;box-shadow:0 40px 70px -30px rgba(0,0,0,.75);width:min(62%,330px)}
+.op img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px}
+.op figcaption{position:absolute;left:0;right:0;bottom:12px;text-align:center;font:800 13px/1 var(--f);font-stretch:118%;letter-spacing:.16em;text-transform:uppercase;color:#6a4a24}
+.op--1{left:2%;top:4%;rotate:-6deg;z-index:2}
+.op--2{right:0;top:18%;rotate:5deg;z-index:1}
+.op--3{left:24%;bottom:0;rotate:-1.5deg;z-index:3}
+.op--1 img{object-position:40% 40%}
+@media (prefers-reduced-motion:no-preference){.op{animation:opIn .9s cubic-bezier(.2,.8,.2,1) both}.op--2{animation-delay:.15s}.op--3{animation-delay:.3s}}
+@keyframes opIn{from{opacity:0;translate:0 50px;scale:.94}to{opacity:1;translate:0 0;scale:1}}
+@media (max-width:900px){.osh2{grid-template-columns:1fr}.osh2__prints{height:min(110vw,520px)}.op{width:min(58%,260px)}}
+/* medals on a rope, like the homepage */
+.osm3:not(#_){background:radial-gradient(60% 50% at 50% 0%,#24160c 0%,transparent 70%),linear-gradient(180deg,#0b0604 0%,#120a05 100%);color:var(--bone)}
+.osm3__head{max-width:1360px;margin:0 auto clamp(26px,4vh,44px);display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:14px clamp(30px,6vw,100px);align-items:end}
+.osm3__head h2:not(#_){margin:0;color:var(--bone)}
+.osm3__n{display:block;font-size:2em;line-height:.9;color:#e0974a}
+.osm3__head p{margin:0;font-size:clamp(16px,1.2vw,18px);line-height:1.6;color:rgba(250,246,238,.8)}
+.osm3__more{max-width:1360px;margin:clamp(30px,5vh,50px) auto 0}
+@media (max-width:900px){.osm3__head{grid-template-columns:1fr}}
+/* the reef chapter on the reef */
+.osr2:not(#_){position:relative;isolation:isolate;color:var(--bone);background:#03101a}
+.osr2::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(3,16,26,.35) 0%,rgba(3,16,26,.55) 45%,rgba(3,16,26,.88) 70%),url(img/r-reef.webp) 30% 50%/cover no-repeat}
+@media (min-width:901px) and (hover:hover){.osr2::before{background-attachment:scroll,fixed}}
+.osr2 h2:not(#_),.osr2 p,.osr2 blockquote p{color:var(--bone)!important}
+.osr2 .osr__quote p:not(#_){color:#bfe6e3!important}
+@media (max-width:900px){.osr2::before{background:linear-gradient(180deg,rgba(3,16,26,.3),rgba(3,16,26,.9) 45%),url(img/r-reef.webp) 30% 0/auto 60svh no-repeat,#03101a}}
+/* FIN in the agave */
+.osf2:not(#_){position:relative;isolation:isolate;color:var(--bone);background:#0e1a12}
+.osf2::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(8,14,20,.92) 0%,rgba(8,14,20,.75) 40%,rgba(8,14,20,.3) 70%),linear-gradient(0deg,rgba(8,14,20,.7),rgba(8,14,20,0) 40%),url(img/fin-agave.webp) 70% 60%/cover no-repeat}
+.osf2 h2:not(#_),.osf2 p{color:var(--bone)!important}
+.osf2 .btn--ink:not(#_){background:#e6bb83!important;color:#1a1208!important}
+/* today, with the four rooms right there */
+.today2:not(#_){grid-template-areas:"text pic" "rooms rooms";row-gap:clamp(40px,6vh,70px)}
+.today2 .ch__text{grid-area:text}.today2 .ch__pic{grid-area:pic}
+.today__wrap{grid-area:rooms;grid-column:1/-1}
+.today__wrap .eyebrow{margin:0 0 18px;color:#8a6234}
+.today__rooms{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2vw,26px)}
+.today__rooms a{display:grid;gap:4px;text-decoration:none;color:var(--ink)}
+.today__rooms img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;border:6px solid #fffaf1;box-shadow:0 26px 40px -24px rgba(70,38,8,.5);margin-bottom:10px;transition:transform .5s cubic-bezier(.3,1.4,.5,1)}
+.today__rooms a:hover img{transform:translateY(-6px)}
+.today__rooms b{font:800 19px/1.15 var(--f);font-stretch:118%}
+.today__rooms span{font-size:14.5px;color:#4a5755}
+.today__rooms em{font:800 12px/1.3 var(--f);font-style:normal;font-stretch:115%;letter-spacing:.12em;text-transform:uppercase;color:#8a6234;margin-top:4px}
+@media (max-width:900px){.today2:not(#_){grid-template-areas:"text" "pic" "rooms"}.today__rooms{grid-template-columns:1fr 1fr}}
+/* the room picker everywhere: soft corners, never arches */
+.rpick img:not(#_){border-radius:16px!important}
+/* the bottles to buy */
+.osb2{background:radial-gradient(70% 60% at 50% 0%,#24160c,transparent 70%),#0b0604;color:var(--bone);padding:var(--sy) var(--gut);text-align:center}
+.osb2__head .eyebrow{color:#e6bb83}
+.osb2__head h2:not(#_){margin:6px 0 clamp(30px,5vh,50px);color:var(--bone)}
+.osb2__row{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,44px);align-items:end}
+.osb2__t{display:grid;justify-items:center;gap:12px}
+.osb2__t:nth-child(2){translate:0 calc(-1 * clamp(14px,3vh,34px))}
+.osb2__pic{display:block;width:100%;border-radius:18px;overflow:hidden;box-shadow:0 40px 70px -36px rgba(0,0,0,.85)}
+.osb2__pic img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.osb2__pic:hover img{transform:scale(1.04)}
+.osb2__nm{display:grid;gap:4px;margin-top:8px}
+.osb2__nm b{font-size:clamp(28px,2.4vw,38px)}
+.osb2__nm .finmark{height:.9em}
+.osb2__nm span{font:800 12px/1 var(--f);font-stretch:115%;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,246,238,.7)}
+.osb2__buy:not(#_){background:#f6efe2;color:#14201f}
+.osb2__t--dark .osb2__buy:not(#_){background:#e0974a;color:#1a0b00}
+.osb2__t--fin .osb2__buy:not(#_){background:#9ec4e6;color:#06172a}
+.osb2__all{margin-top:clamp(40px,6vh,64px);display:grid;justify-items:center;gap:12px}
+.osb2__allbtn:not(#_){font-size:16px!important;min-height:72px;padding:0 64px 0 72px!important;background:#e8d3a6;color:#1a1208}
+.osb2__all p{margin:0;font:800 13px/1 var(--f);font-stretch:115%;letter-spacing:.14em;text-transform:uppercase;color:#e8d3a6}
+@media (max-width:900px){.osb2__row{grid-template-columns:1fr;max-width:420px}.osb2__t:nth-child(2){translate:none}.osb2__allbtn:not(#_){padding:0 36px 0 44px!important;font-size:14px!important}}
+/* no second buy block in the footer on this page */
+.pg--os .foot__buy{display:none!important}
+.pg--os .foot:not(#_){padding-top:clamp(50px,8vh,90px)!important}
+
+.osh2 h1:not(#_){max-width:none}
+.osh2__big:not(#_){font-size:clamp(40px,4.2vw,68px);max-width:16ch}
+.osb2__t--fin .osb2__nm b .finmark{height:clamp(26px,2.2vw,34px)!important}
+.osh2.wv:not(#_){z-index:7}.osr2.wv:not(#_){z-index:6}.osf2.wv:not(#_){z-index:5}
+.ostl__line{z-index:8}
+
+/* ===== v68 cocktails hero: the three bottles on a San Pedro bar, a drink set down in front of each ===== */
+.ckh2{position:relative;isolation:isolate;background:#0b0604;color:var(--bone);min-height:min(100svh,980px);display:grid;align-items:end;overflow:hidden}
+.ckh2__film{position:absolute;inset:0;z-index:-1}
+.ckh2__poster,.ckh2__vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.ckh2__vid{opacity:0;transition:opacity .6s ease}.ckh2__vid.is-on{opacity:1}
+.ckh2__film::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(11,6,4,.92) 0%,rgba(11,6,4,.55) 26%,rgba(11,6,4,0) 46%),linear-gradient(180deg,rgba(11,6,4,.6) 0%,rgba(11,6,4,0) 18%)}
+.ckh2__copy{padding:calc(var(--nav) + 30px) var(--gut) clamp(34px,6vh,64px);max-width:1360px;width:100%;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:10px 40px;align-items:end}
+.ckh2__copy .crumbs{grid-column:1/-1;align-self:start;margin-bottom:auto}
+.ckh2 h1:not(#_){margin:0}
+.ckh2__kw{display:block;margin-bottom:10px;font:800 13px/1.4 var(--f);font-stretch:118%;letter-spacing:.2em;text-transform:uppercase;color:#e6bb83}
+.ckh2__big{display:block;font:800 clamp(44px,5.4vw,90px)/.95 var(--f);font-stretch:125%;letter-spacing:-.02em}
+.ckh2__copy>p{margin:0;font-size:clamp(17px,1.3vw,20px);line-height:1.55;color:rgba(250,246,238,.85)}
+.ckh2__jump{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.ckh2__jump a{padding:12px 20px;border-radius:999px;background:#f6efe2;color:#14201f;text-decoration:none;font:800 13px/1 var(--f);font-stretch:118%;letter-spacing:.14em;text-transform:uppercase}
+.ckh2__jump a:nth-child(1){background:#e0974a;color:#1a0b00}.ckh2__jump a:nth-child(3){background:#9ec4e6;color:#06172a}
+@media (min-width:901px){.ckh2__copy{min-height:min(100svh,980px)}}
+@media (max-width:900px){
+  .ckh2{min-height:0;display:block}
+  .ckh2__film{position:relative;inset:auto;aspect-ratio:16/9;margin-top:var(--nav)}
+  .ckh2__film::after{background:linear-gradient(0deg,rgba(11,6,4,1) 0%,rgba(11,6,4,0) 30%)}
+  .ckh2__copy{grid-template-columns:1fr;padding-top:18px}
+  .ckh2__copy .crumbs{order:-1}
+}
+/* film first, words underneath: nothing sits on the drinks */
+.ckh2:not(#_){display:block;min-height:0}
+.ckh2__film:not(#_){position:relative;inset:auto;z-index:0;margin-top:var(--nav);aspect-ratio:16/9;max-height:calc(100svh - var(--nav) - 140px);width:100%}
+.ckh2__film::after{background:linear-gradient(0deg,rgba(11,6,4,1) 0%,rgba(11,6,4,0) 22%)!important}
+.ckh2__poster:not(#_),.ckh2__vid:not(#_){object-position:50% 45%}
+.ckh2__copy:not(#_){min-height:0;padding-top:clamp(10px,2vh,24px)}
+.ckh2__copy .crumbs{order:-1;margin-bottom:6px}
+
+/* ===== v68 Conservation rebuilt ===== */
+.cvh2:not(#_){position:relative;isolation:isolate}
+.cvh2__vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0;transition:opacity 1.2s ease}
+.cvh2__vid.is-on{opacity:1}
+.cvh2 .cvh__shade{z-index:1}.cvh2 .cvh__text{position:relative;z-index:2}
+.cvh2__stamp{position:absolute;z-index:2;right:clamp(24px,6vw,110px);bottom:clamp(90px,16vh,190px);width:clamp(150px,14vw,210px);aspect-ratio:1;border-radius:50%;display:grid;place-content:center;text-align:center;gap:6px;
+  background:radial-gradient(circle,#0b2a33 0 62%,#e6bb83 63% 64%,#0b2a33 65% 100%);box-shadow:0 0 0 2px #e6bb83,0 30px 60px -20px rgba(0,0,0,.7);rotate:-8deg;color:var(--bone)}
+.cvh2__stamp b{font:800 clamp(46px,4.4vw,70px)/.9 var(--f);font-stretch:125%;color:#e6bb83}
+.cvh2__stamp span{font:800 11.5px/1.3 var(--f);font-stretch:115%;letter-spacing:.12em;text-transform:uppercase;max-width:12ch;margin:0 auto}
+@media (max-width:900px){.cvh2__stamp{display:none}}
+/* Oceana on sand with sharks, sign as a print, facts as numbers */
+.cvo2:not(#_){position:relative;isolation:isolate}
+.cvo2::before{content:"";position:absolute;inset:0;z-index:-1;background:url(img/il/shark-pattern-sm.webp) 0 0/320px auto repeat;opacity:.05;pointer-events:none}
+.cvo2 .cvo__pic img:not(#_){border-radius:18px;border:9px solid #fffaf1;box-shadow:0 44px 70px -36px rgba(70,38,8,.6);rotate:-2deg}
+.cvo2 .cvo__pic figcaption:not(#_){margin-top:16px;font:800 12px/1.3 var(--f);font-stretch:118%;letter-spacing:.14em;text-transform:uppercase;color:#8a6234}
+.cvo2 .cvo__facts:not(#_){border:0!important}
+.cvo2 .cvo__facts div:not(#_){border:0!important;padding:0!important}
+.cvo2 .cvo__facts dd:not(#_){font:800 clamp(22px,2vw,30px)/1.1 var(--f)!important;font-stretch:120%!important;color:#1d6b66}
+/* the boat: prints on dark water */
+.vessel2:not(#_){position:relative;isolation:isolate;background:#04121a}
+.vessel2::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(4,18,26,.55),rgba(4,18,26,.92) 55%),url(img/hero-sandbar.webp) 30% 60%/cover no-repeat;opacity:.9}
+.vessel2 .vessel__pics figure img:not(#_){border-radius:16px;border:8px solid #fffaf1;box-shadow:0 40px 70px -36px rgba(0,0,0,.8)}
+.vessel2 .v1{rotate:-2deg}.vessel2 .v2{rotate:3deg}
+.vessel2 .v2 figcaption:not(#_){background:none;color:#1a1208;bottom:-34px;left:8px;padding:0;font-weight:800}
+/* the reef: porthole over the reef */
+.cvr2:not(#_){position:relative;isolation:isolate;background:#03101a}
+.cvr2::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(3,16,26,.82),rgba(3,16,26,.94)),url(img/r-reef2.webp) 50% 70%/cover no-repeat}
+.cvr2 .ch__hole:not(#_){width:min(100%,500px);justify-self:center}
+.cvr2 .ch__ring text{fill:#9fd3cf}
+.cvr2 .threats li:not(#_){border:0!important;display:grid;justify-items:center;gap:6px;text-align:center}
+.cvr2 .threats svg:not(#_){width:84px;height:84px;padding:20px;border-radius:50%;background:#0b2a33;box-shadow:0 0 0 2px #e6bb83,0 18px 30px -14px rgba(0,0,0,.7);stroke:#e6bb83}
+.cvr2 .threats__label:not(#_){color:#e6bb83}
+/* how to help: big outlined numbers */
+.cvx2 .cvx__list:not(#_){counter-reset:hx}
+.cvx2 .cvx__list li:not(.todo):not(#_){border:0!important;padding-top:0;counter-increment:hx;position:relative}
+.cvx2 .cvx__list li:not(.todo)::before{content:counter(hx,decimal-leading-zero);display:block;font:800 clamp(70px,7vw,120px)/.85 var(--f);font-stretch:125%;color:transparent;-webkit-text-stroke:2px #c9a774;margin-bottom:14px}
+.vessel2::before{background:linear-gradient(90deg,rgba(4,18,26,.35),rgba(4,18,26,.9) 55%),url(img/ck-bg-fin.webp) 30% 50%/cover no-repeat!important;opacity:1!important}
+.cvo2 .cvo__facts div:last-child dd:not(#_){font-size:clamp(17px,1.4vw,20px)!important;line-height:1.3!important}
+.cvr2:not(#_){overflow:clip}
+.cvr2 .ch__hole:not(#_){width:min(86%,480px)}
+@media (max-width:900px){.cvr2 .ch__hole:not(#_){width:min(78%,380px)}}
+.cvh2__stamp span:not(#_){font-size:12px}

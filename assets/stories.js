@@ -121,3 +121,11 @@
   addEventListener('resize', set); set();
 })();
 
+
+/* medal lines outside the homepage: drop in once they are on screen */
+(function () {
+  var m = [].slice.call(document.querySelectorAll('.osm3 .medals')); if (!m.length) return;
+  if (!('IntersectionObserver' in window)) { m.forEach(function (x) { x.classList.add('is-in'); }); return; }
+  var o = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); o.unobserve(e.target); } }); }, { threshold: .2 });
+  m.forEach(function (x) { o.observe(x); });
+})();

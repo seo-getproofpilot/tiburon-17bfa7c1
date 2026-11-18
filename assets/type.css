@@ -855,3 +855,43 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
   .lineup .lu--dark .lu__scene::after{content:"";position:absolute;left:0;right:0;bottom:0;height:120px;z-index:3;pointer-events:none;background:linear-gradient(180deg,rgba(11,6,4,0),#0b0604)}
   .lineup .lu--white .lu__scene::after{content:"";position:absolute;left:0;right:0;bottom:0;height:100px;z-index:3;pointer-events:none;background:linear-gradient(180deg,rgba(241,234,220,0),#eef0ea)}
 }
+
+/* ===== v68 How it's made header and picker: heading alone, centred; three bottles standing in a lit row ===== */
+.process__head:not(#_){display:block;text-align:center;max-width:none;margin:0 auto clamp(26px,4vh,44px)}
+.process__head h2:not(#_){max-width:none;margin:8px 0 0}
+.process__tabs:not(#_){max-width:980px;margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,2vw,30px);border:0!important;background:none!important}
+.process__tabs button:not(#_){display:grid!important;grid-template-columns:1fr!important;grid-template-rows:auto auto auto!important;justify-items:center;text-align:center;row-gap:4px;
+  padding:16px 10px 18px!important;border-radius:0!important;background:none!important;box-shadow:none!important;transform:none!important;opacity:.55;transition:opacity .4s,filter .4s;position:relative;overflow:visible}
+.process__tabs .pt__b:not(#_){grid-row:auto!important;height:clamp(96px,10vw,140px)!important;width:auto;margin-bottom:12px;filter:drop-shadow(0 12px 14px rgba(0,0,0,.55));transition:transform .5s cubic-bezier(.3,1.5,.5,1)}
+.process__tabs button::before{content:"";position:absolute;left:50%;top:calc(16px + clamp(96px,10vw,140px) - 18px);width:120px;height:30px;translate:-50% 0;border-radius:50%;
+  background:radial-gradient(closest-side,color-mix(in srgb,var(--acc) 70%,transparent),transparent);opacity:0;transition:opacity .45s;z-index:-1}
+.process__tabs button::after{display:block!important;content:""!important;position:absolute!important;left:50%!important;right:auto!important;bottom:0!important;width:44px!important;height:3px!important;translate:-50% 0;
+  background:var(--acc)!important;border-radius:2px;transform:scaleX(0)!important;transition:transform .45s cubic-bezier(.3,1.4,.5,1)!important}
+.process__tabs b:not(#_){font-size:clamp(22px,1.9vw,30px)!important;line-height:1!important}
+.process__tabs button span:not(.finmark):not(.sr){font-size:12px!important;letter-spacing:.16em!important}
+.process__tabs #pt-fin b .finmark{height:1em!important;width:auto}
+.process__tabs button:hover{opacity:.85}
+.process__tabs [aria-selected=true]:not(#_){opacity:1}
+.process__tabs [aria-selected=true] .pt__b{transform:translateY(-8px) scale(1.06)}
+.process__tabs [aria-selected=true]::before{opacity:1}
+.process__tabs [aria-selected=true]::after{transform:scaleX(1)!important}
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){
+  .process__tabs .pt__b:not(#_){height:78px!important;margin-bottom:8px}
+  .process__tabs button::before{top:calc(16px + 78px - 14px);width:80px}
+  .process__tabs b:not(#_){font-size:19px!important}
+  .process__tabs button span:not(.finmark):not(.sr){font-size:12px!important;letter-spacing:.06em!important}
+}
+
+/* v68 the pass is plain paper: no diagonal line texture */
+.ticket__main::after{display:none!important}
+
+/* ===== v68 tide-line seams beyond the homepage: a section with .wv ends in a soft wave that washes over the next ===== */
+.wv:not(#_){--wh:clamp(60px,8vw,120px);position:relative;z-index:3;margin-bottom:calc(var(--wh) * -.6);
+  -webkit-mask:linear-gradient(#000,#000) top/100% calc(100% - var(--wh) + 2px) no-repeat,url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1440 140%22 preserveAspectRatio=%22none%22%3E%3Cfilter id=%22b%22 x=%22-5%25%22 y=%22-50%25%22 width=%22110%25%22 height=%22200%25%22%3E%3CfeGaussianBlur stdDeviation=%225%22/%3E%3C/filter%3E%3Cpath filter=%22url%28%23b%29%22 d=%22M-40 -40 H1480 V66 C1300 46 1160 104 960 98 C760 92 620 50 420 62 C260 72 120 108 -40 88 Z%22 fill=%22%23000%22/%3E%3C/svg%3E") bottom/100% var(--wh) no-repeat;
+          mask:linear-gradient(#000,#000) top/100% calc(100% - var(--wh) + 2px) no-repeat,url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1440 140%22 preserveAspectRatio=%22none%22%3E%3Cfilter id=%22b%22 x=%22-5%25%22 y=%22-50%25%22 width=%22110%25%22 height=%22200%25%22%3E%3CfeGaussianBlur stdDeviation=%225%22/%3E%3C/filter%3E%3Cpath filter=%22url%28%23b%29%22 d=%22M-40 -40 H1480 V66 C1300 46 1160 104 960 98 C760 92 620 50 420 62 C260 72 120 108 -40 88 Z%22 fill=%22%23000%22/%3E%3C/svg%3E") bottom/100% var(--wh) no-repeat}
+.wv.wv--b:not(#_){-webkit-mask:linear-gradient(#000,#000) top/100% calc(100% - var(--wh) + 2px) no-repeat,url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1440 140%22 preserveAspectRatio=%22none%22%3E%3Cfilter id=%22b%22 x=%22-5%25%22 y=%22-50%25%22 width=%22110%25%22 height=%22200%25%22%3E%3CfeGaussianBlur stdDeviation=%225%22/%3E%3C/filter%3E%3Cpath filter=%22url%28%23b%29%22 d=%22M-40 -40 H1480 V84 C1320 104 1180 60 1000 64 C800 68 700 112 480 104 C300 97 140 60 -40 72 Z%22 fill=%22%23000%22/%3E%3C/svg%3E") bottom/100% var(--wh) no-repeat;mask:linear-gradient(#000,#000) top/100% calc(100% - var(--wh) + 2px) no-repeat,url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1440 140%22 preserveAspectRatio=%22none%22%3E%3Cfilter id=%22b%22 x=%22-5%25%22 y=%22-50%25%22 width=%22110%25%22 height=%22200%25%22%3E%3CfeGaussianBlur stdDeviation=%225%22/%3E%3C/filter%3E%3Cpath filter=%22url%28%23b%29%22 d=%22M-40 -40 H1480 V84 C1320 104 1180 60 1000 64 C800 68 700 112 480 104 C300 97 140 60 -40 72 Z%22 fill=%22%23000%22/%3E%3C/svg%3E") bottom/100% var(--wh) no-repeat}
+.wv + *:not(#_){padding-top:calc(var(--sy, 90px) + 40px)}
+/* the footer washes up over the end of every page */
+.foot:not(#_){position:relative;z-index:4;margin-top:-90px;background:linear-gradient(180deg,transparent 0,transparent 130px,var(--abyss) 130px)}
+.foot__buy::before{-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1440 140%22 preserveAspectRatio=%22none%22%3E%3Cfilter id=%22b%22 x=%22-5%25%22 y=%22-50%25%22 width=%22110%25%22 height=%22200%25%22%3E%3CfeGaussianBlur stdDeviation=%225%22/%3E%3C/filter%3E%3Cg transform=%22translate%280,140%29 scale%281,-1%29%22%3E%3Cpath filter=%22url%28%23b%29%22 d=%22M-40 -40 H1480 V66 C1300 46 1160 104 960 98 C760 92 620 50 420 62 C260 72 120 108 -40 88 Z%22 fill=%22%23000%22/%3E%3C/g%3E%3C/svg%3E") top/100% 130px no-repeat,linear-gradient(#000,#000) bottom/100% calc(100% - 128px) no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1440 140%22 preserveAspectRatio=%22none%22%3E%3Cfilter id=%22b%22 x=%22-5%25%22 y=%22-50%25%22 width=%22110%25%22 height=%22200%25%22%3E%3CfeGaussianBlur stdDeviation=%225%22/%3E%3C/filter%3E%3Cg transform=%22translate%280,140%29 scale%281,-1%29%22%3E%3Cpath filter=%22url%28%23b%29%22 d=%22M-40 -40 H1480 V66 C1300 46 1160 104 960 98 C760 92 620 50 420 62 C260 72 120 108 -40 88 Z%22 fill=%22%23000%22/%3E%3C/g%3E%3C/svg%3E") top/100% 130px no-repeat,linear-gradient(#000,#000) bottom/100% calc(100% - 128px) no-repeat}
+.pg--os .foot:not(#_){margin-top:0;background:var(--abyss)}
