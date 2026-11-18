@@ -453,3 +453,213 @@ h3:not(#_){font-weight:700!important;font-stretch:108%!important;letter-spacing:
   .shop__add:not(#_){padding-left:clamp(18px,2.4vw,30px)!important;padding-right:clamp(22px,2.8vw,34px)!important;letter-spacing:.12em!important;white-space:nowrap;font-size:clamp(12px,1.5vw,14px)!important}
   .shop__body .wb-link:not(#_){letter-spacing:.12em;font-size:12px!important}
 }
+
+/* ===== v66 reef captions: live inside the pinned stage (no sticky-in-absolute), explicit widths so no browser can shrink them ===== */
+.reef__stage .reef__caps:not(#_){position:absolute;inset:0;bottom:auto;height:100%;display:grid;pointer-events:none;z-index:2}
+.reef__stage .rc:not(#_){position:relative;top:auto;grid-area:1/1;align-self:center;height:auto;margin:0 0 0 var(--gut);padding:0;display:block;
+  width:min(640px,calc(100% - 2 * var(--gut)));max-width:none;box-sizing:border-box;white-space:normal}
+.reef__stage .rc .rc__big:not(#_){font-size:clamp(36px,min(4vw,7vh),62px)!important;line-height:1.02!important;margin:0 0 18px!important;width:auto}
+.reef__stage .rc h2:not(#_){font-size:clamp(40px,min(4.6vw,8vh),76px)!important}
+.reef__stage .rc p:not(.rc__big):not(.eyebrow):not(#_){font-size:clamp(18px,1.5vw,23px)!important;max-width:28em;width:auto}
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){
+  .reef__stage .rc:not(#_){align-self:end;margin-bottom:16vh;margin-bottom:16svh}
+}
+
+/* ===== v66 seams: each bottle scene ends in a soft, feathered tide line that washes over the next one ===== */
+.lineup .lu:not(#_){--wh:clamp(70px,9vw,140px);margin-bottom:calc(var(--wh) * -.62);padding-bottom:calc(var(--sy-s, 80px) + var(--wh) * .5);
+  -webkit-mask:linear-gradient(#000,#000) top/100% calc(100% - var(--wh) + 2px) no-repeat,var(--wave) bottom/100% var(--wh) no-repeat;
+          mask:linear-gradient(#000,#000) top/100% calc(100% - var(--wh) + 2px) no-repeat,var(--wave) bottom/100% var(--wh) no-repeat}
+.lineup .lu--dark{--wave:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1440 140%22 preserveAspectRatio=%22none%22%3E%3Cfilter id=%22b%22 x=%22-5%25%22 y=%22-50%25%22 width=%22110%25%22 height=%22200%25%22%3E%3CfeGaussianBlur stdDeviation=%225%22/%3E%3C/filter%3E%3Cpath filter=%22url%28%23b%29%22 d=%22M-40 -40 H1480 V78 C1290 118 1120 52 900 70 C680 88 560 120 360 96 C200 77 80 58 -40 74 Z%22 fill=%22%23000%22/%3E%3C/svg%3E");z-index:3}
+.lineup .lu--white{--wave:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1440 140%22 preserveAspectRatio=%22none%22%3E%3Cfilter id=%22b%22 x=%22-5%25%22 y=%22-50%25%22 width=%22110%25%22 height=%22200%25%22%3E%3CfeGaussianBlur stdDeviation=%225%22/%3E%3C/filter%3E%3Cpath filter=%22url%28%23b%29%22 d=%22M-40 -40 H1480 V66 C1300 46 1160 104 960 98 C760 92 620 50 420 62 C260 72 120 108 -40 88 Z%22 fill=%22%23000%22/%3E%3C/svg%3E");z-index:2}
+.lineup .lu--fin{--wave:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1440 140%22 preserveAspectRatio=%22none%22%3E%3Cfilter id=%22b%22 x=%22-5%25%22 y=%22-50%25%22 width=%22110%25%22 height=%22200%25%22%3E%3CfeGaussianBlur stdDeviation=%225%22/%3E%3C/filter%3E%3Cpath filter=%22url%28%23b%29%22 d=%22M-40 -40 H1480 V84 C1320 104 1180 60 1000 64 C800 68 700 112 480 104 C300 97 140 60 -40 72 Z%22 fill=%22%23000%22/%3E%3C/svg%3E");z-index:1}
+.lineup:not(#_){z-index:2;background:transparent}
+.lineup .lineup__head:not(#_){background:#070504}
+.lineup .lineup__head{position:relative;z-index:4}
+.story:not(#_){position:relative;z-index:1}
+
+/* ===== v66 homepage How it's made: the bottle and its drink, big, in a pointed arch; the steps hang on a short rope like the full page ===== */
+.pp2:not(#_){grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(36px,6vw,110px);align-items:center;padding-top:clamp(36px,5vw,64px)}
+.pp2__stage{position:relative;margin:0;justify-self:center;width:min(100%,calc(min(76vh,700px) * .8));aspect-ratio:4/5;isolation:isolate}
+.pp2__stage::after{content:"";position:absolute;inset:-16px -16px -10px;z-index:-1;background:var(--acc);opacity:.7;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 125%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M1 124 V50 C1 25 28 8 50 1.2 C72 8 99 25 99 50 V124 Z%22 fill=%22none%22 stroke=%27%23000%27 stroke-width=%271.4%27 vector-effect=%27non-scaling-stroke%27/%3E%3C/svg%3E") center/100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 125%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M1 124 V50 C1 25 28 8 50 1.2 C72 8 99 25 99 50 V124 Z%22 fill=%22none%22 stroke=%27%23000%27 stroke-width=%271.4%27 vector-effect=%27non-scaling-stroke%27/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.pp2__stage::before{content:"";position:absolute;inset:-12% -18%;z-index:-2;background:radial-gradient(50% 50% at 50% 55%,var(--glow),transparent 70%);pointer-events:none}
+.pp2__stage>img{width:100%;height:100%;object-fit:cover;display:block;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 125%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 125 V50 C0 24 28 7 50 0 C72 7 100 24 100 50 V125 Z%22 fill=%22%23000%22 /%3E%3C/svg%3E") center/100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 125%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 125 V50 C0 24 28 7 50 0 C72 7 100 24 100 50 V125 Z%22 fill=%22%23000%22 /%3E%3C/svg%3E") center/100% 100% no-repeat;box-shadow:0 40px 80px -30px rgba(0,0,0,.7)}
+.pp.is-on .pp2__stage>img{animation:pp2In .9s cubic-bezier(.2,.7,.2,1) both}
+@keyframes pp2In{from{opacity:0;transform:translateY(24px) scale(.98)}to{opacity:1;transform:none}}
+.pp2__seal{position:absolute;right:-34px;bottom:9%;width:clamp(110px,10vw,148px);aspect-ratio:1;border-radius:50%;background:#0b0604;display:grid;place-items:center;box-shadow:0 18px 40px -12px rgba(0,0,0,.7),0 0 0 1px color-mix(in srgb,var(--acc) 50%,transparent)}
+.process[data-k=white] .pp2__seal{background:#0a2226}.process[data-k=fin] .pp2__seal{background:#06172a}
+.pp2__seal svg{position:absolute;inset:0;width:100%;height:100%;animation:sealSpin 36s linear infinite}
+.pp2__seal text{font:700 15.5px/1 var(--f);font-stretch:118%;letter-spacing:.06em;fill:var(--acc)}
+.pp2__seal img{width:30%;height:auto;filter:brightness(0) invert(1);opacity:.92}
+@keyframes sealSpin{to{rotate:360deg}}
+.pp2__copy .pp__intro:not(#_){margin-bottom:clamp(20px,3vh,30px)}
+.pp2__rope{list-style:none;margin:0 0 clamp(24px,3.4vh,34px);padding:0;position:relative;display:grid;gap:clamp(12px,1.9vh,18px)}
+.pp2__rope::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:14px;background:url(img/il/rope.webp) center top/100% auto repeat-y;filter:brightness(1.1);transform-origin:top;transform:scaleY(0);border-radius:7px}
+.pp.is-on .pp2__rope::before{animation:ropeDown 1.4s cubic-bezier(.45,0,.25,1) .15s both}
+@keyframes ropeDown{to{transform:scaleY(1)}}
+.pp2__rope li{position:relative;padding-left:46px;display:grid;gap:3px}
+.pp2__rope li::before{content:"";position:absolute;left:3px;top:3px;width:22px;height:22px;border-radius:50%;background:#0b0604;box-shadow:inset 0 0 0 3px var(--acc);transition:background .4s}
+.pp.is-on .pp2__rope li::before{animation:knotFill .45s ease both;animation-delay:calc(.25s + var(--i) * (1.25s / 6))}
+@keyframes knotFill{from{background:#0b0604;transform:scale(1)}60%{transform:scale(1.18)}to{background:var(--acc);transform:scale(1)}}
+.pp2__rope b{font:800 clamp(16px,1.25vw,19px)/1.25 var(--f)!important;font-stretch:118%!important;letter-spacing:.01em;color:var(--bone)}
+.pp2__rope span{font-size:clamp(15px,1.1vw,17px)!important;line-height:1.5;color:rgba(250,246,238,.74)}
+.pp2__cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px}
+.pp2__cta .btn--primary{background:var(--acc);color:#0b0604}
+.pp2__more{font:800 13px/1 var(--f);font-stretch:118%;letter-spacing:.16em;text-transform:uppercase;color:var(--bone);text-decoration:none;border-bottom:2px solid var(--acc);padding-bottom:6px}
+.process__head a{color:var(--acc);font-weight:700}
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){
+  .pp2:not(#_){grid-template-columns:1fr;gap:42px}
+  .pp2__stage{width:min(86%,calc(62svh * .8))}
+  .pp2__seal{right:-18px;width:104px}
+}
+@media (prefers-reduced-motion:reduce){.pp2__seal svg{animation:none}.pp2__rope::before{transform:none}.pp.is-on .pp2__rope li::before{animation:none;background:var(--acc)}}
+.pp2:not(#_){display:grid}
+.pp2[hidden]:not(#_){display:none}
+
+/* ===== v66 awards: the medals hang off a dock line on their own cords and sway; each bottle gets an arch like How it's made ===== */
+.aw2:not(#_){background:radial-gradient(60% 50% at 50% 0%,#24160c 0%,transparent 70%),linear-gradient(180deg,#0b0604 0%,#120a05 60%,#06172a 140%);color:var(--bone);padding:var(--sy) var(--gut);overflow:hidden;position:relative;isolation:isolate}
+.aw2::before{content:"";position:absolute;inset:0;z-index:-1;background:url(img/il/shark-pattern.webp) 0 0/520px auto repeat;opacity:.04;filter:invert(1);pointer-events:none}
+.aw2__head{max-width:1360px;margin:0 auto clamp(30px,5vh,56px);display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:14px clamp(30px,6vw,100px);align-items:end}
+.aw2__head .eyebrow{grid-column:1/-1;margin:0;color:#e6bb83}
+.aw2__head h2:not(#_){margin:0;font:800 clamp(40px,4.6vw,76px)/.95 var(--f)!important;font-stretch:125%!important;text-transform:uppercase;letter-spacing:-.01em}
+.aw2__head .aw__big{display:block;font-size:2.1em;line-height:.85;color:#e0974a;letter-spacing:-.03em}
+.aw2__head>p{margin:0 0 8px;font-size:clamp(16px,1.25vw,19px)!important;line-height:1.6;color:rgba(250,246,238,.78)}
+/* the line */
+.aw2__line{position:relative;max-width:1360px;margin:0 auto;padding-top:22px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(8px,1.4vw,22px);align-items:start}
+.aw2__rope{position:absolute;left:-6vw;right:-6vw;top:10px;height:16px;background:url(img/il/rope-h.webp) left center/auto 100% repeat-x;filter:drop-shadow(0 6px 6px rgba(0,0,0,.45))}
+.aw2__m{margin:0;position:relative;display:grid;justify-items:center;text-align:center;padding-top:var(--drop);transform-origin:50% 0;animation:awSway 6s ease-in-out calc(var(--i) * -.9s) infinite alternate}
+.aw2__cord{position:absolute;top:-6px;left:50%;width:3px;height:calc(var(--drop) + 26px);margin-left:-1.5px;background:linear-gradient(90deg,#7a5a35,#c9a26b 50%,#7a5a35);border-radius:2px}
+.aw2__cord::before{content:"";position:absolute;top:-4px;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:radial-gradient(circle at 38% 35%,#e8c890,#8a6234 72%);box-shadow:0 2px 4px rgba(0,0,0,.5)}
+.aw2__m img{position:relative;width:min(100%,190px);height:auto;filter:drop-shadow(0 18px 22px rgba(0,0,0,.55));transition:transform .5s cubic-bezier(.3,1.5,.5,1)}
+.aw2__m:hover img,.aw2__m:focus-within img{transform:translateY(-6px) scale(1.06)}
+.aw2__m figcaption{display:grid;gap:4px;margin-top:10px}
+.aw2__m b{font:800 clamp(17px,1.4vw,22px)/1.1 var(--f);font-stretch:120%;color:#f2d29b}
+.aw2__m span{font-size:13.5px;line-height:1.35;color:rgba(250,246,238,.82)}
+.aw2__m em{font:700 12px/1.3 var(--f);font-style:normal;letter-spacing:.14em;text-transform:uppercase;color:#e0974a}
+@keyframes awSway{from{rotate:calc(var(--sw) * -1)}to{rotate:var(--sw)}}
+.medals:not(.is-in) .aw2__m{opacity:0;translate:0 -30px}
+.aw2__m{transition:opacity .7s ease calc(var(--i) * .1s),translate .9s cubic-bezier(.3,1.4,.5,1) calc(var(--i) * .1s)}
+/* the three bottles: arches */
+.aw2__shelf{max-width:1360px;margin:clamp(60px,9vh,110px) auto 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,48px);align-items:end}
+.aw2__card{display:grid;justify-items:center;text-align:center;text-decoration:none;color:var(--bone)}
+.aw2__card:nth-child(2){translate:0 calc(-1 * clamp(20px,4vh,46px))}
+.aw2__card figure{margin:0 0 22px;width:100%;aspect-ratio:4/5;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 125%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 125 V50 C0 24 28 7 50 0 C72 7 100 24 100 50 V125 Z%22 fill=%22%23000%22/%3E%3C/svg%3E") center/100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 125%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 125 V50 C0 24 28 7 50 0 C72 7 100 24 100 50 V125 Z%22 fill=%22%23000%22/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.aw2__card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.aw2__card:hover img{transform:scale(1.05)}
+.aw2__card h3:not(#_){margin:0 0 10px;font-size:clamp(32px,2.8vw,44px)!important;line-height:1;color:var(--bone)}
+.aw2__card.plinth--fin h3 .finmark{height:.9em}
+.aw2__card p{margin:0 0 16px;max-width:26em;font-size:clamp(15px,1.15vw,17px)!important;line-height:1.5;color:rgba(250,246,238,.78)}
+.aw2__go{font:800 12.5px/1 var(--f);font-stretch:118%;letter-spacing:.16em;text-transform:uppercase;border-bottom:2px solid #e0974a;padding-bottom:6px}
+.aw2__card--white .aw2__go,.aw2__card.plinth--white .aw2__go{border-color:#9fd3cf}.aw2__card.plinth--fin .aw2__go{border-color:#9ec4e6}
+@media (max-width:1100px){
+  .aw2__head{grid-template-columns:1fr}
+  .aw2__line{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:18px;padding-bottom:12px;margin-right:calc(-1 * var(--gut));padding-right:var(--gut);scrollbar-width:none}
+  .aw2__line::-webkit-scrollbar{display:none}
+  .aw2__rope{left:0;right:auto;width:max(100%,1400px)}
+  .aw2__m{flex:0 0 clamp(150px,40vw,200px);scroll-snap-align:start}
+}
+@media (max-width:760px){
+  .aw2__shelf{grid-template-columns:1fr;gap:48px;max-width:420px}
+  .aw2__card:nth-child(2){translate:none}
+}
+@media (prefers-reduced-motion:reduce){.aw2__m{animation:none}}
+.aw2__m img{width:min(78%,150px)!important}
+.aw2__m figcaption{margin-top:14px}
+
+/* ===== v66 footer: wider, bigger lit bottles, a bigger "add all three", no see-through buttons ===== */
+.foot__buy:not(#_){max-width:1520px}
+@media (min-width:901px) and (not ((orientation:portrait) and (max-width:1180px))){.foot__buy:not(#_){grid-template-columns:minmax(0,.9fr) minmax(0,1.25fr)!important;align-items:center}}
+.foot__kick:not(#_){font-size:14px!important;padding:9px 14px;background:#e8d3a6;color:#1a1208!important}
+.foot__pitch h2:not(#_){font-size:clamp(40px,4.4vw,72px)!important}
+.foot__ctas{gap:14px 16px}
+.foot__all:not(#_){font-size:15px!important;padding:24px 56px 24px 64px!important;min-height:68px}
+.foot__shop:not(#_){background:#e8d3a6!important;color:#1a1208!important;border:0!important;font-size:14px!important;padding:22px 34px!important;min-height:68px}
+.foot__shop:hover{background:#f3e2bd!important}
+.foot__shelf:not(#_){padding-top:clamp(50px,8vh,90px)}
+.fb__pic:not(#_){height:clamp(250px,min(25vw,44vh),400px)}
+.fb--dark .fb__pic:not(#_){height:calc(clamp(250px,min(25vw,44vh),400px) * .98)}
+.fb--fin .fb__pic:not(#_){height:calc(clamp(250px,min(25vw,44vh),400px) * .9)}
+.fb__pic img:not(#_){filter:drop-shadow(0 22px 26px rgba(0,0,0,.6)) brightness(1.08)}
+/* light: a slow beam sweeps the shelf, and a pool of light breathes under each bottle in turn */
+.foot__shelf::after{content:"";position:absolute;left:0;right:0;top:-6%;bottom:44px;z-index:0;pointer-events:none;mix-blend-mode:screen;
+  background:linear-gradient(105deg,transparent 40%,rgba(255,232,190,.16) 50%,transparent 60%) 0 0/250% 100% no-repeat;animation:shelfBeam 7s ease-in-out infinite}
+@keyframes shelfBeam{0%{background-position:120% 0}55%,100%{background-position:-60% 0}}
+.fb::before{content:"";position:absolute;left:50%;bottom:calc(clamp(40px,6vh,64px) + 38px);width:130%;height:46px;translate:-50% 0;z-index:-1;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(255,214,150,.55),rgba(255,214,150,0));animation:shelfPool 4.5s ease-in-out infinite;animation-delay:calc(var(--d,0) * 1.5s)}
+.fb--dark{--d:0}.fb--white{--d:1}.fb--fin{--d:2}
+.fb--white::before{background:radial-gradient(closest-side,rgba(200,240,236,.5),rgba(200,240,236,0))}
+.fb--fin::before{background:radial-gradient(closest-side,rgba(150,195,250,.5),rgba(150,195,250,0))}
+@keyframes shelfPool{0%,100%{opacity:.45;transform:scaleX(.85)}50%{opacity:1;transform:scaleX(1.05)}}
+.fb__nm:not(#_){font-size:clamp(20px,1.7vw,26px)!important}
+.fb__px:not(#_){font-size:16px!important}
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){
+  .fb__pic:not(#_){height:clamp(170px,44vw,260px)}
+  .fb--dark .fb__pic:not(#_){height:calc(clamp(170px,44vw,260px) * .98)}
+  .fb--fin .fb__pic:not(#_){height:calc(clamp(170px,44vw,260px) * .9)}
+  .fb::before{bottom:calc(42px + 38px)}
+  .foot__all:not(#_){padding:20px 40px 20px 52px!important;width:100%;justify-content:center}
+  .foot__shop:not(#_){width:100%;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){.foot__shelf::after,.fb::before{animation:none}}
+
+/* ===== v66 no see-through buttons anywhere: the second button is a solid sand slab on dark grounds, solid ink on light ones ===== */
+.btn--glass:not(#_),.btn--sand:not(#_){background:#e8d3a6!important;color:#1a1208!important;box-shadow:0 10px 24px -12px rgba(0,0,0,.55)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;border:0!important}
+.btn--glass:not(#_):hover,.btn--sand:not(#_):hover{background:#f3e2bd!important;color:#1a1208!important}
+.sty:not(.sty--deep) .btn--glass:not(#_),.sty:not(.sty--deep) .btn--line:not(#_),.story .btn--glass:not(#_){background:#1c2b2a!important;color:#f6efe2!important;box-shadow:0 10px 24px -14px rgba(20,32,31,.6)!important}
+.sty:not(.sty--deep) .btn--line:not(#_):hover{background:#0f1918!important}
+.sty--deep .btn--line:not(#_),.cks .btn--line:not(#_){background:#e8d3a6!important;color:#1a1208!important;box-shadow:0 10px 24px -12px rgba(0,0,0,.55)!important}
+
+/* ===== v66 one voice for type: every headline in the logo's cut (Archivo, heavy and wide); the bottle names keep their label faces ===== */
+h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01em}
+.aw__record h3:not(#_),
+.awards__count b:not(#_),
+.bottles3 b:not(#_),
+.bt-foot:not(#_),
+.bt-huge:not(#_),
+.bt-num:not(#_),
+.bt-year:not(#_),
+.ch__yr:not(#_),
+.dist dt:not(#_),
+.md2 b:not(#_),
+.mw__readout b:not(#_),
+.mw__yr>b:not(#_),
+.nf__code:not(#_),
+.nf__links b:not(#_),
+.ocean h2:not(#_),
+.osh__rail b:not(#_),
+.osr__item h3:not(#_),
+.pour__name:not(#_),
+.pours b:not(#_),
+.pp__steps b:not(#_),
+.rc__big:not(#_),
+.rec thead th:not(#_),
+.rec__yr>b:not(#_),
+.reef__end h3:not(#_),
+.rw__text h3:not(#_),
+.rx__facts b:not(#_),
+.rx__stamp:not(#_),
+.ry h3:not(#_),
+.seal span:not(#_),
+.ship__no h3:not(#_),
+.strip b:not(#_),
+.strip i:not(#_),
+.stz__cap b:not(#_),
+.threats b:not(#_),
+.ticket h3:not(#_),
+.ticket__n b:not(#_),
+.tl__body h3:not(#_),
+.tl__when b:not(#_),
+.trh__facts b:not(#_),
+.vessel__sign:not(#_),
+.visit h3:not(#_),
+.visit2__head h3:not(#_),
+.wform h3:not(#_),
+.step__copy h3:not(#_),
+.tide__c b:not(#_),
+.wpanel h3:not(#_),
+.guide h3:not(#_),
+.know h3:not(#_),
+.life h3:not(#_),
+.cks .ck h3:not(#_){font-family:var(--f)!important;font-weight:800!important;font-stretch:120%!important;letter-spacing:-.005em}
+.reef__end blockquote p:not(#_),
+.rw__text blockquote p:not(#_),
+.story .story__quote p:not(#_){font-family:var(--f)!important;font-weight:700!important;font-stretch:112%!important;font-style:normal!important;letter-spacing:-.005em}

@@ -9,20 +9,27 @@
   };
 
   /* ---- rope: its drawn length follows how far you have read, and it ends on the anchor ring ---- */
-  const proc = $('.proc'), ropeBox = $('.proc__rope'), rope = $('.proc__rope i'), anchor = $('.anchor img'), end = $('.proc__end');
+  const proc = $('.proc'), ropeBox = $('.proc__rope'), rope = $('.proc__rope i'), anchor = $('.anchor__plain') || $('.anchor img'), end = $('.proc__end');
   if (proc && rope) {
     let ticking = false, len = 0;
-    const measure = () => {   // rope runs from the top of the steps to the top of the anchor's ring (about 15% down the drawing)
+    let dots = [];
+    const phone = matchMedia('(max-width:760px)');
+    const measure = () => {   // rope runs from the top of the steps to the top edge of the anchor drawing, where the knotted rope takes over
       const top = proc.getBoundingClientRect().top + scrollY;
-      if (anchor) { const r = anchor.getBoundingClientRect(); len = r.top + scrollY + r.height * .155 - top; }
+      if (anchor) { const r = anchor.getBoundingClientRect(); len = r.top + scrollY + r.height * .006 - top; }
       else len = proc.offsetHeight - 120;
       ropeBox.style.setProperty('--len', Math.max(0, len) + 'px');
+      // each step's knot on the rope: how far down the rope it sits, so it fills only once the rope has reached it
+      dots = $$('.step').map((st) => { const b = st.getBoundingClientRect(); return [st, b.top + scrollY - top + (phone.matches ? 51 : b.height / 2)]; });
     };
     const set = () => {
       ticking = false;
       const r = proc.getBoundingClientRect();
       const p = Math.min(1, Math.max(0, (innerHeight * .62 - r.top) / (len || 1)));
       rope.style.setProperty('--p', RM ? 1 : p.toFixed(4));
+      const reach = (RM ? 1 : p) * len;
+      const pt = r.top;
+      dots.forEach(([st]) => { const b = st.getBoundingClientRect(); st.classList.toggle('is-roped', reach >= b.top - pt + (phone.matches ? 51 : b.height / 2) - 2); });
       if (end) end.classList.toggle('is-tied', RM || p >= .995);
     };
     addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(set); } }, { passive: true });
@@ -31,6 +38,17 @@
     addEventListener('load', () => { measure(); set(); });
     measure(); set();
     seen($$('.step'));
+    // a Tiburon shark cruises down the steps beside the rope, drifting side to side as you read (swimmer)
+    const swim = $('.swim', proc);
+    if (swim && !RM) {
+      const move = () => {
+        const r = proc.getBoundingClientRect(), H = Math.max(1, r.height - innerHeight);
+        const t = Math.min(1, Math.max(0, -r.top / H));
+        const x = Math.sin(t * Math.PI * 5) * 34, dx = Math.cos(t * Math.PI * 5);
+        swim.style.transform = `translate3d(${(50 + x).toFixed(2)}vw, ${(-r.top + innerHeight * .42).toFixed(0)}px, 0) rotate(${(dx * 18 + 90).toFixed(1)}deg)`;
+      };
+      addEventListener('scroll', () => requestAnimationFrame(move), { passive: true }); move();
+    }
   }
 
   /* ---- ecosystem circle: six stops, arrow keys move between them ---- */
@@ -86,3 +104,20 @@
     $$('.cks').forEach((s) => io.observe(s));
   }
 })();
+
+/* Our Story: a dive line runs down the chapters; each year tag lights up when the line reaches it */
+(function () {
+  var box = document.querySelector('.ostl'); if (!box) return;
+  var line = box.querySelector('.ostl__line i'), tags = [].slice.call(box.querySelectorAll('.ostl__tag'));
+  var RM = matchMedia('(prefers-reduced-motion: reduce)').matches, tick = false;
+  function set() {
+    tick = false;
+    var r = box.getBoundingClientRect(), reach = innerHeight * .55 - r.top;
+    var p = RM ? 1 : Math.min(1, Math.max(0, reach / r.height));
+    line.style.transform = 'scaleY(' + p.toFixed(4) + ')';
+    tags.forEach(function (t) { var tr = t.getBoundingClientRect(); t.classList.toggle('is-on', RM || tr.top + tr.height / 2 - r.top <= reach); });
+  }
+  addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(set); } }, { passive: true });
+  addEventListener('resize', set); set();
+})();
+

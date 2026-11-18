@@ -20,9 +20,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,100,400&family=Metamorphous&family=Marcellus+SC&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="../assets/img/os-boat.webp">
-<link rel="stylesheet" href="../assets/site.css?v=1794971832">
-<link rel="stylesheet" href="../assets/page.css?v=1794971832">
-<link rel="stylesheet" href="../assets/type.css?v=1794971832">
+<link rel="stylesheet" href="../assets/site.css?v=1794975389">
+<link rel="stylesheet" href="../assets/page.css?v=1794975389">
+<link rel="stylesheet" href="../assets/type.css?v=1794975389">
+<link rel="stylesheet" href="../assets/stories.css?v=1794975389">
 <script>
   (function(){var d=document.documentElement;d.classList.add('js','inner');try{if(localStorage.getItem('tb_age')!=='1'&&!/nointro/.test(location.search))d.classList.add('needs-age');}catch(e){}})();
 </script>
@@ -82,8 +83,7 @@
   <span class="osh__shade" aria-hidden="true"></span>
   <div class="osh__copy">
     <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../">Home</a></li><li aria-current="page">Our story</li></ol></nav>
-    <p class="eyebrow">Our story</p>
-    <h1 id="os-h">From a dive trip to a rum made in Belize</h1>
+    <h1 id="os-h"><span class="osh__kw">The Tiburon Rum story</span><span class="osh__big">They went looking for the perfect rum. They found Belize.</span></h1>
     <p class="osh__lede">Tiburon was started by Basil and Liz DeStefano, two scuba divers from the Chicago area who went looking for the perfect rum and found the place to make it. This is how it happened, and why the reef still comes first.</p>
   </div>
   <ol class="osh__rail" aria-label="Chapters">
@@ -97,21 +97,25 @@
 </section>
 
 <!-- ============ 1. THE DIVE ============ -->
+<div class="ostl">
+<div class="ostl__line" aria-hidden="true"><i></i></div>
 <section class="ch" id="dive" aria-labelledby="ch1-h">
+  <span class="ostl__tag" aria-hidden="true">Before</span>
   <p class="ch__yr" aria-hidden="true">Before</p>
   <div class="ch__text">
     <h2 id="ch1-h">Divers first, distillers second</h2>
     <p>Basil spent 37 years as a finance director in the Chicago area. He and Liz were scuba divers, and the Caribbean kept pulling them back.</p>
     <blockquote class="ch__quote"><p>&ldquo;Our search for the perfect rum began on a scuba diving trip around the Caribbean. With the spirit of adventure in mind we soon found the perfect place to make our handcrafted rum: Belize.&rdquo;</p><cite>Tiburon Rum Company</cite></blockquote>
   </div>
-  <figure class="ch__pic ch__pic--sq rv">
+  <figure class="ch__pic ch__hole rv">
     <img src="../assets/img/e-bluehole.webp" alt="The Great Blue Hole on the Belize Barrier Reef from the air" width="1000" height="1000" loading="lazy">
-    <figcaption>The Great Blue Hole, Belize Barrier Reef</figcaption>
+    <svg class="ch__ring" viewBox="0 0 200 200" aria-hidden="true"><path id="hole-ring" fill="none" d="M100 100 m-88 0 a88 88 0 1 1 176 0 a88 88 0 1 1 -176 0"/><text><textPath href="#hole-ring" textLength="548">THE GREAT BLUE HOLE · BELIZE BARRIER REEF · WHERE THE DIVING STARTED · </textPath></text></svg>
   </figure>
 </section>
 
 <!-- ============ 2. BELIZE ============ -->
 <section class="ch ch--flip" id="belize" aria-labelledby="ch2-h">
+  <span class="ostl__tag" aria-hidden="true">2013</span>
   <p class="ch__yr" aria-hidden="true">2013</p>
   <div class="ch__text">
     <h2 id="ch2-h">A rum made in Belize, with Belizeans</h2>
@@ -127,6 +131,7 @@
 
 <!-- ============ 3. MEDALS ============ -->
 <section class="osm" id="medals" aria-labelledby="ch3-h">
+  <span class="ostl__tag" aria-hidden="true">2014</span>
   <div class="osm__head">
     <div>
       <p class="eyebrow">2014</p>
@@ -151,6 +156,7 @@
 
 <!-- ============ 4. THE REEF ============ -->
 <section class="osr osr--short" id="reef" aria-labelledby="ch4-h">
+  <span class="ostl__tag" aria-hidden="true">2019</span>
   <figure class="osr__pic rv"><img src="../assets/img/os-cg.webp" alt="Belize Coast Guard officers aboard patrol boat CG-28, the name Tiburon painted on its hull" width="1400" height="1227" loading="lazy"></figure>
   <div class="osr__body">
     <p class="eyebrow">2019</p>
@@ -163,6 +169,7 @@
 
 <!-- ============ 5. FIN (Basil's photos, Nov 11 email) ============ -->
 <section class="osf" id="fin" aria-labelledby="ch5f-h">
+  <span class="ostl__tag" aria-hidden="true">2025</span>
   <div class="osf__text">
     <p class="eyebrow eyebrow--dark">2025</p>
     <h2 id="ch5f-h">Finding FIN in Tequila</h2>
@@ -180,6 +187,7 @@
 
 <!-- ============ 5. TODAY ============ -->
 <section class="ch ch--today" id="today" aria-labelledby="ch5-h">
+  <span class="ostl__tag" aria-hidden="true">Today</span>
   <p class="ch__yr" aria-hidden="true">Today</p>
   <div class="ch__text">
     <h2 id="ch5-h">Four tasting rooms, three bottles</h2>
@@ -191,6 +199,7 @@
     <figcaption>The Shark Shack, San Ignacio</figcaption>
   </figure>
 </section>
+</div>
 
 <!-- ============ THE ROOMS ============ -->
 <nav class="rpick" aria-label="Our four tasting rooms">
@@ -221,8 +230,8 @@
       <h2>Ship Tiburon to your door.</h2>
       <p>We ship to most U.S. states and D.C. through a network of retail partners. You&rsquo;ll see any shipping limits for your address at checkout.</p>
       <div class="foot__ctas">
-        <a class="btn btn--primary" href="../where-to-buy/" data-add="all" data-track="buy-all-footer">Add all three, $120.97</a>
-        <a class="btn btn--glass" href="../where-to-buy/">Shop the bottles</a>
+        <a class="btn btn--primary foot__all" href="../where-to-buy/" data-add="all" data-track="buy-all-footer">Add all three, $120.97</a>
+        <a class="btn foot__shop" href="../where-to-buy/">Shop the bottles</a>
       </div>
     </div>
     <div class="foot__shelf">
@@ -249,10 +258,11 @@
     <p>&copy; 2026 Tiburon Rum Company</p>
   </div>
 </footer>
-<script src="../assets/analytics.js?v=1794971832" defer></script>
-<script src="../assets/cart.js?v=1794971832" defer></script>
+<script src="../assets/analytics.js?v=1794975389" defer></script>
+<script src="../assets/cart.js?v=1794975389" defer></script>
 
 
-<script src="../assets/page.js?v=1794971832" defer></script>
+<script src="../assets/page.js?v=1794975389" defer></script>
+<script src="../assets/stories.js?v=1794975389" defer></script>
 </body>
 </html>
