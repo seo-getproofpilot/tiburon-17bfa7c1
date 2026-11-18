@@ -932,3 +932,15 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 /* the timer fills the bottle's own underline instead of drawing a second line */
 .pt__prog:not(#_){bottom:0;width:44px;height:3px;background:none;z-index:1}
 .process.is-auto [aria-selected=true]::after{opacity:.28}
+
+/* ===== v72 footer: one real photo of the three bottles on the bar, names and prices under each ===== */
+.foot__shelf--photo:not(#_){display:grid;grid-template-columns:repeat(3,1fr);padding:0;row-gap:14px;align-items:start}
+.foot__shelf--photo::before,.foot__shelf--photo::after,.foot__shelf--photo .fb::before{content:none!important;display:none!important}
+.foot__scene{grid-column:1/-1;display:block;margin:0;border-radius:22px;overflow:hidden;box-shadow:0 40px 70px -30px rgba(0,0,0,.75);
+  -webkit-mask:radial-gradient(120% 115% at 50% 45%,#000 62%,transparent 100%);mask:radial-gradient(120% 115% at 50% 45%,#000 62%,transparent 100%)}
+.foot__scene img{display:block;width:100%;height:auto}
+.foot__shelf--photo .fb__nm:not(#_){margin-top:0}
+.foot__shelf--photo .fb:hover .fb__nm{color:#e6bb83}
+.foot__scene:not(#_){border-radius:0;box-shadow:none;
+  -webkit-mask:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%),linear-gradient(180deg,transparent 0,#000 16%,#000 82%,transparent 100%);-webkit-mask-composite:source-in;
+  mask:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%),linear-gradient(180deg,transparent 0,#000 16%,#000 82%,transparent 100%);mask-composite:intersect}
