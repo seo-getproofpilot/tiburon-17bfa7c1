@@ -19,10 +19,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,100,400&family=Metamorphous&family=Marcellus+SC&family=IM+Fell+DW+Pica+SC&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=1795032970">
-<link rel="stylesheet" href="../assets/page.css?v=1795032970">
-<link rel="stylesheet" href="../assets/type.css?v=1795032970">
-<link rel="stylesheet" href="../assets/stories.css?v=1795032970">
+<link rel="stylesheet" href="../assets/site.css?v=1795033440">
+<link rel="stylesheet" href="../assets/page.css?v=1795033440">
+<link rel="stylesheet" href="../assets/type.css?v=1795033440">
+<link rel="stylesheet" href="../assets/stories.css?v=1795033440">
 <script>
   (function(){var d=document.documentElement;d.classList.add('js','inner');try{if(localStorage.getItem('tb_age')!=='1'&&!/nointro/.test(location.search))d.classList.add('needs-age');}catch(e){}})();
 </script>
@@ -72,15 +72,15 @@
 <main id="main">
 
 <!-- ============ HERO ============ -->
-<section class="cvh cvh--photo cvh2 wv" aria-labelledby="cv-h">
+<section class="cvh cvh--photo cvh2 cvh3 wv" aria-labelledby="cv-h">
   <picture class="cvh__bg"><source media="(max-width:900px)" srcset="../assets/img/reef-poster-m.webp"><img src="../assets/img/reef-poster.webp" alt="" width="1600" height="900" fetchpriority="high"></picture>
   <video class="cvh2__vid" muted playsinline loop preload="none" aria-hidden="true" data-d="../assets/video/reef.mp4" data-m="../assets/video/reef-m.mp4"></video>
   <span class="cvh__shade" aria-hidden="true"></span>
-  <div class="cvh2__stamp" aria-hidden="true"><b>$1</b><span>BZ from every bottle sold in Belize</span></div>
+  <div class="cvh2__stamp cvh3__seal" aria-hidden="true"><svg viewBox="0 0 200 200"><path id="seal-cv" fill="none" d="M100 100 m-80 0 a80 80 0 1 1 160 0 a80 80 0 1 1 -160 0"/><text><textPath href="#seal-cv" textLength="500">OCEANA BELIZE · SINCE 2019 · EVERY BOTTLE SOLD IN BELIZE · </textPath></text></svg><b>$1</b><span>BZ a bottle</span></div>
   <div class="cvh__text">
     <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../">Home</a></li><li aria-current="page">Conservation</li></ol></nav>
     <p class="eyebrow">Conservation</p>
-    <h1 id="cv-h">The reef comes first</h1>
+    <h1 id="cv-h"><span class="cvh3__w">The reef</span> <em class="cvh3__w cvh3__gold">comes first</em></h1>
     <p class="cvh__lede">We were divers before we were distillers. The Belize Barrier Reef is the reason Tiburon exists, so part of every bottle sold in Belize goes to protecting it.</p>
     <blockquote class="cvh__quote"><p>&ldquo;Protecting our oceans and marine life is a fundamental part of our adventurous spirit.&rdquo;</p><cite>Basil DeStefano, founder</cite></blockquote>
   </div>
@@ -202,14 +202,14 @@
     <p>&copy; 2026 Tiburon Rum Company</p>
   </div>
 </footer>
-<script src="../assets/analytics.js?v=1795032970" defer></script>
-<script src="../assets/cart.js?v=1795032970" defer></script>
+<script src="../assets/analytics.js?v=1795033440" defer></script>
+<script src="../assets/cart.js?v=1795033440" defer></script>
 
 
-<script src="../assets/page.js?v=1795032970" defer></script>
+<script src="../assets/page.js?v=1795033440" defer></script>
 <script>
 (function(){var v=document.querySelector('.cvh2__vid');if(!v||matchMedia('(prefers-reduced-motion: reduce)').matches||(navigator.connection&&navigator.connection.saveData))return;
-  v.src=matchMedia('(max-width:900px)').matches?v.dataset.m:v.dataset.d;v.playbackRate=.6;
+  v.src=matchMedia('(max-width:900px)').matches?v.dataset.m:v.dataset.d;v.playbackRate=.85;
   v.addEventListener('playing',function(){v.classList.add('is-on')},{once:true});var p=v.play();if(p&&p.catch)p.catch(function(){});})();
 </script>
 </body>
