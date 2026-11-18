@@ -433,3 +433,23 @@ h3:not(#_){font-weight:700!important;font-stretch:108%!important;letter-spacing:
   .trio:not(#_){border-radius:20px}
 }
 @media (max-width:640px){.shop__pic:not(#_){aspect-ratio:5/4!important}.shop__item:not(#_){border-radius:50% 50% 14px 14px / 90px 90px 14px 14px}}
+
+/* ===== v65 Where to Buy tablet: all three arches on one row (641–1100px) ===== */
+@media (min-width:641px) and (max-width:1100px){
+  .shop:not(#_){grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:clamp(10px,1.6vw,18px);max-width:none}
+  .shop__item:not(#_){border-radius:50% 50% 12px 12px / clamp(70px,11vw,120px) clamp(70px,11vw,120px) 12px 12px}
+  .shop__item:nth-child(2){translate:0 calc(-1 * clamp(14px,2.4vw,26px))}
+  .shop__pic:not(#_){aspect-ratio:4/5!important;height:auto}
+  .shop__body:not(#_){padding:clamp(14px,2vw,22px) clamp(12px,1.8vw,20px) clamp(16px,2.2vw,24px)}
+  .shop__name:not(#_){font-size:clamp(24px,3.4vw,34px)!important}
+  .shop__type{font-size:14px;margin-bottom:12px}
+  .shop__notes:not(#_){gap:4px 12px;margin-bottom:14px}
+  .shop__notes li:not(#_){font-size:12px!important;letter-spacing:.1em}
+  .shop__spec:not(#_){grid-template-columns:1fr 1fr;gap:10px 14px;margin-bottom:16px}
+  .shop__spec dd:not(#_){font-size:14.5px}
+  .shop__spec div:last-child{grid-column:1/-1}
+  .shop__buy{flex-wrap:wrap;gap:10px}
+  .shop__price{font-size:clamp(24px,3vw,30px)}
+  .shop__add:not(#_){padding-left:clamp(18px,2.4vw,30px)!important;padding-right:clamp(22px,2.8vw,34px)!important;letter-spacing:.12em!important;white-space:nowrap;font-size:clamp(12px,1.5vw,14px)!important}
+  .shop__body .wb-link:not(#_){letter-spacing:.12em;font-size:12px!important}
+}
