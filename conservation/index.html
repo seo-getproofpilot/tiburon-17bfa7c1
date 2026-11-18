@@ -19,10 +19,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,100,400&family=Metamorphous&family=Marcellus+SC&family=IM+Fell+DW+Pica+SC&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=1795039425">
-<link rel="stylesheet" href="../assets/page.css?v=1795039425">
-<link rel="stylesheet" href="../assets/type.css?v=1795039425">
-<link rel="stylesheet" href="../assets/stories.css?v=1795039425">
+<link rel="stylesheet" href="../assets/site.css?v=1795041295">
+<link rel="stylesheet" href="../assets/page.css?v=1795041295">
+<link rel="stylesheet" href="../assets/type.css?v=1795041295">
+<link rel="stylesheet" href="../assets/stories.css?v=1795041295">
 <script>
   (function(){var d=document.documentElement;d.classList.add('js','inner');try{if(localStorage.getItem('tb_age')!=='1'&&!/nointro/.test(location.search))d.classList.add('needs-age');}catch(e){}})();
 </script>
@@ -33,7 +33,7 @@
 ]}
 </script>
 </head>
-<body class="pg pg--cons">
+<body class="pg pg--cons" data-amb-label="Tap for dive sound" data-amb-src="../assets/audio/amb-">
 
 <div class="agegate" id="agegate" role="dialog" aria-modal="true" aria-labelledby="ageQ">
   <div class="agegate__in">
@@ -72,7 +72,7 @@
 <main id="main">
 
 <!-- ============ HERO ============ -->
-<section class="cvh cvh--photo cvh2 cvh3 wv" aria-labelledby="cv-h">
+<section class="cvh cvh--photo cvh2 cvh3 wv" aria-labelledby="cv-h" data-amb="scuba" data-amb-vol=".5">
   <picture class="cvh__bg"><source media="(max-width:900px)" srcset="../assets/img/reef-poster-m.webp"><img src="../assets/img/reef-poster.webp" alt="" width="1600" height="900" fetchpriority="high"></picture>
   <video class="cvh2__vid" muted playsinline loop preload="none" aria-hidden="true" data-d="../assets/video/reef.mp4" data-m="../assets/video/reef-m.mp4"></video>
   <span class="cvh__shade" aria-hidden="true"></span>
@@ -126,7 +126,7 @@
 </section>
 
 <!-- ============ THE REEF ============ -->
-<section class="cvr cvr2 wv" aria-labelledby="cvr-h">
+<section class="cvr cvr2 wv" aria-labelledby="cvr-h" data-amb="scuba" data-amb-vol=".35">
   <div class="cvr__grid">
     <figure class="cvr__pic ch__hole rv"><img src="../assets/img/e-bluehole.webp" alt="The Great Blue Hole seen from the air, a deep blue circle in the turquoise Belize Barrier Reef" width="1000" height="1000" loading="lazy"><svg class="ch__ring" viewBox="0 0 200 200" aria-hidden="true"><path id="cv-ring" fill="none" d="M100 100 m-88 0 a88 88 0 1 1 176 0 a88 88 0 1 1 -176 0"/><text><textPath href="#cv-ring" textLength="548">THE GREAT BLUE HOLE · BELIZE BARRIER REEF · UNESCO WORLD HERITAGE · </textPath></text></svg></figure>
     <div class="cvr__text">
@@ -202,11 +202,12 @@
     <p>&copy; 2026 Tiburon Rum Company</p>
   </div>
 </footer>
-<script src="../assets/analytics.js?v=1795039425" defer></script>
-<script src="../assets/cart.js?v=1795039425" defer></script>
+<script src="../assets/analytics.js?v=1795041295" defer></script>
+<script src="../assets/cart.js?v=1795041295" defer></script>
 
 
-<script src="../assets/page.js?v=1795039425" defer></script>
+<script src="../assets/page.js?v=1795041295" defer></script>
+<script src="../assets/ambient.js?v=1795041295" defer></script>
 <script>
 (function(){var v=document.querySelector('.cvh2__vid');if(!v||matchMedia('(prefers-reduced-motion: reduce)').matches||(navigator.connection&&navigator.connection.saveData))return;
   v.src=matchMedia('(max-width:900px)').matches?v.dataset.m:v.dataset.d;v.playbackRate=.85;

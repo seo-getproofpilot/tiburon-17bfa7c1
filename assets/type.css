@@ -955,3 +955,8 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 @media (prefers-reduced-motion:reduce){.dive__sound::after{animation:none!important}}
 @media (max-width:900px){.dive__sound{bottom:auto;top:calc(var(--nav) + 12px);padding:8px 13px 8px 10px;font-size:11px}}
 @media (max-width:900px){.dive__sound:not(#_){top:auto;bottom:calc(env(safe-area-inset-bottom) + 96px)}}
+
+/* ===== v78 section sound button (Cocktails, Conservation): the dive pill, pinned to the corner of the screen ===== */
+.amb__btn:not(#_){position:fixed;z-index:60}
+.amb__btn{transition:background .25s,border-color .25s,opacity .35s,visibility .35s}
+.amb__btn.is-away{opacity:0;visibility:hidden;pointer-events:none}

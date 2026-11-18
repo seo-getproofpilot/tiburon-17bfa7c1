@@ -19,10 +19,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,100,400&family=Marcellus+SC&family=IM+Fell+DW+Pica+SC&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=1795039425">
-<link rel="stylesheet" href="../assets/page.css?v=1795039425">
-<link rel="stylesheet" href="../assets/type.css?v=1795039425">
-<link rel="stylesheet" href="../assets/stories.css?v=1795039425">
+<link rel="stylesheet" href="../assets/site.css?v=1795041295">
+<link rel="stylesheet" href="../assets/page.css?v=1795041295">
+<link rel="stylesheet" href="../assets/type.css?v=1795041295">
+<link rel="stylesheet" href="../assets/stories.css?v=1795041295">
 <script>
   (function(){var d=document.documentElement;d.classList.add('js','inner');try{if(localStorage.getItem('tb_age')!=='1'&&!/nointro/.test(location.search))d.classList.add('needs-age');}catch(e){}})();
 </script>
@@ -35,7 +35,7 @@
 ]}
 </script>
 </head>
-<body class="pg pg--story">
+<body class="pg pg--story" data-amb-src="../assets/audio/amb-">
 
 <div class="agegate" id="agegate" role="dialog" aria-modal="true" aria-labelledby="ageQ">
   <div class="agegate__in">
@@ -73,10 +73,11 @@
 
 <main id="main">
 
-<section class="ckh2 wv" aria-labelledby="ck-h">
+<section class="ckh2 wv" aria-labelledby="ck-h" data-amb="bar" data-amb-vol=".55">
   <div class="ckh2__film">
-    <img class="ckh2__poster" src="../assets/img/ckh-poster.webp?v=1795039425" alt="Dark 8, White Tip and FIN on a beach bar at sunset in San Pedro, with an old fashioned, a Belizean rum punch and a margarita set down beside them" width="1600" height="900" fetchpriority="high">
-    <video class="ckh2__vid" muted playsinline preload="auto" poster="../assets/img/ckh-poster.webp?v=1795039425" aria-hidden="true" data-d="../assets/video/ckh.mp4?v=1795039425" data-m="../assets/video/ckh-m.mp4?v=1795039425" data-end="../assets/img/ckh-end.webp?v=1795039425"></video>
+    <img class="ckh2__poster" src="../assets/img/ckh-poster.webp?v=1795041295" alt="Dark 8, White Tip and FIN on a beach bar at sunset in San Pedro, with an old fashioned, a Belizean rum punch and a margarita set down beside them" width="1600" height="900" fetchpriority="high">
+    <video class="ckh2__vid" data-own muted playsinline preload="auto" poster="../assets/img/ckh-poster.webp?v=1795041295" aria-hidden="true" data-d="../assets/video/ckh.mp4?v=1795041295" data-m="../assets/video/ckh-m.mp4?v=1795041295" data-end="../assets/img/ckh-end.webp?v=1795041295"></video>
+    <video class="ckh2__vid ckh2__loop" data-own muted playsinline loop preload="none" aria-hidden="true" data-d="../assets/video/ckh-loop.mp4?v=1795041295" data-m="../assets/video/ckh-loop-m.mp4?v=1795041295"></video>
   </div>
   <div class="ckh2__copy">
     <h1 id="ck-h"><span class="sr">Tiburon cocktails: </span><span class="ckh2__big">What to mix it with</span></h1>
@@ -86,7 +87,7 @@
 
 
 <!-- ============ DARK 8 ============ -->
-<section class="cks cks--dark wv wv--b" id="dark" aria-labelledby="ckd-h">
+<section class="cks cks--dark wv wv--b" id="dark" aria-labelledby="ckd-h" data-amb="bar" data-amb-vol=".55">
   <div class="cks__bg" aria-hidden="true"><video class="cks__vid" muted playsinline loop preload="none" aria-hidden="true" poster="../assets/img/ck-bg-dark.webp" data-d="../assets/video/ck-dark.mp4" data-m="../assets/video/ck-dark-m.mp4"></video></div>
   <div class="sty__in">
     <div class="cks__head">
@@ -155,7 +156,7 @@
 </section>
 
 <!-- ============ WHITE TIP ============ -->
-<section class="cks cks--white wv" id="white" aria-labelledby="ckw-h">
+<section class="cks cks--white wv" id="white" aria-labelledby="ckw-h" data-amb="reef" data-amb-vol=".6" data-amb-enter="plunge">
   <div class="cks__bg" aria-hidden="true"><video class="cks__vid" muted playsinline loop preload="none" aria-hidden="true" poster="../assets/img/ck-bg-white.webp" data-d="../assets/video/ck-white.mp4" data-m="../assets/video/ck-white-m.mp4"></video></div>
   <div class="sty__in">
     <div class="cks__head">
@@ -240,7 +241,7 @@
 </section>
 
 <!-- ============ FIN ============ -->
-<section class="cks cks--fin" id="fin" aria-labelledby="ckf-h">
+<section class="cks cks--fin" id="fin" aria-labelledby="ckf-h" data-amb="deep" data-amb-vol=".7">
   <div class="cks__bg" aria-hidden="true"><video class="cks__vid" muted playsinline loop preload="none" aria-hidden="true" poster="../assets/img/ck-bg-fin.webp" data-d="../assets/video/ck-fin.mp4" data-m="../assets/video/ck-fin-m.mp4"></video></div>
   <div class="sty__in">
     <div class="cks__head">
@@ -343,12 +344,13 @@
     <p>&copy; 2026 Tiburon Rum Company</p>
   </div>
 </footer>
-<script src="../assets/analytics.js?v=1795039425" defer></script>
-<script src="../assets/cart.js?v=1795039425" defer></script>
+<script src="../assets/analytics.js?v=1795041295" defer></script>
+<script src="../assets/cart.js?v=1795041295" defer></script>
 
 
-<script src="../assets/page.js?v=1795039425" defer></script>
-<script src="../assets/stories.js?v=1795039425" defer></script>
+<script src="../assets/page.js?v=1795041295" defer></script>
+<script src="../assets/ambient.js?v=1795041295" defer></script>
+<script src="../assets/stories.js?v=1795041295" defer></script>
 <script>
 /* the hero film plays once when it can, then rests on the finished bar; reduced motion or Save-Data shows the finished bar */
 (function(){var v=document.querySelector('.ckh2__vid');if(!v)return;
@@ -356,6 +358,12 @@
   if(still){document.querySelector('.ckh2__poster').src=v.dataset.end;return;}
   v.src=matchMedia('(max-width:900px)').matches?v.dataset.m:v.dataset.d;
   v.addEventListener('playing',function(){v.classList.add('is-on')},{once:true});
+  /* when the drinks are down, the sea keeps rolling: a seamless loop that starts where the film's water left off */
+  var lp=document.querySelector('.ckh2__loop'),mob=matchMedia('(max-width:900px)').matches;
+  if(lp){v.addEventListener('timeupdate',function(){if(!lp.src&&v.duration&&v.currentTime>v.duration-4){lp.src=mob?lp.dataset.m:lp.dataset.d;lp.load();}});
+    var inView=true,done=false;
+    v.addEventListener('ended',function(){done=true;if(!lp.src)lp.src=mob?lp.dataset.m:lp.dataset.d;lp.addEventListener('playing',function(){lp.classList.add('is-on')},{once:true});if(inView){var q=lp.play();if(q&&q.catch)q.catch(function(){});}});
+    if('IntersectionObserver' in window)new IntersectionObserver(function(es){inView=es[0].isIntersecting;if(!done)return;if(inView)lp.play().catch(function(){});else lp.pause();}).observe(lp);}
   var p=v.play();if(p&&p.catch)p.catch(function(){document.querySelector('.ckh2__poster').src=v.dataset.end;});})();
 </script>
 <script>

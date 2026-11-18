@@ -108,7 +108,7 @@
     if (gate) gate.addEventListener('click', (e) => { if (e.target.closest('[data-age=yes]')) setTimeout(go, 600); });
   });
 
-  $$('video[data-d]:not([data-once])').forEach((v) => {
+  $$('video[data-d]:not([data-once]):not([data-own])').forEach((v) => {
     if (RM) return;
     const src = () => (mobile.matches ? v.dataset.m : v.dataset.d);
     const io = new IntersectionObserver((es) => es.forEach((e) => {
