@@ -28,7 +28,11 @@
   function track(n) {
     if (tracks[n]) return tracks[n];
     var a = new Audio(); a.loop = true; a.preload = 'auto'; a.src = base + n + '.m4a'; a.crossOrigin = 'anonymous';
-    var t = { a: a, g: null, v: 0 };
+    var t = { a: a, g: null, v: 0, sync: null, rate: 1 };
+    /* data-amb-sync="<video selector>" on the section: this sound is a soundtrack for that film, locked to its clock.
+       data-amb-rate is the speed the film plays at, so film time / rate = soundtrack time. */
+    var owner = secs.filter(function (s) { return s.getAttribute('data-amb') === n && s.getAttribute('data-amb-sync'); })[0];
+    if (owner) { t.sync = document.querySelector(owner.getAttribute('data-amb-sync')); t.rate = parseFloat(owner.getAttribute('data-amb-rate') || '1'); }
     if (ctx) { try { var src = ctx.createMediaElementSource(a); t.g = ctx.createGain(); t.g.gain.value = 0; src.connect(t.g).connect(ctx.destination); } catch (e) { t.g = null; } }
     if (!t.g) a.volume = 0;
     return (tracks[n] = t);
@@ -46,7 +50,14 @@
     var level = s ? parseFloat(s.getAttribute('data-amb-vol') || '.5') : 0, done = true;
     if (want) { var t = track(want); if (t.a.paused) { var p = t.a.play(); if (p && p.catch) p.catch(function () {}); } }
     Object.keys(tracks).forEach(function (n) {
-      var t = tracks[n], goal = n === want ? level : 0, v = t.v + (goal - t.v) * (on ? .12 : .3);
+      var t = tracks[n], goal = n === want ? level : 0;
+      if (t.sync) {
+        if (t.sync.paused || !t.sync.currentSrc) goal = 0;
+        else if (!t.a.paused && t.a.duration) { var tt = (t.sync.currentTime / t.rate) % t.a.duration, off = t.a.currentTime - tt;
+          if (off > t.a.duration / 2) off -= t.a.duration; if (off < -t.a.duration / 2) off += t.a.duration;
+          if (Math.abs(off) > .12) try { t.a.currentTime = tt; } catch (e) {} }
+      }
+      var v = t.v + (goal - t.v) * (on ? .12 : .3);
       if (Math.abs(goal - v) < .004) v = goal; else done = false;
       setVol(t, v);
       if (v === 0 && !t.a.paused) t.a.pause();
