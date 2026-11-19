@@ -964,3 +964,7 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 /* ===== v79 section sound on phones: a round icon in the nav bar (left of the cart), never over the page ===== */
 .amb__btn.amb__btn--nav:not(#_){position:relative;inset:auto;top:auto;right:auto;bottom:auto;left:auto;flex:none;width:44px;height:44px;padding:0;justify-content:center;margin-right:-22px;z-index:auto}
 .amb__btn--nav .ds__lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* v80: the hero film's bottle descriptions read bigger on desktop (phones and portrait tablets hide them) */
+.dive .dc__desc:not(#_){font-size:clamp(18px,1.34vw,22px)!important;line-height:1.55!important;max-width:25em}
+@media (min-width:901px){.dive .dc .pairs dt:not(#_){font-size:12px}.dive .dc .pairs dd:not(#_){font-size:24px}}
