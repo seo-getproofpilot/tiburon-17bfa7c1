@@ -174,3 +174,54 @@
 .bt-frame img{object-position:50% 22%}
 .bt-mark dt:not(#_){font:900 clamp(44px,4.6vw,72px)/.9 var(--f)!important;font-stretch:125%!important;letter-spacing:0!important}
 .bt-award .bt-mark dt:not(#_):not(#_){font:900 clamp(44px,4.6vw,72px)/.9 var(--f)!important;font-stretch:125%!important;letter-spacing:0!important}
+
+/* ===== v81e hero: the copy is the homepage bottle block (same type, notes, specs, price and buttons), in a column
+   that never loses width to the page margin; the scene starts under the header and always shows the whole bottle ===== */
+.bph__lu:not(#_){background:none!important;color:#efe3d0;max-width:calc(580px + var(--gut));padding-right:24px}
+.bph__lu .crumbs{margin-bottom:clamp(14px,2.4vh,26px)}
+.bph__lu .lu__title{margin-bottom:clamp(10px,1.8vh,18px)}
+.bph__lu .lu__desc:not(#_){font-size:clamp(16px,min(1.2vw,2.2vh),19px)!important;line-height:1.6;margin-bottom:clamp(12px,2vh,20px)!important}
+.bph__lu .lu__notes{color:#e6bb83;margin-bottom:clamp(12px,2vh,20px)!important}
+.bph__lu .lu__specs{margin-bottom:clamp(14px,2.4vh,24px)!important}
+.bph__lu .lu__specs div{padding:clamp(6px,1vh,10px) 0!important}
+.bph__lu .lu__buy{flex-wrap:nowrap;gap:16px 24px}
+.bph__lu .lu__buy .btn{white-space:nowrap}
+.bph__lu .lu__price{color:#f6e7d2}
+.bph__lu .lu__more{color:#e6bb83}
+.bph__lu .bph__fine{margin-top:clamp(12px,2vh,20px)}
+@media (min-width:901px) and (not ((orientation:portrait) and (max-width:1180px))){
+  .bph--scene:not(#_){min-height:100svh}
+  .bph__scene:not(#_){top:var(--nav)}
+  .bph__scene img,.bph__scene video{object-position:52% 38%}
+}
+/* very wide screens: the whole photo, right-aligned, its left edge melting into the dark */
+@media (min-width:901px) and (min-aspect-ratio:19/10){
+  .bph__scene img:not(#_),.bph__scene video:not(#_){left:auto;right:0;width:auto;height:100%;aspect-ratio:2400/1340;object-fit:cover;
+    -webkit-mask:linear-gradient(90deg,transparent 0,#000 22%);mask:linear-gradient(90deg,transparent 0,#000 22%)}
+}
+@media (min-width:901px){.bph--scene .bph__copy.bph__lu:not(#_){max-width:calc(600px + var(--gut))!important;padding-right:28px!important}}
+.bph__lu .lu__title span:not(#_){white-space:nowrap}
+/* the free-shipping line lives in the bar at the top of every page, so the hero column ends on the price */
+@media (min-width:901px){
+  .bph--scene .bph__lu:not(#_){padding-top:calc(var(--nav) + min(2.6vh,26px))!important;padding-bottom:min(3vh,30px)!important}
+  .bph__lu .lu__notes{gap:6px 20px}
+}
+@media (min-width:901px) and (max-height:820px){
+  .bph__lu .lu__desc:not(#_){font-size:16px!important;line-height:1.55}
+  .bph__lu .lu__notes{display:none}
+}
+.bph__lu .lu__more:not(#_){white-space:nowrap}
+@media (min-width:901px){
+  .pg--scene .amb__btn:not(#_){width:44px;height:44px;padding:0;justify-content:center;gap:0;left:14px;bottom:18px}
+  .pg--scene .amb__btn .ds__lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+}
+.bt-award .bt-frame img{object-position:50% 50%}
+/* 901-1279px: the scene becomes a right-hand panel centred on the bottle and glass, the copy beside it */
+@media (min-width:901px) and (max-width:1399px) and (not ((orientation:portrait) and (max-width:1180px))){
+  .bph__scene img:not(#_),.bph__scene video:not(#_){left:auto;right:0;width:60%;object-position:63% 40%;
+    -webkit-mask:linear-gradient(90deg,transparent 0,#000 20%);mask:linear-gradient(90deg,transparent 0,#000 20%)}
+  .bph--scene .bph__copy.bph__lu:not(#_){max-width:calc(44vw + var(--gut))!important}
+  .bph__lu .lu__title span:not(#_){white-space:normal}
+}
+
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){.bph__lu .lu__buy:not(#_){flex-wrap:wrap}}
