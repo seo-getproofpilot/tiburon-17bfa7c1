@@ -16,6 +16,17 @@
     '<span class="ds__lbl"></span>';
   var label = document.body.getAttribute('data-amb-label') || 'Tap for sound';
   document.body.appendChild(b);
+  /* v79: on phones the corner pill rode over drink titles and Buy buttons, so it moves into the nav bar as a round
+     icon, just left of the cart. Wider screens keep the corner pill. */
+  var navCart = document.querySelector('#nav .cartbtn'), phone = matchMedia('(max-width:900px)');
+  function place() {
+    var inNav = phone.matches && navCart;
+    if (inNav && b.parentNode !== navCart.parentNode) navCart.parentNode.insertBefore(b, navCart);
+    if (!inNav && b.parentNode !== document.body) document.body.appendChild(b);
+    b.classList.toggle('amb__btn--nav', !!inNav);
+  }
+  place();
+  if (phone.addEventListener) phone.addEventListener('change', place);
 
   function paint() {
     b.setAttribute('aria-pressed', on);

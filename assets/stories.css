@@ -1086,3 +1086,7 @@
 }
 @media (max-width:900px){.cvh3 .crumbs{display:none}.cvh3 .cvh__text:not(#_){padding-top:clamp(120px,18vh,170px)!important}}
 @media (max-width:900px){.cvh3__seal span:not(#_){font-size:10.5px}}
+
+/* ===== v79 Conservation seams: each tide line washes over the section below it. All four sat at z 3, so every later
+   section painted over the wave above and the seams read as straight lines. Descending stack, like Our Story and Cocktails. ===== */
+.cvh3.wv:not(#_){z-index:7}.cvo2.wv:not(#_){z-index:6}.vessel2.wv:not(#_){z-index:5}.cvr2.wv:not(#_){z-index:4}
