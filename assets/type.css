@@ -983,3 +983,24 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
   .pg--home .amb__btn:not(#_){width:44px;height:44px;padding:0;justify-content:center;gap:0;left:14px;bottom:18px}
   .pg--home .amb__btn .ds__lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 }
+
+/* v82 mobile pass: tap targets and the smallest labels */
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){
+  .crumbs a:not(#_){display:inline-flex;align-items:center;min-height:40px}
+  .nav__menu:not(#_){flex:none;min-width:44px}
+  .nav__brand:not(#_){min-width:0;flex-shrink:1}
+  .nav__brand img{max-width:100%}
+}
+.ds__lbl:not(#_){font-size:12px}
+.bt-tag:not(#_){font-size:12px}
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){
+  /* the hero's sound switch: an icon in the film's top corner, clear of the headline and buttons */
+  .dive .dive__sound:not(#_){top:calc(var(--nav) + 12px);bottom:auto;left:auto;right:12px;width:44px;height:44px;padding:0;justify-content:center;gap:0}
+  .dive .dive__sound .ds__lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  /* White Tip's house syrup stacks */
+  .syrup:not(#_){grid-template-columns:1fr;gap:10px}
+  /* footer buttons keep their label on one line */
+  .foot__all:not(#_),.foot__shop:not(#_){white-space:nowrap;letter-spacing:.1em;font-size:12.5px}
+}
+@media (max-width:420px){.foot__all:not(#_),.foot__shop:not(#_){padding:18px 26px 18px 38px!important;letter-spacing:.06em;font-size:12px!important;max-width:100%}}
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){.nav__brand:not(#_){min-height:44px;display:inline-flex;align-items:center}}
