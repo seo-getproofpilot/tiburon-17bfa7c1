@@ -59,3 +59,118 @@
 
 /* photo tags stay dark type on a light tag whatever the palette */
 .pg--scene .bpa__pic figcaption:not(#_),.pg--scene .bpst__grid figcaption:not(#_),.pg--scene .bpw__pic figcaption:not(#_){background:rgba(250,246,238,.94);color:#14110d}
+
+/* the nav, cart and footer keep the site's own ink (their buttons are bone with dark type) */
+.pg--scene .nav,.pg--scene .foot,.pg--scene .cart,.pg--scene .cartd,.pg--scene .drawer,.pg--scene .tix{--ink:#14201f;--ink2:#3b4645}
+
+/* ===================== v81b bottle page template: Dark 8 first =====================
+   The homepage's lower half carried in: dark grounds with the shark wallpaper, arched prints staggered in a row,
+   the medal on its cord, gold double-line frames with a turning seal, photoreal medallions, prints on the bar.
+   Every colour comes from the page's variables, so White Tip and FIN wear it in their own worlds. */
+.bt-notes,.bt-award,.bt-made,.bt-serve,.bt-visit{position:relative;isolation:isolate;padding:var(--sy) var(--gut);color:var(--txt);overflow:hidden}
+.bt-notes::before,.bt-serve::before,.bt-award::before{content:"";position:absolute;inset:0;z-index:-1;background:url(img/il/shark-pattern.webp) 0 0/520px auto repeat;opacity:.045;filter:invert(1);pointer-events:none}
+.pg--dark .bt-notes{background:radial-gradient(60% 55% at 50% 0%,#2c1a0c 0%,transparent 70%),#0e0805}
+.pg--dark .bt-award{background:radial-gradient(70% 80% at 85% 40%,#3a1f0c 0%,#170d06 60%,#0b0604 100%)}
+.pg--dark .bt-made{background:radial-gradient(80% 90% at 15% 30%,#3a1d0b 0%,#1b0f07 55%,#0b0604 100%)}
+.pg--dark .bt-serve{background:radial-gradient(60% 55% at 50% 0%,#2c1a0c 0%,transparent 70%),#0e0805}
+.pg--dark .bt-visit{background:linear-gradient(160deg,#3a1d0b,#140b06 70%)}
+.bt-notes.wv:not(#_){z-index:7}.bt-award.wv:not(#_){z-index:6}.bt-made.wv:not(#_){z-index:5}.bt-serve.wv:not(#_){z-index:4}
+.bt-notes h2,.bt-award h2,.bt-made h2,.bt-serve h2,.bt-visit h2{color:var(--head)}
+.bt-notes .bp-eyebrow:not(#_),.bt-award .bp-eyebrow:not(#_),.bt-made .bp-eyebrow:not(#_),.bt-serve .bp-eyebrow:not(#_),.bt-visit .bp-eyebrow:not(#_){color:var(--acc)!important}
+.bt-head{max-width:760px;margin:0 auto clamp(40px,7vh,80px);text-align:center}
+.bt-head .bp-h2{margin-left:auto;margin-right:auto}
+.bt-intro{font-size:clamp(16px,1.15vw,18.5px);line-height:1.65;color:var(--txt);margin:0 auto;max-width:36em}
+/* the label's own lettering for the small titles */
+.pg--dark .bt-face:not(#_){font-family:"Marcellus SC",serif!important;font-weight:400!important;font-stretch:100%!important;letter-spacing:.03em!important;text-transform:none!important}
+
+/* arched prints, staggered like the homepage bottle shelf */
+.bt-cards{max-width:1360px;margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(22px,3vw,52px);align-items:start}
+.bt-card{display:grid;justify-items:center;text-align:center;position:relative}
+.bt-card:nth-child(2){margin-top:clamp(40px,8vh,96px)}
+.bt-card figure{position:relative;margin:0 0 26px;width:100%;aspect-ratio:4/5;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 125%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 125 V50 C0 24 28 7 50 0 C72 7 100 24 100 50 V125 Z%22 fill=%22%23000%22/%3E%3C/svg%3E") center/100% 100% no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 125%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 125 V50 C0 24 28 7 50 0 C72 7 100 24 100 50 V125 Z%22 fill=%22%23000%22/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.bt-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.bt-card:hover img{transform:scale(1.05)}
+/* a thin copper arch traced just outside each print */
+.bt-card::before{content:"";position:absolute;left:-10px;right:-10px;top:-10px;aspect-ratio:4/5;width:calc(100% + 20px);pointer-events:none;z-index:2;
+  background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 125%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0.6 124.4 V50 C0.6 24.4 28.2 7.6 50 0.7 C71.8 7.6 99.4 24.4 99.4 50 V124.4%22 fill=%22none%22 stroke=%22%23c9965a%22 stroke-width=%22.6%22 vector-effect=%22non-scaling-stroke%22/%3E%3C/svg%3E") center/100% 100% no-repeat;opacity:.85}
+.bt-card__n{font:300 15px/1 var(--f);font-stretch:125%;letter-spacing:.3em;color:var(--acc);margin-bottom:10px}
+.bt-card h3:not(#_){margin:0 0 12px;font-size:clamp(30px,2.6vw,42px)!important;line-height:1.05;color:var(--head)}
+.bt-card p{margin:0;max-width:24em;font-size:clamp(15.5px,1.12vw,17.5px)!important;line-height:1.6;color:var(--txt)}
+.bt-fine{text-align:center;margin:clamp(34px,5vh,56px) 0 0;font-size:14px;color:rgba(250,246,238,.72)}
+
+/* awards: the medal on its cord, the photo in a gold double-line frame with a turning seal */
+.bt-award{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(40px,6vw,110px);align-items:center}
+.bt-award__copy{position:relative;max-width:540px}
+.bt-medal{position:relative;width:clamp(120px,11vw,170px);padding-top:56px;margin:-24px 0 18px;transform-origin:50% 0;animation:awSway 6s ease-in-out infinite alternate}
+.bt-medal .aw2__cord{height:84px}
+.bt-medal img{position:relative;width:100%;height:auto;filter:drop-shadow(0 22px 26px rgba(0,0,0,.6))}
+.bt-award__copy>p{font-size:clamp(16px,1.15vw,18px);line-height:1.65;color:var(--txt)}
+.bt-mark{display:flex;align-items:baseline;gap:20px;margin:26px 0;padding:18px 0;border-top:1px solid rgba(201,150,90,.35);border-bottom:1px solid rgba(201,150,90,.35)}
+.bt-mark dt{font:900 clamp(44px,4.6vw,72px)/.9 var(--f);font-stretch:125%;text-transform:uppercase;color:#e2b366;
+  background:linear-gradient(180deg,#f6dc9c,#c99545 60%,#9c6e2c);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.bt-mark dd{margin:0;display:grid;gap:6px;font:700 13px/1.35 var(--f);font-stretch:112%;letter-spacing:.14em;text-transform:uppercase;color:var(--head)}
+.bt-mark dd span{color:var(--acc)}
+.bt-award__all{display:flex;align-items:center;gap:14px}
+.bt-award__all b{flex:none;font:900 34px/1 var(--f);font-stretch:125%;color:var(--acc)}
+.bt-frame{position:relative;margin:0;border-radius:20px;justify-self:center;width:100%;max-width:780px}
+.bt-frame img{display:block;width:100%;height:auto;max-height:min(70vh,640px);object-fit:cover;border-radius:20px;box-shadow:0 50px 90px -40px rgba(0,0,0,.85)}
+.bt-frame::after{content:"";position:absolute;inset:-12px;border-radius:30px;box-shadow:inset 0 0 0 1.5px rgba(201,150,90,.8);pointer-events:none}
+.bt-frame--tall img{aspect-ratio:4/5;max-height:min(74vh,700px)}
+.bt-line{position:absolute;left:-46px;bottom:12%;writing-mode:vertical-rl;rotate:180deg;font:800 12px/1 var(--f);font-stretch:118%;letter-spacing:.32em;text-transform:uppercase;color:#c9965a;white-space:nowrap}
+.bt-seal{right:-38px;bottom:-34px;left:auto}
+.bt-tag{position:absolute;left:18px;bottom:18px;padding:8px 12px;background:#f7f0e2;color:#14110d;font:800 11px/1 var(--f);font-stretch:118%;letter-spacing:.16em;text-transform:uppercase;border-radius:3px}
+/* the seal (process-page component) for pages that do not load stories.css */
+.fx-seal{position:absolute;z-index:4;width:clamp(92px,8vw,124px);aspect-ratio:1;border-radius:50%;background:#14201f;display:grid;place-items:center;box-shadow:0 16px 34px -12px rgba(0,0,0,.55),0 0 0 1px rgba(201,167,116,.5);pointer-events:none}
+.fx-seal svg{position:absolute;inset:0;width:100%;height:100%;animation:sealSpin 36s linear infinite}
+.fx-seal text{font:700 15.5px/1 var(--f);font-stretch:118%;letter-spacing:.06em;fill:#e6bb83}
+.fx-seal img{width:30%;height:auto;filter:brightness(0) invert(1);opacity:.92}
+@keyframes sealSpin{to{rotate:360deg}}
+@keyframes awSway{from{rotate:-2deg}to{rotate:2deg}}
+
+/* how it's made: framed print beside three medallion steps on a copper thread */
+.bt-made{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(48px,6vw,110px);align-items:center}
+.bt-made .bt-intro{margin:0 0 clamp(26px,4vh,44px)}
+.bt-steps{list-style:none;margin:0;padding:0;display:grid;gap:clamp(18px,3vh,30px);position:relative}
+.bt-steps::before{content:"";position:absolute;left:calc(clamp(78px,6.4vw,96px) / 2);top:30px;bottom:30px;width:1.5px;background:linear-gradient(#c9965a,rgba(201,150,90,.15))}
+.bt-steps li{display:grid;grid-template-columns:clamp(78px,6.4vw,96px) 1fr;gap:clamp(18px,2vw,28px);align-items:center;position:relative}
+.bt-med{position:relative;display:block;aspect-ratio:1;border-radius:50%;background:#050302;
+  box-shadow:0 0 0 2px var(--acc),inset 0 0 0 6px rgba(0,0,0,.35),0 20px 30px -14px rgba(0,0,0,.85),0 0 36px -10px var(--acc)}
+.bt-med img{position:absolute;inset:5px;width:calc(100% - 10px);height:calc(100% - 10px);border-radius:50%;object-fit:cover}
+.bt-med i{position:absolute;top:-6px;right:-10px;padding:5px 8px;border-radius:999px;background:var(--acc);color:#1a0b00;font:800 11px/1 var(--f);font-stretch:118%;font-style:normal;letter-spacing:.08em}
+.bt-steps b{display:block;margin-bottom:6px;font:800 15px/1.2 var(--f);font-stretch:118%;letter-spacing:.08em;text-transform:uppercase;color:var(--head)}
+.bt-steps p{margin:0;font-size:clamp(15.5px,1.1vw,17px);line-height:1.6;color:var(--txt)}
+
+/* visit: prints on the bar */
+.bt-visit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(40px,6vw,100px);align-items:center;min-height:min(80vh,720px)}
+.bt-visit__copy p{font-size:clamp(16px,1.15vw,18px);line-height:1.65;color:var(--txt);max-width:34em;margin:0 0 28px}
+.bt-prints{position:relative;height:min(64vh,580px)}
+.bt-print{position:absolute;margin:0;padding:10px;background:#f7f0e2;border-radius:14px;box-shadow:0 34px 60px -28px rgba(0,0,0,.8)}
+.bt-print img{display:block;width:100%;height:100%;object-fit:cover;border-radius:8px}
+.bt-print--a{left:4%;top:4%;width:56%;height:62%;rotate:-3deg;z-index:2}
+.bt-print--b{right:2%;top:0;width:34%;height:58%;rotate:4deg;z-index:1}
+.bt-print--c{left:30%;bottom:0;width:46%;height:42%;rotate:2deg;z-index:3}
+
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){
+  .bt-cards{grid-template-columns:1fr;max-width:440px;gap:56px}
+  .bt-card:nth-child(2){margin-top:0}
+  .bt-award,.bt-made,.bt-visit{grid-template-columns:1fr}
+  .bt-award .bt-frame{order:2}
+  .bt-medal{margin-top:0}
+  .bt-line{display:none}
+  .bt-seal{right:-8px;bottom:-26px}
+  .bt-frame--tall img{aspect-ratio:4/3}
+  .bt-prints{height:min(80vw,460px)}
+}
+@media (min-width:601px) and (max-width:900px),(min-width:601px) and (orientation:portrait) and (max-width:1180px){
+  .bt-cards{grid-template-columns:repeat(3,minmax(0,1fr));max-width:none;gap:20px}
+  .bt-card:nth-child(2){margin-top:40px}
+}
+@media (prefers-reduced-motion:reduce){.fx-seal svg,.bt-medal{animation:none}}
+.bt-visit .btn--primary:not(#_),.bt-award .btn--primary:not(#_){background:var(--btn);color:var(--btn-fg)}
+/* photo and words of each print fit one laptop screen */
+.bt-cards:not(#_){max-width:min(1180px,calc((100svh - var(--nav) - 230px) * 2.4))}
+.bt-frame img{object-position:50% 22%}
+.bt-mark dt:not(#_){font:900 clamp(44px,4.6vw,72px)/.9 var(--f)!important;font-stretch:125%!important;letter-spacing:0!important}
+.bt-award .bt-mark dt:not(#_):not(#_){font:900 clamp(44px,4.6vw,72px)/.9 var(--f)!important;font-stretch:125%!important;letter-spacing:0!important}
