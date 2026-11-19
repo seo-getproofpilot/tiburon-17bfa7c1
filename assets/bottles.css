@@ -291,3 +291,44 @@
 .bph__lu.lu--white .lu__specs dd:not(#_){color:#f4f1ea}
 .bph__lu.lu--white .lu__specs div:not(#_){border-color:rgba(244,241,234,.18)}
 .bph__lu .lu__line:not(#_){flex-wrap:wrap;gap:6px 14px}.bph__lu .lu__line span{white-space:nowrap}
+
+/* ===== v81g hero, every bottle page: full screen, the whole photo top to bottom, copy lower and larger =====
+   An older rule capped the hero at 880px, so on taller screens the next section rose into view and the photo was
+   cropped to a short box, cutting the bottle and glass. Now the hero is exactly one screen, and from 1400px up the
+   photo is shown at the hero's full height (cap to glass base), right-aligned, its left edge melting into the dark. */
+@media (min-width:901px) and (not ((orientation:portrait) and (max-width:1180px))){
+  .bph.bph--scene:not(#_){min-height:100svh!important;align-items:center}
+  .bph--scene .bph__copy.bph__lu:not(#_){padding-top:calc(var(--nav) + clamp(28px,9vh,104px))!important;padding-bottom:clamp(24px,5vh,56px)!important}
+  .bph__lu .lu__desc:not(#_){font-size:clamp(17px,min(1.3vw,2.4vh),21px)!important;line-height:1.6}
+  .bph__lu .lu__specs dt:not(#_){font-size:12px!important}
+  .bph__lu .lu__specs dd:not(#_){font-size:clamp(16px,min(1.25vw,2.3vh),20px)!important}
+  .bph__lu .lu__notes:not(#_){font-size:13px!important}
+  .bph__lu .lu__price:not(#_){font-size:clamp(30px,min(2.4vw,4.4vh),40px)!important}
+  .bph__lu .lu__buy .btn:not(#_){min-height:58px;padding:0 32px;font-size:13.5px}
+  .bph__lu .lu__more:not(#_){font-size:13px}
+  .bph__lu .crumbs:not(#_){font-size:12px}
+}
+@media (min-width:1400px) and (not ((orientation:portrait) and (max-width:1180px))){
+  .bph__scene img:not(#_):not(#_),.bph__scene video:not(#_):not(#_){top:0;bottom:0;left:auto;right:0;width:auto;height:100%;aspect-ratio:2400/1340;object-fit:cover;object-position:50% 50%;
+    -webkit-mask:linear-gradient(90deg,transparent 0,#000 22%);mask:linear-gradient(90deg,transparent 0,#000 22%)}
+  .bph--r .bph__scene img:not(#_):not(#_),.bph--r .bph__scene video:not(#_):not(#_){right:auto;left:0;-webkit-mask:linear-gradient(270deg,transparent 0,#000 22%);mask:linear-gradient(270deg,transparent 0,#000 22%)}
+}
+@media (min-width:901px) and (max-height:800px) and (not ((orientation:portrait) and (max-width:1180px))){
+  .bph--scene .bph__copy.bph__lu:not(#_){padding-top:calc(var(--nav) + 3vh)!important}
+}
+@media (min-width:901px) and (not ((orientation:portrait) and (max-width:1180px))){
+  .bph--scene .bph__copy.bph__lu:not(#_){padding-top:calc(var(--nav) + clamp(14px,min(7vh,(100vh - 900px) * .5 + 30px),104px))!important;padding-bottom:clamp(14px,3vh,40px)!important}
+  .bph__lu .crumbs:not(#_){margin-bottom:clamp(8px,1.6vh,22px)}
+  .bph__lu .lu__script:not(#_),.bph__lu .lu__line:not(#_){margin-bottom:clamp(4px,1vh,12px)!important}
+  .bph__lu .lu__title:not(#_){margin-bottom:clamp(6px,1.2vh,16px)!important}
+  .bph__lu .lu__desc:not(#_){margin-bottom:clamp(8px,1.6vh,18px)!important}
+  .bph__lu .lu__notes:not(#_){margin-bottom:clamp(8px,1.6vh,18px)!important}
+  .bph__lu .lu__specs:not(#_){margin-bottom:clamp(10px,2vh,22px)!important}
+  .bph__lu .lu__specs div:not(#_){padding:clamp(5px,.9vh,10px) 0!important}
+  .bph__lu .lu__buy .btn:not(#_){min-height:clamp(48px,6vh,58px)}
+}
+@media (min-width:901px) and (max-height:1040px) and (not ((orientation:portrait) and (max-width:1180px))){
+  .bph__lu.lu--dark .lu__title span:not(#_){font-size:clamp(40px,min(4.4vw,7.6vh),76px)!important}
+  .bph__lu.lu--dark .lu__title b:not(#_){font-size:clamp(48px,min(5vw,8.6vh),88px)!important}
+  .bph__lu .lu__desc:not(#_){font-size:clamp(16px,min(1.25vw,2.2vh),19px)!important}
+}
