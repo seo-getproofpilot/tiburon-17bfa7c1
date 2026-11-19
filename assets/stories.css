@@ -1090,3 +1090,20 @@
 /* ===== v79 Conservation seams: each tide line washes over the section below it. All four sat at z 3, so every later
    section painted over the wave above and the seams read as straight lines. Descending stack, like Our Story and Cocktails. ===== */
 .cvh3.wv:not(#_){z-index:7}.cvo2.wv:not(#_){z-index:6}.vessel2.wv:not(#_){z-index:5}.cvr2.wv:not(#_){z-index:4}
+
+/* ===== v81 cocktails: readable copy on every sea, and the head copy starts near the top of the bottle ===== */
+@media (min-width:901px){
+  .cks__head:not(#_){align-items:start}
+  .cks__head>div:not(#_){padding-top:clamp(18px,5vh,64px)}
+}
+/* White Tip's reef is bright and busy: its copy sits on a light card instead of floating over coral */
+.cks--white .cks__head>div:not(#_),.cks--white .ck .ck__body:not(#_){background:rgba(250,253,252,.9);border-radius:18px;padding:22px 26px 24px;box-shadow:0 18px 40px -24px rgba(6,40,48,.45)}
+.cks--white .cks__head>div:not(#_){max-width:640px}
+.cks--white .ck .ck__body:not(#_){margin-top:16px}
+.cks--white .ck h3,.cks--white .ck p.ck__line,.cks--white .cks__head p,.cks--white .cks__nm{text-shadow:none!important}
+.cks--white .cks__head p:not(.eyebrow):not(#_),.cks--white .ck p.ck__line:not(#_){color:#1b3533!important;opacity:1}
+.cks--white .cks__head .eyebrow:not(#_),.cks--white .ck .ck__credit:not(#_){color:#0e5a56!important;opacity:1}
+.cks--white .cks__best b:not(#_){color:#0e5a56!important}
+.cks--white .ck h3:not(#_),.cks--white .cks__nm:not(#_){color:#10201f!important}
+/* the dock and the deep: brighter body copy */
+.cks--dark .cks__head p:not(.eyebrow):not(#_),.cks--dark .ck p.ck__line:not(#_),.cks--fin .cks__head p:not(.eyebrow):not(#_),.cks--fin .ck p.ck__line:not(#_){color:rgba(250,246,238,.94)!important}

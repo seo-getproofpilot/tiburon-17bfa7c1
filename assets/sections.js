@@ -22,7 +22,7 @@
     $('.process').dataset.k = t.dataset.k; if (focus) t.focus();
   };
   $$('[data-tab]').forEach((a) => a.addEventListener('click', () => { const t = tabs.find((x) => x.dataset.k === a.dataset.tab); if (t) pick(t); }));
-  /* v71: the picker plays itself, about 6 seconds a bottle (Tiburon 8, White Tip, FIN), while it is on screen.
+  /* v71: the picker plays itself, 4 seconds a bottle (v81, was 6) (Tiburon 8, White Tip, FIN), while it is on screen.
      Hovering or focusing pauses it; choosing a bottle hands control to the visitor; reduced motion leaves it still. */
   const proc = $('.process');
   let auto = !!(proc && tabs.length > 1) && !matchMedia('(prefers-reduced-motion: reduce)').matches, held = false, seen = false, timer;
@@ -32,7 +32,7 @@
     proc.classList.remove('is-tick'); void proc.offsetWidth;
     if (!auto || held || !seen) return;
     proc.classList.add('is-tick');
-    timer = setTimeout(() => { const i = tabs.findIndex((x) => x.getAttribute('aria-selected') === 'true'); pick(tabs[(i + 1) % tabs.length]); arm(); }, 6000);
+    timer = setTimeout(() => { const i = tabs.findIndex((x) => x.getAttribute('aria-selected') === 'true'); pick(tabs[(i + 1) % tabs.length]); arm(); }, 4000);
   };
   if (auto) {
     proc.classList.add('is-auto');

@@ -84,8 +84,16 @@
   }
   function run() { if (!timer) timer = setInterval(tick, 60); }
 
+  /* v81: pages with their own film sound (the homepage hero) share one switch: tb:sound events go both ways */
+  function setOn(x) {
+    if (on === x) return; on = x; paint();
+    if (on && !ctx) { var AC = window.AudioContext || window.webkitAudioContext; if (AC) try { ctx = new AC(); } catch (e) { ctx = null; } }
+    if (ctx && ctx.state === 'suspended') ctx.resume();
+    run();
+  }
+  document.addEventListener('tb:sound', function (e) { if (e.detail && e.detail.from !== 'amb') setOn(!!e.detail.on); });
   b.addEventListener('click', function () {
-    on = !on; paint();
+    on = !on; paint(); document.dispatchEvent(new CustomEvent('tb:sound', { detail: { on: on, from: 'amb' } }));
     if (on && !ctx) { var AC = window.AudioContext || window.webkitAudioContext; if (AC) try { ctx = new AC(); } catch (e) { ctx = null; } }
     if (ctx && ctx.state === 'suspended') ctx.resume();
     if (on) { var s = pick() || secs[0]; var t = track(s.getAttribute('data-amb')); var p = t.a.play(); if (p && p.catch) p.catch(function () {}); }

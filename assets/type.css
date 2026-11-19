@@ -901,7 +901,7 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 .pt__prog{position:absolute;left:50%;bottom:6px;width:56px;height:2px;translate:-50% 0;border-radius:2px;background:rgba(230,187,131,.18);opacity:0;transition:opacity .3s}
 .pt__prog i{display:block;height:100%;width:0;border-radius:inherit;background:#e6bb83}
 .process.is-auto [aria-selected=true] .pt__prog{opacity:1}
-.process.is-tick [aria-selected=true] .pt__prog i{animation:ptTick 6s linear forwards}
+.process.is-tick [aria-selected=true] .pt__prog i{animation:ptTick 4s linear forwards}
 @keyframes ptTick{to{width:100%}}
 
 /* ===== v71 homepage rooms: the heading runs the full width above the words and photos, so it never stacks word by word ===== */
@@ -968,3 +968,18 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 /* v80: the hero film's bottle descriptions read bigger on desktop (phones and portrait tablets hide them) */
 .dive .dc__desc:not(#_){font-size:clamp(18px,1.34vw,22px)!important;line-height:1.55!important;max-width:25em}
 @media (min-width:901px){.dive .dc .pairs dt:not(#_){font-size:12px}.dive .dc .pairs dd:not(#_){font-size:24px}}
+
+/* v81: the v67 footer backdrop (a blurred bar scene stretched across the full width) sat behind the v72 photo of the
+   three bottles, so every page showed the photo twice, once soft. The photo is the scene now: the band is plain sea-dark. */
+.foot__buy::before{background:radial-gradient(70% 90% at 72% 60%,rgba(64,40,20,.35),rgba(5,12,18,0) 70%),#050c12!important}
+/* v81: the distributors headline is a two-line display line, a little smaller than Where to buy's */
+.pg--dist .wbh__big:not(#_),#ds-h .wbh__big:not(#_){font-size:clamp(40px,min(5.4vw,9vh),88px)}
+/* v81: sentence-length small print reads at 14px and 75% or better */
+.bph__fine:not(#_),.bps__fine:not(#_),.wbh__fine:not(#_),.reeftl__src:not(#_){font-size:14px!important;opacity:.82!important}
+.awards .m em:not(#_),.m em:not(#_){opacity:.8!important}
+/* v81: on the homepage the bottle-scene sound switch is an icon in the page margin, clear of the lineup copy
+   (the hero keeps its labelled pill; both are the same switch) */
+@media (min-width:901px){
+  .pg--home .amb__btn:not(#_){width:44px;height:44px;padding:0;justify-content:center;gap:0;left:14px;bottom:18px}
+  .pg--home .amb__btn .ds__lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+}

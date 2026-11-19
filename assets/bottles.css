@@ -1,0 +1,61 @@
+/* ===== v81 bottle pages in their own worlds =====
+   Each bottle page now lives in the scene the homepage gives it: Dark 8 on the beach bar at sunset, White Tip in the
+   reef shallows, FIN at the edge of an agave field at dusk. The hero is that scene, full bleed and moving (the bottle
+   held still); the tasting notes sit on the bottle's moving sea; the cream sections take the bottle's dark palette. */
+
+/* --- palettes: the light sections go dark in each bottle's colours (page.css sections read these variables) --- */
+.pg--dark.pg--scene{--light:#140b06;--ink:#f4e9d8;--ink2:rgba(244,233,216,.8);--line:rgba(244,233,216,.16);--acc-ink:#e9a25a;--glow:rgba(224,151,74,.22)}
+.pg--white.pg--scene{--light:#06272c;--ink:#eef7f5;--ink2:rgba(238,247,245,.82);--line:rgba(238,247,245,.16);--acc-ink:#8fd6d1;--glow:rgba(120,210,205,.22)}
+.pg--fin.pg--scene{--light:#0c1022;--ink:#eef2f8;--ink2:rgba(238,242,248,.8);--line:rgba(238,242,248,.16);--acc-ink:#e6bb83;--glow:rgba(230,187,131,.18)}
+.pg--scene .bpn .btn--primary:not(#_),.pg--scene .bpw .btn--primary:not(#_){background:var(--btn);color:var(--btn-fg)}
+.pg--scene .bp-link:not(#_){color:var(--acc)}
+
+/* --- hero: the scene, full bleed --- */
+.bph--scene:not(#_){isolation:isolate;background:#000;align-items:center;min-height:min(100svh,1000px)}
+.bph__scene{position:absolute;inset:0;z-index:-1;overflow:hidden}
+.bph__scene img,.bph__scene video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.bph__scene video{opacity:0;transition:opacity .8s ease}
+.bph__scene video[src]{opacity:1}
+.bph--dark .bph__scene video,.bph--l .bph__scene video{object-position:52% 50%}
+.bph--r .bph__scene video{object-position:25% 50%}
+.pg--fin .bph__scene video{object-position:71% 50%}
+/* the veil sits on the calm side of the frame so the copy reads */
+.bph__scene::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(4,4,6,.86) 0%,rgba(4,4,6,.62) 30%,rgba(4,4,6,.12) 56%,rgba(4,4,6,0) 70%),linear-gradient(0deg,rgba(4,4,6,.6) 0%,rgba(4,4,6,0) 22%),linear-gradient(180deg,rgba(4,4,6,.55) 0%,rgba(4,4,6,0) 18%)}
+.bph--r .bph__scene::after{background:linear-gradient(270deg,rgba(3,22,26,.88) 0%,rgba(3,22,26,.66) 30%,rgba(3,22,26,.14) 56%,rgba(3,22,26,0) 70%),linear-gradient(0deg,rgba(3,22,26,.6) 0%,rgba(3,22,26,0) 22%),linear-gradient(180deg,rgba(3,22,26,.55) 0%,rgba(3,22,26,0) 18%)}
+.bph--r .bph__copy:not(#_){grid-column:2;justify-self:end;padding-left:24px;padding-right:var(--gut)}
+.bph--scene .bph__copy:not(#_){text-shadow:0 1px 22px rgba(0,0,0,.45)}
+
+/* --- tasting notes on the bottle's moving sea --- */
+.bpn--scene:not(#_){isolation:isolate;background:var(--light)}
+.bpn--scene::before{display:none}
+.bp-scene{position:absolute;inset:0;z-index:-1;overflow:hidden}
+.bp-scene video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.bp-scene::after{content:"";position:absolute;inset:0}
+.pg--dark .bp-scene::after{background:linear-gradient(90deg,rgba(20,11,6,.55) 0%,rgba(20,11,6,.86) 45%,rgba(20,11,6,.92) 100%)}
+.pg--fin .bp-scene::after{background:linear-gradient(90deg,rgba(12,16,34,.5) 0%,rgba(12,16,34,.85) 45%,rgba(12,16,34,.93) 100%)}
+.pg--fin .bp-scene video{object-position:71% 50%;filter:saturate(.9)}
+/* the reef is bright: its notes sit on a deep-water veil rather than over coral */
+.pg--white .bp-scene::after{background:linear-gradient(90deg,rgba(6,39,44,.35) 0%,rgba(6,39,44,.82) 45%,rgba(6,39,44,.9) 100%)}
+.bpn--scene .note p:not(#_){color:var(--ink)}
+.bpn--scene .bpn__bottle img{filter:drop-shadow(0 30px 40px rgba(0,0,0,.55))}
+
+/* the remaining light sections: dark grounds, light type */
+.pg--scene .bpw:not(#_),.pg--scene .bpa:not(#_),.pg--scene .bpst:not(#_){background:var(--light);color:var(--ink)}
+.pg--scene .bpw h2,.pg--scene .bpa h2,.pg--scene .bpst h2{color:var(--head)}
+.pg--scene .rc2:not(#_){background:rgba(255,255,255,.06);border-color:var(--line)}
+.pg--scene .rc2 h3:not(#_){color:var(--head)}
+.pg--scene .rc2 li:not(#_){color:var(--ink2)}
+
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){
+  .bph--scene:not(#_){display:block;min-height:0;background:var(--hero)}
+  .bph__scene:not(#_){position:relative;inset:auto;height:min(64svh,620px);z-index:0}
+  .bph__scene::after,.bph--r .bph__scene::after{background:linear-gradient(0deg,var(--hero) 0%,rgba(0,0,0,0) 34%),linear-gradient(180deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,0) 20%)}
+  .bph__scene img,.bph__scene video{object-position:50% 50%!important}
+  .bph--r .bph__copy:not(#_){grid-column:auto;justify-self:auto;padding:0 var(--gut) 64px}
+  .bph--scene .bph__copy:not(#_){margin-top:-40px;text-shadow:none}
+  .bp-scene::after{background:linear-gradient(180deg,rgba(0,0,0,.35),var(--light) 60%)!important}
+}
+
+/* photo tags stay dark type on a light tag whatever the palette */
+.pg--scene .bpa__pic figcaption:not(#_),.pg--scene .bpst__grid figcaption:not(#_),.pg--scene .bpw__pic figcaption:not(#_){background:rgba(250,246,238,.94);color:#14110d}
