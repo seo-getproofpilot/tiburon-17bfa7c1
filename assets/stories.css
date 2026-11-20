@@ -1109,3 +1109,13 @@
 .cks--dark .cks__head p:not(.eyebrow):not(#_),.cks--dark .ck p.ck__line:not(#_),.cks--fin .cks__head p:not(.eyebrow):not(#_),.cks--fin .ck p.ck__line:not(#_){color:rgba(250,246,238,.94)!important}
 /* v85: no 01/02 counters on How you can help */
 .cvx .cvx__list li:not(.todo)::before{content:none!important;display:none!important}
+
+/* v86 Ecosystem: real photographs replace the watercolours */
+.sth__art.plate:not(#_){border-radius:6px;aspect-ratio:4/3;object-fit:cover;filter:none;box-shadow:0 30px 60px -30px rgba(20,32,31,.45)}
+.sth .sth__art.plate[src*="ec-end"]:not(#_){aspect-ratio:1}
+.wnode img:not(#_){object-fit:cover;box-shadow:0 0 0 3px #f4efe4,0 0 0 4px rgba(36,80,79,.35),0 10px 22px -10px rgba(20,32,31,.5)}
+.wpanel figure.painted.ph:not(#_){margin:14px 0 0}
+.wpanel figure.painted.ph img:not(#_){width:100%;max-width:100%;aspect-ratio:3/2;height:auto;object-fit:cover;border-radius:6px;filter:none;box-shadow:0 24px 44px -26px rgba(20,32,31,.5)}
+.wpanel figure.painted.ph figcaption:not(#_){margin:10px 0 0}
+.sp img:not(#_),.sp--wide img:not(#_){width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;object-position:50% 50%;border-radius:6px;margin-bottom:14px;box-shadow:0 22px 40px -26px rgba(20,32,31,.5)}
+.sp--wide img:not(#_){aspect-ratio:16/9}
