@@ -117,3 +117,20 @@
     io.observe(v);
   });
 })();
+
+/* v85: the footer's top fade must fall on empty space, never on the last section's words.
+   The last section gets extra bottom room the height of the fade. */
+(function () {
+  if (document.body.classList.contains('pg--home')) return;
+  var foot = document.querySelector('.foot'), main = document.querySelector('main');
+  if (!foot || !main) return;
+  var last = main.lastElementChild; while (last && (last.offsetHeight === 0 || /^(SCRIPT|TEMPLATE)$/.test(last.tagName))) last = last.previousElementSibling;
+  if (!last) return;
+  var base = null;
+  function fit() {
+    var h = (parseFloat(getComputedStyle(foot, '::before').height) || 0) + Math.max(0, -(parseFloat(getComputedStyle(foot).marginTop) || 0));
+    last.style.paddingBottom = ''; base = parseFloat(getComputedStyle(last).paddingBottom) || 0;
+    last.style.paddingBottom = (base + h) + 'px';
+  }
+  fit(); addEventListener('resize', fit);
+})();
