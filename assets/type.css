@@ -1042,3 +1042,6 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 .foot:not(#_){position:relative}
 .foot::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:clamp(90px,14vh,170px);background:linear-gradient(180deg,rgba(4,18,26,0),var(--abyss));pointer-events:none;z-index:3}
 .pg--home .foot::before{content:none}
+
+/* v87 homepage tasting steps: real photographs in the four rings */
+.tco img:not(#_),.tsteps__row li:nth-child(3) .tco img:not(#_){width:100%;height:100%;object-fit:cover;border-radius:50%}
