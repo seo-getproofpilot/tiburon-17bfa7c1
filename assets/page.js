@@ -129,8 +129,8 @@
   var base = null;
   function fit() {
     var h = (parseFloat(getComputedStyle(foot, '::before').height) || 0) + Math.max(0, -(parseFloat(getComputedStyle(foot).marginTop) || 0));
-    last.style.paddingBottom = ''; base = parseFloat(getComputedStyle(last).paddingBottom) || 0;
-    last.style.paddingBottom = (base + h) + 'px';
+    last.style.removeProperty('padding-bottom'); base = parseFloat(getComputedStyle(last).paddingBottom) || 0;
+    last.style.setProperty('padding-bottom', (base + h) + 'px', 'important');
   }
   fit(); addEventListener('resize', fit);
 })();

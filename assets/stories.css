@@ -1147,3 +1147,6 @@
   .trb--bar .ticket__where span:not(#_){height:100%;box-sizing:border-box;align-content:center}
   .trb--bar .ticket__where label:not(#_){height:100%}
 }
+/* v95: story pages start on the same left edge as every other page (the page gutter) */
+.sty__in:not(#_){width:calc(100% - 2 * var(--gut))}
+.ckh2__copy:not(#_){max-width:none}

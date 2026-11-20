@@ -1108,3 +1108,12 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
   .ticket__brand:not(#_):not(#_){letter-spacing:.16em!important;font-size:12px!important;line-height:1.4}
 }
 @media (max-width:600px){.trb--bar .ticket__where:not(#_):not(#_),.rooms .tix .ticket__where:not(#_):not(#_){grid-template-columns:1fr!important}}
+
+/* v95: ONE left edge. On wide screens the page gutter equals the 1360px content column, so full-bleed
+   sections and max-width sections start on the same vertical line. */
+@media (min-width:1505px){:root:not(#_){--gut:calc((100vw - 1360px) / 2)}}
+@media (min-width:1760px){:root:not(#_){--gut:calc((100vw - 1360px) / 2)}}
+@media (min-width:2300px){:root:not(#_){--gut:calc((100vw - 1600px) / 2)}}
+/* v95: the tasting-rooms paragraph sits right under its heading, not floated to the middle of the photos */
+@media (min-width:901px){.rooms .rx:not(#_){row-gap:26px;align-items:start}.rooms .rx__text:not(#_){align-self:start}}
+@media (min-width:901px){.rooms .rx__text:not(#_){padding-top:0}}
