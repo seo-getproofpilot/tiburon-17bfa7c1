@@ -1004,3 +1004,41 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 }
 @media (max-width:420px){.foot__all:not(#_),.foot__shop:not(#_){padding:18px 26px 18px 38px!important;letter-spacing:.06em;font-size:12px!important;max-width:100%}}
 @media (max-width:900px),(orientation:portrait) and (max-width:1180px){.nav__brand:not(#_){min-height:44px;display:inline-flex;align-items:center}}
+
+/* ===== v83 footer: the bar photo fills the right side of the band and fades into the page on every edge.
+   The band takes the footer's own colour, so there is no seam above the columns. Desktop only; phones keep the
+   stacked photo. The photo box keeps the photo's own shape (1095x745), so nothing is cropped and the names sit
+   under their bottles. ===== */
+.foot__buy::before{background:radial-gradient(60% 80% at 78% 55%,rgba(120,70,30,.22),rgba(4,18,26,0) 70%),var(--abyss)!important;-webkit-mask:none!important;mask:none!important}
+@media (min-width:901px) and (not ((orientation:portrait) and (max-width:1180px))){
+  .foot__buy:not(#_){display:block!important;min-height:clamp(520px,64vh,760px);display:flex!important;align-items:center}
+  .foot__pitch{position:relative;z-index:2;max-width:min(560px,44%)}
+  .foot__shelf--photo:not(#_){position:absolute;top:0;bottom:0;right:calc(50% - 50vw);height:100%;aspect-ratio:1095/745;max-width:72vw;display:block;padding:0;z-index:1}
+  .foot__scene:not(#_){position:absolute;inset:0;margin:0;
+    -webkit-mask:linear-gradient(90deg,transparent 0,#000 34%),linear-gradient(180deg,transparent 0,#000 16%,#000 74%,transparent 100%);-webkit-mask-composite:source-in;
+    mask:linear-gradient(90deg,transparent 0,#000 34%),linear-gradient(180deg,transparent 0,#000 16%,#000 74%,transparent 100%);mask-composite:intersect}
+  .foot__scene img:not(#_){width:100%;height:100%;object-fit:cover}
+  .foot__shelf--photo .fb:not(#_){position:absolute;bottom:clamp(14px,3vh,34px);translate:-50% 0;animation:none}
+  .foot__shelf--photo .fb--dark{left:17%}.foot__shelf--photo .fb--white{left:50%}.foot__shelf--photo .fb--fin{left:83%}
+  .foot__shelf--photo .fb__nm:not(#_){margin-top:0;text-shadow:0 2px 14px rgba(0,0,0,.9)}
+  .foot__shelf--photo .fb__px{text-shadow:0 2px 10px rgba(0,0,0,.9)}
+}
+/* v83b: photo narrower and its fade shorter, so Dark 8 stays clear of the headline */
+@media (min-width:901px) and (not ((orientation:portrait) and (max-width:1180px))){
+  .foot__shelf--photo:not(#_){max-width:60vw}
+  .foot__scene:not(#_){-webkit-mask:linear-gradient(90deg,transparent 0,#000 15%),linear-gradient(180deg,transparent 0,#000 14%,#000 76%,transparent 100%);-webkit-mask-composite:source-in;
+    mask:linear-gradient(90deg,transparent 0,#000 15%),linear-gradient(180deg,transparent 0,#000 14%,#000 76%,transparent 100%);mask-composite:intersect}
+  .foot__pitch{max-width:min(560px,40vw)}
+}
+/* v83c: room above the caps and a strip under the photo for the names, so nothing sits on a label */
+@media (min-width:901px) and (not ((orientation:portrait) and (max-width:1180px))){
+  .foot__buy:not(#_){min-height:clamp(600px,74vh,860px)}
+  .foot__shelf--photo:not(#_){top:clamp(20px,4vh,48px);bottom:auto;height:calc(100% - clamp(20px,4vh,48px) - 64px)}
+  .foot__scene:not(#_){-webkit-mask:linear-gradient(90deg,transparent 0,#000 15%),linear-gradient(180deg,transparent 0,#000 7%,#000 84%,transparent 100%);-webkit-mask-composite:source-in;
+    mask:linear-gradient(90deg,transparent 0,#000 15%),linear-gradient(180deg,transparent 0,#000 7%,#000 84%,transparent 100%);mask-composite:intersect}
+  .foot__shelf--photo .fb:not(#_){bottom:-62px}
+}
+/* v83d: the last section melts into the footer instead of meeting it on a hard line */
+.foot:not(#_){position:relative}
+.foot::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:clamp(90px,14vh,170px);background:linear-gradient(180deg,rgba(4,18,26,0),var(--abyss));pointer-events:none;z-index:3}
+.pg--home .foot::before{content:none}
