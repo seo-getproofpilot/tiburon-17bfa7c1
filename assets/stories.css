@@ -1111,7 +1111,7 @@
 .cvx .cvx__list li:not(.todo)::before{content:none!important;display:none!important}
 
 /* v86 Ecosystem: real photographs replace the watercolours */
-.sth__art.plate:not(#_){border-radius:6px;aspect-ratio:4/3;object-fit:cover;filter:none;box-shadow:0 30px 60px -30px rgba(20,32,31,.45)}
+.pg--eco .sth__art.plate:not(#_),.sth__art.plate[src*="ec-"]:not(#_){border-radius:6px;aspect-ratio:4/3;object-fit:cover;filter:none;box-shadow:0 30px 60px -30px rgba(20,32,31,.45)}
 .sth .sth__art.plate[src*="ec-end"]:not(#_){aspect-ratio:1}
 .wnode img:not(#_){object-fit:cover;box-shadow:0 0 0 3px #f4efe4,0 0 0 4px rgba(36,80,79,.35),0 10px 22px -10px rgba(20,32,31,.5)}
 .wpanel figure.painted.ph:not(#_){margin:14px 0 0}
@@ -1121,4 +1121,3 @@
 .sp--wide img:not(#_){aspect-ratio:16/9}
 
 /* v87 photographs replace the painted plates on How it's made, Carbon and Tasting rooms */
-.lf img:not(#_){object-fit:cover;border-radius:50%;background:none;box-shadow:0 0 0 4px var(--paper,#f4efe4),0 0 0 5px rgba(36,80,79,.3),0 16px 26px -14px rgba(20,32,31,.5)}
