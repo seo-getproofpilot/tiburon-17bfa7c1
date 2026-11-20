@@ -417,3 +417,51 @@
   .bt-mark dd:not(#_):not(#_),.bt-mark dd span:not(#_):not(#_){font-size:15px!important}
 }
 @media (min-width:901px) and (not ((orientation:portrait) and (max-width:1180px))){.bt-intro:not(#_):not(#_){font-size:clamp(17px,1.3vw,19px)!important}}
+
+/* v92 FIN agave: the field photo fills the section; the four steps run across it as real objects */
+.bt-field:not(#_){display:flex;flex-direction:column;justify-content:space-between;gap:clamp(48px,9vh,120px);min-height:min(100svh,980px);padding-top:calc(var(--sy) + 10px);padding-bottom:clamp(48px,7vh,84px);background:#0a0b16}
+.bt-field__bg{position:absolute;inset:0;z-index:-2}
+.bt-field__bg img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.bt-field::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(6,8,18,.72) 0%,rgba(6,8,18,.18) 30%,rgba(6,8,18,.35) 52%,rgba(6,8,18,.9) 76%,rgba(6,8,18,.96) 100%)}
+.bt-field__head{max-width:640px}
+.bt-field__head .bp-h2{margin:0;text-shadow:0 2px 24px rgba(0,0,0,.45)}
+.bt-field__tag:not(#_){position:absolute;right:var(--gut);top:calc(var(--sy) + 10px);left:auto;bottom:auto}
+.bt-field__steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(20px,2.6vw,44px);position:relative}
+.bt-field__steps::before{content:"";position:absolute;left:0;right:0;top:calc(clamp(150px,15vw,210px) + 14px);height:1.5px;background:linear-gradient(90deg,rgba(201,150,90,.15),#c9965a 15%,#c9965a 85%,rgba(201,150,90,.15))}
+.bt-field__steps li{display:flex;flex-direction:column;align-items:flex-start;position:relative}
+.bt-field__steps figure{margin:0;height:clamp(150px,15vw,210px);width:100%;display:flex;align-items:flex-end;justify-content:flex-start}
+.bt-field__steps figure img{max-height:100%;max-width:92%;width:auto;height:auto;filter:drop-shadow(0 22px 22px rgba(0,0,0,.6))}
+.bt-field__steps figure.is-bottle img{height:100%;max-width:none;margin-left:12%}
+.bt-field__steps i{position:relative;z-index:1;margin:6px 0 18px;padding:6px 10px;border-radius:999px;background:var(--acc);color:#06172a;font:800 13px/1 var(--f);font-stretch:118%;font-style:normal;letter-spacing:.08em}
+.bt-field__steps b{display:block;margin-bottom:8px;font:800 17px/1.2 var(--f);font-stretch:118%;letter-spacing:.08em;text-transform:uppercase;color:var(--head)}
+.bt-field__steps p{margin:0;font-size:clamp(15.5px,1.1vw,17px);line-height:1.6;color:var(--txt);max-width:24em}
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){
+  .bt-field:not(#_){min-height:0;gap:56px}
+  .bt-field::after{background:linear-gradient(180deg,rgba(6,8,18,.7) 0%,rgba(6,8,18,.2) 22%,rgba(6,8,18,.7) 42%,rgba(6,8,18,.94) 60%,rgba(6,8,18,.97) 100%)}
+  .bt-field__tag:not(#_){display:none}
+  .bt-field__steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:44px 22px}
+  .bt-field__steps::before{display:none}
+  .bt-field__steps figure{height:clamp(120px,26vw,190px)}
+}
+@media (max-width:600px){
+  .bt-field__steps b{font-size:15px!important}
+  .bt-field__steps p{font-size:15.5px!important}
+}
+.bt-field:not(#_){align-items:stretch}
+.bt-field__head{align-self:flex-start}
+.bt-field::after{background:linear-gradient(180deg,rgba(6,8,18,.66) 0%,rgba(6,8,18,.1) 30%,rgba(6,8,18,0) 45%,rgba(6,8,18,.55) 66%,rgba(6,8,18,.9) 84%,rgba(6,8,18,.95) 100%)}
+.bt-field__bg img{object-position:50% 0%}
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){
+  .bt-field__bg{bottom:auto;height:min(118vw,900px)}
+  .bt-field::after{background:linear-gradient(180deg,rgba(6,8,18,.66) 0%,rgba(6,8,18,.08) 16%,rgba(6,8,18,0) 26%,rgba(6,8,18,.7) 40%,#0a0b16 54%,#0a0b16 100%)}
+  .bt-field:not(#_){background:#0a0b16}
+}
+@media (min-width:601px) and (max-width:900px),(min-width:601px) and (orientation:portrait) and (max-width:1180px){
+  .bt-field__bg{height:min(82vw,900px)}
+  .bt-field::after{background:linear-gradient(180deg,rgba(6,8,18,.66) 0%,rgba(6,8,18,0) 22%,rgba(6,8,18,.35) 38%,rgba(6,8,18,.85) 60%,#0a0b16 72%,#0a0b16 100%)}
+}
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){
+  .bt-field__bg{-webkit-mask:linear-gradient(180deg,#000 0%,#000 45%,rgba(0,0,0,.35) 75%,transparent 100%);mask:linear-gradient(180deg,#000 0%,#000 45%,rgba(0,0,0,.35) 75%,transparent 100%)}
+  .bt-field:not(#_)::after{background:linear-gradient(180deg,rgba(6,8,18,.66) 0%,rgba(6,8,18,0) 18%)!important}
+}
