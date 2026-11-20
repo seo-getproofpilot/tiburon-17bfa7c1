@@ -1045,3 +1045,28 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 
 /* v87 homepage tasting steps: real photographs in the four rings */
 .tco img:not(#_),.tsteps__row li:nth-child(3) .tco img:not(#_){width:100%;height:100%;object-fit:cover;border-radius:50%}
+
+/* v92: the bottle index in the lineup header sits in one row of three, not stacked */
+.lineup .lineup__index:not(#_){grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0!important;border-top:1px solid rgba(250,246,238,.16);border-bottom:1px solid rgba(250,246,238,.16)}
+.lineup .lineup__index li:not(#_){border-top:0;border-left:1px solid rgba(250,246,238,.16)}
+.lineup .lineup__index li:first-child:not(#_){border-left:0}
+.lineup .lineup__index a:not(#_){display:flex;flex-direction:column;justify-content:flex-end;height:100%;padding:26px clamp(16px,2vw,32px) 28px;box-sizing:border-box}
+.lineup .lineup__index li:first-child a:not(#_){padding-left:0}
+.lineup .lineup__index em:not(#_){font-size:15px;line-height:1.45;margin-top:10px}
+@media (max-width:600px){
+  .lineup .lineup__index a:not(#_){padding:18px 10px 20px}
+  .lineup .lineup__index b:not(#_){font-size:22px;white-space:normal}
+  .lineup .lineup__index .li--fin b:not(#_){font-size:24px}
+  .lineup .lineup__index em:not(#_){font-size:13px;line-height:1.4;margin-top:8px}
+}
+.lineup .lineup__index a:not(#_){justify-content:flex-start}
+.lineup .lineup__index b:not(#_){display:flex;align-items:flex-end;min-height:46px;white-space:nowrap}
+.lineup .lineup__index em:not(#_){text-wrap:balance}
+@media (max-width:600px){
+  .lineup .lineup__index b:not(#_){font-size:19px;min-height:28px;white-space:nowrap}
+  .lineup .lineup__index .li--fin b:not(#_){font-size:21px}
+}
+.lineup .lineup__index .li--dark b:not(#_){gap:.26em}
+@media (min-width:601px) and (max-width:900px),(min-width:601px) and (orientation:portrait) and (max-width:1180px){
+  .lineup .lineup__head:not(#_){grid-template-columns:1fr;align-items:start;gap:40px}
+}
