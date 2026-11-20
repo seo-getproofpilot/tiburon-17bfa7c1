@@ -376,3 +376,44 @@
 /* v83c: the jar photos carry their own transparency now (black ground keyed out), so no mask or blend */
 .jr__pic:not(#_){-webkit-mask:none;mask:none}
 .jr__pic img{mix-blend-mode:normal;filter:drop-shadow(0 18px 18px rgba(0,0,0,.45))}
+
+/* v84 readability: every label, spec, chip and link on the bottle pages steps up a size */
+.bph__lu .crumbs li:not(#_):not(#_),.bph__lu .crumbs a:not(#_):not(#_){font-size:14px!important}
+.bph__lu .lu__line:not(#_):not(#_),.bph__lu .lu__script:not(#_):not(#_){font-size:15px!important}
+.bph__lu.lu--white .lu__sub:not(#_):not(#_){font-size:19px!important}
+.bph__lu .lu__desc:not(#_):not(#_){font-size:clamp(18px,min(1.4vw,2.5vh),21px)!important}
+.bph__lu .lu__notes:not(#_):not(#_){font-size:16px!important}
+.bph__lu .lu__specs div:not(#_):not(#_){grid-template-columns:150px 1fr}
+.bph__lu .lu__specs dt:not(#_):not(#_){font-size:14px!important}
+.bph__lu .lu__specs dd:not(#_):not(#_){font-size:clamp(19px,min(1.45vw,2.6vh),22px)!important}
+.bph__lu .lu__price:not(#_):not(#_){font-size:clamp(34px,min(2.8vw,4.8vh),42px)!important}
+.bph__lu .lu__more:not(#_):not(#_){font-size:15px!important}
+.bph__lu .lu__buy .btn:not(#_):not(#_){font-size:15px!important}
+.bp-eyebrow:not(#_):not(#_){font-size:15px!important}
+.bt-mark dd:not(#_):not(#_),.bt-mark dd span:not(#_):not(#_){font-size:16px!important}
+.bp-link:not(#_):not(#_){font-size:14px!important}
+.bt-line:not(#_):not(#_),.bt-tag:not(#_):not(#_){font-size:13.5px!important}
+.bt-med i:not(#_):not(#_){font-size:13px!important}
+.bt-med+div b:not(#_):not(#_),.bt-steps b:not(#_):not(#_){font-size:17px!important}
+.bt-med+div p:not(#_):not(#_),.bt-steps p:not(#_):not(#_){font-size:17.5px!important}
+.wti__filters .chip:not(#_):not(#_){font-size:14px!important}
+.bt-fine:not(#_):not(#_){font-size:15px!important}
+.bt-visit__copy .btn:not(#_):not(#_){font-size:15px!important}
+.bpst figcaption:not(#_):not(#_){font-size:12.5px!important}
+.jr__tag li:not(#_):not(#_){font-size:16px!important}
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){
+  .bph__lu .crumbs li:not(#_):not(#_),.bph__lu .crumbs a:not(#_):not(#_){font-size:13px!important}
+  .bph__lu .lu__line:not(#_):not(#_),.bph__lu .lu__script:not(#_):not(#_){font-size:14px!important}
+  .bph__lu.lu--white .lu__sub:not(#_):not(#_){font-size:17px!important}
+  .bph__lu .lu__desc:not(#_):not(#_){font-size:18px!important}
+  .bph__lu .lu__specs div:not(#_):not(#_){grid-template-columns:112px 1fr}
+  .bph__lu .lu__specs dt:not(#_):not(#_){font-size:13.5px!important}
+  .bph__lu .lu__specs dd:not(#_):not(#_){font-size:19px!important}
+  .bph__lu .lu__more:not(#_):not(#_),.bph__lu .lu__buy .btn:not(#_):not(#_){font-size:14px!important}
+  .bp-eyebrow:not(#_):not(#_){font-size:14px!important}
+  .bt-med+div b:not(#_):not(#_),.bt-steps b:not(#_):not(#_){font-size:16px!important}
+  .bt-med+div p:not(#_):not(#_),.bt-steps p:not(#_):not(#_){font-size:17px!important}
+  .wti__filters .chip:not(#_):not(#_){font-size:13.5px!important}
+  .bt-mark dd:not(#_):not(#_),.bt-mark dd span:not(#_):not(#_){font-size:15px!important}
+}
+@media (min-width:901px) and (not ((orientation:portrait) and (max-width:1180px))){.bt-intro:not(#_):not(#_){font-size:clamp(17px,1.3vw,19px)!important}}
