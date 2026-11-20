@@ -1121,13 +1121,4 @@
 .sp--wide img:not(#_){aspect-ratio:16/9}
 
 /* v87 photographs replace the painted plates on How it's made, Carbon and Tasting rooms */
-.step__art .plate:not(#_){aspect-ratio:4/5;height:auto;object-fit:cover;border-radius:6px;filter:none;box-shadow:0 34px 60px -32px rgba(20,32,31,.5)}
-.sth__dock img:not(#_){border-radius:0;aspect-ratio:1600/679;object-fit:cover}
 .lf img:not(#_){object-fit:cover;border-radius:50%;background:none;box-shadow:0 0 0 4px var(--paper,#f4efe4),0 0 0 5px rgba(36,80,79,.3),0 16px 26px -14px rgba(20,32,31,.5)}
-/* the rope now ends on a round photograph of the reef instead of a drawn anchor */
-.proc__end .anchor:not(#_){--aw:min(220px,60vw);translate:0 0;transform-origin:50% 0}
-.anchor .anchor__ph:not(#_){width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:50%;filter:none;box-shadow:0 0 0 6px #f4ecdd,0 0 0 9px #a07443,0 30px 50px -24px rgba(20,32,31,.55)}
-@media (max-width:760px){
-  .proc__end .anchor:not(#_){--aw:84px;margin-left:-14px}
-  .anchor>img.anchor__ph:not(#_){scale:1}
-}
