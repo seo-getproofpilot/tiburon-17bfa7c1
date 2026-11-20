@@ -1121,3 +1121,29 @@
 .sp--wide img:not(#_){aspect-ratio:16/9}
 
 /* v87 photographs replace the painted plates on How it's made, Carbon and Tasting rooms */
+
+/* ===== v94 tasting pass: fill it in order (date, guests, name, email, room), then request. Request stays locked until a room is picked ===== */
+.ticket__pass:not(#_){white-space:nowrap}
+.ticket__where label:not(#_){display:block;position:relative}
+.ticket__where span:not(#_)::before{top:50%;transform:translateY(-50%);margin:0}
+.ticket .ticket__go:disabled:not(#_){opacity:.38;cursor:not-allowed;filter:grayscale(.4)}
+.ticket .ticket__go:disabled:hover:not(#_){background:var(--ink)}
+@media (min-width:1001px){
+  .trb--bar .ticket__main:not(#_){grid-template-columns:repeat(4,minmax(0,1fr));align-items:end;gap:16px 16px;padding:26px 30px 24px}
+  .trb--bar .ticket__top:not(#_){grid-column:1/3;align-self:center}
+  .trb--bar .ticket h3:not(#_){grid-column:3/-1;align-self:center}
+  .trb--bar .ticket__where:not(#_){order:3;grid-column:1/-1;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:4px}
+  .trb--bar .ticket__where legend:not(#_){float:none;padding:0;margin:0 0 10px}
+  .trb--bar .ticket__where span:not(#_){display:grid;gap:3px;align-content:center;height:100%;box-sizing:border-box;padding:12px 14px 12px 42px;border-radius:14px;font-size:13px;line-height:1.35}
+  .trb--bar .ticket__where span:not(#_)::before{left:14px}
+  .trb--bar .ticket__where label:not(#_){height:100%}
+  .trb--bar .ticket .ticket__go:not(#_){order:4;grid-column:1/3;justify-self:start;align-self:center;margin-top:6px}
+  .trb--bar .ticket__note:not(#_){order:4;grid-column:3/-1;align-self:center;justify-self:end;text-align:right;margin:6px 0 0}
+}
+@media (max-width:1000px){
+  .trb--bar .ticket__where:not(#_){order:3}
+  .trb--bar .ticket .ticket__go:not(#_){order:4}
+  .trb--bar .ticket__note:not(#_){order:5}
+  .trb--bar .ticket__where span:not(#_){height:100%;box-sizing:border-box;align-content:center}
+  .trb--bar .ticket__where label:not(#_){height:100%}
+}

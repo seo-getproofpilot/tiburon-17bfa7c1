@@ -39,7 +39,7 @@
   if (book) {
     const d = book.querySelector('[name=date]'); d.min = new Date().toISOString().slice(0, 10);
     const g = book.querySelector('[name=guests]');
-    const stub = () => { const n = Math.max(1, Math.min(20, parseInt(g.value, 10) || 1)); $('#tkN').textContent = n; $('#tkTotal').textContent = '$' + n * 30; $('#tkRoom').textContent = book.querySelector('[name=room]:checked').value; };
+    const stub = () => { const n = Math.max(1, Math.min(20, parseInt(g.value, 10) || 1)); $('#tkN').textContent = n; $('#tkTotal').textContent = '$' + n * 30; const r = book.querySelector('[name=room]:checked'), go = book.querySelector('.ticket__go'); $('#tkRoom').textContent = r ? r.value : 'Pick a room'; if (go) { go.disabled = !r; book.classList.toggle('has-room', !!r); } const nt = book.querySelector('.ticket__note'); if (nt && !nt.dataset.sent) nt.textContent = r ? 'Opens an email to our team with your details filled in.' : 'Pick a tasting room to request your tasting.'; };
     $$('.ticket__step button', book).forEach((b) => b.addEventListener('click', () => { g.value = Math.max(1, Math.min(20, (parseInt(g.value, 10) || 1) + +b.dataset.d)); stub(); }));
     book.addEventListener('input', stub); book.addEventListener('change', stub); stub();
     $$('[data-room]').forEach((a) => a.addEventListener('click', () => { const r = book.querySelector(`[name=room][value="${a.dataset.room}"]`); if (r) { r.checked = true; stub(); } }));
@@ -50,7 +50,7 @@
       const when = new Date(f.get('date') + 'T12:00').toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
       const body = `Hi Tiburon team,\n\nI'd like to book a rum tasting.\n\nRoom: ${room}\nDate: ${when}\nGuests: ${f.get('guests')}\nName: ${f.get('name')}\nEmail: ${f.get('email')}\n\nThank you!`;
       location.href = 'mailto:basil@sharkbaitco.com?subject=' + encodeURIComponent(`Tasting request, ${room}, ${when}`) + '&body=' + encodeURIComponent(body);
-      book.querySelector('.ticket__note').textContent = 'Your email app should open with the request ready to send.';
+      { const nt = book.querySelector('.ticket__note'); nt.dataset.sent = '1'; nt.textContent = 'Your email app should open with the request ready to send.'; }
     });
   }
 

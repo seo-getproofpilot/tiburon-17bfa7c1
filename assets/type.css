@@ -1075,3 +1075,36 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 :is(h1,h2,h3):not(.lu__title):not(.pp__title):not(.shelf__name):not(.shop__name):not(.cks__nm):not(.bt-face):not(.sr):not(.sr-only):not(#_){text-transform:uppercase;letter-spacing:-.005em}
 :is(.dc h2,.pp2__copy h3,.aw2__card h3,.plinth__text h3,.lineup__index b,.cartd__item b):not(#_):not(#_){text-transform:none}
 .rx__head h2:not(#_){white-space:normal;max-width:16ch}
+/* v94 tasting pass (homepage copy): radio dot centred, Request locked until a room is picked */
+.ticket__pass:not(#_){white-space:nowrap}
+.ticket__where label:not(#_){display:block;position:relative}
+.ticket__where span:not(#_)::before{top:50%;transform:translateY(-50%);margin:0}
+.ticket .ticket__go:disabled:not(#_){opacity:.38;cursor:not-allowed;filter:grayscale(.4)}
+@media (min-width:1001px){
+  .rooms .tix .ticket__main:not(#_){grid-template-columns:repeat(4,minmax(0,1fr));align-items:end;gap:16px 16px;padding:26px 30px 24px}
+  .rooms .tix .ticket__top:not(#_){grid-column:1/3;align-self:center}
+  .rooms .tix .ticket h3:not(#_){grid-column:3/-1;align-self:center}
+  .rooms .tix .ticket__where:not(#_){order:3;grid-column:1/-1;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px;margin-top:4px}
+  .rooms .tix .ticket__where legend:not(#_){float:none;padding:0;margin:0 0 10px}
+  .rooms .tix .ticket__where span:not(#_){display:grid;gap:3px;align-content:center;height:100%;box-sizing:border-box;padding:12px 14px 12px 44px;border-radius:14px;font-size:13px;line-height:1.35}
+  .rooms .tix .ticket__where label:not(#_){height:100%}
+  .rooms .tix .ticket .ticket__go:not(#_){order:4;grid-column:1/3;justify-self:start;align-self:center;margin-top:6px}
+  .rooms .tix .ticket__note:not(#_){order:4;grid-column:3/-1;align-self:center;justify-self:end;text-align:right;margin:6px 0 0}
+}
+@media (max-width:1000px){
+  .rooms .tix .ticket__where:not(#_){order:3}
+  .rooms .tix .ticket .ticket__go:not(#_){order:4}
+  .rooms .tix .ticket__note:not(#_){order:5}
+  .rooms .tix .ticket__where span:not(#_){height:100%;box-sizing:border-box;align-content:center}
+  .rooms .tix .ticket__where label:not(#_){height:100%}
+}
+@media (max-width:1000px){
+  .ticket__where span:not(#_):not(#_){padding-left:50px!important}
+  .ticket__where span:not(#_)::before{left:16px!important}
+  .ticket__where input:not(#_):not(#_){left:16px}
+}
+@media (max-width:600px){
+  .ticket__top:not(#_){flex-wrap:wrap;gap:10px}
+  .ticket__brand:not(#_):not(#_){letter-spacing:.16em!important;font-size:12px!important;line-height:1.4}
+}
+@media (max-width:600px){.trb--bar .ticket__where:not(#_):not(#_),.rooms .tix .ticket__where:not(#_):not(#_){grid-template-columns:1fr!important}}
