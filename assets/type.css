@@ -1070,3 +1070,8 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 @media (min-width:601px) and (max-width:900px),(min-width:601px) and (orientation:portrait) and (max-width:1180px){
   .lineup .lineup__head:not(#_){grid-template-columns:1fr;align-items:start;gap:40px}
 }
+
+/* v93: every Archivo headline is uppercase, like "Ship Tiburón to your door". Bottle names keep their label faces. */
+:is(h1,h2,h3):not(.lu__title):not(.pp__title):not(.shelf__name):not(.shop__name):not(.cks__nm):not(.bt-face):not(.sr):not(.sr-only):not(#_){text-transform:uppercase;letter-spacing:-.005em}
+:is(.dc h2,.pp2__copy h3,.aw2__card h3,.plinth__text h3,.lineup__index b,.cartd__item b):not(#_):not(#_){text-transform:none}
+.rx__head h2:not(#_){white-space:normal;max-width:16ch}

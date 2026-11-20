@@ -465,3 +465,5 @@
   .bt-field__bg{-webkit-mask:linear-gradient(180deg,#000 0%,#000 45%,rgba(0,0,0,.35) 75%,transparent 100%);mask:linear-gradient(180deg,#000 0%,#000 45%,rgba(0,0,0,.35) 75%,transparent 100%)}
   .bt-field:not(#_)::after{background:linear-gradient(180deg,rgba(6,8,18,.66) 0%,rgba(6,8,18,0) 18%)!important}
 }
+/* v93: step numbers in copper, not blue, and easier to read */
+.bt-field__steps i:not(#_){margin:8px 0 18px;padding:7px 13px 6px;background:rgba(6,8,18,.85);color:#f3e2c4;box-shadow:inset 0 0 0 1.5px #c9965a;font-size:15px!important;letter-spacing:.12em}
