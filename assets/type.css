@@ -1319,3 +1319,56 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 .dmap .leaflet-container .dloc__l a:not(#_){color:#e8d3a6}
 .dmap .leaflet-control-attribution{background:rgba(4,18,26,.75)!important;color:rgba(250,246,238,.6)!important}
 .dmap .leaflet-control-attribution a{color:#e8d3a6!important}
+
+/* ===== v97 footer lockup layout ===== */
+.foot__cols,.foot__mark,.foot__base{display:none!important}
+.fz{position:relative;padding:clamp(48px,7vh,80px) var(--gut) 28px;color:var(--bone);border-top:1px solid rgba(250,246,238,.08)}
+.fz__top{display:grid;grid-template-columns:minmax(180px,1fr) minmax(0,3fr) minmax(260px,1.35fr);gap:clamp(28px,4vw,72px);align-items:start}
+.fz__mk{width:44px;height:auto;fill:var(--amber,#e0974a);display:block;margin-bottom:22px}
+.fz__mk path{fill:var(--amber,#e0974a)}
+.fz__brand p{margin:0;font-size:14.5px;line-height:1.6;color:rgba(250,246,238,.7);max-width:22em}
+.fz__cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2vw,32px)}
+.fz__cols div{display:grid;align-content:start;gap:12px}
+.fz h3:not(#_):not(#_){font:600 12px/1.2 var(--f)!important;font-stretch:112%!important;letter-spacing:.16em!important;text-transform:uppercase!important;color:rgba(250,246,238,.5)!important;margin:0 0 6px!important}
+.fz__cols a{font-size:15px;line-height:1.3;color:var(--bone);text-decoration:none;transition:color .2s}
+.fz__cols a:hover{color:#e8d3a6}
+.fz__list h3:not(#_):not(#_){color:var(--bone)!important;font-size:13px!important}
+.fz__list>p{margin:0 0 14px;font-size:14px;line-height:1.5;color:rgba(250,246,238,.7)}
+.fz__field{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:0;background:rgba(250,246,238,.06);box-shadow:inset 0 0 0 1px rgba(250,246,238,.16)}
+.fz__field svg{width:18px;height:18px;margin:0 8px 0 14px;color:rgba(250,246,238,.55)}
+.fz__field input{min-width:0;height:46px;border:0;background:none;color:var(--bone);font:400 15px var(--f);outline:0}
+.fz__field input::placeholder{color:rgba(250,246,238,.45)}
+.fz__field button{height:46px;padding:0 20px;border:0;background:#e8d3a6;color:#14201f;font:700 12px/1 var(--f);font-stretch:112%;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+.fz__field button:hover{background:#f3e2c4}
+.fz__field:focus-within{box-shadow:inset 0 0 0 1px #e8d3a6}
+.fz__ship{margin:16px 0 0;font-size:12.5px;line-height:1.5;color:rgba(250,246,238,.5)}
+/* the full logo across the page */
+.fz__lock{display:flex;align-items:center;gap:clamp(18px,2.6vw,48px);margin:clamp(48px,8vh,96px) 0 clamp(28px,4vh,44px);text-decoration:none}
+.fz__lmk{flex:0 0 auto;width:clamp(84px,13vw,240px);height:auto}
+.fz__lmk path{fill:var(--amber,#e0974a)}
+.fz__lwd{flex:1 1 auto;width:100%;height:auto;max-height:clamp(70px,15vw,290px)}
+.fz__lwd path{fill:var(--bone)}
+.fz__base{display:flex;justify-content:space-between;align-items:center;gap:16px 40px;padding-top:22px;border-top:1px solid rgba(250,246,238,.14);font-size:12.5px;line-height:1.5;color:rgba(250,246,238,.55)}
+.fz__base p{margin:0;max-width:62em}
+.fz__legal{display:flex;gap:22px;flex:0 0 auto}
+.fz__legal a{color:rgba(250,246,238,.75);text-decoration:underline;text-underline-offset:3px}
+@media (max-width:1100px){.fz__top{grid-template-columns:1fr 2fr}.fz__list{grid-column:1/-1;max-width:520px}}
+@media (max-width:700px){
+  .fz{padding-top:40px}
+  .fz__top{grid-template-columns:1fr;gap:30px}
+  .fz__cols{grid-template-columns:1fr 1fr;gap:26px 18px}
+  .fz__lock{margin:40px 0 24px;gap:14px}
+  .fz__base{flex-direction:column;align-items:flex-start;text-align:left}
+}
+.fz:not(#_){padding-left:0;padding-right:0}
+.fz__lock:not(#_){justify-content:flex-start;gap:clamp(24px,4vw,72px)}
+.fz__lmk:not(#_){width:auto;height:clamp(110px,15vw,300px)}
+.fz__lwd:not(#_){flex:0 1 auto;width:auto;height:clamp(76px,10.3vw,206px);max-height:none}
+.fz__ship:not(#_){margin-top:18px}
+@media (max-width:700px){.fz__lmk:not(#_){height:clamp(70px,19vw,110px)}.fz__lwd:not(#_){height:clamp(48px,13vw,76px)}}
+/* lockup: mark + the TIBURÓN RUM line of the wordmark, sized together to span the content column edge to edge */
+.fz__lock:not(#_){--lw:calc((100vw - 2 * var(--gut) - var(--lg)) / 8.69);--lg:clamp(14px,3vw,48px);gap:var(--lg);align-items:flex-end}
+.fz__lwd:not(#_){overflow:hidden;height:var(--lw);width:calc(var(--lw) * 7.44);flex:0 0 auto}
+.fz__lmk:not(#_){height:calc(var(--lw) * 1.48);width:auto}
+@media (min-width:1505px){.fz__lock:not(#_){--lw:calc((min(100vw,1360px + 2 * var(--gut)) - 2 * var(--gut) - var(--lg)) / 8.69)}}
+.ds__cta:not(#_){margin-bottom:clamp(28px,5vh,56px)}
