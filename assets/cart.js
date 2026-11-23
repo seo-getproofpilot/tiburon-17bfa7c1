@@ -47,7 +47,7 @@
     bar.style.width = Math.min(1, n / FREE) * 100 + '%';
     var ups = Object.keys(P).filter(function (k) { return !cart[k]; });
     addRow.innerHTML = ups.length ? '<p class="cartd__uph">' + (n ? 'Add to your order' : 'Our bottles') + '</p><div class="cartd__ups">' + ups.map(function (k) {
-      return '<div class="cartd__up"><img src="' + root + 'assets/img/up-' + k + '.webp" alt="" width="90" height="120" loading="lazy">' +
+      return '<div class="cartd__up"><img src="' + root + 'assets/img/' + P[k].img + '" alt="" width="82" height="300" loading="lazy">' +
         '<div class="cartd__upt"><b>' + nm(k) + '</b><span>' + money(P[k].price) + '</span>' +
         '<button type="button" class="cartd__upadd" data-add="' + k + '" aria-label="Add ' + P[k].short + ' to your order">+ Add</button></div></div>';
     }).join('') + '</div>' : '';
