@@ -45,9 +45,12 @@
     shipT.innerHTML = n === 0 ? 'Free shipping on <b>3 or more bottles</b>, for a limited time.' :
       left ? 'Add <b>' + left + ' more bottle' + (left > 1 ? 's' : '') + '</b> for free shipping.' : '<b>You&rsquo;ve unlocked free shipping.</b>';
     bar.style.width = Math.min(1, n / FREE) * 100 + '%';
-    addRow.innerHTML = Object.keys(P).filter(function (k) { return !cart[k]; }).map(function (k) {
-      return '<button type="button" class="cartd__more" data-add="' + k + '">+ Add ' + nm(k) + ' <span>' + money(P[k].price) + '</span></button>';
-    }).join('');
+    var ups = Object.keys(P).filter(function (k) { return !cart[k]; });
+    addRow.innerHTML = ups.length ? '<p class="cartd__uph">' + (n ? 'Add to your order' : 'Our bottles') + '</p><div class="cartd__ups">' + ups.map(function (k) {
+      return '<div class="cartd__up"><img src="' + root + 'assets/img/up-' + k + '.webp" alt="" width="90" height="120" loading="lazy">' +
+        '<div class="cartd__upt"><b>' + nm(k) + '</b><span>' + money(P[k].price) + '</span>' +
+        '<button type="button" class="cartd__upadd" data-add="' + k + '" aria-label="Add ' + P[k].short + ' to your order">+ Add</button></div></div>';
+    }).join('') + '</div>' : '';
     go.disabled = n === 0;
     document.querySelectorAll('.cartbtn__n').forEach(function (el) { el.textContent = n; el.hidden = n === 0; });
     document.querySelectorAll('.offer__left').forEach(function (el) { el.textContent = n >= FREE ? 'Free shipping unlocked' : n ? 'Add ' + (FREE - n) + ' more for free shipping' : ''; });
@@ -67,7 +70,7 @@
     var st = e.target.closest('.qty [data-step]');
     if (st) {
       var box = st.closest('.qty'), out = box.querySelector('output'), n = Math.max(1, Math.min(24, (+out.textContent || 1) + (+st.getAttribute('data-step'))));
-      out.textContent = n; var item = box.closest('.shop__item'), btn = item && item.querySelector('[data-add]');
+      out.textContent = n; var item = box.closest('.shop__item,.cel__item'), btn = item && item.querySelector('[data-add]');
       if (btn) { btn.setAttribute('data-q', n); btn.textContent = n > 1 ? 'Add ' + n + ' to cart' : 'Add to cart'; }
       return;
     }
