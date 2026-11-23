@@ -1445,3 +1445,9 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 .dpin2--group .dpin2__disc b{font:800 17px/1 var(--f);font-stretch:112%;color:var(--c)}
 .dpin2__lbl{position:absolute;left:50%;top:calc(100% + 6px);translate:-50% 0;font:700 10px/1 var(--f);font-stretch:112%;letter-spacing:.16em;text-transform:uppercase;color:var(--c);white-space:nowrap;text-shadow:0 1px 6px #04121a}
 .dmap .maplibregl-ctrl-attrib-inner,.dmap .maplibregl-ctrl-attrib-inner *{color:rgba(250,246,238,.6)!important}.dmap .maplibregl-ctrl-attrib-inner a{color:#e8d3a6!important}
+/* satellite ground: a soft vignette pulls the eye to the pins */
+.dmap__stage::after{content:"";position:absolute;inset:7px;z-index:1;pointer-events:none;box-shadow:inset 0 0 120px 30px rgba(4,18,26,.55)}
+@media (max-width:900px){.dmap__stage::after{display:none}.dmap__map::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 70px 14px rgba(4,18,26,.5);z-index:1}}
+.dpin2__disc{box-shadow:0 0 0 2px var(--c),0 0 0 6px rgba(4,18,26,.35),0 10px 22px rgba(0,0,0,.7)!important}
+@media (max-width:900px){.dpop .maplibregl-popup-content{padding:12px 14px 10px}.dpop .dloc__n{font-size:15px}.dpop .dloc__a{font-size:13px}}
+.dpop a:focus:not(:focus-visible),.dpop button:focus:not(:focus-visible){outline:none;box-shadow:none}
