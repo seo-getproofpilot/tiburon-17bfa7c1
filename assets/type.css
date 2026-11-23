@@ -1144,7 +1144,7 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 
 /* ===== v96 Where to Buy: the cellar. Three arched prints with copper outlines (the bottle-page shape), no card boxes,
    header + "all three" offer in one row; the whole range fits one screen above the fold at 1440x900 and up. ===== */
-.cel{--archH:clamp(220px,calc(100svh - var(--nav) - 395px - 4vh - 10vw),600px);position:relative;isolation:isolate;overflow:hidden;color:var(--bone);
+.cel{--archH:clamp(220px,calc(100svh - var(--nav) - 360px - 4vh - 10vw),600px);position:relative;isolation:isolate;overflow:hidden;color:var(--bone);
   padding:calc(var(--nav) + clamp(18px,3vh,36px)) var(--gut) clamp(20px,3vh,36px);
   background:radial-gradient(38% 34% at 18% 70%,rgba(224,151,74,.2),transparent 70%),radial-gradient(34% 32% at 50% 66%,rgba(118,196,190,.14),transparent 70%),radial-gradient(38% 34% at 82% 70%,rgba(110,160,230,.18),transparent 70%),linear-gradient(180deg,#04121a 0%,#071d26 46%,#0a2a33 100%)}
 .cel::before{content:"";position:absolute;inset:0;z-index:-1;background:url(img/il/reef-pattern.webp) 0 0/640px auto repeat;opacity:.055;filter:invert(1);pointer-events:none}
@@ -1372,3 +1372,23 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 .fz__lmk:not(#_){height:calc(var(--lw) * 1.48);width:auto}
 @media (min-width:1505px){.fz__lock:not(#_){--lw:calc((min(100vw,1360px + 2 * var(--gut)) - 2 * var(--gut) - var(--lg)) / 8.69)}}
 .ds__cta:not(#_){margin-bottom:clamp(28px,5vh,56px)}
+/* v98 Where to Buy: specs are just proof and size, centred; "Add all three" sits under the bottles */
+.cel__top:not(#_){grid-template-columns:minmax(0,1fr)}
+.cel__spec:not(#_){display:flex;justify-content:center;align-items:center;gap:0;margin:0 0 clamp(12px,2vh,18px);font:600 15px/1.2 var(--f);font-stretch:112%;color:var(--bone)}
+.cel__spec span{padding:0 clamp(14px,1.6vw,22px)}
+.cel__spec span+span{border-left:1px solid rgba(250,246,238,.22)}
+.cel__all{display:flex;align-items:center;justify-content:center;gap:clamp(16px,2vw,32px);margin:clamp(18px,3vh,32px) auto 0;padding:clamp(12px,1.8vh,16px) clamp(18px,2vw,28px);
+  width:fit-content;max-width:100%;border-top:1px solid rgba(201,150,90,.35);border-bottom:1px solid rgba(201,150,90,.35)}
+.cel__all-b{display:flex;align-items:flex-end}
+.cel__all-b img{height:clamp(48px,7vh,72px);width:auto;filter:drop-shadow(0 8px 8px rgba(0,0,0,.5))}
+.cel__all-b img+img{margin-left:-6px}
+.cel__all p{margin:0;font-size:15px;line-height:1.45;color:rgba(250,246,238,.8)}
+.cel__all p b{color:#e8d3a6}
+.cel__all .btn{flex:0 0 auto;min-height:48px}
+@media (max-width:700px){.cel__all{flex-wrap:wrap;width:auto;text-align:left;justify-content:flex-start}.cel__all p{flex:1 1 200px}.cel__all .btn{flex:1 1 100%;justify-content:center}}
+.cel__top:not(#_):not(#_){grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:end;gap:clamp(24px,4vw,72px)}
+.cel__side .cel__lede{margin:0}
+.cel__side .cel__fine:not(#_){margin:10px 0 0;text-align:left;font-size:12.5px}
+.cel__all:not(#_){padding-block:8px;margin-top:clamp(14px,2.4vh,26px)}
+.cel__all-b img:not(#_){height:clamp(40px,5.6vh,60px)}
+@media (max-width:900px){.cel__top:not(#_):not(#_){grid-template-columns:minmax(0,1fr)}}
