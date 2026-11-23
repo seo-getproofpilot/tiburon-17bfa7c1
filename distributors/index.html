@@ -19,9 +19,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,100,400&family=Metamorphous&family=Marcellus+SC&family=IM+Fell+DW+Pica+SC&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=1795470244">
-<link rel="stylesheet" href="../assets/page.css?v=1795470244">
-<link rel="stylesheet" href="../assets/type.css?v=1795470244">
+<link rel="stylesheet" href="../assets/site.css?v=1795470785">
+<link rel="stylesheet" href="../assets/page.css?v=1795470785">
+<link rel="stylesheet" href="../assets/type.css?v=1795470785">
 <script>
   (function(){var d=document.documentElement;d.classList.add('js','inner');try{if(localStorage.getItem('tb_age')!=='1'&&!/nointro/.test(location.search))d.classList.add('needs-age');}catch(e){}})();
 </script>
@@ -31,7 +31,7 @@
  {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.tiburonrum.com/"},{"@type":"ListItem","position":2,"name":"Distributors","item":"https://www.tiburonrum.com/distributors/"}]}
 ]}
 </script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.css">
 </head>
 <body class="pg pg--buy pg--dist">
 
@@ -94,12 +94,13 @@
     <h2 id="map-h">Find Tibur&oacute;n near you</h2>
     <p>Pick a state or country to see every place that carries Tibur&oacute;n, with an address, phone number and directions.</p>
   </div>
-  <div class="dmap__grid">
-    <div class="dmap__side">
+  <div class="dmap__stage">
+    <div class="dmap__map" id="dmap" data-root="../" role="region" aria-label="Map of places that carry Tibur&oacute;n"></div>
+    <aside class="dmap__panel" aria-label="Places that carry Tibur&oacute;n">
       <div class="dmap__chips" id="dmapChips" role="group" aria-label="Choose a region"></div>
       <ul class="dmap__list" id="dmapList" aria-live="polite"></ul>
-    </div>
-    <div class="dmap__frame"><div class="dmap__map" id="dmap" data-root="../" role="region" aria-label="Map of places that carry Tibur&oacute;n"></div></div>
+      <p class="dmap__key"><span class="k k--d">Distributor</span><span class="k k--t">Tasting room</span></p>
+    </aside>
   </div>
 </section>
 
@@ -198,13 +199,13 @@
     </div>
   </div>
 </footer>
-<script src="../assets/analytics.js?v=1795470244" defer></script>
-<script src="../assets/cart.js?v=1795470244" defer></script>
+<script src="../assets/analytics.js?v=1795470785" defer></script>
+<script src="../assets/cart.js?v=1795470785" defer></script>
 
 
-<script src="../assets/page.js?v=1795470244" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="../assets/locations.js?v=1795470244"></script>
-<script src="../assets/dmap.js?v=1795470244"></script>
+<script src="../assets/page.js?v=1795470785" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.js"></script>
+<script src="../assets/locations.js?v=1795470785"></script>
+<script src="../assets/dmap.js?v=1795470785"></script>
 </body>
 </html>
