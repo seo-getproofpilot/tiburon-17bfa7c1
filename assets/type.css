@@ -1113,7 +1113,31 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
    sections and max-width sections start on the same vertical line. */
 @media (min-width:1505px){:root:not(#_){--gut:calc((100vw - 1360px) / 2)}}
 @media (min-width:1760px){:root:not(#_){--gut:calc((100vw - 1360px) / 2)}}
-@media (min-width:2300px){:root:not(#_){--gut:calc((100vw - 1600px) / 2)}}
+@media (min-width:2300px){:root:not(#_){--gut:calc((100vw - 1360px) / 2)}}  /* v96: was 1600, which split the left edge from the 1360px sections on big screens (Chris) */
 /* v95: the tasting-rooms paragraph sits right under its heading, not floated to the middle of the photos */
 @media (min-width:901px){.rooms .rx:not(#_){row-gap:26px;align-items:start}.rooms .rx__text:not(#_){align-self:start}}
 @media (min-width:901px){.rooms .rx__text:not(#_){padding-top:0}}
+
+/* ===== v96 footer (Chris, 2026-11-23): one transition, not three. No grey fade between the last section and the
+   footer; the photo starts flush with the top of the footer, runs to the right edge of the screen, and melts into the
+   footer colour on its left (behind the headline) and at the bottom (under the names). Wider crop of the original
+   (gen13/bar-start.png), so the bottles are framed with beach on both sides instead of a tight box. ===== */
+.foot::before{content:none!important}
+@media (min-width:901px) and (not ((orientation:portrait) and (max-width:1180px))){
+  .foot__buy:not(#_):not(#_){min-height:calc(min(64vw,1560px) * 860 / 1376);padding-top:0!important;padding-bottom:0!important;align-items:center}
+  .foot__shelf--photo:not(#_):not(#_){top:0;bottom:auto;right:calc(50% - 50vw);width:min(64vw,1560px);max-width:none;height:auto;aspect-ratio:1376/860}
+  .foot__scene:not(#_):not(#_){
+    -webkit-mask:linear-gradient(90deg,transparent 0,rgba(0,0,0,.35) 14%,#000 34%),linear-gradient(180deg,#000 0,#000 60%,rgba(0,0,0,.4) 82%,transparent 100%);-webkit-mask-composite:source-in;
+    mask:linear-gradient(90deg,transparent 0,rgba(0,0,0,.35) 14%,#000 34%),linear-gradient(180deg,#000 0,#000 60%,rgba(0,0,0,.4) 82%,transparent 100%);mask-composite:intersect}
+  .foot__shelf--photo .fb:not(#_):not(#_){bottom:2.5%}
+  .foot__shelf--photo .fb--dark:not(#_){left:30%}.foot__shelf--photo .fb--white:not(#_){left:56.7%}.foot__shelf--photo .fb--fin:not(#_){left:83%}
+  .foot__pitch:not(#_){max-width:min(560px,36vw);padding-block:clamp(60px,8vh,100px)}
+}
+.foot:not(#_):not(#_):not(#_){padding-top:0!important}  /* v96: the photo starts flush with the top of the footer on every page */
+/* v96 phones + portrait tablets: the stacked photo runs edge to edge and melts into the footer at its top and bottom only */
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){
+  .foot__shelf--photo:not(#_):not(#_){margin-inline:calc(var(--gut) * -1)}
+  .foot__scene:not(#_):not(#_){border-radius:0!important;box-shadow:none!important;
+    -webkit-mask:linear-gradient(180deg,transparent 0,#000 16%,#000 78%,transparent 100%)!important;mask:linear-gradient(180deg,transparent 0,#000 16%,#000 78%,transparent 100%)!important}
+  .foot__scene img:not(#_){width:100%;height:auto}
+}
