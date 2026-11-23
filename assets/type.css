@@ -1226,3 +1226,96 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 /* rows line up across the three bottles whatever wraps */
 @media (min-width:901px){.cel__row:not(#_){grid-template-rows:repeat(6,auto);row-gap:0}.cel__item:not(#_){grid-row:span 6;display:grid;grid-template-rows:subgrid}.cel__body:not(#_){display:contents}.cel__item>*,.cel__body>*{justify-self:center}.cel__spec:not(#_){align-self:start}.cel__type{align-self:start}}
 .cel__price:not(#_){font-size:clamp(24px,1.9vw,32px)!important;font-weight:800!important;line-height:1!important}
+@media (max-width:900px){.crumbs ol:not(#_){flex-wrap:nowrap;align-items:center}.crumbs li:not(#_){white-space:nowrap}}
+/* v97 phones: all six medals on screen, 3 x 2, each row on its own rope; shorter cords, smaller medals, captions kept */
+.aw2__rope--2{display:none}
+@media (max-width:900px){
+  .aw2__line:not(#_){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 10px;overflow:visible;margin-right:0;padding-right:0;padding-bottom:0}
+  .aw2__rope:not(#_){left:-8px;right:-8px;width:auto}
+  .aw2__rope--2:not(#_){display:block;position:relative;grid-column:1/-1;left:auto;right:auto;top:auto;height:14px;margin:26px -8px 0}
+  .aw2__m:not(#_){flex:none;padding-top:calc(var(--drop) * .3 + 14px)}
+  .aw2__cord:not(#_){height:calc(var(--drop) * .3 + 34px)}
+  .aw2__m img:not(#_){width:min(86%,104px)!important}
+  .aw2__m figcaption:not(#_){margin-top:8px;gap:2px}
+  .aw2__m b:not(#_){font-size:15px}
+  .aw2__m span:not(#_){font-size:11.5px;line-height:1.3}
+  .aw2__m em:not(#_){font-size:10px;letter-spacing:.1em}
+}
+/* v97 phones: "Ship Tiburón to your door" fits one screen under the nav: title, copy, both buttons, the bottle photo
+   and the three prices (was ~880px tall). Same footer on every page. */
+@media (max-width:700px){
+  .foot__buy:not(#_):not(#_):not(#_){padding-top:22px!important;padding-bottom:6px!important;min-height:0}
+  .foot__pitch h2:not(#_):not(#_){font-size:clamp(28px,8vw,34px)!important;line-height:1!important;margin:0 0 10px!important}
+  .foot__pitch p:not(#_):not(#_){font-size:14.5px!important;line-height:1.5!important;margin:0 0 14px!important}
+  .foot__ctas:not(#_):not(#_){display:grid;grid-template-columns:1fr;gap:8px;margin:0}
+  .foot__ctas .btn:not(#_):not(#_){min-height:46px;padding-top:0;padding-bottom:0;font-size:11.5px}
+  .foot__shelf--photo:not(#_):not(#_):not(#_){margin-top:14px;padding:0}
+  .foot__scene img:not(#_):not(#_){max-height:min(210px,30svh);width:100%;object-fit:cover;object-position:50% 70%}
+  .foot__shelf--photo .fb__nm:not(#_):not(#_){font-size:16px}
+  .foot__shelf--photo .fb__px:not(#_):not(#_){font-size:13px}
+}
+@media (max-width:700px){
+  .foot__ctas .btn:not(#_):not(#_):not(#_){height:46px;min-height:0!important;padding-block:0!important}
+  .foot__scene:not(#_):not(#_):not(#_){-webkit-mask:linear-gradient(180deg,#000 0,#000 86%,transparent 100%)!important;mask:linear-gradient(180deg,#000 0,#000 86%,transparent 100%)!important}
+  .foot__scene img:not(#_):not(#_):not(#_){object-position:50% 100%}
+  .foot__shelf--photo .fb:not(#_):not(#_){margin-top:-6px}
+}
+@media (max-width:700px){
+  .foot__buy:not(#_):not(#_):not(#_){padding-top:14px!important}
+  .foot__pitch h2:not(#_):not(#_):not(#_){font-size:clamp(24px,6.9vw,30px)!important}
+  .foot__shelf--photo:not(#_):not(#_):not(#_){margin-top:6px}
+  .foot__scene img:not(#_):not(#_):not(#_){max-height:none}
+  .foot__shelf--photo .fb:not(#_):not(#_):not(#_){margin-top:-46px;position:relative;z-index:2}
+  .foot__shelf--photo .fb__nm:not(#_):not(#_),.foot__shelf--photo .fb__px:not(#_):not(#_){text-shadow:0 2px 10px rgba(0,0,0,.95)}
+}
+@media (max-width:700px){
+  .foot__pitch h2:not(#_):not(#_):not(#_){max-width:none!important;font-size:clamp(23px,6.6vw,28px)!important}
+  .foot__pitch:not(#_):not(#_){max-width:none!important}
+  .foot__scene:not(#_):not(#_):not(#_){margin:0!important}
+  .foot__shelf--photo:not(#_):not(#_):not(#_){margin-top:0!important}
+}
+
+/* ===== v97 distributor map (Distributors page) ===== */
+.dmap{position:relative;isolation:isolate;color:var(--bone);padding:clamp(56px,9vh,110px) var(--gut);
+  background:radial-gradient(50% 60% at 75% 50%,rgba(18,56,67,.55),transparent 70%),linear-gradient(180deg,#04121a,#071d26)}
+.dmap::before{content:"";position:absolute;inset:0;z-index:-1;background:url(img/il/reef-pattern.webp) 0 0/640px auto repeat;opacity:.05;filter:invert(1)}
+.dmap__head{max-width:760px;margin-bottom:clamp(24px,4vh,40px)}
+.dmap__head h2:not(#_){color:var(--bone);margin:0 0 12px}
+.dmap__head p{margin:0;font-size:clamp(16px,1.15vw,18px);line-height:1.6;color:rgba(250,246,238,.78)}
+.dmap__grid{display:grid;grid-template-columns:minmax(300px,.8fr) minmax(0,1.6fr);gap:clamp(24px,3vw,48px);align-items:stretch}
+.dmap__chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.dchip{font:700 11.5px/1 var(--f);font-stretch:112%;letter-spacing:.14em;text-transform:uppercase;padding:11px 14px;border:0;border-radius:999px;cursor:pointer;
+  color:var(--bone);background:rgba(250,246,238,.07);box-shadow:inset 0 0 0 1px rgba(250,246,238,.22)}
+.dchip i{font-style:normal;opacity:.6;margin-left:4px}
+.dchip[aria-pressed="true"]{background:#e8d3a6;color:#14201f;box-shadow:none}
+.dmap__list{list-style:none;margin:0;padding:0 6px 0 0;display:grid;gap:10px;max-height:min(58vh,560px);overflow:auto;scrollbar-width:thin;scrollbar-color:rgba(201,150,90,.5) transparent}
+.dloc{display:grid;gap:4px;padding:14px 16px;border-radius:4px;cursor:pointer;background:rgba(250,246,238,.04);box-shadow:inset 0 0 0 1px rgba(201,150,90,.25);transition:background .2s,box-shadow .2s}
+.dloc:hover,.dloc.is-on,.dloc:focus-visible{background:rgba(201,150,90,.1);box-shadow:inset 0 0 0 1px rgba(201,150,90,.7);outline:0}
+.dloc__k{font:700 10px/1 var(--f);font-stretch:112%;letter-spacing:.18em;text-transform:uppercase;color:#e0974a}
+.dloc__n{font:800 17px/1.2 var(--f);font-stretch:112%;color:var(--bone)}
+.dloc__a{font-size:14px;line-height:1.45;color:rgba(250,246,238,.72)}
+.dloc__l{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:4px}
+.dloc__l a{font:700 12px/1.4 var(--f);font-stretch:112%;letter-spacing:.08em;color:#e8d3a6;text-decoration:underline;text-underline-offset:3px}
+/* the map sits in the gold double-line frame used for the award photos */
+.dmap__frame{position:relative;padding:8px;border:1px solid rgba(201,150,90,.75);box-shadow:inset 0 0 0 7px #04121a,inset 0 0 0 8px rgba(201,150,90,.35)}
+.dmap__map{height:min(66vh,620px);min-height:380px;background:#0b1a20}
+.dpin span{display:block;width:30px;height:38px;background:#e0974a;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 38'%3E%3Cpath d='M15 0C6.7 0 0 6.6 0 14.8 0 25.5 15 38 15 38s15-12.5 15-23.2C30 6.6 23.3 0 15 0z'/%3E%3C/svg%3E") center/100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 38'%3E%3Cpath d='M15 0C6.7 0 0 6.6 0 14.8 0 25.5 15 38 15 38s15-12.5 15-23.2C30 6.6 23.3 0 15 0z'/%3E%3C/svg%3E") center/100% 100% no-repeat;filter:drop-shadow(0 4px 6px rgba(0,0,0,.5))}
+.dpin span::after{content:"";position:absolute}
+.dpin--t span{background:#9fd6d2}.dpin--r span{background:#e8d3a6}
+.dpin{position:relative}.dpin::after{content:"";position:absolute;left:10px;top:8px;width:10px;height:10px;border-radius:50%;background:#04121a}
+.leaflet-popup-content-wrapper{background:#071d26!important;color:var(--bone)!important;border-radius:4px!important;box-shadow:0 0 0 1px rgba(201,150,90,.6),0 20px 40px -10px rgba(0,0,0,.6)!important}
+.leaflet-popup-tip{background:#071d26!important}
+.leaflet-popup-content{margin:14px 16px!important;min-width:220px}
+.dloc--pop{padding:0;background:none;box-shadow:none;cursor:default}
+.leaflet-container a.leaflet-popup-close-button{color:#e8d3a6}
+.leaflet-container{font-family:inherit}
+@media (max-width:900px){
+  .dmap__grid{grid-template-columns:1fr}
+  .dmap__frame{order:-1}
+  .dmap__map{height:min(52svh,420px);min-height:300px}
+  .dmap__list{max-height:none;overflow:visible;padding:0}
+}
+.dmap .leaflet-tile-pane{filter:invert(1) hue-rotate(185deg) brightness(.82) contrast(.92) saturate(.55)}
+.dmap .leaflet-container .dloc__l a:not(#_){color:#e8d3a6}
+.dmap .leaflet-control-attribution{background:rgba(4,18,26,.75)!important;color:rgba(250,246,238,.6)!important}
+.dmap .leaflet-control-attribution a{color:#e8d3a6!important}

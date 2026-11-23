@@ -19,9 +19,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,100,400&family=Metamorphous&family=Marcellus+SC&family=IM+Fell+DW+Pica+SC&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=1795463482">
-<link rel="stylesheet" href="../assets/page.css?v=1795463482">
-<link rel="stylesheet" href="../assets/type.css?v=1795463482">
+<link rel="stylesheet" href="../assets/site.css?v=1795466463">
+<link rel="stylesheet" href="../assets/page.css?v=1795466463">
+<link rel="stylesheet" href="../assets/type.css?v=1795466463">
 <script>
   (function(){var d=document.documentElement;d.classList.add('js','inner');try{if(localStorage.getItem('tb_age')!=='1'&&!/nointro/.test(location.search))d.classList.add('needs-age');}catch(e){}})();
 </script>
@@ -31,6 +31,7 @@
  {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.tiburonrum.com/"},{"@type":"ListItem","position":2,"name":"Distributors","item":"https://www.tiburonrum.com/distributors/"}]}
 ]}
 </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 </head>
 <body class="pg pg--buy pg--dist">
 
@@ -97,6 +98,21 @@
     <div class="dist__item"><dt>Online</dt><dd><b>Shipping to most U.S. states and D.C.</b>Through our licensed retail partner</dd></div>
     <div class="dist__item"><dt>Belize</dt><dd><b>Four tasting rooms</b>San Pedro, Placencia Village, Caye Caulker and San Ignacio</dd></div>
   </dl>
+</section>
+
+<!-- ============ MAP: where to find Tiburón (v97) ============ -->
+<section class="dmap" id="map" aria-labelledby="map-h">
+  <div class="dmap__head">
+    <h2 id="map-h">Find Tibur&oacute;n near you</h2>
+    <p>Pick a state or country to see every place that carries Tibur&oacute;n, with an address, phone number and directions.</p>
+  </div>
+  <div class="dmap__grid">
+    <div class="dmap__side">
+      <div class="dmap__chips" id="dmapChips" role="group" aria-label="Choose a region"></div>
+      <ul class="dmap__list" id="dmapList" aria-live="polite"></ul>
+    </div>
+    <div class="dmap__frame"><div class="dmap__map" id="dmap" data-root="../" role="region" aria-label="Map of places that carry Tibur&oacute;n"></div></div>
+  </div>
 </section>
 
 <section class="whs" id="inquire" aria-labelledby="inq-h">
@@ -169,10 +185,13 @@
     <p>&copy; 2026 Tibur&oacute;n Rum Company</p>
   </div>
 </footer>
-<script src="../assets/analytics.js?v=1795463482" defer></script>
-<script src="../assets/cart.js?v=1795463482" defer></script>
+<script src="../assets/analytics.js?v=1795466463" defer></script>
+<script src="../assets/cart.js?v=1795466463" defer></script>
 
 
-<script src="../assets/page.js?v=1795463482" defer></script>
+<script src="../assets/page.js?v=1795466463" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="../assets/locations.js?v=1795466463"></script>
+<script src="../assets/dmap.js?v=1795466463"></script>
 </body>
 </html>

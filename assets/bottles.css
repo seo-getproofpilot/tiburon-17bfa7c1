@@ -467,3 +467,10 @@
 }
 /* v93: step numbers in copper, not blue, and easier to read */
 .bt-field__steps i:not(#_){margin:8px 0 18px;padding:7px 13px 6px;background:rgba(6,8,18,.85);color:#f3e2c4;box-shadow:inset 0 0 0 1.5px #c9965a;font-size:15px!important;letter-spacing:.12em}
+/* v97 phones: the scene starts below the nav and keeps the photo's own 4:5 shape, so the whole bottle is on screen
+   (White Tip and FIN filled the frame to the top and lost their necks under the nav). Bottom fade starts lower. */
+@media (max-width:900px){
+  .bph__scene:not(#_):not(#_){margin-top:var(--nav);height:min(125vw,calc(100svh - var(--nav) - 24px))}
+  .bph__scene::after,.bph--r .bph__scene::after{background:linear-gradient(0deg,var(--hero) 0%,rgba(0,0,0,0) 22%)!important}
+  .bph--scene .bph__copy:not(#_):not(#_){margin-top:-28px}
+}

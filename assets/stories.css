@@ -1150,3 +1150,80 @@
 /* v95: story pages start on the same left edge as every other page (the page gutter) */
 .sty__in:not(#_){width:calc(100% - 2 * var(--gut))}
 .ckh2__copy:not(#_){max-width:none}
+/* v97 phones: the bar keeps going. Below the 16:9 film the outpainted bar front (ckh-front-m) runs to the bottom of the
+   screen, so the hero is one photo instead of a bar strip floating over the next section's water. */
+@media (max-width:900px){
+  .ckh2:not(#_){min-height:calc(100svh + 40px);overflow:hidden;background:#0b0604}
+  .ckh2__film:not(#_){overflow:visible}
+  .ckh2__film:not(#_)::before{content:"";position:absolute;left:0;right:0;top:calc(100% - 4px);height:100svh;z-index:-1;
+    background:#0b0604 url(img/ckh-front-m.webp) center top/100% auto no-repeat;
+    -webkit-mask:linear-gradient(180deg,#000 0%,#000 55%,transparent 100%);mask:linear-gradient(180deg,#000 0%,#000 55%,transparent 100%)}
+  .ckh2__film:not(#_)::after{background:linear-gradient(180deg,rgba(11,6,4,.35) 0%,rgba(11,6,4,0) 16%)!important}
+}
+/* v97 phones: Tasting Rooms hero = the photo as a clear band under the nav, then a shorter headline and the four facts
+   in one row. The booking pass (every page that has it) is compacted: two fields per row, rooms 2 x 2, slim stub. */
+@media (max-width:700px){
+  .trh:not(#_):not(#_){display:block;min-height:0;padding:0 0 28px}
+  .trh__img:not(#_):not(#_){position:relative;inset:auto;display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;margin-top:var(--nav)}
+  .trh__shade:not(#_):not(#_){top:var(--nav);bottom:auto;height:calc(100vw * .75);background:linear-gradient(0deg,var(--abyss,#04121a) 0%,rgba(4,18,26,0) 30%)}
+  .trh__copy:not(#_):not(#_){position:relative;padding:0 var(--gut);margin-top:-30px}
+  .trh .crumbs ol:not(#_){margin-bottom:10px}
+  .trh h1:not(#_):not(#_){font-size:clamp(28px,8vw,34px)!important;line-height:1.02!important;margin:0 0 10px!important}
+  .trh__lede:not(#_):not(#_){font-size:15px!important;line-height:1.5!important;margin:0 0 16px!important}
+  .trh__facts:not(#_):not(#_){grid-template-columns:repeat(4,minmax(0,1fr));gap:10px 8px;margin:0 0 22px}
+  .trh__facts li:not(#_):not(#_){padding-left:0}
+  .trh__facts li::before{display:none!important}
+  .trh__facts b:not(#_):not(#_){font-size:24px!important}
+  .trh__facts span:not(#_):not(#_){font-size:9px!important;letter-spacing:.08em!important;line-height:1.25!important}
+  .trh__pass:not(#_):not(#_){margin:0 var(--gut);padding:0}
+}
+@media (max-width:600px){
+  .ticket .ticket__brand:not(#_){display:none}
+  .ticket .ticket__top:not(#_){margin:0 0 4px}
+  .ticket .ticket__main:not(#_){padding:16px 16px 14px!important}
+  .ticket h3:not(#_):not(#_){font-size:24px!important;margin:0 0 12px!important}
+  .ticket .ticket__row:not(#_):not(#_){display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px!important;margin:0 0 10px!important}
+  .ticket label:not(#_):not(#_){font-size:10px!important;gap:5px!important}
+  .ticket input[type=date]:not(#_):not(#_),.ticket input[type=text]:not(#_):not(#_),.ticket input[type=email]:not(#_):not(#_){height:42px!important;min-height:0!important;padding:0 10px!important;font-size:15px!important}
+  .ticket .ticket__step:not(#_):not(#_){height:42px!important}
+  .ticket .ticket__step button:not(#_):not(#_){width:34px!important}
+  .ticket .ticket__where:not(#_):not(#_){display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;margin:4px 0 12px!important}
+  .ticket .ticket__where legend:not(#_){font-size:10px!important;margin-bottom:6px!important}
+  .ticket .ticket__where span:not(#_):not(#_){padding:9px 8px 9px 32px!important;font-size:10.5px!important;line-height:1.3!important;min-height:0!important}
+  .ticket .ticket__where span::before{left:10px!important;width:14px!important;height:14px!important}
+  .ticket .ticket__where b:not(#_):not(#_){font-size:13px!important;margin-bottom:2px!important}
+  .ticket .ticket__where em:not(#_):not(#_){font-size:10px!important;margin-top:2px!important}
+  .ticket .ticket__go:not(#_):not(#_){height:48px!important;min-height:0!important}
+  .ticket .ticket__note:not(#_):not(#_){font-size:12px!important;margin:6px 0 0!important}
+  .ticket .ticket__stub:not(#_):not(#_){display:flex!important;flex-wrap:wrap;align-items:baseline;justify-content:center;gap:4px 12px!important;padding:14px 16px!important;min-height:0!important}
+  .ticket .ticket__stub>*:not(#_){margin:0!important}
+  .ticket .ticket__n b:not(#_):not(#_){font-size:34px!important;line-height:1!important}
+  .ticket .ticket__total b:not(#_):not(#_){font-size:22px!important}
+  .ticket .ticket__keep,.ticket .ticket__code,.ticket .ticket__side{display:none!important}
+}
+@media (max-width:700px){.trh:not(#_):not(#_){background:#04121a!important;color:var(--bone)}.trh__shade:not(#_):not(#_){background:linear-gradient(0deg,#04121a 0%,rgba(4,18,26,0) 30%)!important}}
+@media (max-width:600px){.ticket .ticket__where span::before{top:11px!important;transform:none!important;translate:none!important}}
+@media (max-width:600px){.ticket .ticket__where span:not(#_):not(#_):not(#_){padding-left:34px!important}}
+
+/* ===== v97 Ecosystem + Carbon: the photos get the site's own frames ===== */
+/* pointed arch with a copper line traced outside it (the bottle pages' print shape) */
+.archp:not(#_){position:relative;margin:0;aspect-ratio:4/5;justify-self:end;width:min(100%,460px)}
+.archp img:not(#_){display:block;width:100%;height:100%;object-fit:cover;border-radius:0;box-shadow:none;filter:none;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 125%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 125 V50 C0 24 28 7 50 0 C72 7 100 24 100 50 V125 Z%22 fill=%22%23000%22/%3E%3C/svg%3E") center/100% 100% no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 125%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 125 V50 C0 24 28 7 50 0 C72 7 100 24 100 50 V125 Z%22 fill=%22%23000%22/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.archp::before{content:"";position:absolute;inset:-10px;z-index:2;pointer-events:none;background:#b8864a;opacity:.85;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 125%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0.6 124.4 V50 C0.6 24.4 28.2 7.6 50 0.7 C71.8 7.6 99.4 24.4 99.4 50 V124.4 Z%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%221.2%22 vector-effect=%22non-scaling-stroke%22/%3E%3C/svg%3E") center/100% 100% no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 125%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0.6 124.4 V50 C0.6 24.4 28.2 7.6 50 0.7 C71.8 7.6 99.4 24.4 99.4 50 V124.4 Z%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%221.2%22 vector-effect=%22non-scaling-stroke%22/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.archp::after{content:"";position:absolute;left:10%;right:10%;bottom:-16px;height:20px;border-radius:50%;background:radial-gradient(closest-side,rgba(20,32,31,.3),transparent);z-index:-1}
+@media (max-width:900px){.archp:not(#_){justify-self:center;width:min(72%,340px);margin-top:12px}}
+/* gold double-line frame: a paper mat and a thin copper line, like the award photos */
+.guide .sp img:not(#_):not(#_),.wpanel figure.painted img:not(#_):not(#_){object-fit:cover!important;object-position:50% 50%!important;border-radius:2px;
+  box-shadow:0 0 0 6px #f6efe2,0 0 0 7px rgba(184,134,74,.8),0 26px 46px -26px rgba(20,32,31,.55)!important;filter:none!important}
+.guide .sp img:not(#_):not(#_){margin-bottom:14px}
+.wpanel figure.painted:not(#_):not(#_){margin:16px 0 0 8px}
+.wpanel figure.painted img:not(#_):not(#_){width:calc(100% - 8px);aspect-ratio:3/2}
+.wpanel figure.painted figcaption:not(#_):not(#_){margin:14px 0 0}
+/* Carbon: six stages, one medallion each: paper disc, copper ring, the object inside */
+.lf img:not(#_){border-radius:50%;object-fit:cover;background:#f6efe2;padding:0;
+  box-shadow:0 0 0 2px #f6efe2,0 0 0 3.5px rgba(184,134,74,.85),inset 0 0 0 8px #f6efe2,0 18px 30px -18px rgba(20,32,31,.45)}
+.lf img[src*="c-"]:not(#_),.lf img[src*="k-"]:not(#_){object-fit:contain;padding:12%;background:radial-gradient(circle at 50% 40%,#fbf6ec 0%,#efe4d0 100%)}
