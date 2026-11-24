@@ -55,8 +55,8 @@
     const g = book.querySelector('[name=guests]');
     const stub = () => { const n = Math.max(1, Math.min(20, parseInt(g.value, 10) || 1)); $('#tkN').textContent = n; $('#tkTotal').textContent = '$' + n * 30; const r = book.querySelector('[name=room]:checked'), go = book.querySelector('.ticket__go'); $('#tkRoom').textContent = r ? r.value : 'Pick a room'; if (go) { go.disabled = !r; book.classList.toggle('has-room', !!r); } const nt = book.querySelector('.ticket__note'); if (nt && !nt.dataset.sent) nt.textContent = r ? 'Opens an email to our team with your details filled in.' : 'Pick a tasting room to request your tasting.'; };
     $$('.ticket__step button', book).forEach((b) => b.addEventListener('click', () => { g.value = Math.max(1, Math.min(20, (parseInt(g.value, 10) || 1) + +b.dataset.d)); stub(); }));
-    /* v101: two rooms are not open every day; the date must fall on an open day for the room picked */
-    const OPEN = { 'Caye Caulker': [[4, 5, 6, 0], 'Thursday to Sunday'], 'San Ignacio': [[3, 4, 5, 6], 'Wednesday to Saturday'] };
+    /* v102: hours from Henry Garcia (Tiburón VP of Sales, 2026-11-19); Caye Caulker is the only room closed a day (Mondays) */
+    const OPEN = { 'Caye Caulker': [[0, 2, 3, 4, 5, 6], 'Tuesday to Sunday (closed Mondays)'] };
     const dayCheck = () => { const r = book.querySelector('[name=room]:checked'), o = r && OPEN[r.value]; let m = '';
       if (o && d.value) { const wd = new Date(d.value + 'T12:00').getDay(); if (o[0].indexOf(wd) < 0) m = `${r.value} is open ${o[1]}. Please pick another day.`; }
       d.setCustomValidity(m); const nt = book.querySelector('.ticket__note'); if (m && nt) { nt.textContent = m; nt.classList.add('is-warn'); } else if (nt) nt.classList.remove('is-warn'); return !m; };
