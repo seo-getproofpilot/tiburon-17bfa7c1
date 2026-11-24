@@ -17,7 +17,11 @@
   if (!hasGTM && !GA_ID) return;
   function gtag(type, name, params) {
     if (direct) return window.gtag(type, name, params);
-    var o = { event: name }; for (var k in params) o[k] = params[k]; dataLayer.push(o);
+    var o = { event: name }, ec = null;
+    for (var k in params) { if (k === 'items' || k === 'value' || k === 'currency') { ec = ec || {}; ec[k] = params[k]; } else o[k] = params[k]; }
+    if (ec && ec.items) { o.ecommerce = ec; dataLayer.push({ ecommerce: null }); }  // GA4 ecommerce shape for GTM
+    else if (ec) { for (var j in ec) o[j] = ec[j]; }
+    dataLayer.push(o);
   }
   window.tbTrack = function (name, params) { gtag('event', name, params || {}); };
 

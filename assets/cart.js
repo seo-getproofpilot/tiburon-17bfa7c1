@@ -11,6 +11,35 @@
   var item = function (k, q) { return { item_id: P[k].v, item_name: P[k].name, item_brand: k === 'fin' ? 'FIN' : 'Tiburon', price: P[k].price, quantity: q }; };
   var UTM = 'utm_source=tiburonrum.com&utm_medium=referral&utm_campaign=site_cart';
   var tag = function (u) { return u + (u.indexOf('?') < 0 ? '?' : '&') + UTM; };
+  /* attribution: first and last touch, saved on every page and written onto the partner order as cart attributes,
+     so each Big Thirst order shows the source, campaign, click ID, landing page and GA client that led to it */
+  var AK = 'tb_attr', attr = {}; try { attr = JSON.parse(localStorage.getItem(AK) || '{}') || {}; } catch (e) {}
+  (function () {
+    var q = new URLSearchParams(location.search), t = {}, ref = document.referrer, own = ref && ref.indexOf(location.host) > -1;
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'gbraid', 'wbraid', 'fbclid', 'msclkid', 'ttclid'].forEach(function (k) { if (q.get(k)) t[k] = q.get(k).slice(0, 120); });
+    if (!t.utm_source && ref && !own) { t.utm_source = ref.replace(/^https?:\/\/(www\.)?/, '').split('/')[0]; t.utm_medium = 'referral'; }
+    var touch = Object.keys(t).length;
+    if (touch || !attr.first) {
+      t.landing = location.pathname; t.at = new Date().toISOString().slice(0, 10); t.ts = Date.now();
+      if (!touch) t.utm_source = '(direct)';
+      if (!attr.first) attr.first = t;
+      if (touch || !attr.last) attr.last = t;
+    }
+    attr.page = location.pathname;
+    try { localStorage.setItem(AK, JSON.stringify(attr)); } catch (e) {}
+  })();
+  var attrs = function () {
+    var a = [], add = function (k, v) { if (v) a.push({ key: k, value: String(v) }); }, f = attr.first || {}, l = attr.last || {};
+    add('tb_first_source', [f.utm_source, f.utm_medium].filter(Boolean).join(' / ')); add('tb_first_campaign', f.utm_campaign); add('tb_first_landing', f.landing); add('tb_first_date', f.at);
+    add('tb_last_source', [l.utm_source, l.utm_medium].filter(Boolean).join(' / ')); add('tb_last_campaign', l.utm_campaign); add('tb_last_content', l.utm_content); add('tb_last_term', l.utm_term); add('tb_last_landing', l.landing);
+    ['gclid', 'gbraid', 'wbraid', 'fbclid', 'msclkid', 'ttclid'].forEach(function (k) { add('tb_' + k, l[k] || f[k]); });
+    add('tb_checkout_page', attr.page);
+    add('tb_fbclid_at', l.fbclid ? l.ts : f.fbclid ? f.ts : '');
+    var ga = (document.cookie.match(/(?:^|; )_ga=GA\d\.\d\.(\d+\.\d+)/) || [])[1]; add('tb_ga_client_id', ga);
+    var gs = (document.cookie.match(/(?:^|; )_ga_RBM8QBXN6V=GS\d\.\d\.s?(\d+)/) || [])[1]; add('tb_ga_session_id', gs);
+    add('tb_site', 'tiburonrum.com');
+    return a;
+  };
   var FREE = 3, KEY = 'tb_cart';
   var root = (document.querySelector('script[src*="cart.js"]').getAttribute('src') || '').replace(/assets\/cart\.js.*$/, '');
   var cart = {}; try { cart = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) {}
@@ -91,9 +120,9 @@
     var its = Object.keys(cart).filter(function (k) { return cart[k] && P[k]; }).map(function (k) { return item(k, cart[k]); });
     if (window.tbTrack) tbTrack('begin_checkout', { currency: 'USD', value: its.reduce(function (t, i) { return t + i.price * i.quantity; }, 0), items: its });
     go.disabled = true; go.textContent = 'Opening secure checkout';
-    var permalink = SHOP + '/cart/' + Object.keys(cart).filter(function (k) { return cart[k]; }).map(function (k) { return P[k].v + ':' + cart[k]; }).join(',');
+    var permalink = SHOP + '/cart/' + Object.keys(cart).filter(function (k) { return cart[k]; }).map(function (k) { return P[k].v + ':' + cart[k]; }).join(',') + '?' + attrs().map(function (x) { return 'attributes[' + encodeURIComponent(x.key) + ']=' + encodeURIComponent(x.value); }).join('&');
     fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': TOKEN },
-      body: JSON.stringify({ query: 'mutation($l:[CartLineInput!]!){cartCreate(input:{lines:$l}){cart{checkoutUrl} userErrors{message}}}', variables: { l: lines } }) })
+      body: JSON.stringify({ query: 'mutation($l:[CartLineInput!]!,$a:[AttributeInput!]){cartCreate(input:{lines:$l,attributes:$a}){cart{checkoutUrl} userErrors{message}}}', variables: { l: lines, a: attrs() } }) })
       .then(function (r) { return r.json(); })
       .then(function (j) { var u = j && j.data && j.data.cartCreate && j.data.cartCreate.cart && j.data.cartCreate.cart.checkoutUrl; location.href = tag(u || permalink); })
       .catch(function () { location.href = tag(permalink); });

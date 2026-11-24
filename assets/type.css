@@ -1661,3 +1661,19 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 .dmap__map.is-dense .dpin3:not(.is-on):not(:hover):not(:focus-visible) .dpin3__chip{display:none}
 .dmap__map.is-dense .dpin3:not(.is-on) .dpin2__ring{display:none}
 .dmap__map.is-dense .dpin3:hover,.dmap__map.is-dense .dpin3.is-on{z-index:5}
+
+/* v106 phones: the Product of Belize seal stays on screen (it hung 60px past the right edge) */
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){
+  .process .pp2__seal:not(#_){right:-6px;bottom:3%;width:92px}
+}
+/* v106 phones: Where to Buy bottles use photos with room above the cap and below the base, in a larger arch */
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){
+  .cel__pic:not(#_){width:min(74%,310px)}
+  .cel__pic picture{display:block;width:100%;height:100%}
+  .cel__item .cel__pic img:not(#_){object-position:50% 50%}
+}
+.cel__pic picture{display:contents}
+/* v106 phones: Shark Shack storefront framed so both signs (Tiburón Rum and the shark logo) show */
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){
+  .room2 img[src*="tr-si-front"]:not(#_){object-position:58% 30%}
+}
