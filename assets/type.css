@@ -1639,3 +1639,8 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 /* the lineup lands below the fixed nav */
 #lineup{scroll-margin-top:var(--nav)}
 .dc--rest h2:not(#_){text-transform:uppercase}
+/* v101b: a long breadcrumb never widens the page on a phone; the current page shortens with an ellipsis */
+@media (max-width:900px){
+  .crumbs:not(#_),.crumbs ol:not(#_){max-width:100%;min-width:0;overflow:hidden}
+  .crumbs li:last-child:not(#_){flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+}
