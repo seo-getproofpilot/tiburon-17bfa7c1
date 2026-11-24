@@ -1644,3 +1644,5 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
   .crumbs:not(#_),.crumbs ol:not(#_){max-width:100%;min-width:0;overflow:hidden}
   .crumbs li:last-child:not(#_){flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
 }
+/* v101c: grid columns may shrink below their content, so a breadcrumb can't widen the column on a phone */
+.sth__grid>*:not(#_){min-width:0}
