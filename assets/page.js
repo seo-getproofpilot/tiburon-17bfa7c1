@@ -41,16 +41,21 @@
     const g = book.querySelector('[name=guests]');
     const stub = () => { const n = Math.max(1, Math.min(20, parseInt(g.value, 10) || 1)); $('#tkN').textContent = n; $('#tkTotal').textContent = '$' + n * 30; const r = book.querySelector('[name=room]:checked'), go = book.querySelector('.ticket__go'); $('#tkRoom').textContent = r ? r.value : 'Pick a room'; if (go) { go.disabled = !r; book.classList.toggle('has-room', !!r); } const nt = book.querySelector('.ticket__note'); if (nt && !nt.dataset.sent) nt.textContent = r ? 'Opens an email to our team with your details filled in.' : 'Pick a tasting room to request your tasting.'; };
     $$('.ticket__step button', book).forEach((b) => b.addEventListener('click', () => { g.value = Math.max(1, Math.min(20, (parseInt(g.value, 10) || 1) + +b.dataset.d)); stub(); }));
-    book.addEventListener('input', stub); book.addEventListener('change', stub); stub();
+    /* v101: two rooms are not open every day; the date must fall on an open day for the room picked */
+    const OPEN = { 'Caye Caulker': [[4, 5, 6, 0], 'Thursday to Sunday'], 'San Ignacio': [[3, 4, 5, 6], 'Wednesday to Saturday'] };
+    const dayCheck = () => { const r = book.querySelector('[name=room]:checked'), o = r && OPEN[r.value]; let m = '';
+      if (o && d.value) { const wd = new Date(d.value + 'T12:00').getDay(); if (o[0].indexOf(wd) < 0) m = `${r.value} is open ${o[1]}. Please pick another day.`; }
+      d.setCustomValidity(m); const nt = book.querySelector('.ticket__note'); if (m && nt) { nt.textContent = m; nt.classList.add('is-warn'); } else if (nt) nt.classList.remove('is-warn'); return !m; };
+    book.addEventListener('input', () => { stub(); dayCheck(); }); book.addEventListener('change', () => { stub(); dayCheck(); }); stub();
     $$('[data-room]').forEach((a) => a.addEventListener('click', () => { const r = book.querySelector(`[name=room][value="${a.dataset.room}"]`); if (r) { r.checked = true; stub(); } }));
     book.addEventListener('submit', (e) => {
       e.preventDefault();
-      if (!book.checkValidity()) { book.reportValidity(); return; }
+      dayCheck(); if (!book.checkValidity()) { book.reportValidity(); return; }
       const f = new FormData(book), room = f.get('room');
       const when = new Date(f.get('date') + 'T12:00').toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
       const body = `Hi Tiburon team,\n\nI'd like to book a rum tasting.\n\nRoom: ${room}\nDate: ${when}\nGuests: ${f.get('guests')}\nName: ${f.get('name')}\nEmail: ${f.get('email')}\n\nThank you!`;
       location.href = 'mailto:basil@sharkbaitco.com?subject=' + encodeURIComponent(`Tasting request, ${room}, ${when}`) + '&body=' + encodeURIComponent(body);
-      { const nt = book.querySelector('.ticket__note'); nt.dataset.sent = '1'; nt.textContent = 'Your email app should open with the request ready to send.'; }
+      { const nt = book.querySelector('.ticket__note'); nt.dataset.sent = '1'; nt.innerHTML = 'Your email app should open with the request ready to send. If nothing opened, email <a href="mailto:basil@sharkbaitco.com">basil@sharkbaitco.com</a>.'; }
     });
   }
 
@@ -64,7 +69,7 @@
     sel.addEventListener('change', () => {
       const s = sel.value; out.className = 'ship__out';
       if (!s) { out.textContent = ''; return; }
-      if (NO.includes(s)) { out.classList.add('is-no'); out.textContent = `Sorry, our partners can't ship to ${s} right now.`; }
+      if (NO.includes(s)) { out.classList.add('is-no'); out.innerHTML = `Sorry, our partners can't ship to ${s} right now. You can still taste Tiburón at our <a href="../tasting-rooms/">tasting rooms in Belize</a>, or <a href="../distributors/#map">see where it's poured</a>.`; }
       else { out.classList.add('is-yes'); out.innerHTML = `Good news: ${s} is on our partners' shipping list. <a href="#top" onclick="window.scrollTo({top:0,behavior:\x27smooth\x27})">Shop the bottles</a>`; }
     });
   }
@@ -82,7 +87,7 @@
       const lines = [...d.entries()].map(([k, v]) => `${k[0].toUpperCase() + k.slice(1)}: ${v}`).join('\n');
       const subj = `${f.dataset.kind}${d.get('business') ? ', ' + d.get('business') : ''}`;
       location.href = 'mailto:basil@sharkbaitco.com?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(`Hi Tiburon team,\n\n${lines}\n`);
-      note.textContent = 'Your email app should open with the message ready to send.';
+      note.innerHTML = 'Your email app should open with the message ready to send. If nothing opened, email <a href="mailto:basil@sharkbaitco.com">basil@sharkbaitco.com</a>.';
     });
   });
 

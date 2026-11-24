@@ -106,7 +106,7 @@
     const t = vid.currentTime || 0;
     let st = null, f = 0;
     for (const [name, a0, a1] of windows()) if (t >= a0 && t <= a1) { st = name; f = clamp((t - a0) / (a1 - a0)); }
-    if (st !== shown) { shown = st; copies.forEach(c => c.classList.toggle('is-on', c.dataset.s === st)); stageEl.classList.toggle('at-hero', st === 'hero'); }
+    if (st !== shown) { shown = st; const show = st || 'end'; /* v101: between bottles, the ship-free card keeps a way to buy on screen */ copies.forEach(c => c.classList.toggle('is-on', c.dataset.s === show)); stageEl.classList.toggle('at-hero', st === 'hero'); }
     navBtns.forEach(b => { const on = STAGE_OF[b.dataset.k] === st; b.classList.toggle('is-on', on); b.style.setProperty('--f', on ? f.toFixed(3) : '0'); });
     const hA = st === 'hero' ? 1 : 0;
     if (stageEl._hA !== hA) { stageEl._hA = hA; stageEl.style.setProperty('--heroA', hA); }

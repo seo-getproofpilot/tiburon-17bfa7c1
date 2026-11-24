@@ -1618,3 +1618,24 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 .dpin3.is-dim:not(#_){pointer-events:auto}
 .dpin3.is-dim:hover{opacity:.7}
 .dmx .maplibregl-cooperative-gesture-screen{background:rgba(10,15,17,.72);color:var(--bone);font:600 15px/1.4 var(--f);padding:20px;z-index:3}
+
+/* ===== v101 visitor-test fixes ===== */
+/* age gate: "Yes, I am" leads; "Not yet" is the quiet outline */
+.gate__btns [data-age="no"]:not(#_):not(#_){background:transparent!important;color:var(--bone)!important;box-shadow:inset 0 0 0 1.5px rgba(250,246,238,.45)!important}
+.gate__btns [data-age="no"]:not(#_):not(#_):hover{box-shadow:inset 0 0 0 1.5px var(--bone)!important}
+/* the shark mark in the nav never gets squeezed */
+.nav__brand svg:not(#_){flex:none;width:26px;min-width:26px}
+@media (max-width:900px){
+  /* phones: depth readout moves to the left so the sound button never covers it */
+  .dive .gauge:not(#_){right:auto;left:var(--gut)}
+}
+/* Where to Buy: bottle names link to their pages */
+.cel__name a{color:inherit;text-decoration:none}
+.cel__name a:hover{opacity:.8}
+/* booking: closed-day warning */
+.ticket__note.is-warn{color:#b0472a;font-weight:600}
+.ticket__note a,.wform__note a{color:inherit;text-decoration:underline}
+.ship__out a{color:inherit;text-decoration:underline}
+/* the lineup lands below the fixed nav */
+#lineup{scroll-margin-top:var(--nav)}
+.dc--rest h2:not(#_){text-transform:uppercase}

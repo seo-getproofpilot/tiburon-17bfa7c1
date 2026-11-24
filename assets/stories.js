@@ -129,3 +129,14 @@
   var o = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); o.unobserve(e.target); } }); }, { threshold: .2 });
   m.forEach(function (x) { o.observe(x); });
 })();
+
+/* v101: opening a cocktail recipe brings it into view, so the tap never looks like it did nothing */
+document.addEventListener('toggle', function (ev) {
+  var d = ev.target; if (!d || d.tagName !== 'DETAILS') return;
+  (function () {
+    if (!d.open) return;
+    setTimeout(function () { var r = d.getBoundingClientRect(); if (r.bottom <= innerHeight - 24) return;
+      var y0 = scrollY, dy = Math.min(r.bottom - innerHeight + 40, r.top - 140), t0 = performance.now(), D = 450;
+      var iv = setInterval(function () { var k = Math.min(1, (performance.now() - t0) / D), e = 1 - Math.pow(1 - k, 3); scrollTo(0, y0 + dy * e); if (k >= 1) clearInterval(iv); }, 16); }, 60);
+  })();
+}, true);

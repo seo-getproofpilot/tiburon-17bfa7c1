@@ -102,9 +102,19 @@
   /* past the last sound section (or above the first): no sound, and the button steps away */
   function where() {
     var any = secs.some(function (s) { var r = s.getBoundingClientRect(); return r.bottom > innerHeight * .25 && r.top < innerHeight * .75; });
-    b.classList.toggle('is-away', !any);
+    /* v101: the corner pill never sits on top of a button or link; it steps aside while one passes under it */
+    var hit = false;
+    if (any && !b.classList.contains('amb__btn--nav')) {
+      var a = b.getBoundingClientRect();
+      hit = [].some.call(document.querySelectorAll('a, button, summary'), function (t) {
+        if (t === b || b.contains(t) || !t.offsetParent || t.closest('#nav, .offer, .drawer, .cartd, .gate, #gate')) return false;
+        var r = t.getBoundingClientRect();
+        return r.width > 2 && r.right > a.left - 6 && r.left < a.right + 6 && r.bottom > a.top - 6 && r.top < a.bottom + 6;
+      });
+    }
+    b.classList.toggle('is-away', !any || hit);
   }
-  addEventListener('scroll', function () { where(); if (on) run(); }, { passive: true }); where();
+  var wq = 0; addEventListener('scroll', function () { if (!wq) wq = requestAnimationFrame(function () { wq = 0; where(); }); if (on) run(); }, { passive: true }); where();
   /* leaving the page never carries sound with it */
   addEventListener('pagehide', function () { Object.keys(tracks).forEach(function (n) { tracks[n].a.pause(); setVol(tracks[n], 0); }); });
   addEventListener('pageshow', function (e) { if (e.persisted && on) run(); });
