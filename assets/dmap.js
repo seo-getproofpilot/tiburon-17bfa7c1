@@ -150,7 +150,7 @@
   /* phones: the card sits directly under the map, like a bottom sheet */
   var sheet = document.createElement('div'); sheet.className = 'dmx__sheet'; sheet.hidden = true; sheet.setAttribute('aria-live', 'polite');
   box.closest('.dmx').insertBefore(sheet, box.closest('.dmx').querySelector('.dmx__side'));
-  sheet.addEventListener('click', function (e) { if (e.target.closest('.dmx__x')) { sheet.hidden = true; cur = -1; marks.forEach(function (m) { m.getElement().classList.remove('is-on'); }); [].forEach.call(list.children, function (x) { x.classList.remove('is-on'); }); } });
+  sheet.addEventListener('click', function (e) { if (e.target.closest('.dmx__x')) { sheet.hidden = true; cur = -1; back(); marks.forEach(function (m) { m.getElement().classList.remove('is-on'); }); [].forEach.call(list.children, function (x) { x.classList.remove('is-on'); }); } });
   var shown = D.map(function (_, i) { return i; }), cur = -1;
   function nav() { var n = document.getElementById('nav'); return n ? Math.max(n.getBoundingClientRect().bottom, 0) : 0; }
   function inView() { var r = box.getBoundingClientRect(), t = nav(); if (r.top < t + 8 || r.top > innerHeight * .6) scrollTo({ top: scrollY + r.top - t - 16, behavior: 'smooth' }); }
@@ -171,6 +171,13 @@
     var b = new maplibregl.LngLatBounds(); shown.forEach(function (i) { b.extend([D[i].lng, D[i].lat]); });
     map.fitBounds(b, { padding: pad(), maxZoom: shown.length === 1 ? 12.5 : 9.5, duration: 1300, essential: true });
   }
+  /* v105: closing a place's card (the X) flies back out to the places in the list (everything, if one or none) */
+  function back() {
+    var idx = shown.length > 1 ? shown : D.map(function (_, i) { return i; });
+    var b = new maplibregl.LngLatBounds(); idx.forEach(function (i) { b.extend([D[i].lng, D[i].lat]); });
+    map.fitBounds(b, { padding: pad(), maxZoom: 9.5, duration: 1300, essential: true });
+  }
+  box.addEventListener('click', function (e) { if (e.target.closest('.maplibregl-popup-close-button')) back(); });
   function pick(i, fromPin) {
     /* a pin outside the current search or filter clears them, so every pin can always be opened */
     if (shown.indexOf(i) < 0) { q.value = ''; fk.value = ''; fr.value = ''; render(); }
