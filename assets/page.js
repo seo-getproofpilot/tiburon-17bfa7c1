@@ -74,7 +74,7 @@
     sel.addEventListener('change', () => {
       const s = sel.value; out.className = 'ship__out';
       if (!s) { out.textContent = ''; return; }
-      if (NO.includes(s)) { out.classList.add('is-no'); out.innerHTML = `Sorry, our partners can't ship to ${s} right now. You can still taste Tiburón at our <a href="../tasting-rooms/">tasting rooms in Belize</a>, or <a href="../distributors/#map">see where it's poured</a>.`; }
+      if (NO.includes(s)) { out.classList.add('is-no'); out.innerHTML = `Sorry, our partners can't ship to ${s} right now. You can still taste Tiburón at our <a href="../tasting-rooms/">tasting rooms in Belize</a>, or <a href="#wholesale">see our distributors</a>.`; }
       else { out.classList.add('is-yes'); out.innerHTML = `Good news: ${s} is on our partners' shipping list. <a href="#top" onclick="window.scrollTo({top:0,behavior:\x27smooth\x27})">Shop the bottles</a>`; }
     });
   }
