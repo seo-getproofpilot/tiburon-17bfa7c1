@@ -11,7 +11,7 @@
     const yes = gate.querySelector('[data-age=yes]'); yes.focus({ preventScroll: true });
     gate.addEventListener('click', (e) => {
       const b = e.target.closest('[data-age]'); if (!b) return;
-      if (b.dataset.age === 'yes') { try { localStorage.setItem('tb_age', '1'); } catch (e2) {} root.classList.remove('needs-age'); return; }
+      if (b.dataset.age === 'yes') { try { localStorage.setItem('tb_age', '1'); } catch (e2) {} (window.dataLayer = window.dataLayer || []).push({ event: 'age_gate_pass' }); root.classList.remove('needs-age'); return; }
       gate.querySelector('.gate__q').textContent = 'Then we’ll see you when you are.';
       gate.querySelector('.gate__btns').innerHTML = '<a class="btn btn--glass" href="https://oceana.org/">Meet the reef we protect</a>';
       gate.querySelector('.gate__note').textContent = 'This site is for adults of legal drinking age.';
@@ -34,12 +34,12 @@
     rv.forEach((el, i) => { el.style.transitionDelay = (i % 3) * 80 + 'ms'; io.observe(el); });
   } else rv.forEach((el) => el.classList.add('is-in'));
 
-  /* ---------- tasting request ticket (Tasting Rooms): the stub keeps count; submit opens an email (no backend yet) ---------- */
+  /* ---------- tasting request ticket (Tasting Rooms): the stub keeps count; sent by assets/forms.js (email fallback) ---------- */
   const book = $('#bookForm');
   if (book) {
     const d = book.querySelector('[name=date]'); d.min = new Date().toISOString().slice(0, 10);
     const g = book.querySelector('[name=guests]');
-    const stub = () => { const n = Math.max(1, Math.min(20, parseInt(g.value, 10) || 1)); $('#tkN').textContent = n; $('#tkTotal').textContent = '$' + n * 30; const r = book.querySelector('[name=room]:checked'), go = book.querySelector('.ticket__go'); $('#tkRoom').textContent = r ? r.value : 'Pick a room'; if (go) { go.disabled = !r; book.classList.toggle('has-room', !!r); } const nt = book.querySelector('.ticket__note'); if (nt && !nt.dataset.sent) nt.textContent = r ? 'Opens an email to our team with your details filled in.' : 'Pick a tasting room to request your tasting.'; };
+    const stub = () => { const n = Math.max(1, Math.min(20, parseInt(g.value, 10) || 1)); $('#tkN').textContent = n; $('#tkTotal').textContent = '$' + n * 30; const r = book.querySelector('[name=room]:checked'), go = book.querySelector('.ticket__go'); $('#tkRoom').textContent = r ? r.value : 'Pick a room'; if (go) { go.disabled = !r; book.classList.toggle('has-room', !!r); } const nt = book.querySelector('.ticket__note'); if (nt && !nt.dataset.sent) nt.textContent = r ? 'Sends your request straight to our team.' : 'Pick a tasting room to request your tasting.'; };
     $$('.ticket__step button', book).forEach((b) => b.addEventListener('click', () => { g.value = Math.max(1, Math.min(20, (parseInt(g.value, 10) || 1) + +b.dataset.d)); stub(); }));
     /* v102: hours from Henry Garcia (Tiburón VP of Sales, 2026-11-19); Caye Caulker is the only room closed a day (Mondays) */
     const OPEN = { 'Caye Caulker': [[0, 2, 3, 4, 5, 6], 'Tuesday to Sunday (closed Mondays)'] };
@@ -54,8 +54,13 @@
       const f = new FormData(book), room = f.get('room');
       const when = new Date(f.get('date') + 'T12:00').toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
       const body = `Hi Tiburon team,\n\nI'd like to book a rum tasting.\n\nRoom: ${room}\nDate: ${when}\nGuests: ${f.get('guests')}\nName: ${f.get('name')}\nEmail: ${f.get('email')}\n\nThank you!`;
-      location.href = 'mailto:basil@sharkbaitco.com?subject=' + encodeURIComponent(`Tasting request, ${room}, ${when}`) + '&body=' + encodeURIComponent(body);
-      { const nt = book.querySelector('.ticket__note'); nt.dataset.sent = '1'; nt.innerHTML = 'Your email app should open with the request ready to send. If nothing opened, email <a href="mailto:basil@sharkbaitco.com">basil@sharkbaitco.com</a>.'; }
+      const subj = `Tasting request, ${room}, ${when}`, nt = book.querySelector('.ticket__note'), go = book.querySelector('.ticket__go');
+      nt.dataset.sent = '1'; nt.textContent = 'Sending your request…'; if (go) go.disabled = true;
+      tbSend('Tasting request', subj, { Room: room, Date: when, Guests: f.get('guests'), Name: f.get('name'), Email: f.get('email') }).then((ok) => {
+        if (go) go.disabled = false;
+        if (ok) { nt.textContent = 'Request sent. We’ll email you to confirm your tasting.'; return; }
+        tbMailto(subj, body); nt.innerHTML = 'Your email app should open with the request ready to send. If nothing opened, email <a href="mailto:basil@sharkbaitco.com">basil@sharkbaitco.com</a>.';
+      });
     });
   }
 
@@ -74,7 +79,7 @@
     });
   }
 
-  /* ---------- wholesale + contact forms: honeypot and a minimum fill time keep bots out; submit opens an email (no backend yet) ---------- */
+  /* ---------- wholesale + contact forms: honeypot and a minimum fill time keep bots out; sent by assets/forms.js (email fallback) ---------- */
   $$('form[data-kind]').forEach((f) => {
     const t0 = Date.now();
     f.addEventListener('submit', (e) => {
@@ -86,8 +91,12 @@
       const d = new FormData(f); d.delete('website');
       const lines = [...d.entries()].map(([k, v]) => `${k[0].toUpperCase() + k.slice(1)}: ${v}`).join('\n');
       const subj = `${f.dataset.kind}${d.get('business') ? ', ' + d.get('business') : ''}`;
-      location.href = 'mailto:basil@sharkbaitco.com?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(`Hi Tiburon team,\n\n${lines}\n`);
-      note.innerHTML = 'Your email app should open with the message ready to send. If nothing opened, email <a href="mailto:basil@sharkbaitco.com">basil@sharkbaitco.com</a>.';
+      const fields = {}; d.forEach((v, k) => { fields[k[0].toUpperCase() + k.slice(1)] = v; });
+      note.textContent = 'Sending…';
+      tbSend(f.dataset.kind, subj, fields).then((ok) => {
+        if (ok) { note.textContent = 'Thanks. Your message is with our team and we’ll reply by email.'; f.reset(); return; }
+        tbMailto(subj, `Hi Tiburon team,\n\n${lines}\n`); note.innerHTML = 'Your email app should open with the message ready to send. If nothing opened, email <a href="mailto:basil@sharkbaitco.com">basil@sharkbaitco.com</a>.';
+      });
     });
   });
 

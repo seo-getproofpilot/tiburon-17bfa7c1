@@ -207,7 +207,7 @@
 
 /* ---------- small screens ---------- */
 @media (max-width:900px),(orientation:portrait) and (max-width:1180px){
-  .sth__grid,.eco__grid{grid-template-columns:1fr}
+  .sth__grid,.eco__grid{grid-template-columns:minmax(0,1fr)}
   .sth__art{justify-self:center;width:min(76%,420px)}
   .guide__grid{grid-template-columns:repeat(2,1fr)}
   .sp,.sp--wide{grid-column:span 1}

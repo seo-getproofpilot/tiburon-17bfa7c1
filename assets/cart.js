@@ -8,6 +8,9 @@
     white: { name: 'White Tip Overproof Rum', short: 'White Tip', rest: 'Overproof white rum', price: 27.99, v: '43685670813932', img: 'b-white-s.webp', url: SHOP + '/products/white-tip' },
     fin:   { name: 'FIN Tequila Blanco', short: 'FIN', rest: 'Tequila blanco', price: 54.99, v: '47080982937836', img: 'b-fin-s.webp', url: SHOP + '/products/tiburons-fin-tequila' }
   };
+  var item = function (k, q) { return { item_id: P[k].v, item_name: P[k].name, item_brand: k === 'fin' ? 'FIN' : 'Tiburon', price: P[k].price, quantity: q }; };
+  var UTM = 'utm_source=tiburonrum.com&utm_medium=referral&utm_campaign=site_cart';
+  var tag = function (u) { return u + (u.indexOf('?') < 0 ? '?' : '&') + UTM; };
   var FREE = 3, KEY = 'tb_cart';
   var root = (document.querySelector('script[src*="cart.js"]').getAttribute('src') || '').replace(/assets\/cart\.js.*$/, '');
   var cart = {}; try { cart = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) {}
@@ -61,7 +64,7 @@
   function add(k, q) {
     (k === 'all' ? Object.keys(P) : [k]).forEach(function (x) { if (P[x]) cart[x] = Math.min(24, (cart[x] || 0) + (q || 1)); });
     save(); render(); open();
-    if (window.gtag) gtag('event', 'add_to_cart', { bottle: k, quantity: q || 1 });
+    if (window.tbTrack) (k === 'all' ? Object.keys(P) : [k]).forEach(function (x) { if (P[x]) tbTrack('add_to_cart', { currency: 'USD', value: P[x].price * (q || 1), items: [item(x, q || 1)] }); });
   }
 
   document.addEventListener('click', function (e) {
@@ -85,14 +88,15 @@
   go.addEventListener('click', function () {
     var lines = Object.keys(cart).filter(function (k) { return cart[k] && P[k]; }).map(function (k) { return { merchandiseId: 'gid://shopify/ProductVariant/' + P[k].v, quantity: cart[k] }; });
     if (!lines.length) return;
-    if (window.gtag) gtag('event', 'begin_checkout', { bottles: count(), value: lines.reduce(function (t, l) { var k = Object.keys(P).filter(function (x) { return 'gid://shopify/ProductVariant/' + P[x].v === l.merchandiseId; })[0]; return t + P[k].price * l.quantity; }, 0), currency: 'USD' });
+    var its = Object.keys(cart).filter(function (k) { return cart[k] && P[k]; }).map(function (k) { return item(k, cart[k]); });
+    if (window.tbTrack) tbTrack('begin_checkout', { currency: 'USD', value: its.reduce(function (t, i) { return t + i.price * i.quantity; }, 0), items: its });
     go.disabled = true; go.textContent = 'Opening secure checkout';
     var permalink = SHOP + '/cart/' + Object.keys(cart).filter(function (k) { return cart[k]; }).map(function (k) { return P[k].v + ':' + cart[k]; }).join(',');
     fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': TOKEN },
       body: JSON.stringify({ query: 'mutation($l:[CartLineInput!]!){cartCreate(input:{lines:$l}){cart{checkoutUrl} userErrors{message}}}', variables: { l: lines } }) })
       .then(function (r) { return r.json(); })
-      .then(function (j) { var u = j && j.data && j.data.cartCreate && j.data.cartCreate.cart && j.data.cartCreate.cart.checkoutUrl; location.href = u || permalink; })
-      .catch(function () { location.href = permalink; });
+      .then(function (j) { var u = j && j.data && j.data.cartCreate && j.data.cartCreate.cart && j.data.cartCreate.cart.checkoutUrl; location.href = tag(u || permalink); })
+      .catch(function () { location.href = tag(permalink); });
   });
 
   /* nav cart button */

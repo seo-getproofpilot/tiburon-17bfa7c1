@@ -67,8 +67,17 @@
       const f = new FormData(book), room = f.get('room');
       const when = new Date(f.get('date') + 'T12:00').toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
       const body = `Hi Tiburon team,\n\nI'd like to book a rum tasting.\n\nRoom: ${room}\nDate: ${when}\nGuests: ${f.get('guests')}\nName: ${f.get('name')}\nEmail: ${f.get('email')}\n\nThank you!`;
-      location.href = 'mailto:basil@sharkbaitco.com?subject=' + encodeURIComponent(`Tasting request, ${room}, ${when}`) + '&body=' + encodeURIComponent(body);
-      { const nt = book.querySelector('.ticket__note'); nt.dataset.sent = '1'; nt.innerHTML = 'Your email app should open with the request ready to send. If nothing opened, email <a href="mailto:basil@sharkbaitco.com">basil@sharkbaitco.com</a>.'; }
+      /* v102: same delivery as the Tasting Rooms page: the WordPress form handler first, email as the fallback */
+      const subj = `Tasting request, ${room}, ${when}`, nt = book.querySelector('.ticket__note'), go = book.querySelector('.ticket__go');
+      const viaMail = () => { location.href = 'mailto:basil@sharkbaitco.com?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body); nt.innerHTML = 'Your email app should open with the request ready to send. If nothing opened, email <a href="mailto:basil@sharkbaitco.com">basil@sharkbaitco.com</a>.'; };
+      nt.dataset.sent = '1';
+      if (!window.tbSend) { viaMail(); return; }
+      nt.textContent = 'Sending your request…'; if (go) go.disabled = true;
+      tbSend('Tasting request', subj, { Room: room, Date: when, Guests: f.get('guests'), Name: f.get('name'), Email: f.get('email') }).then((ok) => {
+        if (go) go.disabled = false;
+        if (ok) { nt.textContent = 'Request sent. We’ll email you to confirm your tasting.'; return; }
+        viaMail();
+      });
     });
   }
 

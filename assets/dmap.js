@@ -10,7 +10,7 @@
   var wide = matchMedia('(min-width:901px)');
   var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   var dir = function (p) { return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(p.q || (p.name + ', ' + p.addr)); };
-  var kc = function (k) { return k === 'Distributor' ? 'd' : k === 'Retail' ? 'r' : 't'; };
+  var kc = function (k) { return k === 'Distributor' ? 'd' : (k === 'Retail' || k === 'Bar & restaurant') ? 'r' : 't'; };
   var disc = function (p, cls) { return '<span class="' + cls + ' ' + cls + '--' + kc(p.kind) + '" aria-hidden="true"><svg viewBox="53.5 6 422.8 499.8">' + MARK + '</svg></span>'; };
   var sub = function (p) { return '<span class="dmx__sub"><i>' + esc(p.city) + '</i><em class="dmx__tag--' + kc(p.kind) + '">' + esc(p.kind === 'Tasting room' ? p.short : p.kind + ', ' + p.region) + '</em></span>'; };
   var ico = { clock: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
@@ -31,10 +31,43 @@
   /* region filter options from the data */
   D.map(function (p) { return p.region; }).filter(function (r, i, a) { return a.indexOf(r) === i; }).forEach(function (r) { var o = document.createElement('option'); o.value = o.textContent = r; fr.appendChild(o); });
 
+  /* v104: no WebGL (hardware acceleration off, some in-app browsers) means no map; the list and cards still work */
+  function nomap() {
+    var dmx = box.closest('.dmx'); dmx.classList.add('dmx--nomap'); box.closest('.dmx__map').hidden = true;
+    var sheet = document.createElement('div'); sheet.className = 'dmx__sheet'; sheet.hidden = true; sheet.setAttribute('aria-live', 'polite');
+    dmx.insertBefore(sheet, dmx.querySelector('.dmx__side'));
+    var cur = -1;
+    function render() {
+      var term = (q.value || '').trim().toLowerCase(), k = fk.value, r = fr.value;
+      var shown = D.map(function (p, i) { return i; }).filter(function (i) { var p = D[i];
+        return (!k || p.kind === k) && (!r || p.region === r) && (!term || (p.name + ' ' + p.city + ' ' + p.addr + ' ' + p.region).toLowerCase().indexOf(term) >= 0); });
+      cnt.textContent = shown.length + (shown.length === 1 ? ' place' : ' places');
+      list.innerHTML = shown.length ? shown.map(function (i) { var p = D[i];
+        return '<li class="dmx__row' + (i === cur ? ' is-on' : '') + '" data-i="' + i + '" tabindex="0">' + disc(p, 'dmx__disc') +
+          '<div class="dmx__txt"><b class="dmx__name">' + esc(p.name) + '</b>' + sub(p) + '</div>' +
+          '<a class="dmx__go" href="' + dir(p) + '" target="_blank" rel="noopener" aria-label="Directions to ' + esc(p.name) + '">' + ico.go + '</a></li>'; }).join('')
+        : '<li class="dmx__none">Nothing matches yet. Try another city, or <a href="#inquire">ask us</a>.</li>';
+    }
+    function pick(i) {
+      cur = i; [].forEach.call(list.children, function (x) { x.classList.toggle('is-on', +x.getAttribute('data-i') === i); });
+      sheet.innerHTML = cardHTML(D[i]) + '<button type="button" class="dmx__x" aria-label="Close">&times;</button>'; sheet.hidden = false;
+      var t = sheet.getBoundingClientRect().top; if (t < 70 || t > innerHeight * .7) scrollTo({ top: scrollY + t - 90, behavior: 'smooth' });
+    }
+    sheet.addEventListener('click', function (e) { if (e.target.closest('.dmx__x')) { sheet.hidden = true; cur = -1; render(); } });
+    [q, fk, fr].forEach(function (c) { c.addEventListener(c === q ? 'input' : 'change', function () { sheet.hidden = true; render(); }); });
+    list.addEventListener('click', function (e) { if (e.target.closest('a')) return; var li = e.target.closest('.dmx__row'); if (li) pick(+li.getAttribute('data-i')); });
+    list.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('.dmx__row')) { e.preventDefault(); pick(+e.target.getAttribute('data-i')); } });
+    render();
+  }
+  var gl = (function () { try { var c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch (e) { return false; } })();
+  if (!gl) return nomap();
+
   var all = new maplibregl.LngLatBounds(); D.forEach(function (p) { all.extend([p.lng, p.lat]); });
   var pad = function () { return wide.matches ? { top: 90, bottom: 110, left: 110, right: 110 } : { top: 84, bottom: 80, left: 80, right: 80 }; };
-  var map = new maplibregl.Map({ container: box, style: 'https://tiles.openfreemap.org/styles/dark', bounds: all, fitBoundsOptions: { padding: pad() },
-    attributionControl: { compact: true }, cooperativeGestures: wide.matches, dragRotate: false, pitchWithRotate: false, touchPitch: false, minZoom: 1.6 });
+  var map;
+  try { map = new maplibregl.Map({ container: box, style: 'https://tiles.openfreemap.org/styles/dark', bounds: all, fitBoundsOptions: { padding: pad() },
+    attributionControl: { compact: true }, cooperativeGestures: wide.matches, dragRotate: false, pitchWithRotate: false, touchPitch: false, minZoom: 1.6 }); }
+  catch (e) { return nomap(); }
   /* v100: page scroll still scrolls the page; pinch (trackpad or two fingers) and Cmd/Ctrl + scroll zoom the map */
   map.touchZoomRotate.disableRotation();
   map.keyboard.disableRotation && map.keyboard.disableRotation();
@@ -96,6 +129,11 @@
   /* pins closer than their own size slide apart along the line between them, so every name stays readable and tappable */
   function declutter() {
     var vis = marks.filter(function (m) { return m.getElement().style.display !== 'none'; });
+    /* v104: with many pins in view (the Georgia stores), keep every pin on its real address and hide the name chips;
+       the spreading below is for a handful of neighbours and would push a crowd far from where they are */
+    var dense = vis.filter(function (m) { var q = map.project(m.getLngLat()); return q.x > -40 && q.y > -40 && q.x < box.clientWidth + 40 && q.y < box.clientHeight + 40; }).length > 14;
+    box.classList.toggle('is-dense', dense);
+    if (dense) { marks.forEach(function (m) { m.setOffset([0, -24]); }); return; }
     var pos = vis.map(function (m) { var e = m.getElement(); return { m: m, p: map.project(m.getLngLat()), w: e.offsetWidth + 10, h: e.offsetHeight + 6, o: [0, 0] }; });
     for (var a = 0; a < pos.length; a++) for (var b = a + 1; b < pos.length; b++) {
       var A = pos[a], B = pos[b], dx = B.p.x - A.p.x, dy = B.p.y - A.p.y, d = Math.hypot(dx, dy) || 0.01, ux = dx / d, uy = dy / d;
@@ -108,7 +146,7 @@
     pos.forEach(function (q) { q.m.setOffset([Math.round(q.o[0]), Math.round(q.o[1]) - 24]); });
     marks.forEach(function (m) { if (m.getElement().style.display === 'none') m.setOffset([0, -24]); });
   }
-  map.on('zoom', function () { grouping(); declutter(); }); map.on('load', function () { grouping(); declutter(); });
+  map.on('zoom', function () { grouping(); declutter(); }); map.on('moveend', declutter); map.on('load', function () { grouping(); declutter(); });
   /* phones: the card sits directly under the map, like a bottom sheet */
   var sheet = document.createElement('div'); sheet.className = 'dmx__sheet'; sheet.hidden = true; sheet.setAttribute('aria-live', 'polite');
   box.closest('.dmx').insertBefore(sheet, box.closest('.dmx').querySelector('.dmx__side'));

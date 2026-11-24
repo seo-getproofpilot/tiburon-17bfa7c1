@@ -35,7 +35,7 @@
       requestAnimationFrame(() => { el.classList.add('is-gate'); gate.querySelector('[data-age=yes]').focus({ preventScroll: true }); });
       gate.addEventListener('click', (e) => {
         const b = e.target.closest('[data-age]'); if (!b) return;
-        if (b.dataset.age === 'yes') { try { localStorage.setItem('tb_age', '1'); } catch (e2) {} el.setAttribute('aria-hidden', 'true'); finish(); return; }
+        if (b.dataset.age === 'yes') { try { localStorage.setItem('tb_age', '1'); } catch (e2) {} (window.dataLayer = window.dataLayer || []).push({ event: 'age_gate_pass' }); el.setAttribute('aria-hidden', 'true'); finish(); return; }
         gate.querySelector('.gate__q').textContent = 'Then we\u2019ll see you when you are.';
         gate.querySelector('.gate__btns').innerHTML = '<a class="btn btn--glass" href="https://oceana.org/">Meet the reef we protect</a>';
         gate.querySelector('.gate__note').textContent = 'This site is for adults of legal drinking age.';

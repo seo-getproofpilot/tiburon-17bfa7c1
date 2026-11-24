@@ -1,16 +1,25 @@
-/* Google Analytics 4 + the SOW's conversion events. Off until GA_ID is set at launch (the preview sends nothing).
+/* Google Analytics 4 + the SOW's conversion events. Fires through GTM (dataLayer events) when the container is on the page; direct gtag only if GA_ID is set and GTM is absent. Never on staging.
    Events: buy_click (any Buy button, with the bottle), generate_lead (tasting, wholesale, contact forms that pass validation),
    phone_click, email_click, directions_click, state_check. */
 (function () {
-  var GA_ID = '';                       // e.g. 'G-XXXXXXXXXX', set at launch
-  if (!GA_ID || /github\.io$|localhost|127\.0\.0\.1/.test(location.hostname)) return;
-
-  var s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
-  document.head.appendChild(s);
+  var GA_ID = '';                       // only for a no-GTM fallback; with GTM, GA4 loads from the container
+  if (/github\.io$|localhost|127\.0\.0\.1|^staging\./.test(location.hostname)) return;
   window.dataLayer = window.dataLayer || [];
-  function gtag() { dataLayer.push(arguments); }
-  window.gtag = gtag;
-  gtag('js', new Date()); gtag('config', GA_ID, { anonymize_ip: true });
+  var hasGTM = dataLayer.some(function (e) { return e && e.event === 'gtm.js'; });
+  /* every event goes to dataLayer as {event, ...params}; GTM tags read it. Without GTM, direct gtag sends it. */
+  var direct = !hasGTM && GA_ID;
+  if (direct) {
+    var s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(s);
+    window.gtag = function () { dataLayer.push(arguments); };
+    gtag('js', new Date()); gtag('config', GA_ID);
+  }
+  if (!hasGTM && !GA_ID) return;
+  function gtag(type, name, params) {
+    if (direct) return window.gtag(type, name, params);
+    var o = { event: name }; for (var k in params) o[k] = params[k]; dataLayer.push(o);
+  }
+  window.tbTrack = function (name, params) { gtag('event', name, params || {}); };
 
   var page = location.pathname.replace(/^\/|\/$/g, '') || 'home';
   var bottleOf = function (el) {
