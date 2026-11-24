@@ -1613,3 +1613,8 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
   .dmx__map{height:min(50svh,420px)!important}
 }
 .dmx .dmap__map::after{display:none!important}
+
+/* v100 map: dimmed pins stay clickable; branded gesture hint */
+.dpin3.is-dim:not(#_){pointer-events:auto}
+.dpin3.is-dim:hover{opacity:.7}
+.dmx .maplibregl-cooperative-gesture-screen{background:rgba(10,15,17,.72);color:var(--bone);font:600 15px/1.4 var(--f);padding:20px;z-index:3}

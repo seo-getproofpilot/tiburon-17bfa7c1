@@ -32,10 +32,12 @@
   D.map(function (p) { return p.region; }).filter(function (r, i, a) { return a.indexOf(r) === i; }).forEach(function (r) { var o = document.createElement('option'); o.value = o.textContent = r; fr.appendChild(o); });
 
   var all = new maplibregl.LngLatBounds(); D.forEach(function (p) { all.extend([p.lng, p.lat]); });
-  var pad = function () { return wide.matches ? { top: 90, bottom: 110, left: 90, right: 90 } : { top: 60, bottom: 70, left: 40, right: 40 }; };
+  var pad = function () { return wide.matches ? { top: 90, bottom: 110, left: 110, right: 110 } : { top: 84, bottom: 80, left: 80, right: 80 }; };
   var map = new maplibregl.Map({ container: box, style: 'https://tiles.openfreemap.org/styles/dark', bounds: all, fitBoundsOptions: { padding: pad() },
-    attributionControl: { compact: true }, cooperativeGestures: !wide.matches, dragRotate: false, pitchWithRotate: false });
-  map.scrollZoom.disable();
+    attributionControl: { compact: true }, cooperativeGestures: wide.matches, dragRotate: false, pitchWithRotate: false, touchPitch: false, minZoom: 1.6 });
+  /* v100: page scroll still scrolls the page; pinch (trackpad or two fingers) and Cmd/Ctrl + scroll zoom the map */
+  map.touchZoomRotate.disableRotation();
+  map.keyboard.disableRotation && map.keyboard.disableRotation();
   map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
   map.on('styleimagemissing', function (e) { if (!map.hasImage(e.id)) map.addImage(e.id, { width: 1, height: 1, data: new Uint8Array(4) }); });
   /* graphite street map, tinted toward the abyss teal; roads and labels quiet so the pins lead */
@@ -64,7 +66,7 @@
     });
   });
   /* pins: the shark disc and a name chip under it */
-  var popup = new maplibregl.Popup({ offset: [0, -34], closeButton: true, maxWidth: wide.matches ? '340px' : Math.min(320, innerWidth - 60) + 'px', className: 'dpop dpop--x' });
+  var popup = new maplibregl.Popup({ offset: [0, -34], closeButton: true, focusAfterOpen: false, maxWidth: wide.matches ? '340px' : Math.min(320, innerWidth - 60) + 'px', className: 'dpop dpop--x' });
   var marks = D.map(function (p, i) {
     var el = document.createElement('button');
     el.type = 'button'; el.className = 'dpin3 dpin3--' + kc(p.kind);
@@ -91,7 +93,22 @@
       groups[c.r].forEach(function (i) { marks[i].getElement().style.display = tight ? 'none' : ''; });
     });
   }
-  map.on('zoom', grouping); map.on('load', grouping);
+  /* pins closer than their own size slide apart along the line between them, so every name stays readable and tappable */
+  function declutter() {
+    var vis = marks.filter(function (m) { return m.getElement().style.display !== 'none'; });
+    var pos = vis.map(function (m) { var e = m.getElement(); return { m: m, p: map.project(m.getLngLat()), w: e.offsetWidth + 10, h: e.offsetHeight + 6, o: [0, 0] }; });
+    for (var a = 0; a < pos.length; a++) for (var b = a + 1; b < pos.length; b++) {
+      var A = pos[a], B = pos[b], dx = B.p.x - A.p.x, dy = B.p.y - A.p.y, d = Math.hypot(dx, dy) || 0.01, ux = dx / d, uy = dy / d;
+      if (d < 0.5) { ux = 1; uy = 0; }
+      var W = (A.w + B.w) / 2, H = (A.h + B.h) / 2;
+      if (Math.abs(dx) >= W || Math.abs(dy) >= H) continue;
+      var need = Math.min(Math.abs(ux) > .01 ? W / Math.abs(ux) : 1e9, Math.abs(uy) > .01 ? H / Math.abs(uy) : 1e9), x = (need - d) / 2;
+      A.o[0] -= ux * x; A.o[1] -= uy * x; B.o[0] += ux * x; B.o[1] += uy * x;
+    }
+    pos.forEach(function (q) { q.m.setOffset([Math.round(q.o[0]), Math.round(q.o[1]) - 24]); });
+    marks.forEach(function (m) { if (m.getElement().style.display === 'none') m.setOffset([0, -24]); });
+  }
+  map.on('zoom', function () { grouping(); declutter(); }); map.on('load', function () { grouping(); declutter(); });
   /* phones: the card sits directly under the map, like a bottom sheet */
   var sheet = document.createElement('div'); sheet.className = 'dmx__sheet'; sheet.hidden = true; sheet.setAttribute('aria-live', 'polite');
   box.closest('.dmx').insertBefore(sheet, box.closest('.dmx').querySelector('.dmx__side'));
@@ -117,6 +134,8 @@
     map.fitBounds(b, { padding: pad(), maxZoom: shown.length === 1 ? 12.5 : 9.5, duration: 1300, essential: true });
   }
   function pick(i, fromPin) {
+    /* a pin outside the current search or filter clears them, so every pin can always be opened */
+    if (shown.indexOf(i) < 0) { q.value = ''; fk.value = ''; fr.value = ''; render(); }
     cur = i; var p = D[i];
     [].forEach.call(list.children, function (x) { x.classList.toggle('is-on', +x.getAttribute('data-i') === i); });
     marks.forEach(function (m, j) { m.getElement().classList.toggle('is-on', j === i); });
@@ -131,5 +150,5 @@
   list.addEventListener('click', function (e) { if (e.target.closest('a')) return; var li = e.target.closest('.dmx__row'); if (li) { inView(); pick(+li.getAttribute('data-i'), false); } });
   list.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('.dmx__row')) { e.preventDefault(); pick(+e.target.getAttribute('data-i'), false); } });
   map.on('load', function () { var a = box.querySelector('.maplibregl-ctrl-attrib'); if (a) a.classList.remove('maplibregl-compact-show'); });
-  render(); grouping();
+  render(); grouping(); declutter(); box.__map = map;
 })();
