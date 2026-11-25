@@ -1702,3 +1702,17 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 .dmap__locate{display:none}
 @media (max-width:900px),(orientation:portrait) and (max-width:1180px){.dmap__locate:not(#_){display:inline-flex;margin-top:22px}}
 .dmap--page .dmap__head p{max-width:46em}
+/* v108 Find Tiburón entry points (preview-only part find-page): header pin + a near-you line under every Buy */
+.findbtn{display:inline-flex;align-items:center;gap:7px;height:44px;padding:0 16px 0 12px;border-radius:22px;color:var(--bone);text-decoration:none;box-shadow:inset 0 0 0 1.5px rgba(250,246,238,.45);font:700 11px/1 var(--f);font-stretch:112%;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;flex:none;transition:background-color .2s}
+.findbtn:hover,.findbtn:focus-visible{background:rgba(250,246,238,.1);outline:0}
+.findbtn svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7}
+.nav .findbtn{margin-right:-18px}
+@media (max-width:1700px){.findbtn{width:44px;padding:0;justify-content:center}.findbtn span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
+.lu__near{display:flex;align-items:flex-start;gap:9px;margin:16px 0 0;font-size:14.5px;line-height:1.5;color:rgba(250,246,238,.72);flex-basis:100%}
+.lu__near svg{width:18px;height:18px;flex:none;margin-top:2px;fill:none;stroke:#e6bb83;stroke-width:1.7}
+.lu__near a{color:#e8d3a6;font-weight:600;text-underline-offset:3px;white-space:nowrap}
+.cel__lede a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){.nav .findbtn{display:none}}
+/* v108 laptop widths: the header row was 14px too wide at 1280 (cart clipped); tighten the gaps so pin + Buy + cart fit */
+@media (min-width:1181px) and (max-width:1480px){.nav:not(#_){gap:18px}.nav__links:not(#_){gap:16px!important}.nav .findbtn{margin-right:-6px}}
+@media (min-width:1181px) and (max-width:1360px){.nav__links a:not(#_){letter-spacing:.1em}}
