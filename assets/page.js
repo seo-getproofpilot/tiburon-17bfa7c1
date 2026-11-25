@@ -34,35 +34,7 @@
     rv.forEach((el, i) => { el.style.transitionDelay = (i % 3) * 80 + 'ms'; io.observe(el); });
   } else rv.forEach((el) => el.classList.add('is-in'));
 
-  /* ---------- tasting request ticket (Tasting Rooms): the stub keeps count; sent by assets/forms.js (email fallback) ---------- */
-  const book = $('#bookForm');
-  if (book) {
-    const d = book.querySelector('[name=date]'); d.min = new Date().toISOString().slice(0, 10);
-    const g = book.querySelector('[name=guests]');
-    const stub = () => { const n = Math.max(1, Math.min(20, parseInt(g.value, 10) || 1)); $('#tkN').textContent = n; $('#tkTotal').textContent = '$' + n * 30; const r = book.querySelector('[name=room]:checked'), go = book.querySelector('.ticket__go'); $('#tkRoom').textContent = r ? r.value : 'Pick a room'; if (go) { go.disabled = !r; book.classList.toggle('has-room', !!r); } const nt = book.querySelector('.ticket__note'); if (nt && !nt.dataset.sent) nt.textContent = r ? 'Sends your request straight to our team.' : 'Pick a tasting room to request your tasting.'; };
-    $$('.ticket__step button', book).forEach((b) => b.addEventListener('click', () => { g.value = Math.max(1, Math.min(20, (parseInt(g.value, 10) || 1) + +b.dataset.d)); stub(); }));
-    /* v102: hours from Henry Garcia (Tiburón VP of Sales, 2026-11-19); Caye Caulker is the only room closed a day (Mondays) */
-    const OPEN = { 'Caye Caulker': [[0, 2, 3, 4, 5, 6], 'Tuesday to Sunday (closed Mondays)'] };
-    const dayCheck = () => { const r = book.querySelector('[name=room]:checked'), o = r && OPEN[r.value]; let m = '';
-      if (o && d.value) { const wd = new Date(d.value + 'T12:00').getDay(); if (o[0].indexOf(wd) < 0) m = `${r.value} is open ${o[1]}. Please pick another day.`; }
-      d.setCustomValidity(m); const nt = book.querySelector('.ticket__note'); if (m && nt) { nt.textContent = m; nt.classList.add('is-warn'); } else if (nt) nt.classList.remove('is-warn'); return !m; };
-    book.addEventListener('input', () => { stub(); dayCheck(); }); book.addEventListener('change', () => { stub(); dayCheck(); }); stub();
-    $$('[data-room]').forEach((a) => a.addEventListener('click', () => { const r = book.querySelector(`[name=room][value="${a.dataset.room}"]`); if (r) { r.checked = true; stub(); } }));
-    book.addEventListener('submit', (e) => {
-      e.preventDefault();
-      dayCheck(); if (!book.checkValidity()) { book.reportValidity(); return; }
-      const f = new FormData(book), room = f.get('room');
-      const when = new Date(f.get('date') + 'T12:00').toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-      const body = `Hi Tiburon team,\n\nI'd like to book a rum tasting.\n\nRoom: ${room}\nDate: ${when}\nGuests: ${f.get('guests')}\nName: ${f.get('name')}\nEmail: ${f.get('email')}\n\nThank you!`;
-      const subj = `Tasting request, ${room}, ${when}`, nt = book.querySelector('.ticket__note'), go = book.querySelector('.ticket__go');
-      nt.dataset.sent = '1'; nt.textContent = 'Sending your request…'; if (go) go.disabled = true;
-      tbSend('Tasting request', subj, { Room: room, Date: when, Guests: f.get('guests'), Name: f.get('name'), Email: f.get('email') }).then((ok) => {
-        if (go) go.disabled = false;
-        if (ok) { nt.textContent = 'Request sent. We’ll email you to confirm your tasting.'; return; }
-        tbMailto(subj, body); nt.innerHTML = 'Your email app should open with the request ready to send. If nothing opened, email <a href="mailto:basil@sharkbaitco.com">basil@sharkbaitco.com</a>.';
-      });
-    });
-  }
+  /* tasting booking ticket: assets/booking.js (v109) */
 
   /* ---------- shipping checker (Where to Buy): the ten states on their Buy Now page are the only ones excluded ---------- */
   const sel = $('#stateSel');
