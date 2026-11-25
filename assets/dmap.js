@@ -12,7 +12,32 @@
   var dir = function (p) { return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(p.q || (p.name + ', ' + p.addr)); };
   var kc = function (k) { return k === 'Distributor' ? 'd' : (k === 'Retail' || k === 'Bar & restaurant') ? 'r' : 't'; };
   var disc = function (p, cls) { return '<span class="' + cls + ' ' + cls + '--' + kc(p.kind) + '" aria-hidden="true"><svg viewBox="53.5 6 422.8 499.8">' + MARK + '</svg></span>'; };
-  var sub = function (p) { return '<span class="dmx__sub"><i>' + esc(p.city) + '</i><em class="dmx__tag--' + kc(p.kind) + '">' + esc(p.kind === 'Tasting room' ? p.short : p.kind + ', ' + p.region) + '</em></span>'; };
+  var sub = function (p) { return '<span class="dmx__sub">' + (me ? '<b class="dmx__mi">' + miTxt(p) + '</b>' : '') + '<i>' + esc(p.city) + '</i><em class="dmx__tag--' + kc(p.kind) + '">' + esc(p.kind === 'Tasting room' ? p.short : p.kind + ', ' + p.region) + '</em></span>'; };
+  /* v107 near me (Find Tiburón page): "Use my location" sorts the list by distance, shows miles, and frames the closest places */
+  var nearBtn = document.getElementById('dmxNear'), nearMsg = document.getElementById('dmxNearMsg'), ask = box.getAttribute('data-ask') || '#inquire', me = null;
+  var miles = function (p) { if (!me) return 0; var r = Math.PI / 180, a = Math.sin((p.lat - me.lat) * r / 2), b = Math.sin((p.lng - me.lng) * r / 2);
+    var h = a * a + Math.cos(me.lat * r) * Math.cos(p.lat * r) * b * b; return 7917.5 * Math.asin(Math.min(1, Math.sqrt(h))); };
+  var byNear = function (idx) { return me ? idx.slice().sort(function (x, y) { return miles(D[x]) - miles(D[y]); }) : idx; };
+  var miTxt = function (p) { var m = miles(p); return m < 10 ? m.toFixed(1) + ' mi' : Math.round(m).toLocaleString('en-US') + ' mi'; };
+  function nearSay(html) { if (!nearMsg) return; nearMsg.innerHTML = html; nearMsg.hidden = !html; }
+  /* find the visitor, then hand back the indexes of every place, closest first */
+  function locate(done) {
+    if (!navigator.geolocation) { nearSay('Your browser can&rsquo;t share a location. Search your city instead.'); return; }
+    nearBtn.disabled = true; nearBtn.setAttribute('aria-busy', 'true'); nearSay('Finding you&hellip;');
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      nearBtn.disabled = false; nearBtn.removeAttribute('aria-busy'); nearBtn.classList.add('is-on');
+      me = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      q.value = ''; fk.value = ''; fr.value = '';
+      /* distributors sell to shops, not to the public, so the closest-place pick skips them (they stay in the list) */
+      var order = byNear(D.map(function (_, i) { return i; })).filter(function (i) { return D[i].kind !== 'Distributor'; }), p = D[order[0]], far = miles(p) > 150;
+      nearSay(far ? 'Nothing within 150 miles of you yet. Most states can <a href="' + root + 'where-to-buy/">order online</a>.'
+        : 'Closest to you: <b>' + esc(p.name) + '</b>, ' + miTxt(p) + ' away.');
+      done(order, far);
+    }, function (err) {
+      nearBtn.disabled = false; nearBtn.removeAttribute('aria-busy');
+      nearSay(err && err.code === 1 ? 'Location is off for this site. Search your city instead.' : 'We couldn&rsquo;t find your location. Search your city instead.');
+    }, { enableHighAccuracy: false, timeout: 12000, maximumAge: 600000 });
+  }
   var ico = { clock: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
     pin: '<svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.8-6.5-11a6.5 6.5 0 0113 0c0 5.2-6.5 11-6.5 11z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="10" r="2.2" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>',
     tel: '<svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>',
@@ -41,12 +66,13 @@
       var term = (q.value || '').trim().toLowerCase(), k = fk.value, r = fr.value;
       var shown = D.map(function (p, i) { return i; }).filter(function (i) { var p = D[i];
         return (!k || p.kind === k) && (!r || p.region === r) && (!term || (p.name + ' ' + p.city + ' ' + p.addr + ' ' + p.region).toLowerCase().indexOf(term) >= 0); });
+      shown = byNear(shown);
       cnt.textContent = shown.length + (shown.length === 1 ? ' place' : ' places');
       list.innerHTML = shown.length ? shown.map(function (i) { var p = D[i];
         return '<li class="dmx__row' + (i === cur ? ' is-on' : '') + '" data-i="' + i + '" tabindex="0">' + disc(p, 'dmx__disc') +
           '<div class="dmx__txt"><b class="dmx__name">' + esc(p.name) + '</b>' + sub(p) + '</div>' +
           '<a class="dmx__go" href="' + dir(p) + '" target="_blank" rel="noopener" aria-label="Directions to ' + esc(p.name) + '">' + ico.go + '</a></li>'; }).join('')
-        : '<li class="dmx__none">Nothing matches yet. Try another city, or <a href="#inquire">ask us</a>.</li>';
+        : '<li class="dmx__none">Nothing matches yet. Try another city, or <a href="' + ask + '">ask us</a>.</li>';
     }
     function pick(i) {
       cur = i; [].forEach.call(list.children, function (x) { x.classList.toggle('is-on', +x.getAttribute('data-i') === i); });
@@ -57,6 +83,8 @@
     [q, fk, fr].forEach(function (c) { c.addEventListener(c === q ? 'input' : 'change', function () { sheet.hidden = true; render(); }); });
     list.addEventListener('click', function (e) { if (e.target.closest('a')) return; var li = e.target.closest('.dmx__row'); if (li) pick(+li.getAttribute('data-i')); });
     list.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('.dmx__row')) { e.preventDefault(); pick(+e.target.getAttribute('data-i')); } });
+    [].forEach.call(document.querySelectorAll('[data-near]'), function (b) { b.addEventListener('click', function () { nearBtn && nearBtn.click(); }); });
+    if (nearBtn) nearBtn.addEventListener('click', function () { locate(function () { sheet.hidden = true; render(); list.scrollTop = 0; }); });
     render();
   }
   var gl = (function () { try { var c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch (e) { return false; } })();
@@ -158,12 +186,13 @@
     var term = (q.value || '').trim().toLowerCase(), k = fk.value, r = fr.value;
     shown = D.map(function (p, i) { return i; }).filter(function (i) { var p = D[i];
       return (!k || p.kind === k) && (!r || p.region === r) && (!term || (p.name + ' ' + p.city + ' ' + p.addr + ' ' + p.region).toLowerCase().indexOf(term) >= 0); });
+    shown = byNear(shown);
     cnt.textContent = shown.length + (shown.length === 1 ? ' place' : ' places');
     list.innerHTML = shown.length ? shown.map(function (i) { var p = D[i];
       return '<li class="dmx__row' + (i === cur ? ' is-on' : '') + '" data-i="' + i + '" tabindex="0">' + disc(p, 'dmx__disc') +
         '<div class="dmx__txt"><b class="dmx__name">' + esc(p.name) + '</b>' + sub(p) + '</div>' +
         '<a class="dmx__go" href="' + dir(p) + '" target="_blank" rel="noopener" aria-label="Directions to ' + esc(p.name) + '">' + ico.go + '</a></li>'; }).join('')
-      : '<li class="dmx__none">Nothing matches yet. Try another city, or <a href="#inquire">ask us</a>.</li>';
+      : '<li class="dmx__none">Nothing matches yet. Try another city, or <a href="' + ask + '">ask us</a>.</li>';
     marks.forEach(function (m, i) { m.getElement().classList.toggle('is-dim', shown.indexOf(i) < 0); });
   }
   function frame() {
@@ -195,5 +224,19 @@
   list.addEventListener('click', function (e) { if (e.target.closest('a')) return; var li = e.target.closest('.dmx__row'); if (li) { inView(); pick(+li.getAttribute('data-i'), false); } });
   list.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('.dmx__row')) { e.preventDefault(); pick(+e.target.getAttribute('data-i'), false); } });
   map.on('load', function () { var a = box.querySelector('.maplibregl-ctrl-attrib'); if (a) a.classList.remove('maplibregl-compact-show'); });
+  var youM = null;
+  [].forEach.call(document.querySelectorAll('[data-near]'), function (b) { b.addEventListener('click', function () { nearBtn && nearBtn.click(); }); });
+  if (nearBtn) nearBtn.addEventListener('click', function () {
+    locate(function (order, far) {
+      popup.remove(); sheet.hidden = true; cur = -1; render(); list.scrollTop = 0;
+      marks.forEach(function (m) { m.getElement().classList.remove('is-on'); });
+      if (!youM) { var el = document.createElement('span'); el.className = 'dme'; el.setAttribute('aria-label', 'You are here'); el.innerHTML = '<i></i>';
+        youM = new maplibregl.Marker({ element: el }).setLngLat([me.lng, me.lat]).addTo(map); } else youM.setLngLat([me.lng, me.lat]);
+      var b = new maplibregl.LngLatBounds([me.lng, me.lat], [me.lng, me.lat]);
+      if (far) { map.flyTo({ center: [me.lng, me.lat], zoom: 6, duration: 1500, essential: true }); inView(); return; }
+      order.slice(0, 3).forEach(function (i) { b.extend([D[i].lng, D[i].lat]); });
+      inView(); map.fitBounds(b, { padding: pad(), maxZoom: 12.5, duration: 1500, essential: true });
+    });
+  });
   render(); grouping(); declutter(); box.__map = map;
 })();

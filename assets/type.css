@@ -1677,3 +1677,28 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 @media (max-width:900px),(orientation:portrait) and (max-width:1180px){
   .room2 img[src*="tr-si-front"]:not(#_){object-position:58% 30%}
 }
+
+/* ===== v107 Find Tiburón page: the distributor map as its own page, plus "Use my location" ===== */
+.dmap--page{padding-top:calc(var(--nav) + clamp(40px,6vh,72px))}
+.dmap--page .crumbs ol{margin-bottom:18px;color:rgba(250,246,238,.85)}
+.dmap--page .crumbs a{color:inherit}
+.dmap--page h1:not(#_){color:var(--bone);margin:0 0 14px;font:800 clamp(34px,min(4.2vw,7vh),64px)/1 var(--f)!important;font-stretch:115%!important;letter-spacing:-.012em!important;text-transform:uppercase}
+.dmap__foot{margin:clamp(18px,3vh,28px) 0 0;font-size:15px;line-height:1.6;color:rgba(250,246,238,.72)}
+.dmap__foot a{color:#e8d3a6;text-underline-offset:3px}
+.dmx__near{margin:0 0 16px}
+.dmx__nearbtn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;height:46px;border-radius:12px;border:1px solid rgba(232,211,166,.55);background:rgba(232,211,166,.08);color:#e8d3a6;font:600 14px var(--f);font-stretch:112%;letter-spacing:.04em;cursor:pointer;transition:background-color .2s,border-color .2s}
+.dmx__nearbtn svg{width:18px;height:18px;flex:none}
+.dmx__nearbtn:hover,.dmx__nearbtn:focus-visible{background:rgba(232,211,166,.16);border-color:#e8d3a6;outline:0}
+.dmx__nearbtn[aria-busy]{opacity:.65;cursor:progress}
+.dmx__nearbtn.is-on{background:#e8d3a6;color:#14191b;border-color:#e8d3a6}
+.dmx__nearmsg{margin:10px 2px 0;font-size:13.5px;line-height:1.45;color:rgba(250,246,238,.78)}
+.dmx__nearmsg b{color:var(--bone)}
+.dmx__nearmsg a{color:#e8d3a6}
+.dmx__mi{font-weight:700;color:#e8d3a6;margin-right:2px}
+.dme{width:22px;height:22px;border-radius:50%;background:rgba(120,190,255,.22);display:grid;place-items:center;pointer-events:none}
+.dme i{width:12px;height:12px;border-radius:50%;background:#5aa9ff;box-shadow:0 0 0 2.5px #fff,0 2px 8px rgba(0,0,0,.5)}
+@media (prefers-reduced-motion:no-preference){.dme{animation:dme 2.4s ease-out infinite}@keyframes dme{0%{box-shadow:0 0 0 0 rgba(90,169,255,.45)}100%{box-shadow:0 0 0 18px rgba(90,169,255,0)}}}
+.dmap--page .dmap__head{max-width:1000px}
+.dmap__locate{display:none}
+@media (max-width:900px),(orientation:portrait) and (max-width:1180px){.dmap__locate:not(#_){display:inline-flex;margin-top:22px}}
+.dmap--page .dmap__head p{max-width:46em}
