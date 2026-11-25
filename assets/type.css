@@ -1771,3 +1771,7 @@ h1,h2{font-family:var(--f);font-weight:800;font-stretch:122%;letter-spacing:-.01
 .lineup .lu--white .lu__near-q{text-shadow:none}
 .lineup .lu--white .nearbtn{background:#0f2324;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:0 10px 24px -12px rgba(15,35,36,.6)}
 .lineup .lu--white .nearbtn:hover,.lineup .lu--white .nearbtn:focus-visible{background:#e8d3a6}
+/* v110 optional WhatsApp/phone on the booking ticket */
+.ticket__phone small{font-weight:600;letter-spacing:.04em;text-transform:none;color:#7a8785;margin-left:6px}
+:is(.rooms .tix,.trb--bar) .ticket__phone{order:4!important;grid-column:1/-1}
+@media (min-width:1001px){:is(.rooms .tix,.trb--bar) .ticket__phone{grid-column:1/3}}

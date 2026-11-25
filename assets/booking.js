@@ -1,7 +1,7 @@
 /* v109 tasting booking (the ticket form on Home, Tasting Rooms, Our Story).
    Room -> date -> time (only times inside that room's hours) -> guests -> name, email -> "Book my tasting".
    Times come from the hours below; live seats left come from WordPress (/wp-json/tiburon/v1/slots), which
-   also re-checks every booking (wordpress/tiburon-theme/inc/tastings.php holds the same hours and is the
+   also re-checks every booking and puts it on the room's calendar link (wordpress/tiburon-theme/inc/tastings.php holds the same hours and is the
    one that counts). Guests pay at the room. Where there is no WordPress (the static preview) booking falls
    back to the old request email. */
 (function () {
@@ -95,12 +95,12 @@
     e.preventDefault();
     if (!book.checkValidity() || !time()) { book.reportValidity(); if (!time()) { nt.textContent = 'Please pick a time.'; nt.classList.add('is-warn'); } return; }
     var f = new FormData(book), r = f.get('room'), ymd = f.get('date'), t = f.get('time');
-    var data = { room: r, date: ymd, time: t, guests: guests(), name: f.get('name'), email: f.get('email'), website: f.get('website') || '' };
+    var data = { room: r, date: ymd, time: t, guests: guests(), name: f.get('name'), email: f.get('email'), phone: f.get('phone') || '', website: f.get('website') || '' };
     nt.dataset.sent = '1'; nt.classList.remove('is-warn', 'is-ok'); nt.textContent = 'Booking your tasting…'; go.disabled = true;
     var when = longDate(ymd) + ' at ' + nice(t);
     var fallback = function () {
       var subj = 'Tasting booking, ' + r + ', ' + when;
-      var fields = { Room: r, Date: longDate(ymd), Time: nice(t) + ' (Belize time)', Guests: data.guests, Name: data.name, Email: data.email };
+      var fields = { Room: r, Date: longDate(ymd), Time: nice(t) + ' (Belize time)', Guests: data.guests, Name: data.name, Email: data.email, Phone: data.phone };
       return (window.tbSend ? tbSend('Tasting booking', subj, fields) : Promise.resolve(false)).then(function (ok) {
         go.disabled = false;
         if (ok) { done(); return; }
@@ -112,7 +112,7 @@
     var done = function () {
       book.classList.add('is-booked');
       nt.classList.add('is-ok');
-      nt.innerHTML = '<b>You&rsquo;re booked in:</b> ' + r + ', ' + when + ', ' + data.guests + (data.guests === 1 ? ' guest' : ' guests') + '. We&rsquo;ve emailed you the details, and the ' + r + ' team will confirm shortly. You pay at the room.';
+      nt.innerHTML = '<b>You&rsquo;re booked in:</b> ' + r + ', ' + when + ', ' + data.guests + (data.guests === 1 ? ' guest' : ' guests') + '. The ' + r + ' team will confirm by ' + (data.phone ? 'WhatsApp, text or email' : 'email') + ' shortly. You pay at the room.';
       go.textContent = 'Booked';
     };
     fetch(API + 'book', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
