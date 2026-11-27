@@ -1,4 +1,4 @@
-/* v109 tasting booking (the ticket form on Home, Tasting Rooms, Our Story).
+/* v112 tasting booking (the ticket form on Home, Tasting Rooms, Our Story).
    Room -> date -> time (only times inside that room's hours) -> guests -> name, email -> "Book my tasting".
    Times come from the hours below; live seats left come from WordPress (/wp-json/tiburon/v1/slots), which
    also re-checks every booking and puts it on the room's calendar link (wordpress/tiburon-theme/inc/tastings.php holds the same hours and is the
@@ -43,10 +43,10 @@
     return out;
   }
   var live = true, seq = 0, slots = [];
-  function draw(list, r, ymd) {
+  function draw(list, r, ymd, why, reason) {
     slots = list || [];
     var keep = time();
-    if (!list) { box.innerHTML = '<p class="ticket__hint is-warn">' + r + ' is closed on ' + DAYS[wday(ymd)] + '. Please pick another day.</p>'; return; }
+    if (!list) { box.innerHTML = '<p class="ticket__hint is-warn">' + (why === 'closed' ? r + ' is closed on ' + longDate(ymd) + (reason ? ' (' + reason + ')' : '') + '. Please pick another day.' : r + ' is closed on ' + DAYS[wday(ymd)] + '. Please pick another day.') + '</p>'; return; }
     var n = guests(), any = false;
     box.innerHTML = list.map(function (s) {
       var ok = s.ok && s.left >= n; any = any || ok;
@@ -64,7 +64,7 @@
     var my = ++seq;
     fetch(API + 'slots?room=' + encodeURIComponent(r) + '&date=' + ymd + '&_=' + Date.now(), { cache: 'no-store' })
       .then(function (res) { if (!res.ok) throw 0; return res.json(); })
-      .then(function (j) { if (my !== seq || !j || !j.ok) return; draw(j.open ? j.slots : null, r, ymd); stub(); })
+      .then(function (j) { if (my !== seq || !j || !j.ok) return; draw(j.open ? j.slots : null, r, ymd, j.why, j.reason); stub(); })
       .catch(function () { live = false; });
   }
   function stub() {
@@ -78,7 +78,7 @@
     if (!nt.dataset.sent) nt.textContent = ready ? 'Ready to book: ' + r + ', ' + longDate(d.value) + ' at ' + nice(t) + '. You pay at the room.' : 'Pick a room, a date and a time to book. You pay at the tasting room.';
   }
 
-  var regs = function () { if (room() && d.value) draw(local(room(), d.value) ? slots : null, room(), d.value); stub(); };
+  var regs = function () { if (room() && d.value && box.querySelector('.tslot')) draw(slots, room(), d.value); stub(); };
   book.querySelectorAll('.ticket__step button').forEach(function (b) { b.addEventListener('click', function () { g.value = Math.max(1, Math.min(CAP, guests() + +b.dataset.d)); regs(); }); });
   book.addEventListener('change', function (e) {
     delete nt.dataset.sent; nt.classList.remove('is-warn', 'is-ok');
@@ -112,8 +112,8 @@
     var done = function () {
       book.classList.add('is-booked');
       nt.classList.add('is-ok');
-      nt.innerHTML = '<b>You&rsquo;re booked in:</b> ' + r + ', ' + when + ', ' + data.guests + (data.guests === 1 ? ' guest' : ' guests') + '. The ' + r + ' team will confirm by ' + (data.phone ? 'WhatsApp, text or email' : 'email') + ' shortly. You pay at the room.';
-      go.textContent = 'Booked';
+      nt.innerHTML = '<b>Booking received:</b> ' + r + ', ' + when + ', ' + data.guests + (data.guests === 1 ? ' guest' : ' guests') + '. Your seats are held, and you&rsquo;ll get an email from the ' + r + ' team when they confirm it. You pay at the room.';
+      go.textContent = 'Booking received';
     };
     fetch(API + 'book', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
       .then(function (res) {
