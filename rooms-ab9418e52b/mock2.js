@@ -17,7 +17,7 @@
   var real=window.fetch;
   window.fetch=function(u,o){o=o||{};u=String(u);var b=o.body?JSON.parse(o.body):{};
     if(u.indexOf('/mock-api/room-login')===0) return (b.pin||'').length===6?J({ok:true,room:'all',key:'k'}):J({ok:false,message:'That PIN isn’t right. Try again.'},403);
-    if(u.indexOf('/mock-api/room-bookings')===0){var r=new URLSearchParams(u.split('?')[1]).get('room');return J({ok:true,today:ymd(0),now:Math.floor(Date.now()/1000),bookings:DB.filter(function(x){return r==='all'||x.room===r}),closed:CLOSED.filter(function(c){return r==='all'||c.room===r})});}
+    if(u.indexOf('/mock-api/room-bookings')===0){var r=new URLSearchParams(u.split('?')[1]).get('room');return J({ok:true,today:ymd(0),now:Math.floor(Date.now()/1000),bookings:DB.filter(function(x){return r==='all'||x.room===r}).sort(function(a,b){var k=function(x){var t=x.timeText.match(/(\d+):(\d+)(am|pm)/);var h=(+t[1]%12)+(t[3]==='pm'?12:0);return x.date+('0'+h).slice(-2)+t[2];};return k(a)<k(b)?-1:k(a)>k(b)?1:0}),closed:CLOSED.filter(function(c){return r==='all'||c.room===r})});}
     if(u.indexOf('/mock-api/room-status')===0){var x=DB.filter(function(y){return y.id===b.id})[0];x.status=b.status;x.mailed=b.status==='pending'?'':'sent';return J({ok:true,booking:x});}
     if(u.indexOf('/mock-api/room-close')===0){CLOSED=CLOSED.filter(function(c){return !(c.room===b.target&&c.date===b.date)});if(b.closed)CLOSED.push({room:b.target,date:b.date,reason:b.reason||''});CLOSED.sort(function(a,c){return a.date<c.date?-1:1});return J({ok:true});}
     return real(u,o);};
