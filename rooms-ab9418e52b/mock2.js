@@ -10,7 +10,8 @@
     mk(4,'san-pedro','San Pedro',2,'2:00pm',6,'The Carter family','carter@example.com','+1 404 555 0199','pending',300),
     mk(5,'caye-caulker','Caye Caulker',3,'4:00pm',3,'Liam Chen','liam@example.com','','confirmed'),
     mk(6,'san-pedro','San Pedro',1,'11:30am',2,'Sofia Ruiz','sofia@example.com','','confirmed'),
-    mk(7,'san-pedro','San Pedro',5,'6:00pm',8,'Priya Shah','priya@example.com','+44 7700 900123','confirmed')];
+    mk(7,'san-pedro','San Pedro',5,'6:00pm',8,'Priya Shah','priya@example.com','+44 7700 900123','confirmed'),
+    (function(){var b=mk(9,'san-pedro','San Pedro',1,'4:00pm',3,'Dan Murphy','dan@example.com','','cancelled');b.byGuest=true;return b;})()];
   var CLOSED=[{room:'san-pedro',date:ymd(9),reason:'Private event'}];
   var J=function(o,s){return Promise.resolve(new Response(JSON.stringify(o),{status:s||200}))};
   var real=window.fetch;

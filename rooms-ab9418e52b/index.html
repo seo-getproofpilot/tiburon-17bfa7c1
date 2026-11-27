@@ -44,6 +44,8 @@ h2 b{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0
 .list{background:var(--bone);box-shadow:inset 0 0 0 1px var(--line)}
 .row{display:grid;grid-template-columns:70px 1fr auto;gap:2px 12px;align-items:baseline;padding:12px 14px;border-bottom:1px solid var(--line)}
 .row:last-child{border-bottom:0}
+.row.gone .t,.row.gone .who,.row.gone .g{color:var(--ink2);text-decoration:line-through;font-weight:600}
+.row .gn{grid-column:2/-1;font-size:13px;font-weight:700;color:var(--red)}
 .row .t{font-weight:800;font-stretch:112%;font-size:16px}
 .row .who{font-weight:700;min-width:0}
 .row .g{color:var(--ink2);font-size:14px;white-space:nowrap}
@@ -98,7 +100,7 @@ h2 b{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0
 <div style="background:#e8d3a6;color:#14191b;font:600 13px/1.35 -apple-system,sans-serif;padding:8px 14px;text-align:center">Preview with sample bookings. Any 6-digit PIN works. Nothing is saved or emailed.</div>
 <main id="app" aria-live="polite"></main>
 <div class="toast" id="toast" hidden></div>
-<script src="mock2.js?v=3"></script>
+<script src="mock2.js?v=4"></script>
 <script>
 (function () {
   var CFG = {"api":"/mock-api/","max":"2027-03-25","rooms":{"san-pedro":{"name":"San Pedro","color":"#c8873d"},"placencia":{"name":"Placencia Village","color":"#2f8f8c"},"caye-caulker":{"name":"Caye Caulker","color":"#3d6f9e"},"san-ignacio":{"name":"San Ignacio","color":"#5d8a4c"}}};
@@ -115,7 +117,7 @@ h2 b{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0
   var qs = new URLSearchParams(location.search);
   if (qs.get('room') && qs.get('key')) { store.set({ room: qs.get('room'), key: qs.get('key') }); history.replaceState(null, '', location.pathname); }
 
-  var me = store.get(), data = null, known = null, today = '', seq = 0, showAll = false, closing = false;
+  var knownGone = null, me = store.get(), data = null, known = null, today = '', seq = 0, showAll = false, closing = false;
   var view = (function () { try { return localStorage.getItem('tbView') || 'all'; } catch (e) { return 'all'; } })();
   var setView = function (v) { view = v; try { localStorage.setItem('tbView', v); } catch (e) {} known = pendingIds(); setTitle(); draw(); };
   var inView = function (b) { return view === 'all' || b.room === view; };
@@ -163,6 +165,9 @@ h2 b{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0
       if (j._status === 403) { store.set(null); me = null; login(); toast('Please sign in again'); return; }
       if (!j.ok) throw 0;
       today = j.today; data = j;
+      var gone = j.bookings.filter(function (b) { return b.status === 'cancelled' && b.byGuest && inView(b); }).map(function (b) { return b.id; });
+      if (knownGone && gone.some(function (id) { return knownGone.indexOf(id) < 0; })) toast('A guest cancelled');
+      knownGone = gone;
       var ids = pendingIds();
       if (known && ids.some(function (id) { return known.indexOf(id) < 0; })) { ring(); toast('New booking'); }
       known = ids;
@@ -188,7 +193,7 @@ h2 b{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0
     var bs = data.bookings.filter(inView), nw = bs.filter(function (b) { return b.status === 'pending'; });
     var newIn = function (slug) { return data.bookings.filter(function (b) { return b.status === 'pending' && (slug === 'all' || b.room === slug); }).length; };
     var chip = function (slug, label, c) { var n = newIn(slug); return '<button type="button" data-view="' + slug + '"' + (view === slug ? ' class="on" aria-pressed="true"' : ' aria-pressed="false"') + (c ? ' style="--c:' + esc(c) + '"' : '') + '>' + (c ? '<i></i>' : '') + esc(label) + (n ? ' <b>' + n + '</b>' : '') + '</button>'; };
-    var ok = bs.filter(function (b) { return b.status === 'confirmed'; });
+    var ok = bs.filter(function (b) { return b.status === 'confirmed' || (b.status === 'cancelled' && b.byGuest); });
     var tdy = ok.filter(function (b) { return b.date === today; });
     var soon = ok.filter(function (b) { return b.date > today && (showAll || b.date <= addDays(today, 14)); });
     var html = '<div class="flt" role="group" aria-label="Show bookings for">' + chip('all', 'All rooms') + Object.keys(CFG.rooms).map(function (s) { return chip(s, CFG.rooms[s].name, CFG.rooms[s].color); }).join('') + '</div>';
@@ -206,6 +211,7 @@ h2 b{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0
       var out = '', last = '';
       list.forEach(function (b) {
         if (withDay && b.date !== last) { out += '<div class="day cap">' + esc(dayWord(b.date)) + '</div>'; last = b.date; }
+        if (b.status === 'cancelled') { out += '<div class="row gone" data-id="' + b.id + '"><span class="t">' + esc(b.timeText) + '</span><span class="who">' + esc(b.name) + '</span><span class="g">' + gs(b.guests) + '</span>' + (multi() ? '<span class="rmn" style="--c:' + color(b) + '">' + esc(b.roomName) + '</span>' : '') + '<span class="gn">Guest cancelled. Seats are free again.</span></div>'; return; }
         out += '<div class="row" data-id="' + b.id + '"><span class="t">' + esc(b.timeText) + '</span><span class="who">' + esc(b.name) + '</span><span class="g">' + gs(b.guests) + '</span>' +
           (multi() ? '<span class="rmn" style="--c:' + color(b) + '">' + esc(b.roomName) + '</span>' : '') + mailWarn(b) +
           '<details><summary>Contact &amp; options</summary>' + contact(b) + '<br>' + esc(b.total) + ' at the room<br><button type="button" class="x" data-do="declined">Cancel this booking</button></details></div>';
